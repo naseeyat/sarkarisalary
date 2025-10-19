@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IAS Officer - Complete Career Journey & Salary Details</title>
+  <meta name="description" content="Complete IAS officer career journey from SDM to Secretary. Detailed salary progression, responsibilities, and growth path.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f0f2f5;
+      color: #1c1e21;
+      line-height: 1.6;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    /* Header */
+    .header {
+      background: white;
+      padding: 20px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      margin-bottom: 32px;
+    }
+    
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: #0866ff;
+    }
+    
+    .breadcrumb {
+      font-size: 14px;
+      color: #65676b;
+    }
+    
+    .breadcrumb a {
+      color: #0866ff;
+      text-decoration: none;
+    }
+    
+    /* Job Header */
+    .job-header {
+      background: linear-gradient(135deg, #0866ff 0%, #42a5f5 100%);
+      color: white;
+      padding: 60px 0;
+      border-radius: 16px;
+      margin-bottom: 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .job-header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></svg>') repeat;
+      background-size: 30px 30px;
+      animation: float 20s linear infinite;
+    }
+    
+    @keyframes float {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    
+    .job-header-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .job-title {
+      font-size: 48px;
+      font-weight: 900;
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+    
+    .job-subtitle {
+      font-size: 20px;
+      opacity: 0.9;
+      margin-bottom: 32px;
+    }
+    
+    .job-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 32px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .job-stat {
+      text-align: center;
+    }
+    
+    .job-stat-number {
+      font-size: 28px;
+      font-weight: 800;
+      display: block;
+    }
+    
+    .job-stat-label {
+      font-size: 14px;
+      opacity: 0.8;
+      margin-top: 4px;
+    }
+    
+    /* Career Journey - CENTER SECTION */
+    .career-journey {
+      background: white;
+      border-radius: 16px;
+      padding: 48px;
+      margin: 40px 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      position: relative;
+    }
+    
+    .journey-title {
+      text-align: center;
+      font-size: 36px;
+      font-weight: 800;
+      color: #1c1e21;
+      margin-bottom: 48px;
+      position: relative;
+    }
+    
+    .journey-title::after {
+      content: '';
+      position: absolute;
+      bottom: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #0866ff, #42a5f5);
+      border-radius: 2px;
+    }
+    
+    .journey-timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    /* Vertical line */
+    .journey-timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(180deg, #0866ff, #42a5f5);
+      border-radius: 2px;
+      transform: translateX(-50%);
+    }
+    
+    .journey-step {
+      position: relative;
+      margin-bottom: 60px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .journey-step:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+    
+    .journey-step:nth-child(even) .step-content {
+      text-align: right;
+    }
+    
+    .step-content {
+      flex: 1;
+      padding: 0 40px;
+    }
+    
+    .step-position {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0866ff;
+      margin-bottom: 8px;
+    }
+    
+    .step-salary {
+      font-size: 24px;
+      font-weight: 700;
+      color: #1c1e21;
+      margin-bottom: 8px;
+    }
+    
+    .step-years {
+      font-size: 14px;
+      color: #65676b;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    
+    .step-description {
+      font-size: 15px;
+      color: #42474e;
+      line-height: 1.6;
+    }
+    
+    .step-icon {
+      width: 80px;
+      height: 80px;
+      background: white;
+      border: 4px solid #0866ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 800;
+      color: #0866ff;
+      box-shadow: 0 4px 12px rgba(8, 102, 255, 0.2);
+      position: relative;
+      z-index: 2;
+    }
+    
+    .step-icon.active {
+      background: #0866ff;
+      color: white;
+    }
+    
+    /* Salary Details */
+    .salary-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin: 40px 0;
+    }
+    
+    .salary-card {
+      background: white;
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      border: 1px solid #e4e6ea;
+    }
+    
+    .salary-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1c1e21;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .salary-table {
+      width: 100%;
+    }
+    
+    .salary-table tr {
+      border-bottom: 1px solid #f0f2f5;
+    }
+    
+    .salary-table tr:last-child {
+      border-bottom: none;
+    }
+    
+    .salary-table td {
+      padding: 12px 0;
+      font-size: 14px;
+    }
+    
+    .salary-table td:first-child {
+      color: #65676b;
+    }
+    
+    .salary-table td:last-child {
+      font-weight: 600;
+      color: #1c1e21;
+      text-align: right;
+    }
+    
+    .total-row {
+      border-top: 2px solid #e4e6ea !important;
+      font-weight: 700 !important;
+    }
+    
+    .total-row td {
+      font-weight: 700 !important;
+      color: #0866ff !important;
+      font-size: 16px !important;
+    }
+    
+    /* Benefits */
+    .benefits {
+      background: white;
+      border-radius: 12px;
+      padding: 32px;
+      margin: 40px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    
+    .benefits h3 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 24px;
+      color: #1c1e21;
+    }
+    
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    
+    .benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      background: #f8f9fa;
+      border-radius: 8px;
+    }
+    
+    .benefit-icon {
+      width: 40px;
+      height: 40px;
+      background: #0866ff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+    }
+    
+    .benefit-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1c1e21;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+      
+      .job-title {
+        font-size: 36px;
+      }
+      
+      .journey-timeline::before {
+        left: 20px;
+      }
+      
+      .journey-step {
+        flex-direction: column !important;
+        text-align: center !important;
+        margin-left: 40px;
+      }
+      
+      .journey-step:nth-child(even) .step-content {
+        text-align: center;
+      }
+      
+      .step-content {
+        padding: 20px 0 0 0;
+      }
+      
+      .step-icon {
+        position: absolute;
+        left: -60px;
+        width: 60px;
+        height: 60px;
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <nav class="nav">
+        <div class="logo">SarkariSalary</div>
+        <div class="breadcrumb">
+          <a href="/">Home</a> > <a href="/central-government/">Central Government</a> > IAS Officer
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Job Header -->
+    <section class="job-header">
+      <div class="job-header-content">
+        <h1 class="job-title">IAS Officer</h1>
+        <p class="job-subtitle">Indian Administrative Service - The Steel Frame of India</p>
+        
+        <div class="job-stats">
+          <div class="job-stat">
+            <span class="job-stat-number">₹56,100</span>
+            <div class="job-stat-label">Starting Salary</div>
+          </div>
+          <div class="job-stat">
+            <span class="job-stat-number">₹2,50,000+</span>
+            <div class="job-stat-label">Peak Salary</div>
+          </div>
+          <div class="job-stat">
+            <span class="job-stat-number">30-35 Years</span>
+            <div class="job-stat-label">Service Period</div>
+          </div>
+          <div class="job-stat">
+            <span class="job-stat-number">All India</span>
+            <div class="job-stat-label">Posting</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Career Journey - CENTER SECTION -->
+    <section class="career-journey">
+      <h2 class="journey-title">Career Journey & Growth Path</h2>
+      
+      <div class="journey-timeline">
+        <div class="journey-step">
+          <div class="step-content">
+            <div class="step-position">Sub Divisional Magistrate (SDM)</div>
+            <div class="step-salary">₹65,000 - ₹85,000</div>
+            <div class="step-years">0-2 Years Experience</div>
+            <div class="step-description">Entry level administrative position. Handle revenue cases, licensing, and basic administrative duties. Posted at sub-division level.</div>
+          </div>
+          <div class="step-icon active">1</div>
+        </div>
+
+        <div class="journey-step">
+          <div class="step-content">
+            <div class="step-position">Assistant Collector / ADM</div>
+            <div class="step-salary">₹85,000 - ₹1,10,000</div>
+            <div class="step-years">2-4 Years Experience</div>
+            <div class="step-description">Assistant to District Collector. Handle land acquisition, revenue collection, and district administration support. Greater responsibilities.</div>
+          </div>
+          <div class="step-icon">2</div>
+        </div>
+
+        <div class="journey-step">
+          <div class="step-content">
+            <div class="step-position">District Collector / DM</div>
+            <div class="step-salary">₹1,20,000 - ₹1,60,000</div>
+            <div class="step-years">4-8 Years Experience</div>
+            <div class="step-description">Head of district administration. CEO of Zilla Panchayat. Handle law & order, revenue, development programs. Most prestigious field posting.</div>
+          </div>
+          <div class="step-icon">3</div>
+        </div>
+
+        <div class="journey-step">
+          <div class="step-content">
+            <div class="step-position">Deputy Secretary (Central)</div>
+            <div class="step-salary">₹1,40,000 - ₹1,80,000</div>
+            <div class="step-years">8-12 Years Experience</div>
+            <div class="step-description">Central government secretariat posting. Policy formulation, file handling, inter-ministerial coordination. Exposure to national governance.</div>
+          </div>
+          <div class="step-icon">4</div>
+        </div>
+
+        <div class="journey-step">
+          <div class="step-content">
+            <div class="step-position">Joint Secretary</div>
+            <div class="step-salary">₹1,80,000 - ₹2,20,000</div>
+            <div class="step-years">12-16 Years Experience</div>
+            <div class="step-description">Senior policy making position. Head important divisions. Brief ministers, handle Parliament questions. Significant decision-making authority.</div>
+          </div>
+          <div class="step-icon">5</div>
+        </div>
+
+        <div class="journey-step">
+          <div class="step-content">
+            <div class="step-position">Additional Secretary</div>
+            <div class="step-salary">₹2,20,000 - ₹2,50,000</div>
+            <div class="step-years">16-22 Years Experience</div>
+            <div class="step-description">Senior administrative position. Assist Secretary in ministry functioning. Handle complex policy issues and inter-state coordination.</div>
+          </div>
+          <div class="step-icon">6</div>
+        </div>
+
+        <div class="journey-step">
+          <div class="step-content">
+            <div class="step-position">Secretary to Government</div>
+            <div class="step-salary">₹2,50,000+</div>
+            <div class="step-years">22+ Years Experience</div>
+            <div class="step-description">Highest administrative position. Head of ministry/department. Direct interface with ministers. Shape national policies and governance.</div>
+          </div>
+          <div class="step-icon">7</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Salary Details -->
+    <section class="salary-details">
+      <div class="salary-card">
+        <h3>💰 Entry Level Breakdown</h3>
+        <table class="salary-table">
+          <tr>
+            <td>Basic Pay</td>
+            <td>₹56,100</td>
+          </tr>
+          <tr>
+            <td>Dearness Allowance (50%)</td>
+            <td>₹28,050</td>
+          </tr>
+          <tr>
+            <td>House Rent Allowance (24%)</td>
+            <td>₹13,464</td>
+          </tr>
+          <tr>
+            <td>Transport Allowance</td>
+            <td>₹3,200</td>
+          </tr>
+          <tr>
+            <td>Medical Allowance</td>
+            <td>₹1,000</td>
+          </tr>
+          <tr class="total-row">
+            <td>Gross Salary</td>
+            <td>₹1,01,814</td>
+          </tr>
+          <tr>
+            <td>PF & Deductions</td>
+            <td>₹15,000</td>
+          </tr>
+          <tr class="total-row">
+            <td>Net In-hand</td>
+            <td>₹86,814</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="salary-card">
+        <h3>📊 Peak Level Breakdown</h3>
+        <table class="salary-table">
+          <tr>
+            <td>Basic Pay</td>
+            <td>₹2,25,000</td>
+          </tr>
+          <tr>
+            <td>Dearness Allowance (50%)</td>
+            <td>₹1,12,500</td>
+          </tr>
+          <tr>
+            <td>House Rent Allowance (24%)</td>
+            <td>₹54,000</td>
+          </tr>
+          <tr>
+            <td>Transport Allowance</td>
+            <td>₹15,750</td>
+          </tr>
+          <tr>
+            <td>Other Allowances</td>
+            <td>₹25,000</td>
+          </tr>
+          <tr class="total-row">
+            <td>Gross Salary</td>
+            <td>₹4,32,250</td>
+          </tr>
+          <tr>
+            <td>PF & Deductions</td>
+            <td>₹45,000</td>
+          </tr>
+          <tr class="total-row">
+            <td>Net In-hand</td>
+            <td>₹3,87,250</td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="benefits">
+      <h3>Additional Benefits & Perks</h3>
+      <div class="benefits-grid">
+        <div class="benefit-item">
+          <div class="benefit-icon">🏠</div>
+          <div class="benefit-text">Government Accommodation</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">🚗</div>
+          <div class="benefit-text">Official Vehicle with Driver</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">⚡</div>
+          <div class="benefit-text">Free Electricity & Water</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">🛡️</div>
+          <div class="benefit-text">Security Cover</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">🏥</div>
+          <div class="benefit-text">CGHS Medical Benefits</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">✈️</div>
+          <div class="benefit-text">LTC Travel Benefits</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">📚</div>
+          <div class="benefit-text">Children Education Allowance</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon">🎯</div>
+          <div class="benefit-text">Pension After Retirement</div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IAS Officer Career Journey - Interactive Infographic Timeline</title>
+  <meta name="description" content="Interactive infographic showing complete IAS officer career journey from SDM to Secretary with salary progression and responsibilities.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    /* Header */
+    .header {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      padding: 20px 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+      border-radius: 0 0 20px 20px;
+    }
+    
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      color: #667eea;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .breadcrumb {
+      font-size: 14px;
+      color: #666;
+    }
+    
+    .breadcrumb a {
+      color: #667eea;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    /* Infographic Header */
+    .infographic-header {
+      text-align: center;
+      margin-bottom: 60px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      padding: 60px 40px;
+      border-radius: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .infographic-title {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 900;
+      color: white;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+      letter-spacing: -2px;
+    }
+    
+    .infographic-subtitle {
+      font-size: 24px;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+    
+    .infographic-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .stat-bubble {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      padding: 30px 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .stat-bubble:hover {
+      transform: translateY(-10px);
+      background: rgba(255, 255, 255, 0.3);
+    }
+    
+    .stat-number {
+      font-size: 32px;
+      font-weight: 900;
+      color: white;
+      display: block;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    .stat-label {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    /* Timeline Container */
+    .timeline-container {
+      background: white;
+      border-radius: 30px;
+      padding: 60px 40px;
+      margin: 40px 0;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #667eea, #764ba2, #f093fb, #f5576c);
+    }
+    
+    .timeline-title {
+      text-align: center;
+      font-size: 42px;
+      font-weight: 900;
+      color: #2d3748;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    
+    .timeline-subtitle {
+      text-align: center;
+      font-size: 18px;
+      color: #718096;
+      margin-bottom: 60px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* Timeline */
+    .timeline {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    /* Vertical line */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      background: linear-gradient(180deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      border-radius: 3px;
+      transform: translateX(-50%);
+      box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
+    }
+    
+    /* Timeline Items */
+    .timeline-item {
+      position: relative;
+      margin-bottom: 80px;
+      display: flex;
+      align-items: center;
+      opacity: 0;
+      animation: slideInTimeline 0.8s ease forwards;
+    }
+    
+    .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+    .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+    .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+    .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+    .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+    .timeline-item:nth-child(6) { animation-delay: 0.6s; }
+    .timeline-item:nth-child(7) { animation-delay: 0.7s; }
+    
+    @keyframes slideInTimeline {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .timeline-item:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+    
+    /* Timeline Content */
+    .timeline-content {
+      flex: 1;
+      padding: 0 40px;
+      max-width: 480px;
+    }
+    
+    .timeline-item:nth-child(even) .timeline-content {
+      text-align: right;
+    }
+    
+    .timeline-card {
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      border-radius: 20px;
+      padding: 40px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      border: 1px solid #e2e8f0;
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    
+    .timeline-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #667eea, #764ba2);
+    }
+    
+    .timeline-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    }
+    
+    /* Arrow pointing to center */
+    .timeline-card::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 20px;
+      height: 20px;
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      transform: rotate(45deg) translateY(-50%);
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-card::after {
+      right: -11px;
+    }
+    
+    .timeline-item:nth-child(even) .timeline-card::after {
+      left: -11px;
+    }
+    
+    .position-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #2d3748;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .position-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+    }
+    
+    .salary-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 18px;
+      margin: 12px 0;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+    
+    .years-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 12px;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .position-description {
+      color: #4a5568;
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    
+    .responsibilities {
+      list-style: none;
+      margin: 0;
+    }
+    
+    .responsibilities li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 8px;
+      color: #2d3748;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    
+    .responsibilities li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #10b981;
+      font-weight: 700;
+    }
+    
+    /* Center Icon */
+    .timeline-icon {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 24px;
+      font-weight: 900;
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+      border: 6px solid white;
+      position: relative;
+      z-index: 10;
+      transition: all 0.3s ease;
+    }
+    
+    .timeline-icon:hover {
+      transform: scale(1.1);
+      box-shadow: 0 15px 40px rgba(102, 126, 234, 0.5);
+    }
+    
+    /* Growth Indicators */
+    .growth-indicator {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 2px solid #10b981;
+      border-radius: 12px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #059669;
+    }
+    
+    .timeline-item:nth-child(even) .growth-indicator {
+      left: 20px;
+      right: auto;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+      
+      .timeline::before {
+        left: 30px;
+      }
+      
+      .timeline-item {
+        flex-direction: column !important;
+        margin-left: 60px;
+      }
+      
+      .timeline-item:nth-child(even) .timeline-content {
+        text-align: left;
+      }
+      
+      .timeline-content {
+        padding: 20px 0 0 0;
+      }
+      
+      .timeline-card::after {
+        display: none;
+      }
+      
+      .timeline-icon {
+        position: absolute;
+        left: -80px;
+        width: 60px;
+        height: 60px;
+        font-size: 18px;
+      }
+      
+      .infographic-header {
+        padding: 40px 20px;
+      }
+      
+      .timeline-container {
+        padding: 40px 20px;
+      }
+    }
+    
+    /* Floating Elements */
+    .floating-element {
+      position: absolute;
+      opacity: 0.1;
+      animation: float 6s ease-in-out infinite;
+    }
+    
+    .floating-element:nth-child(1) {
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+    
+    .floating-element:nth-child(2) {
+      top: 20%;
+      right: 10%;
+      animation-delay: 2s;
+    }
+    
+    .floating-element:nth-child(3) {
+      bottom: 20%;
+      left: 15%;
+      animation-delay: 4s;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-element">💼</div>
+  <div class="floating-element">📈</div>
+  <div class="floating-element">🏛️</div>
+
+  <header class="header">
+    <div class="container">
+      <nav class="nav">
+        <div class="logo">SarkariSalary</div>
+        <div class="breadcrumb">
+          <a href="/">Home</a> > <a href="/central-government/">Central Government</a> > IAS Career Journey
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Infographic Header -->
+    <section class="infographic-header">
+      <h1 class="infographic-title">IAS Officer Career Journey</h1>
+      <p class="infographic-subtitle">From Sub Divisional Magistrate to Secretary - Complete Growth Path</p>
+      
+      <div class="infographic-stats">
+        <div class="stat-bubble">
+          <span class="stat-number">₹65K</span>
+          <div class="stat-label">Starting Salary</div>
+        </div>
+        <div class="stat-bubble">
+          <span class="stat-number">₹3.8L+</span>
+          <div class="stat-label">Peak Salary</div>
+        </div>
+        <div class="stat-bubble">
+          <span class="stat-number">7 Stages</span>
+          <div class="stat-label">Career Levels</div>
+        </div>
+        <div class="stat-bubble">
+          <span class="stat-number">30+ Years</span>
+          <div class="stat-label">Service Period</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="timeline-container">
+      <h2 class="timeline-title">Career Progression Timeline</h2>
+      <p class="timeline-subtitle">Follow the complete journey from entry-level administrator to top government position with salary growth at each stage</p>
+      
+      <div class="timeline">
+        <!-- Stage 1 -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-card">
+              <div class="growth-indicator">+30% Growth</div>
+              <div class="position-title">
+                <div class="position-icon">SDM</div>
+                Sub Divisional Magistrate
+              </div>
+              <div class="years-badge">0-2 Years Experience</div>
+              <div class="salary-badge">₹65,000 - ₹85,000</div>
+              <p class="position-description">Entry level administrative position handling revenue cases, licensing, and basic administrative duties at sub-division level.</p>
+              <ul class="responsibilities">
+                <li>Revenue case management</li>
+                <li>Licensing and permits</li>
+                <li>Basic administrative oversight</li>
+                <li>Public grievance handling</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-icon">1</div>
+        </div>
+
+        <!-- Stage 2 -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-card">
+              <div class="growth-indicator">+25% Growth</div>
+              <div class="position-title">
+                <div class="position-icon">ADM</div>
+                Assistant Collector
+              </div>
+              <div class="years-badge">2-4 Years Experience</div>
+              <div class="salary-badge">₹85,000 - ₹1,10,000</div>
+              <p class="position-description">Assistant to District Collector with expanded responsibilities in land acquisition, revenue collection, and district administration support.</p>
+              <ul class="responsibilities">
+                <li>Land acquisition projects</li>
+                <li>Revenue collection oversight</li>
+                <li>District administration support</li>
+                <li>Development scheme monitoring</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-icon">2</div>
+        </div>
+
+        <!-- Stage 3 -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-card">
+              <div class="growth-indicator">+40% Growth</div>
+              <div class="position-title">
+                <div class="position-icon">DC</div>
+                District Collector
+              </div>
+              <div class="years-badge">4-8 Years Experience</div>
+              <div class="salary-badge">₹1,20,000 - ₹1,60,000</div>
+              <p class="position-description">Head of district administration and CEO of Zilla Panchayat. Most prestigious field posting with executive powers.</p>
+              <ul class="responsibilities">
+                <li>District administration head</li>
+                <li>Law & order coordination</li>
+                <li>Development programs oversight</li>
+                <li>Emergency management</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-icon">3</div>
+        </div>
+
+        <!-- Stage 4 -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-card">
+              <div class="growth-indicator">+20% Growth</div>
+              <div class="position-title">
+                <div class="position-icon">DS</div>
+                Deputy Secretary
+              </div>
+              <div class="years-badge">8-12 Years Experience</div>
+              <div class="salary-badge">₹1,40,000 - ₹1,80,000</div>
+              <p class="position-description">Central government secretariat posting involving policy formulation, file handling, and inter-ministerial coordination.</p>
+              <ul class="responsibilities">
+                <li>Policy formulation</li>
+                <li>Inter-ministerial coordination</li>
+                <li>File processing and approval</li>
+                <li>Parliamentary work</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-icon">4</div>
+        </div>
+
+        <!-- Stage 5 -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-card">
+              <div class="growth-indicator">+22% Growth</div>
+              <div class="position-title">
+                <div class="position-icon">JS</div>
+                Joint Secretary
+              </div>
+              <div class="years-badge">12-16 Years Experience</div>
+              <div class="salary-badge">₹1,80,000 - ₹2,20,000</div>
+              <p class="position-description">Senior policy making position heading important divisions, briefing ministers, and handling Parliament questions.</p>
+              <ul class="responsibilities">
+                <li>Division head responsibilities</li>
+                <li>Minister briefings</li>
+                <li>Parliament question handling</li>
+                <li>Policy implementation oversight</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-icon">5</div>
+        </div>
+
+        <!-- Stage 6 -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-card">
+              <div class="growth-indicator">+15% Growth</div>
+              <div class="position-title">
+                <div class="position-icon">AS</div>
+                Additional Secretary
+              </div>
+              <div class="years-badge">16-22 Years Experience</div>
+              <div class="salary-badge">₹2,20,000 - ₹2,50,000</div>
+              <p class="position-description">Senior administrative position assisting Secretary in ministry functioning and handling complex policy issues.</p>
+              <ul class="responsibilities">
+                <li>Ministry functioning support</li>
+                <li>Complex policy issues</li>
+                <li>Inter-state coordination</li>
+                <li>Cabinet note preparation</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-icon">6</div>
+        </div>
+
+        <!-- Stage 7 -->
+        <div class="timeline-item">
+          <div class="timeline-content">
+            <div class="timeline-card">
+              <div class="growth-indicator">Peak Level</div>
+              <div class="position-title">
+                <div class="position-icon">SEC</div>
+                Secretary to Government
+              </div>
+              <div class="years-badge">22+ Years Experience</div>
+              <div class="salary-badge">₹2,50,000 - ₹3,80,000+</div>
+              <p class="position-description">Highest administrative position as head of ministry/department with direct interface with ministers.</p>
+              <ul class="responsibilities">
+                <li>Ministry/department head</li>
+                <li>Direct minister interface</li>
+                <li>National policy shaping</li>
+                <li>Government decision making</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-icon">👑</div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
