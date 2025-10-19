@@ -1,27 +1,23 @@
 {
-  "name": "sarkarisalaryde",
-  "version": "0.1.0",
-  "private": true,
+  "name": "sarkarisalary-static",
+  "version": "1.0.0",
+  "description": "Static site generator for SarkariSalary.de",
+  "main": "build.js",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
-    "start": "next start",
-    "lint": "eslint"
+    "build": "node build.js",
+    "dev": "node build.js && cd dist && python3 -m http.server 8000",
+    "serve": "cd dist && python3 -m http.server 8000",
+    "clean": "rm -rf dist",
+    "deploy": "npm run build && echo 'Upload dist/ folder to your CDN'"
   },
-  "dependencies": {
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "next": "15.5.6"
-  },
-  "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
-    "eslint": "^9",
-    "eslint-config-next": "15.5.6",
-    "@eslint/eslintrc": "^3"
-  }
+  "keywords": [
+    "static-site-generator",
+    "government-jobs",
+    "salary-information",
+    "seo"
+  ],
+  "author": "SarkariSalary.de",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {}
 }

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Government Salary Calculator | Calculate In-hand Salary, DA, HRA</title>
+  <meta name="description" content="Calculate your government job in-hand salary with DA, HRA, deductions. Free salary calculator for all sarkari jobs with 7th pay commission rates.">
+  <meta name="keywords" content="salary calculator, government salary calculator, in-hand salary calculator, DA calculator, HRA calculator, sarkari salary">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#212529;line-height:1.6}
+    .container{max-width:1000px;margin:0 auto;padding:0 20px}
+    .header{background:#fff;border-bottom:3px solid #000;padding:15px 0}
+    .nav{display:flex;justify-content:space-between;align-items:center}
+    .logo{font-size:28px;font-weight:900;color:#000}
+    .nav-links{display:flex;gap:30px}
+    .nav-links a{color:#000;text-decoration:none;font-weight:600;padding:8px 16px;border:2px solid transparent}
+    .nav-links a:hover{border:2px solid #000;background:#fff200}
+    .calculator{background:#fff;border:3px solid #000;margin:30px 0;padding:40px}
+    .calc-title{font-size:36px;font-weight:900;margin-bottom:30px;text-align:center}
+    .form-group{margin-bottom:25px}
+    .form-label{display:block;font-weight:700;margin-bottom:8px;font-size:16px}
+    .form-input{width:100%;padding:12px;border:2px solid #000;font-size:16px;background:#fff}
+    .form-input:focus{outline:none;box-shadow:0 0 0 3px #fff200}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+    .calc-btn{background:#000;color:#fff;padding:15px 30px;border:none;font-size:18px;font-weight:bold;cursor:pointer;width:100%;margin:20px 0}
+    .calc-btn:hover{background:#333}
+    .result-section{background:#fff200;border:3px solid #000;padding:30px;margin-top:30px;display:none}
+    .result-title{font-size:24px;font-weight:900;margin-bottom:20px;text-align:center}
+    .result-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+    .result-item{background:#fff;border:2px solid #000;padding:20px;text-align:center}
+    .result-label{font-weight:600;color:#666;margin-bottom:5px}
+    .result-value{font-size:24px;font-weight:900;color:#000}
+    .breakdown{background:#fff;border:3px solid #000;margin:30px 0;padding:30px}
+    .breakdown-title{font-size:20px;font-weight:700;margin-bottom:20px}
+    .breakdown-row{display:flex;justify-content:space-between;padding:10px;border-bottom:1px solid #eee}
+    .breakdown-row:last-child{border-bottom:none;font-weight:900;background:#f8f9fa}
+    .quick-calcs{margin:40px 0}
+    .section-title{font-size:28px;font-weight:900;margin-bottom:25px;text-align:center}
+    .calc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+    .quick-calc{background:#fff;border:3px solid #000;padding:25px;text-align:center}
+    .quick-calc:hover{background:#fff200;transform:translate(-2px,-2px);box-shadow:4px 4px 0 #000}
+    .quick-calc h3{font-weight:700;margin-bottom:15px}
+    .quick-calc p{color:#666;margin-bottom:15px}
+    .quick-btn{background:#000;color:#fff;padding:10px 20px;border:none;font-weight:bold;cursor:pointer}
+  </style>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Government Salary Calculator",
+      "description": "Calculate government job in-hand salary with allowances and deductions",
+      "url": "https://sarkarisalary.de/salary-calculator/",
+      "applicationCategory": "Finance"
+    }
+  </script>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <nav class="nav">
+        <a href="/" class="logo">SARKARI SALARY</a>
+        <div class="nav-links">
+          <a href="/">Home</a>
+          <a href="/central-government/">Central Govt</a>
+          <a href="/payslips/">Pay Slips</a>
+          <a href="/latest/">Latest</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="calculator">
+      <h1 class="calc-title">Government Salary Calculator</h1>
+      
+      <form id="salaryForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Basic Pay (₹)</label>
+            <input type="number" class="form-input" id="basicPay" placeholder="Enter basic pay">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Grade Pay (₹)</label>
+            <input type="number" class="form-input" id="gradePay" placeholder="Enter grade pay">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">DA Rate (%)</label>
+            <input type="number" class="form-input" id="daRate" value="50" placeholder="DA percentage">
+          </div>
+          <div class="form-group">
+            <label class="form-label">HRA Rate (%)</label>
+            <input type="number" class="form-input" id="hraRate" value="24" placeholder="HRA percentage">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">City Allowance (₹)</label>
+            <input type="number" class="form-input" id="cityAllowance" value="0" placeholder="City allowance">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Other Allowances (₹)</label>
+            <input type="number" class="form-input" id="otherAllowances" value="0" placeholder="Other allowances">
+          </div>
+        </div>
+
+        <button type="button" class="calc-btn" onclick="calculateSalary()">CALCULATE SALARY</button>
+      </form>
+
+      <div class="result-section" id="resultSection">
+        <h2 class="result-title">Your Calculated Salary</h2>
+        <div class="result-grid">
+          <div class="result-item">
+            <div class="result-label">Gross Salary</div>
+            <div class="result-value" id="grossSalary">₹0</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">Total Deductions</div>
+            <div class="result-value" id="totalDeductions">₹0</div>
+          </div>
+          <div class="result-item">
+            <div class="result-label">In-hand Salary</div>
+            <div class="result-value" id="inhandSalary">₹0</div>
+          </div>
+        </div>
+
+        <div class="breakdown">
+          <h3 class="breakdown-title">Salary Breakdown</h3>
+          <div class="breakdown-row">
+            <span>Basic Pay + Grade Pay</span>
+            <span id="basicTotal">₹0</span>
+          </div>
+          <div class="breakdown-row">
+            <span>DA (Dearness Allowance)</span>
+            <span id="daAmount">₹0</span>
+          </div>
+          <div class="breakdown-row">
+            <span>HRA (House Rent Allowance)</span>
+            <span id="hraAmount">₹0</span>
+          </div>
+          <div class="breakdown-row">
+            <span>City Allowance</span>
+            <span id="cityAmount">₹0</span>
+          </div>
+          <div class="breakdown-row">
+            <span>Other Allowances</span>
+            <span id="otherAmount">₹0</span>
+          </div>
+          <div class="breakdown-row">
+            <span>PF Deduction (12%)</span>
+            <span id="pfDeduction">₹0</span>
+          </div>
+          <div class="breakdown-row">
+            <span>Professional Tax</span>
+            <span id="professionalTax">₹200</span>
+          </div>
+          <div class="breakdown-row">
+            <span><strong>Net In-hand Salary</strong></span>
+            <span id="finalSalary"><strong>₹0</strong></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="quick-calcs">
+      <h2 class="section-title">Quick Calculators</h2>
+      <div class="calc-grid">
+        <div class="quick-calc">
+          <h3>DA Calculator</h3>
+          <p>Calculate Dearness Allowance based on current rates</p>
+          <button class="quick-btn">CALCULATE DA</button>
+        </div>
+        <div class="quick-calc">
+          <h3>HRA Calculator</h3>
+          <p>House Rent Allowance calculator for all cities</p>
+          <button class="quick-btn">CALCULATE HRA</button>
+        </div>
+        <div class="quick-calc">
+          <h3>Pension Calculator</h3>
+          <p>Calculate your government pension amount</p>
+          <button class="quick-btn">CALCULATE PENSION</button>
+        </div>
+        <div class="quick-calc">
+          <h3>Gratuity Calculator</h3>
+          <p>Calculate gratuity amount for government employees</p>
+          <button class="quick-btn">CALCULATE GRATUITY</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function calculateSalary() {
+      const basicPay = parseFloat(document.getElementById('basicPay').value) || 0;
+      const gradePay = parseFloat(document.getElementById('gradePay').value) || 0;
+      const daRate = parseFloat(document.getElementById('daRate').value) || 0;
+      const hraRate = parseFloat(document.getElementById('hraRate').value) || 0;
+      const cityAllowance = parseFloat(document.getElementById('cityAllowance').value) || 0;
+      const otherAllowances = parseFloat(document.getElementById('otherAllowances').value) || 0;
+
+      if (basicPay === 0) {
+        alert('Please enter basic pay');
+        return;
+      }
+
+      const basicTotal = basicPay + gradePay;
+      const daAmount = (basicTotal * daRate) / 100;
+      const hraAmount = (basicTotal * hraRate) / 100;
+      const grossSalary = basicTotal + daAmount + hraAmount + cityAllowance + otherAllowances;
+      
+      const pfDeduction = (basicTotal * 12) / 100;
+      const professionalTax = 200;
+      const totalDeductions = pfDeduction + professionalTax;
+      const inhandSalary = grossSalary - totalDeductions;
+
+      document.getElementById('grossSalary').textContent = '₹' + grossSalary.toLocaleString();
+      document.getElementById('totalDeductions').textContent = '₹' + totalDeductions.toLocaleString();
+      document.getElementById('inhandSalary').textContent = '₹' + inhandSalary.toLocaleString();
+      
+      document.getElementById('basicTotal').textContent = '₹' + basicTotal.toLocaleString();
+      document.getElementById('daAmount').textContent = '₹' + daAmount.toLocaleString();
+      document.getElementById('hraAmount').textContent = '₹' + hraAmount.toLocaleString();
+      document.getElementById('cityAmount').textContent = '₹' + cityAllowance.toLocaleString();
+      document.getElementById('otherAmount').textContent = '₹' + otherAllowances.toLocaleString();
+      document.getElementById('pfDeduction').textContent = '₹' + pfDeduction.toLocaleString();
+      document.getElementById('professionalTax').textContent = '₹' + professionalTax.toLocaleString();
+      document.getElementById('finalSalary').textContent = '₹' + inhandSalary.toLocaleString();
+
+      document.getElementById('resultSection').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

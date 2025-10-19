@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Government Salary Slips | Sample Pay Slips for Sarkari Jobs</title>
+  <meta name="description" content="View sample government salary slips for all sarkari jobs. Realistic pay slip formats for IAS, IPS, Railway, Banking, and other government positions.">
+  <meta name="keywords" content="salary slip, pay slip, government salary slip, sarkari job pay slip, IAS salary slip, IPS salary slip, sample pay slip">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#f8f9fa;color:#212529;line-height:1.6}
+    .container{max-width:1200px;margin:0 auto;padding:0 20px}
+    .header{background:#fff;border-bottom:3px solid #000;padding:15px 0}
+    .nav{display:flex;justify-content:space-between;align-items:center}
+    .logo{font-size:28px;font-weight:900;color:#000}
+    .nav-links{display:flex;gap:30px}
+    .nav-links a{color:#000;text-decoration:none;font-weight:600;padding:8px 16px;border:2px solid transparent}
+    .nav-links a:hover{border:2px solid #000;background:#fff200}
+    .page-title{background:#fff200;border:3px solid #000;margin:20px 0;padding:30px;text-align:center}
+    .page-title h1{font-size:42px;font-weight:900;margin-bottom:15px}
+    .payslip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:20px;margin:40px 0}
+    .payslip-card{background:#fff;border:3px solid #000;padding:25px}
+    .payslip-card:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 #000}
+    .payslip-title{font-size:18px;font-weight:700;margin-bottom:15px;color:#000}
+    .payslip-preview{background:#f8f9fa;border:2px solid #ddd;padding:20px;margin-bottom:15px;font-family:monospace;font-size:12px}
+    .payslip-header{text-align:center;margin-bottom:15px;border-bottom:1px solid #000;padding-bottom:10px}
+    .payslip-row{display:flex;justify-content:space-between;margin-bottom:5px}
+    .payslip-total{border-top:1px solid #000;padding-top:10px;margin-top:10px;font-weight:bold}
+    .view-btn{background:#000;color:#fff;padding:12px 20px;border:none;font-weight:bold;cursor:pointer;width:100%}
+    .view-btn:hover{background:#333}
+    .payslip-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:1000}
+    .modal-content{background:#fff;border:3px solid #000;max-width:800px;margin:50px auto;padding:30px;max-height:80vh;overflow-y:auto}
+    .close-btn{float:right;font-size:24px;font-weight:bold;cursor:pointer;background:none;border:none}
+    .full-payslip{font-family:monospace;font-size:14px;line-height:1.4}
+    .dept-header{text-align:center;font-weight:bold;margin-bottom:20px;border-bottom:2px solid #000;padding-bottom:10px}
+    .emp-details{margin-bottom:20px}
+    .salary-table{width:100%;border-collapse:collapse;margin-bottom:20px}
+    .salary-table th,.salary-table td{border:1px solid #000;padding:8px;text-align:left}
+    .salary-table th{background:#f8f9fa;font-weight:bold}
+    .total-row{background:#fff200;font-weight:bold}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <nav class="nav">
+        <a href="/" class="logo">SARKARI SALARY</a>
+        <div class="nav-links">
+          <a href="/">Home</a>
+          <a href="/central-government/">Central Govt</a>
+          <a href="/salary-calculator/">Calculator</a>
+          <a href="/latest/">Latest</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="page-title">
+      <h1>Government Salary Slips</h1>
+      <p>Sample salary slips for all government positions. View realistic pay slip formats and understand salary components.</p>
+    </section>
+
+    <section class="payslip-grid">
+      <div class="payslip-card">
+        <div class="payslip-title">IAS Officer Salary Slip</div>
+        <div class="payslip-preview">
+          <div class="payslip-header">
+            <strong>GOVERNMENT OF INDIA<br>
+            DEPARTMENT OF PERSONNEL & TRAINING<br>
+            SALARY SLIP - OCTOBER 2025</strong>
+          </div>
+          <div class="payslip-row"><span>Name:</span><span>RAJESH KUMAR</span></div>
+          <div class="payslip-row"><span>Designation:</span><span>IAS OFFICER</span></div>
+          <div class="payslip-row"><span>Employee ID:</span><span>IAS001234</span></div>
+          <div class="payslip-row"><span>Pay Scale:</span><span>56100-177500</span></div>
+          <hr style="margin:10px 0">
+          <div class="payslip-row"><span>Basic Pay:</span><span>Rs. 65,000</span></div>
+          <div class="payslip-row"><span>Grade Pay:</span><span>Rs. 8,700</span></div>
+          <div class="payslip-row"><span>DA (50%):</span><span>Rs. 36,850</span></div>
+          <div class="payslip-row"><span>HRA (24%):</span><span>Rs. 17,688</span></div>
+          <div class="payslip-total"><span>Gross:</span><span>Rs. 1,28,238</span></div>
+          <div class="payslip-row"><span>PF:</span><span>Rs. 8,844</span></div>
+          <div class="payslip-total"><span>Net Pay:</span><span>Rs. 1,19,394</span></div>
+        </div>
+        <button class="view-btn" onclick="showPayslip('ias')">VIEW FULL SLIP</button>
+      </div>
+
+      <div class="payslip-card">
+        <div class="payslip-title">Railway Officer Salary Slip</div>
+        <div class="payslip-preview">
+          <div class="payslip-header">
+            <strong>INDIAN RAILWAYS<br>
+            NORTHERN RAILWAY<br>
+            SALARY SLIP - OCTOBER 2025</strong>
+          </div>
+          <div class="payslip-row"><span>Name:</span><span>SURESH SHARMA</span></div>
+          <div class="payslip-row"><span>Designation:</span><span>STATION MASTER</span></div>
+          <div class="payslip-row"><span>Employee ID:</span><span>NR567890</span></div>
+          <div class="payslip-row"><span>Pay Scale:</span><span>35400-112400</span></div>
+          <hr style="margin:10px 0">
+          <div class="payslip-row"><span>Basic Pay:</span><span>Rs. 42,000</span></div>
+          <div class="payslip-row"><span>Grade Pay:</span><span>Rs. 4,200</span></div>
+          <div class="payslip-row"><span>DA (50%):</span><span>Rs. 23,100</span></div>
+          <div class="payslip-row"><span>HRA (24%):</span><span>Rs. 11,088</span></div>
+          <div class="payslip-total"><span>Gross:</span><span>Rs. 80,388</span></div>
+          <div class="payslip-row"><span>PF:</span><span>Rs. 5,544</span></div>
+          <div class="payslip-total"><span>Net Pay:</span><span>Rs. 74,844</span></div>
+        </div>
+        <button class="view-btn" onclick="showPayslip('railway')">VIEW FULL SLIP</button>
+      </div>
+
+      <div class="payslip-card">
+        <div class="payslip-title">Bank PO Salary Slip</div>
+        <div class="payslip-preview">
+          <div class="payslip-header">
+            <strong>STATE BANK OF INDIA<br>
+            MUMBAI CIRCLE<br>
+            SALARY SLIP - OCTOBER 2025</strong>
+          </div>
+          <div class="payslip-row"><span>Name:</span><span>PRIYA SINGH</span></div>
+          <div class="payslip-row"><span>Designation:</span><span>PROBATIONARY OFFICER</span></div>
+          <div class="payslip-row"><span>Employee ID:</span><span>SBI123456</span></div>
+          <div class="payslip-row"><span>Pay Scale:</span><span>36000-103000</span></div>
+          <hr style="margin:10px 0">
+          <div class="payslip-row"><span>Basic Pay:</span><span>Rs. 36,000</span></div>
+          <div class="payslip-row"><span>Special Allow:</span><span>Rs. 7,200</span></div>
+          <div class="payslip-row"><span>DA (17.95%):</span><span>Rs. 7,754</span></div>
+          <div class="payslip-row"><span>HRA (8%):</span><span>Rs. 4,077</span></div>
+          <div class="payslip-total"><span>Gross:</span><span>Rs. 55,031</span></div>
+          <div class="payslip-row"><span>PF:</span><span>Rs. 4,320</span></div>
+          <div class="payslip-total"><span>Net Pay:</span><span>Rs. 50,711</span></div>
+        </div>
+        <button class="view-btn" onclick="showPayslip('bank')">VIEW FULL SLIP</button>
+      </div>
+
+      <div class="payslip-card">
+        <div class="payslip-title">Police Constable Salary Slip</div>
+        <div class="payslip-preview">
+          <div class="payslip-header">
+            <strong>DELHI POLICE<br>
+            POLICE HEADQUARTERS<br>
+            SALARY SLIP - OCTOBER 2025</strong>
+          </div>
+          <div class="payslip-row"><span>Name:</span><span>AMIT KUMAR</span></div>
+          <div class="payslip-row"><span>Designation:</span><span>HEAD CONSTABLE</span></div>
+          <div class="payslip-row"><span>Employee ID:</span><span>DL789012</span></div>
+          <div class="payslip-row"><span>Pay Scale:</span><span>25500-81100</span></div>
+          <hr style="margin:10px 0">
+          <div class="payslip-row"><span>Basic Pay:</span><span>Rs. 29,200</span></div>
+          <div class="payslip-row"><span>Grade Pay:</span><span>Rs. 2,000</span></div>
+          <div class="payslip-row"><span>DA (50%):</span><span>Rs. 15,600</span></div>
+          <div class="payslip-row"><span>HRA (24%):</span><span>Rs. 7,488</span></div>
+          <div class="payslip-total"><span>Gross:</span><span>Rs. 54,288</span></div>
+          <div class="payslip-row"><span>PF:</span><span>Rs. 3,744</span></div>
+          <div class="payslip-total"><span>Net Pay:</span><span>Rs. 50,544</span></div>
+        </div>
+        <button class="view-btn" onclick="showPayslip('police')">VIEW FULL SLIP</button>
+      </div>
+
+      <div class="payslip-card">
+        <div class="payslip-title">Teacher Salary Slip</div>
+        <div class="payslip-preview">
+          <div class="payslip-header">
+            <strong>DIRECTORATE OF EDUCATION<br>
+            GOVT. OF NCT OF DELHI<br>
+            SALARY SLIP - OCTOBER 2025</strong>
+          </div>
+          <div class="payslip-row"><span>Name:</span><span>SUNITA VERMA</span></div>
+          <div class="payslip-row"><span>Designation:</span><span>TGT (MATHEMATICS)</span></div>
+          <div class="payslip-row"><span>Employee ID:</span><span>ED345678</span></div>
+          <div class="payslip-row"><span>Pay Scale:</span><span>35400-112400</span></div>
+          <hr style="margin:10px 0">
+          <div class="payslip-row"><span>Basic Pay:</span><span>Rs. 38,000</span></div>
+          <div class="payslip-row"><span>Grade Pay:</span><span>Rs. 4,600</span></div>
+          <div class="payslip-row"><span>DA (50%):</span><span>Rs. 21,300</span></div>
+          <div class="payslip-row"><span>HRA (24%):</span><span>Rs. 10,224</span></div>
+          <div class="payslip-total"><span>Gross:</span><span>Rs. 74,124</span></div>
+          <div class="payslip-row"><span>PF:</span><span>Rs. 5,112</span></div>
+          <div class="payslip-total"><span>Net Pay:</span><span>Rs. 69,012</span></div>
+        </div>
+        <button class="view-btn" onclick="showPayslip('teacher')">VIEW FULL SLIP</button>
+      </div>
+
+      <div class="payslip-card">
+        <div class="payslip-title">SSC CGL Officer Salary Slip</div>
+        <div class="payslip-preview">
+          <div class="payslip-header">
+            <strong>MINISTRY OF FINANCE<br>
+            INCOME TAX DEPARTMENT<br>
+            SALARY SLIP - OCTOBER 2025</strong>
+          </div>
+          <div class="payslip-row"><span>Name:</span><span>RAVI GUPTA</span></div>
+          <div class="payslip-row"><span>Designation:</span><span>INCOME TAX INSPECTOR</span></div>
+          <div class="payslip-row"><span>Employee ID:</span><span>IT901234</span></div>
+          <div class="payslip-row"><span>Pay Scale:</span><span>25500-81100</span></div>
+          <hr style="margin:10px 0">
+          <div class="payslip-row"><span>Basic Pay:</span><span>Rs. 35,000</span></div>
+          <div class="payslip-row"><span>Grade Pay:</span><span>Rs. 4,600</span></div>
+          <div class="payslip-row"><span>DA (50%):</span><span>Rs. 19,800</span></div>
+          <div class="payslip-row"><span>HRA (24%):</span><span>Rs. 9,504</span></div>
+          <div class="payslip-total"><span>Gross:</span><span>Rs. 68,904</span></div>
+          <div class="payslip-row"><span>PF:</span><span>Rs. 4,752</span></div>
+          <div class="payslip-total"><span>Net Pay:</span><span>Rs. 64,152</span></div>
+        </div>
+        <button class="view-btn" onclick="showPayslip('ssc')">VIEW FULL SLIP</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="payslip-modal" id="payslipModal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closePayslip()">&times;</button>
+      <div class="full-payslip" id="fullPayslip"></div>
+    </div>
+  </div>
+
+  <script>
+    const payslipData = {
+      ias: `
+        <div class="dept-header">
+          GOVERNMENT OF INDIA<br>
+          DEPARTMENT OF PERSONNEL & TRAINING<br>
+          SALARY SLIP FOR THE MONTH OF OCTOBER 2025
+        </div>
+        <div class="emp-details">
+          <strong>Employee Details:</strong><br>
+          Name: RAJESH KUMAR<br>
+          Employee ID: IAS001234<br>
+          Designation: IAS OFFICER (DISTRICT COLLECTOR)<br>
+          Pay Scale: 56100-177500<br>
+          Grade Pay: Rs. 8,700<br>
+          Department: DISTRICT ADMINISTRATION<br>
+          Location: NEW DELHI
+        </div>
+        <table class="salary-table">
+          <tr><th>EARNINGS</th><th>AMOUNT (Rs.)</th><th>DEDUCTIONS</th><th>AMOUNT (Rs.)</th></tr>
+          <tr><td>Basic Pay</td><td>65,000</td><td>Provident Fund</td><td>8,844</td></tr>
+          <tr><td>Grade Pay</td><td>8,700</td><td>Professional Tax</td><td>200</td></tr>
+          <tr><td>DA (50%)</td><td>36,850</td><td>Income Tax</td><td>12,000</td></tr>
+          <tr><td>HRA (24%)</td><td>17,688</td><td>CGHS</td><td>500</td></tr>
+          <tr><td>Transport Allowance</td><td>3,200</td><td>Group Insurance</td><td>120</td></tr>
+          <tr><td>Medical Allowance</td><td>1,000</td><td></td><td></td></tr>
+          <tr class="total-row"><td><strong>TOTAL EARNINGS</strong></td><td><strong>1,32,438</strong></td><td><strong>TOTAL DEDUCTIONS</strong></td><td><strong>21,664</strong></td></tr>
+          <tr class="total-row"><td colspan="3"><strong>NET SALARY PAYABLE</strong></td><td><strong>1,10,774</strong></td></tr>
+        </table>
+        <p><strong>Net Salary in Words:</strong> One Lakh Ten Thousand Seven Hundred Seventy Four Rupees Only</p>
+      `,
+      railway: `
+        <div class="dept-header">
+          INDIAN RAILWAYS - NORTHERN RAILWAY<br>
+          SALARY SLIP FOR THE MONTH OF OCTOBER 2025
+        </div>
+        <div class="emp-details">
+          <strong>Employee Details:</strong><br>
+          Name: SURESH SHARMA<br>
+          Employee ID: NR567890<br>
+          Designation: STATION MASTER<br>
+          Pay Scale: 35400-112400<br>
+          Grade Pay: Rs. 4,200<br>
+          Department: OPERATIONS<br>
+          Station: NEW DELHI RAILWAY STATION
+        </div>
+        <table class="salary-table">
+          <tr><th>EARNINGS</th><th>AMOUNT (Rs.)</th><th>DEDUCTIONS</th><th>AMOUNT (Rs.)</th></tr>
+          <tr><td>Basic Pay</td><td>42,000</td><td>Provident Fund</td><td>5,544</td></tr>
+          <tr><td>Grade Pay</td><td>4,200</td><td>Professional Tax</td><td>200</td></tr>
+          <tr><td>DA (50%)</td><td>23,100</td><td>Income Tax</td><td>3,500</td></tr>
+          <tr><td>HRA (24%)</td><td>11,088</td><td>Railway Service</td><td>150</td></tr>
+          <tr><td>Running Allowance</td><td>2,500</td><td>Group Insurance</td><td>75</td></tr>
+          <tr><td>Night Duty Allowance</td><td>800</td><td></td><td></td></tr>
+          <tr class="total-row"><td><strong>TOTAL EARNINGS</strong></td><td><strong>83,688</strong></td><td><strong>TOTAL DEDUCTIONS</strong></td><td><strong>9,469</strong></td></tr>
+          <tr class="total-row"><td colspan="3"><strong>NET SALARY PAYABLE</strong></td><td><strong>74,219</strong></td></tr>
+        </table>
+        <p><strong>Net Salary in Words:</strong> Seventy Four Thousand Two Hundred Nineteen Rupees Only</p>
+      `
+    };
+
+    function showPayslip(type) {
+      document.getElementById('fullPayslip').innerHTML = payslipData[type] || 'Payslip data not available';
+      document.getElementById('payslipModal').style.display = 'block';
+    }
+
+    function closePayslip() {
+      document.getElementById('payslipModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById('payslipModal');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>

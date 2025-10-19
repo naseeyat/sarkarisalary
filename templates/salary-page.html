@@ -1,0 +1,62 @@
+<!-- Salary page template for specific jobs -->
+<div class="container">
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1 class="hero-title">{{JOB_TITLE}} Salary {{CURRENT_YEAR}}</h1>
+    <p class="hero-subtitle">{{JOB_DESCRIPTION}}</p>
+  </section>
+
+  <!-- Quick Facts -->
+  <section class="section">
+    <div class="card">
+      <h2 style="text-align: center; margin-bottom: var(--spacing-lg); font-size: 1.75rem; font-weight: 900;">{{JOB_TITLE}} Salary Quick Facts</h2>
+      <div class="stats-grid">
+        <!-- PLACEHOLDER: SALARY_FACTS -->
+        {{SALARY_FACTS}}
+      </div>
+    </div>
+  </section>
+
+  <!-- Salary Breakdown -->
+  <section class="section">
+    <div class="card">
+      <h2 style="text-align: center; margin-bottom: var(--spacing-lg); font-size: 1.75rem; font-weight: 900;">{{JOB_TITLE}} Salary Breakdown (Entry Level)</h2>
+      <div style="overflow-x: auto;">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Amount (₹)</th>
+              <th>Percentage</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- PLACEHOLDER: SALARY_BREAKDOWN -->
+            {{SALARY_BREAKDOWN}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Career Progression -->
+  <section class="section">
+    <div class="card">
+      <h2 style="text-align: center; margin-bottom: var(--spacing-lg); font-size: 1.75rem; font-weight: 900;">{{JOB_TITLE}} Career Progression & Salary</h2>
+      <div class="grid grid-3">
+        <!-- PLACEHOLDER: CAREER_PROGRESSION -->
+        {{CAREER_PROGRESSION}}
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Links -->
+  <section class="section">
+    <h2 style="text-align: center; margin-bottom: var(--spacing-lg); font-size: 1.75rem; font-weight: 900;">Related Information</h2>
+    <div class="grid grid-3">
+      <!-- PLACEHOLDER: RELATED_LINKS -->
+      {{RELATED_LINKS}}
+    </div>
+  </section>
+</div>
