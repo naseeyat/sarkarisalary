@@ -1,0 +1,11 @@
+{
+  "name": "sarkari-salary-static",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node build.js && npx serve dist -p 3000"
+  },
+  "dependencies": {
+    "serve": "^14.0.0"
+  }
+}

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarkari Salary - Government Job Salary Calculator</title>
+    <meta name="description" content="Complete government job salary calculator. Check pay scale for IAS, IPS, Banking, Railway jobs.">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VCKVNDH46X"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-VCKVNDH46X');
+    </script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: ui-monospace, SFMono-Regular, monospace;
+            background: #ffffff;
+            color: #333333;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border: 3px solid #333333;
+            padding: 40px;
+            background: #ffffff;
+            box-shadow: 8px 8px 0px #333333;
+        }
+        .main-title {
+            font-size: 36px;
+            font-weight: 900;
+            color: #333333;
+            margin-bottom: 12px;
+        }
+        .job-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .job-card {
+            border: 3px solid #333333;
+            background: #ffffff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .job-card:hover {
+            box-shadow: 6px 6px 0px #333333;
+            transform: translateY(-2px);
+        }
+        .job-header {
+            padding: 20px;
+            background: #f8f8f8;
+            border-bottom: 1px solid #333333;
+        }
+        .job-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .job-dept {
+            font-size: 12px;
+            color: #666666;
+        }
+        .job-body {
+            padding: 20px;
+            text-align: center;
+        }
+        .salary-amount {
+            font-size: 24px;
+            font-weight: 900;
+            color: #333333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="main-title">SARKARI SALARY</h1>
+            <p>Government Job Salary Calculator</p>
+        </header>
+
+        <div class="job-grid">
+            
+            <div class="job-card" onclick="window.location.href='ias.html'">
+                <div class="job-header">
+                    <div class="job-title">IAS Officer</div>
+                    <div class="job-dept">UPSC - All India Service</div>
+                </div>
+                <div class="job-body">
+                    <div class="salary-amount">₹99,000/month</div>
+                </div>
+            </div>
+            <div class="job-card" onclick="window.location.href='ips.html'">
+                <div class="job-header">
+                    <div class="job-title">IPS Officer</div>
+                    <div class="job-dept">UPSC - Police Service</div>
+                </div>
+                <div class="job-body">
+                    <div class="salary-amount">₹99,000/month</div>
+                </div>
+            </div>
+            <div class="job-card" onclick="window.location.href='sbi-po.html'">
+                <div class="job-header">
+                    <div class="job-title">SBI PO</div>
+                    <div class="job-dept">State Bank of India</div>
+                </div>
+                <div class="job-body">
+                    <div class="salary-amount">₹82,000/month</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
