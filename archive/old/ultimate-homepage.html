@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SarkariSalary.today - Ultimate Government Jobs Portal | Live Dashboard</title>
+    <meta name="description" content="India's Most Advanced Government Jobs Platform - Live Data, Interactive Tools & Personalized Career Guidance">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #059669;
+            --accent: #f59e0b;
+            --danger: #ef4444;
+            --success: #10b981;
+            --purple: #8b5cf6;
+            --pink: #ec4899;
+            --dark: #0f172a;
+            --gray-50: #f8fafc;
+            --gray-100: #f1f5f9;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-600: #475569;
+            --gray-800: #1e293b;
+            --gray-900: #0f172a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-800);
+            background: var(--gray-50);
+            overflow-x: hidden;
+        }
+
+        /* Interactive Header */
+        .header {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+            animation: logoGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            0% { box-shadow: 0 0 20px rgba(37, 99, 235, 0.5); }
+            100% { box-shadow: 0 0 30px rgba(139, 92, 246, 0.7); }
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-link:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--danger);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.2); }
+        }
+
+        /* Hero Dashboard */
+        .hero-dashboard {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            padding: 120px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-dashboard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-header h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff, #cbd5e1);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .dashboard-header p {
+            font-size: 1.25rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Live Stats Grid */
+        .live-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--purple), var(--pink));
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .stat-trend {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.875rem;
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 0.5rem;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.875rem;
+        }
+
+        /* Interactive Salary Calculator */
+        .calculator-section {
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+            margin: 3rem 0;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .calculator-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .calculator-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .calculator-controls {
+            space-y: 1.5rem;
+        }
+
+        .control-group {
+            margin-bottom: 2rem;
+        }
+
+        .control-label {
+            display: block;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 0.5rem;
+        }
+
+        .slider-container {
+            position: relative;
+            margin: 1rem 0;
+        }
+
+        .salary-slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--gray-200);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .salary-slider::-webkit-slider-thumb {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+        }
+
+        .salary-output {
+            background: var(--gray-50);
+            border-radius: 12px;
+            padding: 2rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .salary-breakdown {
+            margin-bottom: 1.5rem;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .breakdown-item:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--success);
+        }
+
+        /* Live Job Feed */
+        .job-feed {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feed-header {
+            background: linear-gradient(135deg, var(--dark), var(--gray-800));
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: between;
+        }
+
+        .feed-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .feed-counter {
+            background: var(--danger);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        .job-feed-items {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .feed-item {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid var(--gray-100);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .feed-item:hover {
+            background: var(--gray-50);
+        }
+
+        .feed-item.new {
+            background: linear-gradient(90deg, rgba(16, 185, 129, 0.1), transparent);
+            border-left: 4px solid var(--success);
+        }
+
+        .feed-item-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .job-title {
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .job-salary {
+            font-weight: 700;
+            color: var(--success);
+        }
+
+        .job-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        /* Floating Action Elements */
+        .floating-elements {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 999;
+        }
+
+        .fab {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .fab-primary {
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+        }
+
+        .fab-secondary {
+            background: linear-gradient(135deg, var(--success), var(--secondary));
+        }
+
+        .fab:hover {
+            transform: scale(1.1) translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Notification Toast */
+        .notification-toast {
+            position: fixed;
+            top: 100px;
+            right: 2rem;
+            background: white;
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-left: 4px solid var(--success);
+            max-width: 350px;
+            transform: translateX(400px);
+            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1001;
+        }
+
+        .notification-toast.show {
+            transform: translateX(0);
+        }
+
+        .toast-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .toast-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--success);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.875rem;
+        }
+
+        .toast-title {
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .toast-message {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+
+        /* Achievement Badges */
+        .achievement-banner {
+            background: linear-gradient(135deg, var(--accent), #f97316);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .achievement-text {
+            font-size: 1.125rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .dashboard-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .floating-elements {
+                bottom: 1rem;
+                right: 1rem;
+            }
+        }
+
+        /* Smooth scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--gray-100);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Interactive Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-university"></i>
+                </div>
+                SarkariSalary.today
+            </a>
+            <ul class="nav-links">
+                <li><a href="#" class="nav-link">Dashboard</a></li>
+                <li><a href="#" class="nav-link">Live Jobs</a></li>
+                <li><a href="#" class="nav-link">Calculator</a></li>
+                <li><a href="#" class="nav-link">Career Path</a></li>
+                <li><a href="#" class="nav-link">Community</a></li>
+            </ul>
+            <div class="live-indicator">
+                <div class="live-dot"></div>
+                <span>Live Updates</span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Dashboard -->
+    <section class="hero-dashboard">
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <h1>Live Government Jobs Dashboard</h1>
+                <p>Real-time data, interactive tools, and personalized career guidance for every government job seeker in India</p>
+            </div>
+
+            <!-- Live Stats -->
+            <div class="live-stats">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, var(--primary), var(--purple));">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="stat-trend">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+12.5%</span>
+                        </div>
+                    </div>
+                    <div class="stat-number" id="activeJobs">0</div>
+                    <div class="stat-label">Active Job Openings</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, var(--success), var(--secondary));">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-trend">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+8.2%</span>
+                        </div>
+                    </div>
+                    <div class="stat-number" id="activeUsers">0</div>
+                    <div class="stat-label">Users Online Now</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, var(--accent), #f97316);">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-trend">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>+25.8%</span>
+                        </div>
+                    </div>
+                    <div class="stat-number" id="salaryIncrease">0</div>
+                    <div class="stat-label">Avg Salary Increase</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-icon" style="background: linear-gradient(135deg, var(--pink), #be185d);">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-trend">
+                            <i class="fas fa-arrow-down"></i>
+                            <span>-15.3%</span>
+                        </div>
+                    </div>
+                    <div class="stat-number" id="avgTime">0</div>
+                    <div class="stat-label">Avg Selection Time (Days)</div>
+                </div>
+            </div>
+
+            <!-- Achievement Banner -->
+            <div class="achievement-banner">
+                <div class="achievement-text">
+                    <i class="fas fa-trophy"></i>
+                    <span>🎉 Congratulations! You've unlocked "Job Explorer" badge for visiting 5+ job pages today!</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Salary Calculator -->
+    <section class="calculator-section">
+        <div class="calculator-header">
+            <h2>🧮 Live Salary Calculator</h2>
+            <p>Calculate your exact in-hand salary for any government position</p>
+        </div>
+
+        <div class="calculator-grid">
+            <div class="calculator-controls">
+                <div class="control-group">
+                    <label class="control-label">Select Job Position</label>
+                    <select id="jobSelect" style="width: 100%; padding: 1rem; border: 2px solid var(--gray-200); border-radius: 8px; font-size: 1rem;">
+                        <option value="ias">IAS Officer (Level 10)</option>
+                        <option value="ips">IPS Officer (Level 10)</option>
+                        <option value="ssc">SSC CGL (Level 4)</option>
+                        <option value="sbi">SBI PO (JMGS-I)</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Experience Level: <span id="expValue">0</span> years</label>
+                    <div class="slider-container">
+                        <input type="range" id="experienceSlider" class="salary-slider" min="0" max="25" value="0">
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">City Type</label>
+                    <select id="citySelect" style="width: 100%; padding: 1rem; border: 2px solid var(--gray-200); border-radius: 8px; font-size: 1rem;">
+                        <option value="metro">Metro Cities (24% HRA)</option>
+                        <option value="major">Major Cities (16% HRA)</option>
+                        <option value="other">Other Cities (8% HRA)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="salary-output">
+                <h3 style="margin-bottom: 1rem; color: var(--gray-900);">💰 Your Salary Breakdown</h3>
+                <div class="salary-breakdown">
+                    <div class="breakdown-item">
+                        <span>Basic Pay:</span>
+                        <span id="basicPay">₹56,100</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>DA (53%):</span>
+                        <span id="daPay">₹29,733</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>HRA:</span>
+                        <span id="hraPay">₹13,464</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Other Allowances:</span>
+                        <span id="otherPay">₹5,200</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span>Total In-Hand Salary:</span>
+                        <span id="totalSalary">₹1,04,497</span>
+                    </div>
+                </div>
+                <button style="width: 100%; padding: 1rem; background: linear-gradient(135deg, var(--primary), var(--purple)); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 1rem;">
+                    📊 View Detailed Report
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Job Feed -->
+    <section style="max-width: 1400px; margin: 0 auto; padding: 0 2rem;">
+        <div class="job-feed">
+            <div class="feed-header">
+                <h3 class="feed-title">🔴 Live Job Updates</h3>
+                <div class="feed-counter" id="liveCounter">124 Active</div>
+            </div>
+            <div class="job-feed-items" id="jobFeed">
+                <!-- Jobs will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating Action Buttons -->
+    <div class="floating-elements">
+        <button class="fab fab-primary" title="Quick Calculator">
+            <i class="fas fa-calculator"></i>
+        </button>
+        <button class="fab fab-secondary" title="Job Alerts">
+            <i class="fas fa-bell"></i>
+        </button>
+    </div>
+
+    <!-- Notification Toast -->
+    <div class="notification-toast" id="notificationToast">
+        <div class="toast-header">
+            <div class="toast-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <div class="toast-title">New Job Alert!</div>
+        </div>
+        <div class="toast-message">SSC CGL 2025 notification released with 15,000+ vacancies. Apply now!</div>
+    </div>
+
+    <script>
+        // Live counter animations
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            
+            function updateCounter() {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target.toLocaleString();
+                } else {
+                    element.textContent = Math.floor(start).toLocaleString();
+                    requestAnimationFrame(updateCounter);
+                }
+            }
+            updateCounter();
+        }
+
+        // Initialize counters
+        window.addEventListener('load', () => {
+            animateCounter(document.getElementById('activeJobs'), 487563);
+            animateCounter(document.getElementById('activeUsers'), 12847);
+            animateCounter(document.getElementById('salaryIncrease'), 15);
+            animateCounter(document.getElementById('avgTime'), 180);
+        });
+
+        // Salary Calculator
+        const jobData = {
+            ias: { basic: 56100, level: 'Level 10' },
+            ips: { basic: 56100, level: 'Level 10' },
+            ssc: { basic: 25500, level: 'Level 4' },
+            sbi: { basic: 41960, level: 'JMGS-I' }
+        };
+
+        function updateSalaryCalculation() {
+            const job = document.getElementById('jobSelect').value;
+            const experience = parseInt(document.getElementById('experienceSlider').value);
+            const city = document.getElementById('citySelect').value;
+            
+            document.getElementById('expValue').textContent = experience;
+            
+            const basic = jobData[job].basic + (experience * 1500); // Increment with experience
+            const da = Math.round(basic * 0.53);
+            const hraRate = city === 'metro' ? 0.24 : city === 'major' ? 0.16 : 0.08;
+            const hra = Math.round(basic * hraRate);
+            const other = 5200;
+            const total = basic + da + hra + other;
+            
+            document.getElementById('basicPay').textContent = `₹${basic.toLocaleString()}`;
+            document.getElementById('daPay').textContent = `₹${da.toLocaleString()}`;
+            document.getElementById('hraPay').textContent = `₹${hra.toLocaleString()}`;
+            document.getElementById('otherPay').textContent = `₹${other.toLocaleString()}`;
+            document.getElementById('totalSalary').textContent = `₹${total.toLocaleString()}`;
+        }
+
+        // Event listeners for calculator
+        document.getElementById('jobSelect').addEventListener('change', updateSalaryCalculation);
+        document.getElementById('experienceSlider').addEventListener('input', updateSalaryCalculation);
+        document.getElementById('citySelect').addEventListener('change', updateSalaryCalculation);
+
+        // Live job feed
+        const jobTitles = [
+            'IAS Officer - District Collector',
+            'SSC CGL - Assistant Audit Officer',
+            'SBI PO - Probationary Officer',
+            'Railway Group D - Track Maintainer',
+            'IBPS Clerk - Banking Associate',
+            'Teaching - KVS TGT',
+            'IPS - Assistant Superintendent',
+            'UPSC - Foreign Service Officer'
+        ];
+
+        const departments = [
+            'Central Government', 'State Government', 'Banking Sector', 
+            'Railway Department', 'Defense Services', 'Education Sector'
+        ];
+
+        function generateJobFeed() {
+            const feed = document.getElementById('jobFeed');
+            feed.innerHTML = '';
+            
+            for (let i = 0; i < 8; i++) {
+                const job = jobTitles[Math.floor(Math.random() * jobTitles.length)];
+                const dept = departments[Math.floor(Math.random() * departments.length)];
+                const salary = `₹${(Math.random() * 50000 + 25000).toFixed(0)}`;
+                const timeAgo = `${Math.floor(Math.random() * 60)} mins ago`;
+                const isNew = i < 2;
+                
+                const item = document.createElement('div');
+                item.className = `feed-item ${isNew ? 'new' : ''}`;
+                item.innerHTML = `
+                    <div class="feed-item-header">
+                        <div class="job-title">${job}</div>
+                        <div class="job-salary">${salary}</div>
+                    </div>
+                    <div class="job-meta">
+                        <span><i class="fas fa-building"></i> ${dept}</span>
+                        <span><i class="fas fa-clock"></i> ${timeAgo}</span>
+                        ${isNew ? '<span style="color: var(--success);"><i class="fas fa-circle"></i> New</span>' : ''}
+                    </div>
+                `;
+                feed.appendChild(item);
+            }
+        }
+
+        // Initialize job feed and update every 30 seconds
+        generateJobFeed();
+        setInterval(generateJobFeed, 30000);
+
+        // Show notification toast
+        function showNotification() {
+            const toast = document.getElementById('notificationToast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 5000);
+        }
+
+        // Show notification after 3 seconds
+        setTimeout(showNotification, 3000);
+
+        // Update live counter randomly
+        setInterval(() => {
+            const counter = document.getElementById('liveCounter');
+            const current = parseInt(counter.textContent);
+            const change = Math.floor(Math.random() * 10) - 5;
+            counter.textContent = `${Math.max(100, current + change)} Active`;
+        }, 10000);
+
+        // Floating action button interactions
+        document.querySelector('.fab-primary').addEventListener('click', () => {
+            document.querySelector('.calculator-section').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        document.querySelector('.fab-secondary').addEventListener('click', () => {
+            alert('🔔 Job alerts enabled! You\'ll receive notifications for new opportunities.');
+        });
+
+        // Initial calculation
+        updateSalaryCalculation();
+    </script>
+</body>
+</html>

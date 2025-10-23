@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Advanced Salary Calculator</title>
+    <script src="dropdown-system.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+            background: #ffffff;
+            color: #333333;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .header {
+            margin-bottom: 40px;
+            text-align: center;
+            border: 3px solid #333333;
+            padding: 30px;
+            background: #ffffff;
+            box-shadow: 8px 8px 0px #333333;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 20px;
+        }
+
+        .tag-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: #333333;
+            color: #ffffff;
+            padding: 6px 12px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tag:hover {
+            background: #000000;
+        }
+
+        .mode-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border: 3px solid #333333;
+            margin-bottom: 30px;
+            box-shadow: 4px 4px 0px #333333;
+        }
+
+        .mode-btn {
+            padding: 16px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #333333;
+            cursor: pointer;
+            border-right: 1px solid #333333;
+            background: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            border: none;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mode-btn:last-child {
+            border-right: none;
+        }
+
+        .mode-btn.active,
+        .mode-btn:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        .advanced-calculator {
+            border: 3px solid #333333;
+            background: #ffffff;
+            box-shadow: 8px 8px 0px #333333;
+            min-height: 600px;
+        }
+
+        .main-content-area {
+            min-height: 800px;
+        }
+
+        .calc-header {
+            padding: 24px;
+            border-bottom: 1px solid #333333;
+            font-size: 18px;
+            font-weight: 800;
+            color: #333333;
+            text-align: center;
+            background: #f8f8f8;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .calc-form {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            min-height: 120px;
+        }
+
+        .form-section {
+            padding: 20px;
+            border-right: 1px solid #333333;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 120px;
+        }
+
+        .form-section:last-child {
+            border-right: none;
+        }
+
+        .form-label {
+            font-size: 11px;
+            color: #333333;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 10px;
+            font-size: 12px;
+            font-family: inherit;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 8px;
+            font-size: 12px;
+            font-family: inherit;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+        }
+
+        .toggle-section {
+            border-top: 1px solid #333333;
+            padding: 16px 24px;
+            background: #f8f8f8;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .toggle-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #333333;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .toggle-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .toggle-btn {
+            padding: 6px 12px;
+            font-size: 10px;
+            font-weight: 600;
+            color: #666666;
+            background: #ffffff;
+            border: 1px solid #333333;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .toggle-btn.active {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        .results-section {
+            border-top: 1px solid #333333;
+        }
+
+        .section-header {
+            background: #333333;
+            color: #ffffff;
+            padding: 12px 20px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .gross-salary {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            border-bottom: 1px solid #333333;
+            min-height: 100px;
+        }
+
+        .deductions-section {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            border-bottom: 1px solid #333333;
+            min-height: 100px;
+        }
+
+        .net-salary {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: #f8f8f8;
+            border-bottom: 1px solid #333333;
+            min-height: 100px;
+        }
+
+        .per-hour-section {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            background: #e8f5e8;
+            min-height: 100px;
+        }
+
+        .result-box {
+            border-right: 1px solid #333333;
+            padding: 16px 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100px;
+        }
+
+        .result-box:last-child {
+            border-right: none;
+        }
+
+        .result-box:hover {
+            background: #333333;
+            color: #ffffff;
+            transform: scale(1.02);
+        }
+
+        .result-value {
+            font-size: 15px;
+            font-weight: 900;
+            margin-bottom: 4px;
+        }
+
+        .result-label {
+            font-size: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            font-weight: 600;
+        }
+
+        .detailed-breakdown {
+            border-top: 1px solid #333333;
+            padding: 24px;
+            background: #fafafa;
+        }
+
+        .breakdown-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .breakdown-item {
+            background: #ffffff;
+            padding: 16px;
+            border: 2px solid #333333;
+            text-align: center;
+        }
+
+        .breakdown-amount {
+            font-size: 18px;
+            font-weight: 900;
+            color: #007bff;
+            margin-bottom: 4px;
+        }
+
+        .breakdown-desc {
+            font-size: 10px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .navigation-footer {
+            margin-top: 40px;
+            text-align: center;
+            border: 2px solid #333333;
+            padding: 20px;
+            background: #f8f8f8;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: #333333;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 8px 16px;
+            border: 2px solid #333333;
+            background: #ffffff;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 11px;
+            color: #666666;
+            border-top: 2px solid #333333;
+            padding-top: 20px;
+            font-weight: 600;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+            
+            .calc-form,
+            .gross-salary,
+            .deductions-section,
+            .net-salary,
+            .per-hour-section {
+                grid-template-columns: repeat(2, 1fr);
+                min-height: auto;
+            }
+            
+            .breakdown-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .result-box {
+                border-right: none;
+                border-bottom: 1px solid #333333;
+            }
+
+            .result-box:nth-child(2n) {
+                border-bottom: none;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title" id="jobTitle">Advanced Salary Calculator</h1>
+            <p class="subtitle" id="jobSubtitle">Detailed per-hour and tax analysis</p>
+            <div class="tag-container" id="jobTags">
+                <div class="tag">Advanced Mode</div>
+                <div class="tag">Per Hour</div>
+                <div class="tag">Tax Breakdown</div>
+            </div>
+        </header>
+
+        <div class="mode-selector">
+            <button class="mode-btn" onclick="setMode('basic')">Basic View</button>
+            <button class="mode-btn active" onclick="setMode('advanced')">Advanced Calculator</button>
+            <button class="mode-btn" onclick="setMode('retirement')">Retirement Planner</button>
+        </div>
+
+        <div class="main-content-area">
+            <div class="advanced-calculator">
+            <div class="calc-header">Advanced Salary & Time Calculator</div>
+            <div class="calc-form">
+                <div class="form-section">
+                    <div class="form-label">Position</div>
+                    <div class="dropdown" 
+                         data-name="position" 
+                         data-default="Choose level"
+                         data-options='[
+                           {"value": "99000", "text": "SDM (₹99,000)"},
+                           {"value": "120000", "text": "Assistant Collector (₹1,20,000)"},
+                           {"value": "160000", "text": "District Collector (₹1,60,000)"},
+                           {"value": "180000", "text": "Deputy Secretary (₹1,80,000)"},
+                           {"value": "200000", "text": "Joint Secretary (₹2,00,000)"},
+                           {"value": "240000", "text": "Additional Secretary (₹2,40,000)"},
+                           {"value": "280000", "text": "Secretary (₹2,80,000)"}
+                         ]'></div>
+                </div>
+                <div class="form-section">
+                    <div class="form-label">City</div>
+                    <div class="dropdown" 
+                         data-name="city" 
+                         data-default="Select city"
+                         data-options='[
+                           {"value": "metro", "text": "Metro (24%)"},
+                           {"value": "major", "text": "Major (16%)"},
+                           {"value": "other", "text": "Other (8%)"}
+                         ]'></div>
+                </div>
+                <div class="form-section">
+                    <div class="form-label">Experience</div>
+                    <div class="dropdown" 
+                         data-name="experience" 
+                         data-default="Select experience"
+                         data-options='[
+                           {"value": "0", "text": "Fresher"},
+                           {"value": "1", "text": "1 Year"},
+                           {"value": "2", "text": "2 Years"},
+                           {"value": "3", "text": "3 Years"},
+                           {"value": "5", "text": "5+ Years"}
+                         ]'></div>
+                </div>
+                <div class="form-section">
+                    <div class="form-label">Age</div>
+                    <div class="dropdown" 
+                         data-name="age" 
+                         data-default="Select age"
+                         data-options='[
+                           {"value": "25", "text": "Below 60"},
+                           {"value": "65", "text": "Above 60"},
+                           {"value": "80", "text": "Above 80"}
+                         ]'></div>
+                </div>
+                <div class="form-section">
+                    <div class="form-label">Tax Regime</div>
+                    <div class="dropdown" 
+                         data-name="taxRegime" 
+                         data-default="Select regime"
+                         data-options='[
+                           {"value": "new", "text": "New Regime"},
+                           {"value": "old", "text": "Old Regime"}
+                         ]'></div>
+                </div>
+            </div>
+
+            <div class="toggle-section">
+                <div class="toggle-label">Working Days Calculation</div>
+                <div class="toggle-group">
+                    <button class="toggle-btn active" onclick="setWorkingDays(30)" id="days30">30 Days</button>
+                    <button class="toggle-btn" onclick="setWorkingDays(22)" id="days22">22 Working</button>
+                    <button class="toggle-btn" onclick="setWorkingDays(20)" id="days20">20 Working</button>
+                </div>
+            </div>
+
+            <div id="advancedResult" class="results-section hidden">
+                <div class="section-header">Gross Monthly Breakdown</div>
+                <div class="gross-salary">
+                    <div class="result-box">
+                        <div class="result-value" id="basic">₹0</div>
+                        <div class="result-label">Basic Pay</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-value" id="da">₹0</div>
+                        <div class="result-label">DA (53%)</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-value" id="hra">₹0</div>
+                        <div class="result-label">HRA</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-value" id="allowances">₹0</div>
+                        <div class="result-label">Allowances</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-value" id="bonus">₹0</div>
+                        <div class="result-label">Annual Bonus</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-value" id="grossTotal">₹0</div>
+                        <div class="result-label">Gross Total</div>
+                    </div>
+                </div>
+
+                <div class="section-header">Monthly Deductions</div>
+                <div class="deductions-section">
+                    <div class="result-box">
+                        <div class="result-value" id="incomeTax">₹0</div>
+                        <div class="result-label">Income Tax</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-value" id="epf">₹0</div>
+                        <div class="result-label">EPF (12%)</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-value" id="esi">₹0</div>
+                        <div class="result-label">ESI</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-value" id="professional">₹0</div>
+                        <div class="result-label">Prof. Tax</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-value" id="totalDeductions">₹0</div>
+                        <div class="result-label">Total Deductions</div>
+                    </div>
+                </div>
+
+                <div class="section-header">Take Home Analysis</div>
+                <div class="net-salary">
+                    <div class="result-box">
+                        <div class="result-value" id="netMonthly">₹0</div>
+                        <div class="result-label">Net Monthly</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-value" id="netAnnual">₹0</div>
+                        <div class="result-label">Net Annual</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-value" id="effectiveRate">0%</div>
+                        <div class="result-label">Tax Rate</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-value" id="savingsRate">0%</div>
+                        <div class="result-label">Savings Rate</div>
+                    </div>
+                </div>
+
+                <div class="section-header">Per Hour Breakdown (Take Home)</div>
+                <div class="per-hour-section">
+                    <div class="result-box">
+                        <div class="result-value" id="perHour">₹0</div>
+                        <div class="result-label">Per Hour</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-value" id="perDay">₹0</div>
+                        <div class="result-label">Per Day</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-value" id="perMinute">₹0</div>
+                        <div class="result-label">Per Minute</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-value" id="perSecond">₹0</div>
+                        <div class="result-label">Per Second</div>
+                    </div>
+                    <div class="result-box">
+                        <div class="result-value" id="workingDaysUsed">22</div>
+                        <div class="result-label">Working Days</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="detailedBreakdown" class="detailed-breakdown hidden">
+                <div class="breakdown-title">Annual Tax & Benefits Analysis</div>
+                <div class="breakdown-grid">
+                    <div class="breakdown-item">
+                        <div class="breakdown-amount" id="annualTax">₹0</div>
+                        <div class="breakdown-desc">Annual Income Tax Paid</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <div class="breakdown-amount" id="employerPF">₹0</div>
+                        <div class="breakdown-desc">Employer PF Contribution</div>
+                    </div>
+                    <div class="breakdown-item">
+                        <div class="breakdown-amount" id="totalBenefits">₹0</div>
+                        <div class="breakdown-desc">Total Annual Benefits</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="navigation-footer">
+            <div class="nav-links">
+                <a href="#" class="nav-link" onclick="setMode('basic')">Basic Calculator</a>
+                <a href="#" class="nav-link" onclick="setMode('retirement')">Retirement Planning</a>
+                <a href="#" class="nav-link">Compare with Other Jobs</a>
+            </div>
+        </div>
+
+        <footer class="footer">
+            © 2025 Government Pay Navigator • Advanced Salary Calculator
+        </footer>
+    </div>
+
+    <script>
+        let workingDaysPerMonth = 22; // Default working days
+
+        // Initialize dropdown system when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            setupDropdownHandlers();
+        });
+
+        function setupDropdownHandlers() {
+            if (!window.dropdownSystem) {
+                setTimeout(setupDropdownHandlers, 100);
+                return;
+            }
+
+            // Set up change handlers for all dropdowns
+            const dropdownNames = ['position', 'city', 'experience', 'age', 'taxRegime'];
+            
+            dropdownNames.forEach(name => {
+                dropdownSystem.onChange(name, function(value, text) {
+                    console.log(`${name} changed to:`, text);
+                    calculateAdvanced();
+                });
+            });
+        }
+
+        function calculateAdvanced() {
+            const basic = parseInt(dropdownSystem.getValue('position')) || 0;
+            const cityType = dropdownSystem.getValue('city');
+            const experience = parseInt(dropdownSystem.getValue('experience')) || 0;
+            const age = parseInt(dropdownSystem.getValue('age')) || 25;
+            const taxRegime = dropdownSystem.getValue('taxRegime');
+            
+            if (!basic) {
+                document.getElementById('advancedResult').classList.add('hidden');
+                document.getElementById('detailedBreakdown').classList.add('hidden');
+                return;
+            }
+            
+            // Apply experience increment
+            const adjustedBasic = basic + (experience * Math.floor(basic * 0.03));
+            
+            // Calculate components
+            const da = Math.round(adjustedBasic * 0.53);
+            let hraRate = 0.08;
+            if (cityType === 'metro') hraRate = 0.24;
+            else if (cityType === 'major') hraRate = 0.16;
+            const hra = Math.round(adjustedBasic * hraRate);
+            const allowances = 5000;
+            const annualBonus = Math.round(adjustedBasic / 12); // Monthly equivalent of annual bonus
+            const grossMonthly = adjustedBasic + da + hra + allowances + annualBonus;
+            const grossAnnual = grossMonthly * 12;
+            
+            // Calculate deductions
+            const epfContribution = Math.round(adjustedBasic * 0.12);
+            const employerPF = Math.round(adjustedBasic * 0.12); // Employer contribution
+            const esiContribution = grossMonthly <= 21000 ? Math.round(grossMonthly * 0.0075) : 0;
+            const professionalTax = 200; // Standard professional tax
+            
+            // Calculate income tax based on regime
+            let annualTax = 0;
+            const taxableIncome = grossAnnual - (epfContribution * 12) - 50000; // Standard deduction
+            
+            if (taxRegime === 'new') {
+                // New Tax Regime
+                if (taxableIncome > 300000) {
+                    if (taxableIncome <= 700000) {
+                        annualTax = (taxableIncome - 300000) * 0.05;
+                    } else if (taxableIncome <= 1000000) {
+                        annualTax = 400000 * 0.05 + (taxableIncome - 700000) * 0.10;
+                    } else if (taxableIncome <= 1200000) {
+                        annualTax = 400000 * 0.05 + 300000 * 0.10 + (taxableIncome - 1000000) * 0.15;
+                    } else if (taxableIncome <= 1500000) {
+                        annualTax = 400000 * 0.05 + 300000 * 0.10 + 200000 * 0.15 + (taxableIncome - 1200000) * 0.20;
+                    } else {
+                        annualTax = 400000 * 0.05 + 300000 * 0.10 + 200000 * 0.15 + 300000 * 0.20 + (taxableIncome - 1500000) * 0.30;
+                    }
+                }
+            } else {
+                // Old Tax Regime (simplified)
+                if (taxableIncome > 250000) {
+                    if (taxableIncome <= 500000) {
+                        annualTax = (taxableIncome - 250000) * 0.05;
+                    } else if (taxableIncome <= 1000000) {
+                        annualTax = 250000 * 0.05 + (taxableIncome - 500000) * 0.20;
+                    } else {
+                        annualTax = 250000 * 0.05 + 500000 * 0.20 + (taxableIncome - 1000000) * 0.30;
+                    }
+                }
+            }
+            
+            // Health and Education Cess (4% on tax)
+            annualTax = annualTax * 1.04;
+            
+            const monthlyTax = Math.round(annualTax / 12);
+            const totalDeductions = monthlyTax + epfContribution + esiContribution + professionalTax;
+            const netMonthly = grossMonthly - totalDeductions;
+            const netAnnual = netMonthly * 12;
+            const effectiveRate = ((grossMonthly - netMonthly) / grossMonthly * 100).toFixed(1);
+            const savingsRate = ((netMonthly - (netMonthly * 0.3)) / netMonthly * 100).toFixed(1); // Assuming 30% expenses
+            
+            // Per hour calculations based on selected working days
+            const hoursPerDay = 8;
+            const totalHoursPerMonth = workingDaysPerMonth * hoursPerDay;
+            const perHour = Math.round(netMonthly / totalHoursPerMonth);
+            const perDay = Math.round(netMonthly / workingDaysPerMonth);
+            const perMinute = Math.round(perHour / 60);
+            const perSecond = Math.round(perMinute / 60);
+            
+            // Update displays
+            document.getElementById('basic').textContent = '₹' + adjustedBasic.toLocaleString();
+            document.getElementById('da').textContent = '₹' + da.toLocaleString();
+            document.getElementById('hra').textContent = '₹' + hra.toLocaleString();
+            document.getElementById('allowances').textContent = '₹' + allowances.toLocaleString();
+            document.getElementById('bonus').textContent = '₹' + annualBonus.toLocaleString();
+            document.getElementById('grossTotal').textContent = '₹' + grossMonthly.toLocaleString();
+            
+            document.getElementById('incomeTax').textContent = '₹' + monthlyTax.toLocaleString();
+            document.getElementById('epf').textContent = '₹' + epfContribution.toLocaleString();
+            document.getElementById('esi').textContent = '₹' + esiContribution.toLocaleString();
+            document.getElementById('professional').textContent = '₹' + professionalTax.toLocaleString();
+            document.getElementById('totalDeductions').textContent = '₹' + totalDeductions.toLocaleString();
+            
+            document.getElementById('netMonthly').textContent = '₹' + netMonthly.toLocaleString();
+            document.getElementById('netAnnual').textContent = '₹' + netAnnual.toLocaleString();
+            document.getElementById('effectiveRate').textContent = effectiveRate + '%';
+            document.getElementById('savingsRate').textContent = savingsRate + '%';
+            
+            document.getElementById('perHour').textContent = '₹' + perHour.toLocaleString();
+            document.getElementById('perDay').textContent = '₹' + perDay.toLocaleString();
+            document.getElementById('perMinute').textContent = '₹' + perMinute.toLocaleString();
+            document.getElementById('perSecond').textContent = '₹' + perSecond.toLocaleString();
+            document.getElementById('workingDaysUsed').textContent = workingDaysPerMonth + ' Days';
+            
+            // Detailed breakdown
+            document.getElementById('annualTax').textContent = '₹' + Math.round(annualTax).toLocaleString();
+            document.getElementById('employerPF').textContent = '₹' + (employerPF * 12).toLocaleString();
+            document.getElementById('totalBenefits').textContent = '₹' + ((employerPF * 12) + (allowances * 12)).toLocaleString();
+            
+            document.getElementById('advancedResult').classList.remove('hidden');
+            document.getElementById('detailedBreakdown').classList.remove('hidden');
+        }
+
+        function setWorkingDays(days) {
+            workingDaysPerMonth = days;
+            
+            // Update active button
+            document.querySelectorAll('.toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById('days' + days).classList.add('active');
+            
+            // Recalculate if we have data
+            calculateAdvanced();
+        }
+
+        function setMode(mode) {
+            if (mode === 'basic') {
+                window.location.href = 'job-template-basic.html';
+            } else if (mode === 'retirement') {
+                window.location.href = 'job-template-retirement.html';
+            }
+        }
+    </script>
+</body>
+</html>

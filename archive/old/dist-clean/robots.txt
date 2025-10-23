@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://sarkarisalary.de/sitemap.xml
+
+# Block crawling of search and filter parameters
+Disallow: /*?search=
+Disallow: /*?filter=
+Disallow: /*?sort=
+
+# Allow all salary pages
+Allow: /*-salary/
+Allow: /*-salary-*
+
+# Block admin areas
+Disallow: /admin/
+Disallow: /wp-admin/
+Disallow: /private/

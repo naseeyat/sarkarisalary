@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Calculator | ASCII Terminal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #00ff00;
+            padding: 20px;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        .terminal {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #000;
+            border: 2px solid #333;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .header {
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .prompt {
+            color: #ffff00;
+        }
+
+        .input {
+            color: #ffffff;
+        }
+
+        .output {
+            color: #00ff00;
+            margin: 10px 0;
+        }
+
+        .highlight {
+            color: #00ffff;
+        }
+
+        .calculator-form {
+            border: 1px solid #333;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .form-group {
+            margin: 15px 0;
+        }
+
+        .form-label {
+            color: #ffffff;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"], select {
+            background: #111;
+            border: 1px solid #333;
+            color: #00ff00;
+            padding: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            width: 200px;
+        }
+
+        button {
+            background: #222;
+            border: 1px solid #555;
+            color: #00ff00;
+            padding: 10px 20px;
+            font-family: 'Courier New', monospace;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+
+        button:hover {
+            background: #333;
+            color: #ffff00;
+        }
+
+        .result-box {
+            border: 2px solid #00ff00;
+            padding: 20px;
+            margin: 20px 0;
+            background: #001100;
+        }
+
+        .breakdown {
+            margin: 15px 0;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            padding: 3px 0;
+            border-bottom: 1px dotted #333;
+        }
+
+        .total {
+            border-top: 2px solid #00ff00;
+            padding-top: 10px;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #ffff00;
+        }
+
+        .blink {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .navigation {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .nav-link {
+            color: #00ffff;
+            text-decoration: underline;
+            cursor: pointer;
+            margin: 0 15px;
+        }
+
+        .nav-link:hover {
+            color: #ffff00;
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="header">
+            <div class="prompt">root@paynavigator:~$ <span class="input">salary-calculator</span></div>
+            <div class="output">Government Salary Calculator v2.0 - Terminal Interface</div>
+            <div class="output">Calculate exact in-hand salary based on 7th Pay Commission</div>
+        </div>
+
+        <div class="calculator-form">
+            <div class="output">
+┌─────────────────────────────────────────────────────────────────┐
+│                    SALARY CALCULATOR INPUT                      │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│ Step 1: Select Position/Level                                   │
+│ ─────────────────────────────                                  │
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Position:</label>
+                <select id="position" onchange="updateBasicPay()">
+                    <option value="">Select Position</option>
+                    <option value="mts_1">MTS (Level 1) - ₹18,000</option>
+                    <option value="ldc_4">LDC (Level 4) - ₹25,500</option>
+                    <option value="udc_5">UDC (Level 5) - ₹29,200</option>
+                    <option value="aso_6">ASO (Level 6) - ₹35,400</option>
+                    <option value="inspector_7">Inspector (Level 7) - ₹44,900</option>
+                    <option value="so_8">Section Officer (Level 8) - ₹47,600</option>
+                    <option value="ias_10">IAS Entry (Level 10) - ₹56,100</option>
+                    <option value="us_11">Under Secretary (Level 11) - ₹67,700</option>
+                    <option value="ds_12">Deputy Secretary (Level 12) - ₹78,800</option>
+                    <option value="js_13">Joint Secretary (Level 13) - ₹1,18,500</option>
+                    <option value="as_14">Additional Secretary (Level 14) - ₹1,44,200</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Or Enter Custom Basic Pay:</label>
+                <input type="number" id="customBasic" placeholder="Enter basic pay amount" onchange="calculateSalary()">
+            </div>
+
+            <div class="output">
+│                                                                 │
+│ Step 2: Location & Personal Details                             │
+│ ─────────────────────────────────────                          │
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">City Category:</label>
+                <select id="cityCategory" onchange="calculateSalary()">
+                    <option value="metro">Metro Cities (HRA 24%)</option>
+                    <option value="major">Major Cities (HRA 16%)</option>
+                    <option value="other">Other Cities (HRA 8%)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Years of Service:</label>
+                <input type="number" id="experience" value="0" min="0" max="35" onchange="calculateSalary()">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Family Status:</label>
+                <select id="familyStatus" onchange="calculateSalary()">
+                    <option value="single">Single</option>
+                    <option value="married">Married</option>
+                    <option value="family">Married with Children</option>
+                </select>
+            </div>
+
+            <div class="output">
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+            </div>
+
+            <button onclick="calculateSalary()">Calculate Salary</button>
+            <button onclick="resetCalculator()">Reset</button>
+            <button onclick="generateReport()">Generate Report</button>
+        </div>
+
+        <div id="result-area">
+            <div class="output">
+┌─────────────────────────────────────────────────────────────────┐
+│                        CALCULATION RESULT                       │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│ Enter position details above and click Calculate                │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+            </div>
+        </div>
+
+        <div class="navigation">
+            <span class="nav-link" onclick="location.href='index.html'">◄ Back to Main Menu</span>
+            <span class="nav-link" onclick="location.href='timeline.html'">Career Timeline ►</span>
+        </div>
+
+        <div class="prompt">
+            root@paynavigator:~$ <span class="blink">_</span>
+        </div>
+    </div>
+
+    <script>
+        const positionData = {
+            'mts_1': { basic: 18000, level: 1 },
+            'ldc_4': { basic: 25500, level: 4 },
+            'udc_5': { basic: 29200, level: 5 },
+            'aso_6': { basic: 35400, level: 6 },
+            'inspector_7': { basic: 44900, level: 7 },
+            'so_8': { basic: 47600, level: 8 },
+            'ias_10': { basic: 56100, level: 10 },
+            'us_11': { basic: 67700, level: 11 },
+            'ds_12': { basic: 78800, level: 12 },
+            'js_13': { basic: 118500, level: 13 },
+            'as_14': { basic: 144200, level: 14 }
+        };
+
+        function updateBasicPay() {
+            const position = document.getElementById('position').value;
+            if (position && positionData[position]) {
+                document.getElementById('customBasic').value = positionData[position].basic;
+                calculateSalary();
+            }
+        }
+
+        function calculateSalary() {
+            const position = document.getElementById('position').value;
+            let basicPay = parseInt(document.getElementById('customBasic').value) || 0;
+            const cityCategory = document.getElementById('cityCategory').value;
+            const experience = parseInt(document.getElementById('experience').value) || 0;
+            const familyStatus = document.getElementById('familyStatus').value;
+
+            if (basicPay === 0) return;
+
+            // Calculate increments based on experience
+            const incrementPerYear = Math.floor(basicPay * 0.03); // 3% annual increment
+            const adjustedBasic = basicPay + (incrementPerYear * experience);
+
+            // Calculate components
+            const da = Math.round(adjustedBasic * 0.53); // Current DA rate: 53%
+            
+            let hraRate = 0.08; // Default for other cities
+            if (cityCategory === 'metro') hraRate = 0.24;
+            else if (cityCategory === 'major') hraRate = 0.16;
+            const hra = Math.round(adjustedBasic * hraRate);
+
+            // Transport allowance based on level
+            let transportAllowance = 3200;
+            if (basicPay >= 56100) transportAllowance = 7200; // Group A officers
+            else if (basicPay >= 35400) transportAllowance = 4800; // Level 6+
+
+            // Medical allowance
+            let medicalAllowance = 1000;
+            if (familyStatus === 'married') medicalAllowance = 1500;
+            else if (familyStatus === 'family') medicalAllowance = 2000;
+
+            // Other allowances
+            const telephoneAllowance = basicPay >= 56100 ? 1000 : 500;
+            const uniformAllowance = 500;
+
+            // Deductions
+            const providentFund = Math.round(adjustedBasic * 0.12);
+            const professionalTax = 200;
+            const incomeTax = calculateIncomeTax(adjustedBasic, da, hra);
+
+            // Totals
+            const grossSalary = adjustedBasic + da + hra + transportAllowance + medicalAllowance + telephoneAllowance + uniformAllowance;
+            const totalDeductions = providentFund + professionalTax + incomeTax;
+            const netSalary = grossSalary - totalDeductions;
+
+            displayResult({
+                adjustedBasic,
+                da,
+                hra,
+                transportAllowance,
+                medicalAllowance,
+                telephoneAllowance,
+                uniformAllowance,
+                grossSalary,
+                providentFund,
+                professionalTax,
+                incomeTax,
+                totalDeductions,
+                netSalary,
+                cityCategory,
+                experience
+            });
+        }
+
+        function calculateIncomeTax(basic, da, hra) {
+            const annualIncome = (basic + da + hra) * 12;
+            if (annualIncome <= 500000) return 0; // No tax up to 5 lakh
+            else if (annualIncome <= 1000000) return Math.round((annualIncome - 500000) * 0.20 / 12);
+            else return Math.round(((annualIncome - 1000000) * 0.30 + 100000) / 12);
+        }
+
+        function displayResult(data) {
+            document.getElementById('result-area').innerHTML = \`
+                <div class="result-box">
+┌─────────────────────────────────────────────────────────────────┐
+│                    DETAILED SALARY BREAKDOWN                    │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│ EARNINGS:                                                       │
+│ ─────────────────────────────────────────────────────────────── │
+│                                                                 │
+│ Basic Pay (after \${data.experience} years)    ₹\${data.adjustedBasic.toLocaleString()} │
+│ Dearness Allowance (53%)           ₹\${data.da.toLocaleString()} │
+│ House Rent Allowance (\${data.cityCategory})      ₹\${data.hra.toLocaleString()} │
+│ Transport Allowance                ₹\${data.transportAllowance.toLocaleString()} │
+│ Medical Allowance                  ₹\${data.medicalAllowance.toLocaleString()} │
+│ Telephone Allowance                ₹\${data.telephoneAllowance.toLocaleString()} │
+│ Uniform Allowance                  ₹\${data.uniformAllowance.toLocaleString()} │
+│                                                                 │
+│ ─────────────────────────────────────────────────────────────── │
+│ <span class="highlight">GROSS SALARY                         ₹\${data.grossSalary.toLocaleString()}</span> │
+│                                                                 │
+│ DEDUCTIONS:                                                     │
+│ ─────────────────────────────────────────────────────────────── │
+│                                                                 │
+│ Provident Fund (12%)               ₹\${data.providentFund.toLocaleString()} │
+│ Professional Tax                   ₹\${data.professionalTax.toLocaleString()} │
+│ Income Tax (Estimated)             ₹\${data.incomeTax.toLocaleString()} │
+│                                                                 │
+│ ─────────────────────────────────────────────────────────────── │
+│ Total Deductions                   ₹\${data.totalDeductions.toLocaleString()} │
+│                                                                 │
+│ ═════════════════════════════════════════════════════════════== │
+│ <span class="highlight">NET TAKE-HOME SALARY                 ₹\${data.netSalary.toLocaleString()}</span> │
+│ ═════════════════════════════════════════════════════════════== │
+│                                                                 │
+│ Annual Package: ₹\${(data.grossSalary * 12).toLocaleString()}        │
+│ Annual Take-home: ₹\${(data.netSalary * 12).toLocaleString()}        │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+                </div>
+            \`;
+        }
+
+        function resetCalculator() {
+            document.getElementById('position').value = '';
+            document.getElementById('customBasic').value = '';
+            document.getElementById('cityCategory').value = 'metro';
+            document.getElementById('experience').value = '0';
+            document.getElementById('familyStatus').value = 'single';
+            
+            document.getElementById('result-area').innerHTML = \`
+                <div class="output">
+┌─────────────────────────────────────────────────────────────────┐
+│                        CALCULATION RESULT                       │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│ Calculator reset. Enter position details and click Calculate.   │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+                </div>
+            \`;
+        }
+
+        function generateReport() {
+            alert('Detailed PDF report generation feature coming soon!');
+        }
+    </script>
+</body>
+</html>

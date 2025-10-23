@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete Government Jobs List - Salary, Career Timeline & Tips</title>
+  <meta name="description" content="Complete list of all government jobs in India with salary structure, career progression and real challenges faced by officers.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #fafafa;
+      color: #0a0a0a;
+      line-height: 1.5;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    /* Header */
+    .header {
+      padding: 40px 0;
+      border-bottom: 1px solid #e5e5e5;
+      margin-bottom: 40px;
+    }
+    
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0a0a0a;
+    }
+    
+    .breadcrumb {
+      font-size: 14px;
+      color: #737373;
+    }
+    
+    .breadcrumb a {
+      color: #0a0a0a;
+      text-decoration: none;
+    }
+    
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .hero h1 {
+      font-size: 48px;
+      font-weight: 800;
+      color: #0a0a0a;
+      margin-bottom: 16px;
+      letter-spacing: -2px;
+      line-height: 1.1;
+    }
+    
+    .hero p {
+      font-size: 18px;
+      color: #525252;
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 24px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .hero-stat {
+      text-align: center;
+    }
+    
+    .hero-stat-number {
+      font-size: 24px;
+      font-weight: 700;
+      color: #0a0a0a;
+      display: block;
+    }
+    
+    .hero-stat-label {
+      font-size: 14px;
+      color: #737373;
+      margin-top: 4px;
+    }
+    
+    /* Filter Section */
+    .filter-section {
+      margin-bottom: 40px;
+    }
+    
+    .filter-tabs {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    
+    .filter-tab {
+      padding: 12px 24px;
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      color: #525252;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    
+    .filter-tab.active,
+    .filter-tab:hover {
+      background: #0a0a0a;
+      color: #ffffff;
+      border-color: #0a0a0a;
+    }
+    
+    /* Jobs Grid */
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+    
+    .job-card {
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    
+    .job-card:hover {
+      border-color: #0a0a0a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    
+    .job-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    
+    .job-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0a0a0a;
+      margin-bottom: 4px;
+    }
+    
+    .job-category {
+      font-size: 12px;
+      color: #737373;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    
+    .salary-range {
+      text-align: right;
+    }
+    
+    .salary-amount {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0a0a0a;
+    }
+    
+    .salary-type {
+      font-size: 11px;
+      color: #16a34a;
+      font-weight: 600;
+    }
+    
+    .job-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      background: #f8fafc;
+      border-radius: 6px;
+    }
+    
+    .stat-label {
+      font-size: 12px;
+      color: #525252;
+    }
+    
+    .stat-value {
+      font-size: 12px;
+      font-weight: 600;
+      color: #0a0a0a;
+    }
+    
+    .recruitment-info {
+      font-size: 14px;
+      color: #525252;
+      margin-bottom: 16px;
+    }
+    
+    .job-challenges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    
+    .challenge-tag {
+      background: #fef2f2;
+      color: #dc2626;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    
+    .challenge-tag.medium {
+      background: #fef3c7;
+      color: #d97706;
+    }
+    
+    .challenge-tag.low {
+      background: #f0fdf4;
+      color: #16a34a;
+    }
+    
+    /* CTA Section */
+    .cta-section {
+      background: #0a0a0a;
+      color: #ffffff;
+      padding: 60px 40px;
+      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .cta-section h2 {
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    
+    .cta-section p {
+      color: #a3a3a3;
+      margin-bottom: 32px;
+      font-size: 16px;
+    }
+    
+    .cta-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .cta-btn {
+      background: #ffffff;
+      color: #0a0a0a;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+    
+    .cta-btn:hover {
+      background: #f5f5f5;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+      
+      .hero h1 {
+        font-size: 32px;
+      }
+      
+      .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .filter-tabs {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 8px;
+      }
+      
+      .jobs-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .job-stats {
+        grid-template-columns: 1fr;
+      }
+      
+      .cta-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+    
+    /* Category Filters */
+    .category-section {
+      display: none;
+    }
+    
+    .category-section.active {
+      display: block;
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <nav class="nav">
+        <div class="logo">SarkariSalary</div>
+        <div class="breadcrumb">
+          <a href="/">Home</a> → Government Jobs
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Hero Section -->
+    <section class="hero">
+      <h1>Complete Government Jobs Database</h1>
+      <p>Explore salary structures, career timelines, and real challenges across all government services in India. From UPSC to Banking - everything in one place.</p>
+      
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat-number">150+</span>
+          <span class="hero-stat-label">Job Types</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-number">₹18K-₹2.5L</span>
+          <span class="hero-stat-label">Salary Range</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-number">50L+</span>
+          <span class="hero-stat-label">Total Positions</span>
+        </div>
+        <div class="hero-stat">
+          <span class="hero-stat-number">All States</span>
+          <span class="hero-stat-label">Coverage</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter Tabs -->
+    <section class="filter-section">
+      <div class="filter-tabs">
+        <div class="filter-tab active" data-category="all">All Jobs</div>
+        <div class="filter-tab" data-category="central-services">Central Services</div>
+        <div class="filter-tab" data-category="ssc-jobs">SSC Jobs</div>
+        <div class="filter-tab" data-category="banking-jobs">Banking</div>
+        <div class="filter-tab" data-category="railway-jobs">Railway</div>
+        <div class="filter-tab" data-category="teaching-jobs">Teaching</div>
+        <div class="filter-tab" data-category="defense-jobs">Defense</div>
+        <div class="filter-tab" data-category="psu-jobs">PSU</div>
+        <div class="filter-tab" data-category="state-jobs">State Govt</div>
+      </div>
+    </section>
+
+    <!-- Central Services Section -->
+    <section class="category-section active" data-category="central-services">
+      <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #0a0a0a;">🎯 Central Services (UPSC)</h2>
+      <div class="jobs-grid">
+        <!-- IAS Card -->
+        <a href="/ias-salary/" class="job-card">
+          <div class="job-card-header">
+            <div>
+              <div class="job-title">Indian Administrative Service</div>
+              <div class="job-category">All India Service</div>
+            </div>
+            <div class="salary-range">
+              <div class="salary-amount">₹56K - ₹2.5L</div>
+              <div class="salary-type">Monthly</div>
+            </div>
+          </div>
+          
+          <div class="job-stats">
+            <div class="stat-item">
+              <span class="stat-label">Vacancies</span>
+              <span class="stat-value">180/year</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Success Rate</span>
+              <span class="stat-value">0.1%</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Training</span>
+              <span class="stat-value">2 years</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Posting</span>
+              <span class="stat-value">All India</span>
+            </div>
+          </div>
+          
+          <div class="recruitment-info">
+            <strong>Recruitment:</strong> UPSC Civil Services Examination
+          </div>
+          
+          <div class="job-challenges">
+            <span class="challenge-tag">#political-pressure</span>
+            <span class="challenge-tag">#remote-posting</span>
+            <span class="challenge-tag medium">#transfer-stress</span>
+            <span class="challenge-tag">#media-scrutiny</span>
+          </div>
+        </a>
+
+        <!-- IPS Card -->
+        <a href="/ips-salary/" class="job-card">
+          <div class="job-card-header">
+            <div>
+              <div class="job-title">Indian Police Service</div>
+              <div class="job-category">All India Service</div>
+            </div>
+            <div class="salary-range">
+              <div class="salary-amount">₹56K - ₹2.25L</div>
+              <div class="salary-type">Monthly</div>
+            </div>
+          </div>
+          
+          <div class="job-stats">
+            <div class="stat-item">
+              <span class="stat-label">Vacancies</span>
+              <span class="stat-value">150/year</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Success Rate</span>
+              <span class="stat-value">0.1%</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Training</span>
+              <span class="stat-value">18 months</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Posting</span>
+              <span class="stat-value">State cadre</span>
+            </div>
+          </div>
+          
+          <div class="recruitment-info">
+            <strong>Recruitment:</strong> UPSC Civil Services Examination
+          </div>
+          
+          <div class="job-challenges">
+            <span class="challenge-tag">#physical-demands</span>
+            <span class="challenge-tag">#political-pressure</span>
+            <span class="challenge-tag medium">#night-shifts</span>
+            <span class="challenge-tag">#corruption-exposure</span>
+          </div>
+        </a>
+
+        <!-- IFS Card -->
+        <a href="/ifs-salary/" class="job-card">
+          <div class="job-card-header">
+            <div>
+              <div class="job-title">Indian Foreign Service</div>
+              <div class="job-category">Central Service A</div>
+            </div>
+            <div class="salary-range">
+              <div class="salary-amount">₹56K - ₹2.25L</div>
+              <div class="salary-type">Monthly</div>
+            </div>
+          </div>
+          
+          <div class="job-stats">
+            <div class="stat-item">
+              <span class="stat-label">Vacancies</span>
+              <span class="stat-value">20-30/year</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Success Rate</span>
+              <span class="stat-value">0.05%</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Training</span>
+              <span class="stat-value">1 year</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Posting</span>
+              <span class="stat-value">Global</span>
+            </div>
+          </div>
+          
+          <div class="recruitment-info">
+            <strong>Recruitment:</strong> UPSC Civil Services Examination
+          </div>
+          
+          <div class="job-challenges">
+            <span class="challenge-tag">#family-separation</span>
+            <span class="challenge-tag medium">#cultural-adaptation</span>
+            <span class="challenge-tag low">#language-barrier</span>
+            <span class="challenge-tag medium">#diplomatic-pressure</span>
+          </div>
+        </a>
+
+        <!-- IRS Card -->
+        <a href="/irs-salary/" class="job-card">
+          <div class="job-card-header">
+            <div>
+              <div class="job-title">Indian Revenue Service</div>
+              <div class="job-category">Central Service A</div>
+            </div>
+            <div class="salary-range">
+              <div class="salary-amount">₹56K - ₹2.25L</div>
+              <div class="salary-type">Monthly</div>
+            </div>
+          </div>
+          
+          <div class="job-stats">
+            <div class="stat-item">
+              <span class="stat-label">Vacancies</span>
+              <span class="stat-value">300-400/year</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Success Rate</span>
+              <span class="stat-value">0.3%</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Training</span>
+              <span class="stat-value">9 months</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Posting</span>
+              <span class="stat-value">Pan India</span>
+            </div>
+          </div>
+          
+          <div class="recruitment-info">
+            <strong>Recruitment:</strong> UPSC Civil Services Examination
+          </div>
+          
+          <div class="job-challenges">
+            <span class="challenge-tag">#corruption-exposure</span>
+            <span class="challenge-tag">#political-pressure</span>
+            <span class="challenge-tag medium">#work-pressure</span>
+            <span class="challenge-tag medium">#audit-stress</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- SSC Jobs Section -->
+    <section class="category-section" data-category="ssc-jobs">
+      <h2 style="font-size: 24px; font-weight: 700; margin-bottom: 24px; color: #0a0a0a;">📋 SSC Jobs</h2>
+      <div class="jobs-grid">
+        <!-- SSC CGL Card -->
+        <a href="/ssc-cgl-salary/" class="job-card">
+          <div class="job-card-header">
+            <div>
+              <div class="job-title">SSC Combined Graduate Level</div>
+              <div class="job-category">Group B & C</div>
+            </div>
+            <div class="salary-range">
+              <div class="salary-amount">₹25K - ₹1.51L</div>
+              <div class="salary-type">Monthly</div>
+            </div>
+          </div>
+          
+          <div class="job-stats">
+            <div class="stat-item">
+              <span class="stat-label">Vacancies</span>
+              <span class="stat-value">15,000+/year</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Success Rate</span>
+              <span class="stat-value">2%</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Training</span>
+              <span class="stat-value">3-6 months</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Posting</span>
+              <span class="stat-value">Central Govt</span>
+            </div>
+          </div>
+          
+          <div class="recruitment-info">
+            <strong>Recruitment:</strong> SSC CGL Examination
+          </div>
+          
+          <div class="job-challenges">
+            <span class="challenge-tag medium">#exam-pressure</span>
+            <span class="challenge-tag low">#work-life-balance</span>
+            <span class="challenge-tag medium">#competition</span>
+            <span class="challenge-tag low">#routine-work</span>
+          </div>
+        </a>
+
+        <!-- SSC CHSL Card -->
+        <a href="/ssc-chsl-salary/" class="job-card">
+          <div class="job-card-header">
+            <div>
+              <div class="job-title">SSC Higher Secondary Level</div>
+              <div class="job-category">Group C</div>
+            </div>
+            <div class="salary-range">
+              <div class="salary-amount">₹19K - ₹81K</div>
+              <div class="salary-type">Monthly</div>
+            </div>
+          </div>
+          
+          <div class="job-stats">
+            <div class="stat-item">
+              <span class="stat-label">Vacancies</span>
+              <span class="stat-value">4,500+/year</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Success Rate</span>
+              <span class="stat-value">3%</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Training</span>
+              <span class="stat-value">1-3 months</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Posting</span>
+              <span class="stat-value">Central Govt</span>
+            </div>
+          </div>
+          
+          <div class="recruitment-info">
+            <strong>Recruitment:</strong> SSC CHSL Examination
+          </div>
+          
+          <div class="job-challenges">
+            <span class="challenge-tag low">#entry-level-stress</span>
+            <span class="challenge-tag low">#career-growth</span>
+            <span class="challenge-tag medium">#exam-pressure</span>
+            <span class="challenge-tag low">#job-security</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <h2>Ready to Start Your Government Career?</h2>
+      <p>Get detailed career timelines, salary calculators, and insider tips for your dream government job</p>
+      <div class="cta-actions">
+        <a href="/salary-calculator/" class="cta-btn">Salary Calculator</a>
+        <a href="/exam-calendar/" class="cta-btn">Exam Calendar</a>
+        <a href="/preparation-tips/" class="cta-btn">Preparation Tips</a>
+        <a href="/success-stories/" class="cta-btn">Success Stories</a>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Filter functionality
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const categorySections = document.querySelectorAll('.category-section');
+
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const category = tab.dataset.category;
+        
+        // Update active tab
+        filterTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Show/hide sections
+        categorySections.forEach(section => {
+          if (category === 'all' || section.dataset.category === category) {
+            section.classList.add('active');
+          } else {
+            section.classList.remove('active');
+          }
+        });
+      });
+    });
+
+    // Track clicks for analytics
+    document.querySelectorAll('.job-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        const jobTitle = card.querySelector('.job-title').textContent;
+        console.log(`Clicked: ${jobTitle}`);
+        // Here you can add analytics tracking
+      });
+    });
+  </script>
+</body>
+</html>

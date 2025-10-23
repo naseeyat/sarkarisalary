@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Pay Navigator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #ffffff;
+            color: #000000;
+            line-height: 1.5;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 60px 24px;
+        }
+
+        .header {
+            margin-bottom: 60px;
+        }
+
+        .logo {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 40px;
+        }
+
+        .nav {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .nav a {
+            color: #666666;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .nav a:hover {
+            color: #000000;
+        }
+
+        .nav a.active {
+            color: #000000;
+        }
+
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .title {
+            font-size: 32px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: #666666;
+            font-size: 16px;
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .column h3 {
+            font-size: 14px;
+            font-weight: 500;
+            color: #000000;
+            margin-bottom: 16px;
+        }
+
+        .column a {
+            display: block;
+            color: #666666;
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .column a:hover {
+            color: #000000;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
+        }
+
+        .table th {
+            text-align: left;
+            font-weight: 500;
+            font-size: 14px;
+            color: #000000;
+            padding: 12px 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .table td {
+            font-size: 14px;
+            color: #666666;
+            padding: 12px 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .table tr:hover td {
+            color: #000000;
+        }
+
+        .form {
+            margin: 40px 0;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .form-input,
+        .form-select {
+            width: 100%;
+            max-width: 300px;
+            padding: 8px 12px;
+            border: 1px solid #e5e5e5;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .form-input:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: #000000;
+        }
+
+        .button {
+            background: #000000;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background: #333333;
+        }
+
+        .result {
+            margin: 40px 0;
+            padding: 24px 0;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .result-row.total {
+            font-weight: 500;
+            border-top: 1px solid #e5e5e5;
+            padding-top: 16px;
+            margin-top: 8px;
+        }
+
+        .footer {
+            margin-top: 120px;
+            padding-top: 40px;
+            border-top: 1px solid #e5e5e5;
+            text-align: center;
+        }
+
+        .footer-links {
+            color: #666666;
+            font-size: 14px;
+        }
+
+        .footer-links a {
+            color: #666666;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+
+        .footer-links a:hover {
+            color: #000000;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            
+            .nav {
+                flex-wrap: wrap;
+                gap: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">Government Pay Navigator</div>
+            <nav class="nav">
+                <a href="#" class="active" onclick="showSection('overview')">Overview</a>
+                <a href="#" onclick="showSection('calculator')">Calculator</a>
+                <a href="#" onclick="showSection('timeline')">Timeline</a>
+                <a href="#" onclick="showSection('matrix')">Pay Matrix</a>
+            </nav>
+        </header>
+
+        <!-- Overview Section -->
+        <div id="overview" class="section">
+            <h1 class="title">7th Pay Commission Navigator</h1>
+            <p class="subtitle">Simple salary calculator and career guidance for government positions in India.</p>
+            
+            <div class="grid">
+                <div class="column">
+                    <h3>Pay Matrix</h3>
+                    <a href="#" onclick="showSection('matrix')">Level wise breakdown</a>
+                    <a href="#" onclick="showSection('matrix')">Entry pay scales</a>
+                    <a href="#" onclick="showSection('matrix')">Maximum pay scales</a>
+                    <a href="#" onclick="showSection('matrix')">Common positions</a>
+                </div>
+
+                <div class="column">
+                    <h3>Calculator</h3>
+                    <a href="#" onclick="showSection('calculator')">Salary calculator</a>
+                    <a href="#" onclick="showSection('calculator')">DA calculation</a>
+                    <a href="#" onclick="showSection('calculator')">HRA calculation</a>
+                    <a href="#" onclick="showSection('calculator')">Take home salary</a>
+                </div>
+
+                <div class="column">
+                    <h3>Career Paths</h3>
+                    <a href="#" onclick="showSection('timeline')">IAS progression</a>
+                    <a href="#" onclick="showSection('timeline')">IPS progression</a>
+                    <a href="#" onclick="showSection('timeline')">SSC career path</a>
+                    <a href="#" onclick="showSection('timeline')">Banking career</a>
+                </div>
+
+                <div class="column">
+                    <h3>Positions</h3>
+                    <a href="#" onclick="calculatePosition('ias')">IAS Officer</a>
+                    <a href="#" onclick="calculatePosition('ssc')">SSC CGL</a>
+                    <a href="#" onclick="calculatePosition('banking')">Banking PO</a>
+                    <a href="#" onclick="selectLevel(1)">Level 1 - MTS</a>
+                </div>
+
+                <div class="column">
+                    <h3>Resources</h3>
+                    <a href="#">Pay commission info</a>
+                    <a href="#">Latest updates</a>
+                    <a href="#">Contact support</a>
+                    <a href="#">Terms of use</a>
+                </div>
+            </div>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Level</th>
+                        <th>Entry Pay</th>
+                        <th>Max Pay</th>
+                        <th>Common Positions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr onclick="selectLevel(1)">
+                        <td>1</td>
+                        <td>₹18,000</td>
+                        <td>₹56,900</td>
+                        <td>Multi Tasking Staff, Safai Karmachari</td>
+                    </tr>
+                    <tr onclick="selectLevel(4)">
+                        <td>4</td>
+                        <td>₹25,500</td>
+                        <td>₹81,100</td>
+                        <td>Lower Division Clerk, Data Entry Operator</td>
+                    </tr>
+                    <tr onclick="selectLevel(6)">
+                        <td>6</td>
+                        <td>₹35,400</td>
+                        <td>₹1,12,400</td>
+                        <td>Assistant Section Officer, SSC CGL</td>
+                    </tr>
+                    <tr onclick="selectLevel(10)">
+                        <td>10</td>
+                        <td>₹56,100</td>
+                        <td>₹1,77,500</td>
+                        <td>IAS, IPS, Group A Officers</td>
+                    </tr>
+                    <tr onclick="selectLevel(13)">
+                        <td>13</td>
+                        <td>₹1,18,500</td>
+                        <td>₹2,14,100</td>
+                        <td>Joint Secretary, Director</td>
+                    </tr>
+                    <tr onclick="selectLevel(17)">
+                        <td>17</td>
+                        <td>₹2,25,000</td>
+                        <td>₹2,50,000</td>
+                        <td>Cabinet Secretary</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Calculator Section -->
+        <div id="calculator" class="section hidden">
+            <h2 class="title">Salary Calculator</h2>
+            <p class="subtitle">Calculate your exact take-home salary based on position, location, and experience.</p>
+            
+            <div class="form">
+                <div class="form-group">
+                    <label class="form-label">Position / Pay Level</label>
+                    <select class="form-select" id="position">
+                        <option value="">Select position</option>
+                        <option value="18000">Level 1 - MTS (₹18,000)</option>
+                        <option value="25500">Level 4 - SSC CHSL (₹25,500)</option>
+                        <option value="35400">Level 6 - SSC CGL (₹35,400)</option>
+                        <option value="56100">Level 10 - IAS/IPS (₹56,100)</option>
+                        <option value="67700">Level 11 - Under Secretary (₹67,700)</option>
+                        <option value="118500">Level 13 - Joint Secretary (₹1,18,500)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">City Type</label>
+                    <select class="form-select" id="cityType">
+                        <option value="metro">Metro cities (24% HRA)</option>
+                        <option value="major">Major cities (16% HRA)</option>
+                        <option value="other">Other cities (8% HRA)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Years of Service</label>
+                    <input type="number" class="form-input" id="experience" value="0" min="0" max="35">
+                </div>
+                
+                <button class="button" onclick="calculateSalary()">Calculate Salary</button>
+            </div>
+
+            <div id="calculationResult" class="result hidden">
+                <div class="result-row">
+                    <span>Basic Pay</span>
+                    <span id="basicPay">₹0</span>
+                </div>
+                <div class="result-row">
+                    <span>Dearness Allowance (53%)</span>
+                    <span id="daAmount">₹0</span>
+                </div>
+                <div class="result-row">
+                    <span>House Rent Allowance</span>
+                    <span id="hraAmount">₹0</span>
+                </div>
+                <div class="result-row">
+                    <span>Other Allowances</span>
+                    <span id="otherAllowances">₹0</span>
+                </div>
+                <div class="result-row total">
+                    <span>Total Monthly Salary</span>
+                    <span id="totalSalary">₹0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline Section -->
+        <div id="timeline" class="section hidden">
+            <h2 class="title">Career Timeline</h2>
+            <p class="subtitle">Explore career progression paths for different government services.</p>
+            
+            <div class="form">
+                <div class="form-group">
+                    <label class="form-label">Select Career Path</label>
+                    <select class="form-select" id="careerPath" onchange="generateTimeline()">
+                        <option value="">Choose career path</option>
+                        <option value="ias">Indian Administrative Service</option>
+                        <option value="ips">Indian Police Service</option>
+                        <option value="ssc">SSC Combined Graduate Level</option>
+                        <option value="banking">Banking Probationary Officer</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="timelineResult" class="hidden">
+                <table class="table" id="timelineTable">
+                    <thead>
+                        <tr>
+                            <th>Stage</th>
+                            <th>Position</th>
+                            <th>Duration</th>
+                            <th>Salary Range</th>
+                            <th>Key Responsibilities</th>
+                        </tr>
+                    </thead>
+                    <tbody id="timelineTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Pay Matrix Section -->
+        <div id="matrix" class="section hidden">
+            <h2 class="title">7th Pay Commission Matrix</h2>
+            <p class="subtitle">Complete pay scale structure for all government positions.</p>
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Level</th>
+                        <th>Entry Pay</th>
+                        <th>Maximum Pay</th>
+                        <th>Common Positions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr onclick="selectLevel(1)">
+                        <td>1</td>
+                        <td>₹18,000</td>
+                        <td>₹56,900</td>
+                        <td>Multi Tasking Staff, Safai Karmachari</td>
+                    </tr>
+                    <tr onclick="selectLevel(2)">
+                        <td>2</td>
+                        <td>₹19,900</td>
+                        <td>₹63,200</td>
+                        <td>Peon, Helper, Watchman</td>
+                    </tr>
+                    <tr onclick="selectLevel(3)">
+                        <td>3</td>
+                        <td>₹21,700</td>
+                        <td>₹69,100</td>
+                        <td>Cook, Mali, Barber</td>
+                    </tr>
+                    <tr onclick="selectLevel(4)">
+                        <td>4</td>
+                        <td>₹25,500</td>
+                        <td>₹81,100</td>
+                        <td>Lower Division Clerk, Junior Assistant</td>
+                    </tr>
+                    <tr onclick="selectLevel(5)">
+                        <td>5</td>
+                        <td>₹29,200</td>
+                        <td>₹92,300</td>
+                        <td>Upper Division Clerk, Clerk, Typist</td>
+                    </tr>
+                    <tr onclick="selectLevel(6)">
+                        <td>6</td>
+                        <td>₹35,400</td>
+                        <td>₹1,12,400</td>
+                        <td>Assistant Section Officer, SSC CGL</td>
+                    </tr>
+                    <tr onclick="selectLevel(7)">
+                        <td>7</td>
+                        <td>₹44,900</td>
+                        <td>₹1,42,400</td>
+                        <td>Section Officer, Inspector</td>
+                    </tr>
+                    <tr onclick="selectLevel(8)">
+                        <td>8</td>
+                        <td>₹47,600</td>
+                        <td>₹1,51,100</td>
+                        <td>Senior Section Officer</td>
+                    </tr>
+                    <tr onclick="selectLevel(9)">
+                        <td>9</td>
+                        <td>₹53,100</td>
+                        <td>₹1,68,300</td>
+                        <td>Hindi Officer, Assistant Administrative Officer</td>
+                    </tr>
+                    <tr onclick="selectLevel(10)">
+                        <td>10</td>
+                        <td>₹56,100</td>
+                        <td>₹1,77,500</td>
+                        <td>Under Secretary, IAS/IPS Entry Level</td>
+                    </tr>
+                    <tr onclick="selectLevel(11)">
+                        <td>11</td>
+                        <td>₹67,700</td>
+                        <td>₹2,08,700</td>
+                        <td>Deputy Secretary, Assistant Registrar</td>
+                    </tr>
+                    <tr onclick="selectLevel(12)">
+                        <td>12</td>
+                        <td>₹78,800</td>
+                        <td>₹2,09,200</td>
+                        <td>Director, Joint Registrar</td>
+                    </tr>
+                    <tr onclick="selectLevel(13)">
+                        <td>13</td>
+                        <td>₹1,18,500</td>
+                        <td>₹2,14,100</td>
+                        <td>Joint Secretary, Additional Director</td>
+                    </tr>
+                    <tr onclick="selectLevel(14)">
+                        <td>14</td>
+                        <td>₹1,44,200</td>
+                        <td>₹2,18,200</td>
+                        <td>Additional Secretary</td>
+                    </tr>
+                    <tr onclick="selectLevel(15)">
+                        <td>15</td>
+                        <td>₹1,82,200</td>
+                        <td>₹2,24,100</td>
+                        <td>Special Secretary</td>
+                    </tr>
+                    <tr onclick="selectLevel(16)">
+                        <td>16</td>
+                        <td>₹2,05,400</td>
+                        <td>₹2,24,400</td>
+                        <td>Secretary (Selection Grade)</td>
+                    </tr>
+                    <tr onclick="selectLevel(17)">
+                        <td>17</td>
+                        <td>₹2,25,000</td>
+                        <td>₹2,50,000</td>
+                        <td>Cabinet Secretary</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="#">Privacy</a> | 
+                <a href="#">Terms</a> | 
+                <a href="#">Support</a> | 
+                <a href="#">Government Pay Commission Official Website</a>
+            </div>
+            <div style="margin-top: 16px; color: #666666; font-size: 14px;">
+                © 2025 Government Pay Navigator. All rights reserved.
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.add('hidden');
+            });
+            
+            // Remove active class from nav links
+            document.querySelectorAll('.nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName).classList.remove('hidden');
+            
+            // Add active class to clicked nav link
+            event.target.classList.add('active');
+        }
+
+        function calculateSalary() {
+            const basicPay = parseInt(document.getElementById('position').value);
+            const cityType = document.getElementById('cityType').value;
+            const experience = parseInt(document.getElementById('experience').value) || 0;
+            
+            if (!basicPay) {
+                alert('Please select a position');
+                return;
+            }
+            
+            // Calculate with experience increments (3% annual)
+            const adjustedBasic = basicPay + (experience * Math.floor(basicPay * 0.03));
+            const da = Math.round(adjustedBasic * 0.53);
+            
+            let hraRate = 0.08;
+            if (cityType === 'metro') hraRate = 0.24;
+            else if (cityType === 'major') hraRate = 0.16;
+            const hra = Math.round(adjustedBasic * hraRate);
+            
+            const otherAllowances = 4200; // Transport + Medical + others
+            const totalSalary = adjustedBasic + da + hra + otherAllowances;
+            
+            // Display results
+            document.getElementById('basicPay').textContent = '₹' + adjustedBasic.toLocaleString();
+            document.getElementById('daAmount').textContent = '₹' + da.toLocaleString();
+            document.getElementById('hraAmount').textContent = '₹' + hra.toLocaleString();
+            document.getElementById('otherAllowances').textContent = '₹' + otherAllowances.toLocaleString();
+            document.getElementById('totalSalary').textContent = '₹' + totalSalary.toLocaleString();
+            
+            document.getElementById('calculationResult').classList.remove('hidden');
+        }
+
+        function generateTimeline() {
+            const careerPath = document.getElementById('careerPath').value;
+            
+            if (!careerPath) {
+                document.getElementById('timelineResult').classList.add('hidden');
+                return;
+            }
+
+            const timelines = {
+                ias: [
+                    ['1', 'Training (LBSNAA)', '2 years', '₹56,100', 'Foundation training, district posting'],
+                    ['2', 'Sub Divisional Magistrate', '2-4 years', '₹99,000', 'Revenue administration, licensing'],
+                    ['3', 'District Collector', '5-8 years', '₹1,60,000', 'District administration head'],
+                    ['4', 'Joint Secretary', '4-6 years', '₹2,00,000', 'Policy formulation, ministry work'],
+                    ['5', 'Secretary', 'Until retirement', '₹2,80,000+', 'Ministry head, minister interface']
+                ],
+                ips: [
+                    ['1', 'Training (SVPNPA)', '1 year', '₹56,100', 'Police training, law enforcement'],
+                    ['2', 'Assistant SP', '4-6 years', '₹99,000', 'Sub-division police command'],
+                    ['3', 'Superintendent of Police', '6-8 years', '₹1,25,000', 'District police administration'],
+                    ['4', 'Inspector General', '5-8 years', '₹2,10,000', 'State-level operations'],
+                    ['5', 'Director General', 'Until retirement', '₹2,50,000+', 'State police leadership']
+                ],
+                ssc: [
+                    ['1', 'Assistant (Entry)', '3-5 years', '₹44,000', 'Administrative tasks, learning'],
+                    ['2', 'Senior Assistant', '5-8 years', '₹52,000', 'Team supervision, coordination'],
+                    ['3', 'Section Officer', '6-10 years', '₹65,000', 'Policy implementation'],
+                    ['4', 'Deputy Director', 'Until retirement', '₹85,000', 'Senior administrative roles']
+                ],
+                banking: [
+                    ['1', 'Probationary Officer', '2 years', '₹57,000', 'Training, branch operations'],
+                    ['2', 'Assistant Manager', '3-5 years', '₹70,000', 'Team leadership, business development'],
+                    ['3', 'Manager', '5-7 years', '₹85,000', 'Branch management, portfolios'],
+                    ['4', 'Chief Manager', '5-8 years', '₹1,10,000', 'Regional operations, strategy'],
+                    ['5', 'AGM/DGM', 'Until retirement', '₹1,50,000', 'Circle management, policy']
+                ]
+            };
+
+            const timelineData = timelines[careerPath];
+            const tbody = document.getElementById('timelineTableBody');
+            tbody.innerHTML = '';
+
+            timelineData.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${row[0]}</td>
+                    <td>${row[1]}</td>
+                    <td>${row[2]}</td>
+                    <td>${row[3]}</td>
+                    <td>${row[4]}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            document.getElementById('timelineResult').classList.remove('hidden');
+        }
+
+        function selectLevel(level) {
+            showSection('calculator');
+            
+            const levelValues = {
+                1: '18000', 2: '19900', 3: '21700', 4: '25500', 5: '29200',
+                6: '35400', 7: '44900', 8: '47600', 9: '53100', 10: '56100',
+                11: '67700', 12: '78800', 13: '118500', 14: '144200',
+                15: '182200', 16: '205400', 17: '225000'
+            };
+            
+            document.getElementById('position').value = levelValues[level];
+            calculateSalary();
+        }
+
+        function calculatePosition(type) {
+            showSection('calculator');
+            
+            const positionMap = {
+                'ias': '56100',
+                'ssc': '35400', 
+                'banking': '57000'
+            };
+            
+            document.getElementById('position').value = positionMap[type];
+            calculateSalary();
+        }
+    </script>
+</body>
+</html>

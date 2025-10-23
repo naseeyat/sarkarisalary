@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IAS Officer Career Journey - Complete Guide</title>
+  <meta name="description" content="Complete IAS officer career journey from SDM to Secretary with salary progression.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #fafafa;
+      color: #0a0a0a;
+      line-height: 1.5;
+    }
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    /* Sticky Navigation */
+    .sticky-nav {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      padding: 8px;
+      z-index: 100;
+      opacity: 0;
+      transform: translateX(100px);
+      transition: all 0.3s ease;
+    }
+    
+    .sticky-nav.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .nav-item {
+      display: block;
+      padding: 6px 12px;
+      margin: 2px 0;
+      color: #737373;
+      text-decoration: none;
+      font-size: 11px;
+      border-radius: 4px;
+      text-align: center;
+      min-width: 60px;
+    }
+    
+    .nav-item.active {
+      background: #0a0a0a;
+      color: #ffffff;
+    }
+    
+    /* Header */
+    .header {
+      padding: 40px 0;
+      border-bottom: 1px solid #e5e5e5;
+      margin-bottom: 40px;
+    }
+    
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0a0a0a;
+    }
+    
+    .breadcrumb {
+      font-size: 14px;
+      color: #737373;
+    }
+    
+    .breadcrumb a {
+      color: #0a0a0a;
+      text-decoration: none;
+    }
+    
+    /* Overview Section */
+    .overview {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+    
+    .overview-content h1 {
+      font-size: 48px;
+      font-weight: 800;
+      color: #0a0a0a;
+      margin-bottom: 16px;
+      letter-spacing: -2px;
+      line-height: 1.1;
+    }
+    
+    .overview-content p {
+      font-size: 18px;
+      color: #525252;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    
+    .key-points {
+      list-style: none;
+    }
+    
+    .key-points li {
+      font-size: 15px;
+      color: #0a0a0a;
+      margin-bottom: 8px;
+      padding-left: 20px;
+      position: relative;
+      font-weight: 500;
+    }
+    
+    .key-points li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #0a0a0a;
+      font-weight: 700;
+    }
+    
+    .stats-panel {
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 32px;
+    }
+    
+    .stats-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0a0a0a;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #f5f5f5;
+    }
+    
+    .stat-item:last-child {
+      border-bottom: none;
+    }
+    
+    .stat-label {
+      font-size: 14px;
+      color: #525252;
+    }
+    
+    .stat-value {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0a0a0a;
+    }
+    
+    /* Timeline Section */
+    .timeline-section {
+      margin-bottom: 60px;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .section-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #0a0a0a;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+    
+    .section-subtitle {
+      font-size: 16px;
+      color: #525252;
+    }
+    
+    /* Career Stages */
+    .career-stage {
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      overflow: hidden;
+      scroll-margin-top: 100px;
+      position: relative;
+    }
+    
+    
+    .stage-header {
+      background: #f8fafc;
+      padding: 20px 24px;
+      border-bottom: 1px solid #e5e5e5;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 20px;
+      align-items: center;
+      position: relative;
+    }
+    
+    .stage-number {
+      width: 40px;
+      height: 40px;
+      background: #0a0a0a;
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+    }
+    
+    .stage-info h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0a0a0a;
+      margin-bottom: 4px;
+    }
+    
+    .stage-info .years {
+      font-size: 12px;
+      color: #737373;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    
+    .stage-salary {
+      text-align: right;
+    }
+    
+    .salary-amount {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0a0a0a;
+      margin-bottom: 4px;
+    }
+    
+    .salary-growth {
+      font-size: 11px;
+      color: #16a34a;
+      font-weight: 600;
+    }
+    
+    .stage-content {
+      padding: 24px;
+    }
+    
+    .stage-description {
+      font-size: 15px;
+      color: #525252;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    
+    .responsibilities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    
+    .responsibility-item {
+      background: #f8fafc;
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      color: #525252;
+      border-left: 3px solid #e5e5e5;
+    }
+
+    /* Challenge Tags */
+    .challenge-tags {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #f3f4f6;
+    }
+
+    .challenge-tag {
+      display: inline-block;
+      background: #fef2f2;
+      color: #dc2626;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      margin: 2px 4px 2px 0;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .challenge-tag:hover {
+      background: #dc2626;
+      color: #ffffff;
+    }
+
+    .challenge-tag.medium {
+      background: #fef3c7;
+      color: #d97706;
+    }
+
+    .challenge-tag.medium:hover {
+      background: #d97706;
+      color: #ffffff;
+    }
+
+    .challenge-tag.low {
+      background: #f0fdf4;
+      color: #16a34a;
+    }
+
+    .challenge-tag.low:hover {
+      background: #16a34a;
+      color: #ffffff;
+    }
+    
+    /* Back to Top */
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 48px;
+      height: 48px;
+      background: #0a0a0a;
+      color: #ffffff;
+      border: none;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      z-index: 50;
+    }
+    
+    .back-to-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Summary */
+    .summary {
+      background: #0a0a0a;
+      color: #ffffff;
+      padding: 40px;
+      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .summary h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    
+    .summary p {
+      color: #a3a3a3;
+      margin-bottom: 24px;
+    }
+    
+    .summary-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .action-btn {
+      background: #ffffff;
+      color: #0a0a0a;
+      padding: 12px 24px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+      
+      .overview {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      
+      .overview-content h1 {
+        font-size: 36px;
+      }
+      
+      .stage-header {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 12px;
+      }
+      
+      .stage-salary {
+        text-align: center;
+      }
+      
+      .responsibilities-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .sticky-nav {
+        display: none;
+      }
+      
+      .summary-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Sticky Navigation -->
+  <nav class="sticky-nav" id="stickyNav">
+    <a href="#stage1" class="nav-item">SDM</a>
+    <a href="#stage2" class="nav-item">ADM</a>
+    <a href="#stage3" class="nav-item">DC</a>
+    <a href="#stage4" class="nav-item">DS</a>
+    <a href="#stage5" class="nav-item">JS</a>
+    <a href="#stage6" class="nav-item">AS</a>
+    <a href="#stage7" class="nav-item">SEC</a>
+  </nav>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop">↑</button>
+
+  <header class="header">
+    <div class="container">
+      <nav class="nav">
+        <div class="logo">SarkariSalary</div>
+        <div class="breadcrumb">
+          <a href="/">Home</a> → <a href="/central-government/">Central Government</a> → IAS Journey
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Overview -->
+    <section class="overview">
+      <div class="overview-content">
+        <h1>IAS Officer Career Journey</h1>
+        <p>The Indian Administrative Service (IAS) offers one of the most prestigious career paths in government service. From entry-level Sub Divisional Magistrate to Secretary-level positions, the journey spans 30+ years with significant salary growth and responsibility expansion.</p>
+        
+        <ul class="key-points">
+          <li>Starting salary: ₹65,000 per month</li>
+          <li>Peak earning potential: ₹3,80,000+ per month</li>
+          <li>7 major career progression stages</li>
+          <li>Comprehensive benefits package included</li>
+          <li>All-India service with nationwide postings</li>
+        </ul>
+      </div>
+      
+      <div class="stats-panel">
+        <h3 class="stats-title">Quick Stats</h3>
+        <div class="stat-item">
+          <span class="stat-label">Service Duration</span>
+          <span class="stat-value">30-35 Years</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Starting Package</span>
+          <span class="stat-value">₹85,000</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Peak Package</span>
+          <span class="stat-value">₹4,50,000+</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Average Growth</span>
+          <span class="stat-value">25% per stage</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Retirement Age</span>
+          <span class="stat-value">60 Years</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="timeline-section">
+      <div class="section-header">
+        <h2 class="section-title">Career Progression Timeline</h2>
+        <p class="section-subtitle">Complete journey from entry to top administrative positions</p>
+      </div>
+
+      <!-- Stage 1 -->
+      <div class="career-stage" id="stage1">
+        <div class="stage-header">
+          <div class="stage-number">1</div>
+          <div class="stage-info">
+            <h3>Sub Divisional Magistrate (SDM)</h3>
+            <div class="years">0-2 Years Experience</div>
+          </div>
+          <div class="stage-salary">
+            <div class="salary-amount">₹65,000 - ₹85,000</div>
+          </div>
+        </div>
+        <div class="stage-content">
+          <p class="stage-description">Entry level administrative position handling revenue cases, licensing, and basic administrative duties at sub-division level. First posting after training completion.</p>
+          <div class="responsibilities-grid">
+            <div class="responsibility-item">Revenue case management</div>
+            <div class="responsibility-item">Land records maintenance</div>
+            <div class="responsibility-item">Business licensing</div>
+            <div class="responsibility-item">Public grievances</div>
+            <div class="responsibility-item">Sub-division coordination</div>
+            <div class="responsibility-item">Citizen services</div>
+          </div>
+          <div class="challenge-tags">
+            <span class="challenge-tag medium">#learning-curve</span>
+            <span class="challenge-tag low">#work-life-balance</span>
+            <span class="challenge-tag medium">#local-language</span>
+            <span class="challenge-tag low">#training-pressure</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 2 -->
+      <div class="career-stage" id="stage2">
+        <div class="stage-header">
+          <div class="stage-number">2</div>
+          <div class="stage-info">
+            <h3>Assistant Collector (ADM)</h3>
+            <div class="years">2-4 Years Experience</div>
+          </div>
+          <div class="stage-salary">
+            <div class="salary-amount">₹85,000 - ₹1,10,000</div>
+            <div class="salary-growth">+30% Growth</div>
+          </div>
+        </div>
+        <div class="stage-content">
+          <p class="stage-description">Assistant to District Collector with expanded responsibilities in land acquisition, revenue collection, and district administration support.</p>
+          <div class="responsibilities-grid">
+            <div class="responsibility-item">Land acquisition projects</div>
+            <div class="responsibility-item">Revenue collection oversight</div>
+            <div class="responsibility-item">District admin support</div>
+            <div class="responsibility-item">Development programs</div>
+            <div class="responsibility-item">Inter-departmental coordination</div>
+            <div class="responsibility-item">Policy implementation</div>
+          </div>
+          <div class="challenge-tags">
+            <span class="challenge-tag">#political-pressure</span>
+            <span class="challenge-tag medium">#work-life-balance</span>
+            <span class="challenge-tag">#land-disputes</span>
+            <span class="challenge-tag medium">#coordination-stress</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 3 -->
+      <div class="career-stage" id="stage3">
+        <div class="stage-header">
+          <div class="stage-number">3</div>
+          <div class="stage-info">
+            <h3>District Collector (DC)</h3>
+            <div class="years">4-8 Years Experience</div>
+          </div>
+          <div class="stage-salary">
+            <div class="salary-amount">₹1,20,000 - ₹1,60,000</div>
+            <div class="salary-growth">+40% Growth</div>
+          </div>
+        </div>
+        <div class="stage-content">
+          <p class="stage-description">Head of district administration and CEO of Zilla Panchayat. Most prestigious field posting with complete executive powers over district.</p>
+          <div class="responsibilities-grid">
+            <div class="responsibility-item">District administration head</div>
+            <div class="responsibility-item">Law & order coordination</div>
+            <div class="responsibility-item">Development oversight</div>
+            <div class="responsibility-item">Emergency management</div>
+            <div class="responsibility-item">Inter-agency coordination</div>
+            <div class="responsibility-item">Public policy execution</div>
+          </div>
+          <div class="challenge-tags">
+            <span class="challenge-tag">#political-pressure</span>
+            <span class="challenge-tag">#media-scrutiny</span>
+            <span class="challenge-tag">#remote-posting</span>
+            <span class="challenge-tag medium">#emergency-stress</span>
+            <span class="challenge-tag">#family-separation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 4 -->
+      <div class="career-stage" id="stage4">
+        <div class="stage-header">
+          <div class="stage-number">4</div>
+          <div class="stage-info">
+            <h3>Deputy Secretary (DS)</h3>
+            <div class="years">8-12 Years Experience</div>
+          </div>
+          <div class="stage-salary">
+            <div class="salary-amount">₹1,40,000 - ₹1,80,000</div>
+            <div class="salary-growth">+20% Growth</div>
+          </div>
+        </div>
+        <div class="stage-content">
+          <p class="stage-description">Central government secretariat posting involving policy formulation, file handling, and inter-ministerial coordination at national level.</p>
+          <div class="responsibilities-grid">
+            <div class="responsibility-item">Policy formulation</div>
+            <div class="responsibility-item">Inter-ministerial coordination</div>
+            <div class="responsibility-item">File processing & approval</div>
+            <div class="responsibility-item">Parliamentary work</div>
+            <div class="responsibility-item">Strategic planning</div>
+            <div class="responsibility-item">National program oversight</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 5 -->
+      <div class="career-stage" id="stage5">
+        <div class="stage-header">
+          <div class="stage-number">5</div>
+          <div class="stage-info">
+            <h3>Joint Secretary (JS)</h3>
+            <div class="years">12-16 Years Experience</div>
+          </div>
+          <div class="stage-salary">
+            <div class="salary-amount">₹1,80,000 - ₹2,20,000</div>
+            <div class="salary-growth">+22% Growth</div>
+          </div>
+        </div>
+        <div class="stage-content">
+          <p class="stage-description">Senior policy making position heading important divisions, briefing ministers, and handling Parliament questions with significant decision-making authority.</p>
+          <div class="responsibilities-grid">
+            <div class="responsibility-item">Division head management</div>
+            <div class="responsibility-item">Minister briefings</div>
+            <div class="responsibility-item">Parliament question handling</div>
+            <div class="responsibility-item">Policy implementation oversight</div>
+            <div class="responsibility-item">Strategic decision making</div>
+            <div class="responsibility-item">Inter-state coordination</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 6 -->
+      <div class="career-stage" id="stage6">
+        <div class="stage-header">
+          <div class="stage-number">6</div>
+          <div class="stage-info">
+            <h3>Additional Secretary (AS)</h3>
+            <div class="years">16-22 Years Experience</div>
+          </div>
+          <div class="stage-salary">
+            <div class="salary-amount">₹2,20,000 - ₹2,50,000</div>
+            <div class="salary-growth">+15% Growth</div>
+          </div>
+        </div>
+        <div class="stage-content">
+          <p class="stage-description">Senior administrative position assisting Secretary in ministry functioning, handling complex policy issues and inter-state coordination matters.</p>
+          <div class="responsibilities-grid">
+            <div class="responsibility-item">Ministry support functions</div>
+            <div class="responsibility-item">Complex policy resolution</div>
+            <div class="responsibility-item">Inter-state coordination</div>
+            <div class="responsibility-item">Cabinet note preparation</div>
+            <div class="responsibility-item">Senior team leadership</div>
+            <div class="responsibility-item">High-level negotiations</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 7 -->
+      <div class="career-stage" id="stage7">
+        <div class="stage-header">
+          <div class="stage-number">★</div>
+          <div class="stage-info">
+            <h3>Secretary to Government</h3>
+            <div class="years">22+ Years Experience</div>
+          </div>
+          <div class="stage-salary">
+            <div class="salary-amount">₹2,50,000 - ₹3,80,000+</div>
+            <div class="salary-growth">Peak Level</div>
+          </div>
+        </div>
+        <div class="stage-content">
+          <p class="stage-description">Highest administrative position as head of ministry/department with direct interface with ministers, shaping national policies and governance.</p>
+          <div class="responsibilities-grid">
+            <div class="responsibility-item">Ministry/department head</div>
+            <div class="responsibility-item">Direct minister interface</div>
+            <div class="responsibility-item">National policy shaping</div>
+            <div class="responsibility-item">Government decision making</div>
+            <div class="responsibility-item">Strategic leadership</div>
+            <div class="responsibility-item">International representations</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Summary -->
+    <section class="summary">
+      <h2>Ready to Start Your IAS Journey?</h2>
+      <p>Calculate your potential earnings and explore career opportunities in government service</p>
+      <div class="summary-actions">
+        <a href="/salary-calculator/" class="action-btn">Calculate Salary</a>
+        <a href="/ips-salary/" class="action-btn">Compare with IPS</a>
+        <a href="/upsc-preparation/" class="action-btn">UPSC Preparation</a>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Sticky navigation
+    const stickyNav = document.getElementById('stickyNav');
+    const backToTop = document.getElementById('backToTop');
+    const stages = document.querySelectorAll('.career-stage');
+    const navItems = document.querySelectorAll('.nav-item');
+
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      
+      // Show/hide sticky nav and back to top
+      if (scrolled > 300) {
+        stickyNav.classList.add('visible');
+        backToTop.classList.add('visible');
+      } else {
+        stickyNav.classList.remove('visible');
+        backToTop.classList.remove('visible');
+      }
+
+      // Update active nav item
+      let activeStage = '';
+      stages.forEach(stage => {
+        const rect = stage.getBoundingClientRect();
+        if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+          activeStage = stage.id;
+        }
+      });
+
+      navItems.forEach(item => {
+        if (item.getAttribute('href') === '#' + activeStage) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+    });
+
+    // Smooth scroll for navigation
+    navItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(item.getAttribute('href'));
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+
+    // Back to top
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>

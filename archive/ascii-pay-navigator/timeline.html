@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Career Timeline | ASCII Terminal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #00ff00;
+            padding: 20px;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        .terminal {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #000;
+            border: 2px solid #333;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .header {
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .prompt {
+            color: #ffff00;
+        }
+
+        .input {
+            color: #ffffff;
+        }
+
+        .output {
+            color: #00ff00;
+            margin: 10px 0;
+        }
+
+        .highlight {
+            color: #00ffff;
+        }
+
+        .warning {
+            color: #ffa500;
+        }
+
+        .timeline-selector {
+            border: 1px solid #333;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .form-group {
+            margin: 15px 0;
+        }
+
+        .form-label {
+            color: #ffffff;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        select {
+            background: #111;
+            border: 1px solid #333;
+            color: #00ff00;
+            padding: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            width: 300px;
+        }
+
+        button {
+            background: #222;
+            border: 1px solid #555;
+            color: #00ff00;
+            padding: 10px 20px;
+            font-family: 'Courier New', monospace;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+
+        button:hover {
+            background: #333;
+            color: #ffff00;
+        }
+
+        .timeline-result {
+            border: 2px solid #00ff00;
+            padding: 20px;
+            margin: 20px 0;
+            background: #001100;
+        }
+
+        .timeline-stage {
+            margin: 15px 0;
+            padding: 10px;
+            border-left: 3px solid #ffff00;
+            padding-left: 15px;
+        }
+
+        .stage-title {
+            color: #ffffff;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stage-details {
+            color: #00ff00;
+            margin: 5px 0;
+        }
+
+        .stage-salary {
+            color: #00ffff;
+            font-weight: bold;
+        }
+
+        .stage-tips {
+            color: #ffa500;
+            font-style: italic;
+            margin-top: 8px;
+        }
+
+        .navigation {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .nav-link {
+            color: #00ffff;
+            text-decoration: underline;
+            cursor: pointer;
+            margin: 0 15px;
+        }
+
+        .nav-link:hover {
+            color: #ffff00;
+        }
+
+        .blink {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .requirements-box {
+            border: 1px solid #555;
+            padding: 15px;
+            margin: 15px 0;
+            background: #0a0a0a;
+        }
+
+        .ascii-timeline {
+            font-size: 12px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="header">
+            <div class="prompt">root@paynavigator:~$ <span class="input">career-timeline-generator</span></div>
+            <div class="output">Career Timeline Generator v2.0 - Terminal Interface</div>
+            <div class="output">Generate detailed career progression paths for government positions</div>
+        </div>
+
+        <div class="timeline-selector">
+            <div class="output">
+┌─────────────────────────────────────────────────────────────────┐
+│                    TIMELINE GENERATOR INPUT                     │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│ Select Career Path:                                             │
+│ ─────────────────────                                          │
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Choose Government Service:</label>
+                <select id="careerPath" onchange="generateTimeline()">
+                    <option value="">Select Career Path</option>
+                    <option value="ias">Indian Administrative Service (IAS)</option>
+                    <option value="ips">Indian Police Service (IPS)</option>
+                    <option value="ifs">Indian Forest Service (IFS)</option>
+                    <option value="irs">Indian Revenue Service (IRS)</option>
+                    <option value="ssc_cgl">SSC Combined Graduate Level</option>
+                    <option value="banking_po">Banking - Probationary Officer</option>
+                    <option value="railway_engineering">Railway Engineering Services</option>
+                    <option value="defense_technical">Defense Technical</option>
+                    <option value="teaching_kvs">Teaching - KVS/NVS</option>
+                    <option value="state_pcs">State PCS (General)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Current Status:</label>
+                <select id="currentStatus">
+                    <option value="aspirant">Aspirant (Planning to start)</option>
+                    <option value="preparing">Currently Preparing</option>
+                    <option value="appeared">Appeared for Exam</option>
+                    <option value="selected">Recently Selected</option>
+                    <option value="working">Currently Working</option>
+                </select>
+            </div>
+
+            <div class="output">
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+            </div>
+
+            <button onclick="generateTimeline()">Generate Timeline</button>
+            <button onclick="generateComparison()">Compare Paths</button>
+            <button onclick="resetTimeline()">Reset</button>
+        </div>
+
+        <div id="timeline-result">
+            <div class="output">
+┌─────────────────────────────────────────────────────────────────┐
+│                        SELECT CAREER PATH                       │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│ Choose a government service from the dropdown above to          │
+│ generate a detailed career progression timeline.                │
+│                                                                 │
+│ Available Options:                                              │
+│ • Central Services (IAS, IPS, IFS, IRS)                       │
+│ • SSC Positions (CGL, CHSL, MTS)                              │
+│ • Banking Services (PO, Clerk, SO)                            │
+│ • Railway Services (Engineering, Commercial)                   │
+│ • Defense Services (Technical, Non-technical)                  │
+│ • Teaching Services (KVS, NVS, Central Schools)               │
+│ • State Services (PCS, Administrative)                         │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+            </div>
+        </div>
+
+        <div class="navigation">
+            <span class="nav-link" onclick="location.href='index.html'">◄ Back to Main Menu</span>
+            <span class="nav-link" onclick="location.href='calculator.html'">Salary Calculator</span>
+            <span class="nav-link" onclick="location.href='comparison.html'">Compare Positions ►</span>
+        </div>
+
+        <div class="prompt">
+            root@paynavigator:~$ <span class="blink">_</span>
+        </div>
+    </div>
+
+    <script>
+        const careerTimelines = {
+            ias: {
+                name: "Indian Administrative Service (IAS)",
+                examRoute: "UPSC Civil Services Examination",
+                stages: [
+                    {
+                        title: "Preparation Phase",
+                        duration: "1-3 years",
+                        salary: "₹0 (Investment phase)",
+                        details: "Self-study or coaching, prelims & mains preparation",
+                        tips: "Focus on NCERT foundation, current affairs, answer writing practice",
+                        requirements: "Graduate degree, Age 21-32 (General)"
+                    },
+                    {
+                        title: "Training at LBSNAA",
+                        duration: "2 years",
+                        salary: "₹56,100 basic (Training stipend)",
+                        details: "Lal Bahadur Shastri National Academy of Administration",
+                        tips: "Network building, learn administrative procedures, district training",
+                        requirements: "Clear UPSC CSE, Medical fitness, Character verification"
+                    },
+                    {
+                        title: "Sub Divisional Magistrate (SDM)",
+                        duration: "2-4 years",
+                        salary: "₹99,000 total (Level 10)",
+                        details: "Revenue administration, licensing, sub-division management",
+                        tips: "Master local administration, build public relations, learn revenue systems",
+                        requirements: "Complete training, probation clearance"
+                    },
+                    {
+                        title: "Additional District Magistrate (ADM)",
+                        duration: "3-5 years",
+                        salary: "₹1,05,000 - ₹1,20,000",
+                        details: "Land acquisition, development programs, district coordination",
+                        tips: "Develop project management skills, inter-departmental coordination",
+                        requirements: "Successful SDM tenure, performance evaluation"
+                    },
+                    {
+                        title: "District Collector/District Magistrate",
+                        duration: "5-8 years",
+                        salary: "₹1,40,000 - ₹1,60,000",
+                        details: "Head of district administration, law & order coordination",
+                        tips: "Master crisis management, political liaison, media handling",
+                        requirements: "8-10 years total service, empanelment for JS level"
+                    },
+                    {
+                        title: "Joint Secretary (Central Govt)",
+                        duration: "4-6 years",
+                        salary: "₹2,00,000 - ₹2,20,000",
+                        details: "Policy formulation, parliamentary questions, minister briefings",
+                        tips: "Specialize in policy domains, build central govt networks",
+                        requirements: "15+ years service, selection through empanelment"
+                    },
+                    {
+                        title: "Additional Secretary",
+                        duration: "5-7 years",
+                        salary: "₹2,40,000 - ₹2,60,000",
+                        details: "Senior policy making, cabinet note preparation, high-level negotiations",
+                        tips: "Develop expertise in specific domains, international exposure",
+                        requirements: "20+ years service, proven track record"
+                    },
+                    {
+                        title: "Secretary to Government",
+                        duration: "Until retirement",
+                        salary: "₹2,80,000+ (Plus perks)",
+                        details: "Ministry head, direct minister interface, policy leadership",
+                        tips: "Lead transformational changes, mentor next generation",
+                        requirements: "25+ years service, exceptional performance record"
+                    }
+                ]
+            },
+            
+            ips: {
+                name: "Indian Police Service (IPS)",
+                examRoute: "UPSC Civil Services Examination",
+                stages: [
+                    {
+                        title: "Training at SVPNPA",
+                        duration: "1 year",
+                        salary: "₹56,100 basic (Training stipend)",
+                        details: "Sardar Vallabhbhai Patel National Police Academy",
+                        tips: "Physical fitness, law knowledge, leadership development",
+                        requirements: "Clear UPSC CSE, Physical standards, Medical fitness"
+                    },
+                    {
+                        title: "Assistant Superintendent of Police (ASP)",
+                        duration: "4-6 years",
+                        salary: "₹99,000 total (Level 10)",
+                        details: "Sub-division police administration, crime investigation",
+                        tips: "Ground-level policing experience, community relations",
+                        requirements: "Complete training, probation clearance"
+                    },
+                    {
+                        title: "Superintendent of Police (SP)",
+                        duration: "6-8 years",
+                        salary: "₹1,25,000 - ₹1,45,000",
+                        details: "District police command, law & order maintenance",
+                        tips: "Strategic planning, media management, political coordination",
+                        requirements: "8-10 years service, performance assessment"
+                    },
+                    {
+                        title: "Deputy Inspector General (DIG)",
+                        duration: "5-7 years",
+                        salary: "₹1,70,000 - ₹1,90,000",
+                        details: "Range/zone command, specialized operations oversight",
+                        tips: "Specialize in areas like cyber crime, anti-terrorism",
+                        requirements: "15+ years service, empanelment for senior positions"
+                    },
+                    {
+                        title: "Inspector General (IG)",
+                        duration: "5-8 years",
+                        salary: "₹2,10,000 - ₹2,30,000",
+                        details: "State-level operations, policy implementation",
+                        tips: "Modern policing techniques, technology adoption",
+                        requirements: "20+ years service, proven leadership"
+                    },
+                    {
+                        title: "Additional Director General (ADG)",
+                        duration: "Until retirement",
+                        salary: "₹2,50,000+ (Plus security perks)",
+                        details: "State police leadership, national security coordination",
+                        tips: "Police reforms, institutional development focus",
+                        requirements: "25+ years service, exceptional record"
+                    }
+                ]
+            },
+
+            ssc_cgl: {
+                name: "SSC Combined Graduate Level",
+                examRoute: "SSC CGL Examination",
+                stages: [
+                    {
+                        title: "Assistant/Inspector (Entry Level)",
+                        duration: "3-5 years",
+                        salary: "₹44,000 - ₹50,000 (Level 4-6)",
+                        details: "Administrative tasks, field inspections, data analysis",
+                        tips: "Build strong foundation in govt procedures and regulations",
+                        requirements: "Graduate degree, Age 18-32, Clear SSC CGL"
+                    },
+                    {
+                        title: "Senior Assistant/Inspector",
+                        duration: "5-8 years",
+                        salary: "₹52,000 - ₹62,000",
+                        details: "Team supervision, complex case handling, training juniors",
+                        tips: "Develop specialization in department's core functions",
+                        requirements: "Promotion through DPC, performance evaluation"
+                    },
+                    {
+                        title: "Assistant Audit Officer/Section Officer",
+                        duration: "6-10 years",
+                        salary: "₹65,000 - ₹75,000",
+                        details: "Audit management, policy implementation, coordination",
+                        tips: "Pursue professional certifications and higher education",
+                        requirements: "Departmental promotion, merit-based selection"
+                    },
+                    {
+                        title: "Senior Section Officer/Deputy Director",
+                        duration: "Until retirement",
+                        salary: "₹75,000 - ₹95,000",
+                        details: "Senior administrative roles, policy advisory, mentoring",
+                        tips: "Consider competitive exams for further advancement (UPSC)",
+                        requirements: "15+ years service, excellent performance"
+                    }
+                ]
+            },
+
+            banking_po: {
+                name: "Banking - Probationary Officer",
+                examRoute: "IBPS PO / SBI PO Examination",
+                stages: [
+                    {
+                        title: "Probationary Officer (PO)",
+                        duration: "2 years",
+                        salary: "₹57,000 - ₹62,000 (Scale I)",
+                        details: "Customer service, loan processing, branch operations training",
+                        tips: "Focus on banking fundamentals and customer relationship building",
+                        requirements: "Graduate degree, Age 20-30, Clear banking exam"
+                    },
+                    {
+                        title: "Assistant Manager",
+                        duration: "3-5 years",
+                        salary: "₹62,000 - ₹70,000 (Scale II)",
+                        details: "Team leadership, business development, risk management",
+                        tips: "Develop expertise in digital banking and financial products",
+                        requirements: "Complete probation, internal assessment"
+                    },
+                    {
+                        title: "Manager",
+                        duration: "5-7 years",
+                        salary: "₹75,000 - ₹85,000 (Scale III)",
+                        details: "Branch management, portfolio oversight, compliance monitoring",
+                        tips: "Pursue professional banking certifications, MBA",
+                        requirements: "Promotion based on performance and vacancies"
+                    },
+                    {
+                        title: "Chief Manager",
+                        duration: "5-8 years",
+                        salary: "₹95,000 - ₹1,10,000 (Scale IV)",
+                        details: "Regional operations, strategic planning, large corporate clients",
+                        tips: "Specialize in corporate banking or treasury operations",
+                        requirements: "15+ years experience, leadership assessment"
+                    },
+                    {
+                        title: "Assistant General Manager",
+                        duration: "Until retirement",
+                        salary: "₹1,20,000 - ₹1,50,000 (Scale V)",
+                        details: "Circle management, policy formulation, board presentations",
+                        tips: "Focus on digital transformation and fintech partnerships",
+                        requirements: "20+ years service, exceptional performance"
+                    }
+                ]
+            }
+        };
+
+        function generateTimeline() {
+            const careerPath = document.getElementById('careerPath').value;
+            const currentStatus = document.getElementById('currentStatus').value;
+            
+            if (!careerPath) {
+                alert('Please select a career path first!');
+                return;
+            }
+
+            const timeline = careerTimelines[careerPath];
+            if (!timeline) {
+                alert('Timeline data not available for selected path!');
+                return;
+            }
+
+            let timelineHTML = \`
+                <div class="timeline-result">
+┌─────────────────────────────────────────────────────────────────┐
+│                    CAREER TIMELINE: \${timeline.name.toUpperCase()}                    │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│ Exam Route: \${timeline.examRoute}                               │
+│ Your Status: \${currentStatus.replace('_', ' ').toUpperCase()}                        │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+
+<div class="ascii-timeline">
+┌─ CAREER PROGRESSION PATH ────────────────────────────────────────┐
+│                                                                   │\`;
+
+            timeline.stages.forEach((stage, index) => {
+                timelineHTML += \`
+│ Stage \${index + 1}: \${stage.title}
+│ ├─ Duration: \${stage.duration}
+│ ├─ Salary: \${stage.salary}
+│ ├─ Role: \${stage.details}
+│ ├─ Requirements: \${stage.requirements}
+│ └─ Tips: \${stage.tips}
+│                                                                   │\`;
+            });
+
+            timelineHTML += \`
+│                                                                   │
+└───────────────────────────────────────────────────────────────────┘
+</div>
+
+<div class="requirements-box">
+<div class="warning">IMPORTANT NOTES:</div>
+• Timeline may vary based on performance, vacancies, and policy changes
+• Salary figures include basic pay + allowances (approximate total)
+• Promotions are subject to departmental promotion committee decisions
+• Consider parallel preparation for higher services while working
+• Stay updated with government policies and pay commission recommendations
+</div>
+                </div>
+            \`;
+
+            document.getElementById('timeline-result').innerHTML = timelineHTML;
+        }
+
+        function generateComparison() {
+            document.getElementById('timeline-result').innerHTML = \`
+                <div class="timeline-result">
+┌─────────────────────────────────────────────────────────────────┐
+│                        CAREER PATH COMPARISON                    │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│                  │ IAS/IPS  │ SSC CGL  │ Banking │ Teaching │    │
+│ ──────────────────────────────────────────────────────────────  │
+│ Entry Salary     │ ₹99,000  │ ₹44,000  │ ₹57,000 │ ₹47,000 │    │
+│ Peak Salary      │₹2,80,000+│ ₹95,000  │₹1,50,000│ ₹78,000 │    │
+│ Job Security     │ Highest  │ High     │ High    │ Highest │    │
+│ Growth Rate      │ Fast     │ Moderate │ Good    │ Slow    │    │
+│ Exam Difficulty  │ Extreme  │ High     │ High    │ High    │    │
+│ Work Pressure    │ Very High│ High     │ High    │ Moderate│    │
+│ Transfers        │ Frequent │ Limited  │ Limited │ Rare    │    │
+│ Retirement Age   │ 60 years │ 60 years │ 60 years│ 62 years│    │
+│                                                                 │
+│ RECOMMENDATION MATRIX:                                          │
+│ ────────────────────────                                       │
+│ High Risk-High Reward: → IAS/IPS                              │
+│ Balanced Approach: → SSC CGL + UPSC preparation               │
+│ Financial Sector Interest: → Banking PO                       │
+│ Teaching Passion: → KVS/NVS/University positions              │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+                </div>
+            \`;
+        }
+
+        function resetTimeline() {
+            document.getElementById('careerPath').value = '';
+            document.getElementById('currentStatus').value = 'aspirant';
+            
+            document.getElementById('timeline-result').innerHTML = \`
+                <div class="output">
+┌─────────────────────────────────────────────────────────────────┐
+│                        SELECT CAREER PATH                       │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│ Timeline generator reset. Choose a career path to begin.        │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+                </div>
+            \`;
+        }
+    </script>
+</body>
+</html>

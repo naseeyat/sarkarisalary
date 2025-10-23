@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Dropdown System Demo</title>
+    <script src="dropdown-system.js"></script>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            padding: 40px;
+            background: #f5f5f5;
+        }
+        
+        .demo-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 10px 5px 0 0;
+        }
+        
+        .button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h1>Universal Dropdown System Demo</h1>
+        <p>यह system किसी भी page पर कहीं भी dropdown add करने के लिए है:</p>
+        
+        <form>
+            <div class="form-group">
+                <label class="form-label">Government Job Position</label>
+                <div class="dropdown" 
+                     data-name="position" 
+                     data-default="Choose your position"
+                     data-options='[
+                       {"value": "99000", "text": "SDM (₹99,000)"},
+                       {"value": "120000", "text": "Assistant Collector (₹1,20,000)"},
+                       {"value": "160000", "text": "District Collector (₹1,60,000)"},
+                       {"value": "180000", "text": "Deputy Secretary (₹1,80,000)"},
+                       {"value": "200000", "text": "Joint Secretary (₹2,00,000)"},
+                       {"value": "240000", "text": "Additional Secretary (₹2,40,000)"},
+                       {"value": "280000", "text": "Secretary (₹2,80,000)"}
+                     ]'></div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">City Type</label>
+                <div class="dropdown" 
+                     data-name="city" 
+                     data-default="Select city type"
+                     data-options='[
+                       {"value": "metro", "text": "Metro Cities (24% HRA)"},
+                       {"value": "major", "text": "Major Cities (16% HRA)"},
+                       {"value": "other", "text": "Other Cities (8% HRA)"}
+                     ]'></div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Experience Level</label>
+                <div class="dropdown" 
+                     data-name="experience" 
+                     data-default="Select experience"
+                     data-options='[
+                       {"value": "0", "text": "Fresher (0 years)"},
+                       {"value": "1", "text": "1 Year Experience"},
+                       {"value": "3", "text": "3 Years Experience"},
+                       {"value": "5", "text": "5+ Years Experience"}
+                     ]'></div>
+            </div>
+        </form>
+        
+        <button class="button" onclick="calculateSalary()">Calculate Salary</button>
+        <button class="button" onclick="showValues()">Show All Values</button>
+        <button class="button" onclick="resetAll()">Reset All</button>
+        
+        <div id="result" class="result" style="display: none;">
+            <h3>Selected Values:</h3>
+            <div id="resultContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // Example usage of the dropdown system
+        
+        // Listen for dropdown changes
+        document.addEventListener('dropdownChange', function(e) {
+            console.log('Dropdown changed:', e.detail);
+        });
+        
+        // Set up individual change handlers
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.dropdownSystem) {
+                setupDropdownHandlers();
+            } else {
+                // Wait for dropdown system to load
+                setTimeout(setupDropdownHandlers, 100);
+            }
+        });
+        
+        function setupDropdownHandlers() {
+            // Set individual callbacks
+            dropdownSystem.onChange('position', function(value, text) {
+                console.log('Position changed to:', text);
+                updateCalculation();
+            });
+            
+            dropdownSystem.onChange('city', function(value, text) {
+                console.log('City changed to:', text);
+                updateCalculation();
+            });
+            
+            dropdownSystem.onChange('experience', function(value, text) {
+                console.log('Experience changed to:', text);
+                updateCalculation();
+            });
+        }
+        
+        function updateCalculation() {
+            const position = dropdownSystem.getValue('position');
+            const city = dropdownSystem.getValue('city');
+            const experience = dropdownSystem.getValue('experience');
+            
+            if (position && city && experience) {
+                calculateSalary();
+            }
+        }
+        
+        function calculateSalary() {
+            const basic = parseInt(dropdownSystem.getValue('position')) || 0;
+            const cityType = dropdownSystem.getValue('city');
+            const experience = parseInt(dropdownSystem.getValue('experience')) || 0;
+            
+            if (!basic || !cityType) {
+                alert('Please select position and city type first!');
+                return;
+            }
+            
+            // Apply experience increment
+            const adjustedBasic = basic + (experience * Math.floor(basic * 0.03));
+            
+            // Calculate components
+            const da = Math.round(adjustedBasic * 0.53);
+            let hraRate = 0.08;
+            if (cityType === 'metro') hraRate = 0.24;
+            else if (cityType === 'major') hraRate = 0.16;
+            const hra = Math.round(adjustedBasic * hraRate);
+            const allowances = 5000;
+            const grossMonthly = adjustedBasic + da + hra + allowances;
+            
+            // Show result
+            const resultDiv = document.getElementById('result');
+            const resultContent = document.getElementById('resultContent');
+            
+            resultContent.innerHTML = `
+                <p><strong>Position:</strong> ${dropdownSystem.getText('position')}</p>
+                <p><strong>City:</strong> ${dropdownSystem.getText('city')}</p>
+                <p><strong>Experience:</strong> ${dropdownSystem.getText('experience')}</p>
+                <hr style="margin: 15px 0;">
+                <p><strong>Basic Pay:</strong> ₹${adjustedBasic.toLocaleString()}</p>
+                <p><strong>DA (53%):</strong> ₹${da.toLocaleString()}</p>
+                <p><strong>HRA:</strong> ₹${hra.toLocaleString()}</p>
+                <p><strong>Allowances:</strong> ₹${allowances.toLocaleString()}</p>
+                <p style="font-size: 18px; font-weight: bold; color: #007bff;">
+                    <strong>Gross Salary:</strong> ₹${grossMonthly.toLocaleString()}
+                </p>
+            `;
+            
+            resultDiv.style.display = 'block';
+        }
+        
+        function showValues() {
+            const values = {
+                position: {
+                    value: dropdownSystem.getValue('position'),
+                    text: dropdownSystem.getText('position')
+                },
+                city: {
+                    value: dropdownSystem.getValue('city'),
+                    text: dropdownSystem.getText('city')
+                },
+                experience: {
+                    value: dropdownSystem.getValue('experience'),
+                    text: dropdownSystem.getText('experience')
+                }
+            };
+            
+            console.log('All dropdown values:', values);
+            alert('Check console for all values');
+        }
+        
+        function resetAll() {
+            // Reset all dropdowns to default
+            dropdownSystem.setValue('position', '', 'Choose your position');
+            dropdownSystem.setValue('city', '', 'Select city type');
+            dropdownSystem.setValue('experience', '', 'Select experience');
+            
+            // Hide result
+            document.getElementById('result').style.display = 'none';
+        }
+        
+        // Example of dynamically updating dropdown options
+        function addNewPositions() {
+            const newOptions = [
+                {"value": "99000", "text": "SDM (₹99,000)"},
+                {"value": "120000", "text": "Assistant Collector (₹1,20,000)"},
+                {"value": "160000", "text": "District Collector (₹1,60,000)"},
+                {"value": "180000", "text": "Deputy Secretary (₹1,80,000)"},
+                {"value": "200000", "text": "Joint Secretary (₹2,00,000)"},
+                {"value": "240000", "text": "Additional Secretary (₹2,40,000)"},
+                {"value": "280000", "text": "Secretary (₹2,80,000)"},
+                {"value": "320000", "text": "Cabinet Secretary (₹3,20,000)"}  // New option
+            ];
+            
+            dropdownSystem.updateOptions('position', newOptions);
+        }
+    </script>
+</body>
+</html>

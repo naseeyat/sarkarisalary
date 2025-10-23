@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Jobs Carousel Demo</title>
+    <style>
+        body {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+            background: #ffffff;
+            color: #333333;
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.4;
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: 40px;
+            border: 3px solid #333333;
+            padding: 30px;
+            background: #f8f8f8;
+            box-shadow: 6px 6px 0px #333333;
+        }
+
+        .demo-title {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 12px;
+            color: #333333;
+        }
+
+        .demo-subtitle {
+            font-size: 16px;
+            color: #666666;
+            font-weight: 600;
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 160px 1fr 160px;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .carousel-container {
+            background: #ffffff;
+            border: 3px solid #333333;
+            box-shadow: 8px 8px 0px #333333;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-slides {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(100%);
+            transition: all 0.5s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+            z-index: 2;
+        }
+
+        .carousel-slide.prev {
+            transform: translateX(-100%);
+        }
+
+        .carousel-slide.next {
+            transform: translateX(100%);
+        }
+
+        .slide-content {
+            padding: 40px;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide-header {
+            margin-bottom: 30px;
+            border-bottom: 2px solid #333333;
+            padding-bottom: 20px;
+        }
+
+        .slide-title {
+            font-size: 28px;
+            font-weight: 900;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .slide-subtitle {
+            font-size: 16px;
+            color: #666666;
+            font-weight: 600;
+        }
+
+        .slide-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-item {
+            padding: 20px;
+            border: 2px solid #333333;
+            background: #f8f8f8;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            background: #333333;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 6px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        .slide-tags {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .slide-tags .tag {
+            background: #333333;
+            color: #ffffff;
+            padding: 8px 16px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .slide-tags .tag:hover {
+            background: #000000;
+            transform: scale(1.05);
+        }
+
+        .slide-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid #333333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .action-btn.primary {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        .action-btn.primary:hover {
+            background: #000000;
+            transform: scale(1.05);
+        }
+
+        .action-btn.secondary {
+            background: #ffffff;
+            color: #333333;
+        }
+
+        .action-btn.secondary:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        .action-btn.tertiary {
+            background: #f0f8ff;
+            color: #333333;
+        }
+
+        .action-btn.tertiary:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        .carousel-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 40px;
+            border-top: 2px solid #333333;
+            background: #f8f8f8;
+        }
+
+        .carousel-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid #333333;
+            background: #ffffff;
+            font-size: 24px;
+            font-weight: 900;
+            color: #333333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-btn:hover {
+            background: #333333;
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+
+        .carousel-indicators {
+            display: flex;
+            gap: 10px;
+        }
+
+        .carousel-indicator {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #333333;
+            background: #ffffff;
+            color: #333333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .carousel-indicator.active,
+        .carousel-indicator:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        .sidebar-ad {
+            background: #ffffff;
+            border: 3px solid #333333;
+            box-shadow: 4px 4px 0px #333333;
+            position: sticky;
+            top: 20px;
+        }
+
+        .sidebar-ad-content {
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #f8f8f8;
+            border: 2px dashed #cccccc;
+            margin: 10px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-ad-content:hover {
+            border-color: #333333;
+            background: #eeeeee;
+        }
+
+        .carousel-ads {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            padding: 20px;
+            background: #fafafa;
+            border-top: 2px solid #333333;
+        }
+
+        .ad-slot {
+            min-height: 100px;
+            border: 2px dashed #cccccc;
+            background: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .ad-slot:hover {
+            border-color: #333333;
+            background: #eeeeee;
+        }
+
+        .ad-placeholder {
+            color: #999999;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .ad-refresh-indicator {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 20px;
+            height: 20px;
+            background: #007bff;
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .demo-info {
+            margin-top: 40px;
+            padding: 30px;
+            border: 2px solid #333333;
+            background: #f8f8f8;
+            text-align: center;
+        }
+
+        .demo-info h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #333333;
+        }
+
+        .demo-info p {
+            margin-bottom: 10px;
+            color: #666666;
+            font-size: 14px;
+        }
+
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .sidebar-ad {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .slide-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .slide-actions {
+                flex-direction: column;
+            }
+            
+            .action-btn {
+                width: 100%;
+            }
+            
+            .carousel-controls {
+                padding: 15px 20px;
+            }
+            
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+            
+            .carousel-indicator {
+                width: 30px;
+                height: 30px;
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-header">
+        <h1 class="demo-title">Government Jobs Carousel</h1>
+        <p class="demo-subtitle">Interactive salary calculator with AdSense integration</p>
+    </div>
+
+    <div class="main-container">
+        <!-- Left Sidebar Ad -->
+        <div class="sidebar-ad">
+            <div class="sidebar-ad-content" id="leftSidebarAd">
+                <div class="ad-placeholder">Left Sidebar Ad</div>
+                <div class="ad-refresh-indicator" id="leftAdRefresh" style="display: none;">↻</div>
+            </div>
+        </div>
+
+        <!-- Main Carousel -->
+        <div class="carousel-container">
+            <div class="carousel-wrapper">
+                <div class="carousel-slides" id="carouselSlides">
+                <!-- Slide 1: Premium Government Jobs (IAS/IPS) -->
+                <div class="carousel-slide active">
+                    <div class="slide-content">
+                        <div class="slide-header">
+                            <h2 class="slide-title">🏛️ Premium Civil Services</h2>
+                            <p class="slide-subtitle">IAS • IPS • IFS - Elite Government Positions</p>
+                        </div>
+                        
+                        <div class="slide-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">₹99K - ₹2.8L</div>
+                                <div class="stat-label">Salary Range</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">25-30 Years</div>
+                                <div class="stat-label">Service Period</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">~500 Posts</div>
+                                <div class="stat-label">Annual Vacancies</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">₹8-12 Cr</div>
+                                <div class="stat-label">Lifetime Earnings</div>
+                            </div>
+                        </div>
+                        
+                        <div class="slide-tags">
+                            <span class="tag">Grade A+</span>
+                            <span class="tag">All India Service</span>
+                            <span class="tag">District Collector</span>
+                            <span class="tag">Policy Maker</span>
+                            <span class="tag">UPSC CSE</span>
+                        </div>
+                        
+                        <div class="slide-actions">
+                            <a href="job-template-basic.html?job=ias" class="action-btn primary">IAS Calculator</a>
+                            <a href="job-template-advanced.html?job=ips" class="action-btn secondary">IPS Analysis</a>
+                            <a href="job-template-retirement.html?job=ifs" class="action-btn tertiary">IFS Retirement</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Banking & Financial Services -->
+                <div class="carousel-slide">
+                    <div class="slide-content">
+                        <div class="slide-header">
+                            <h2 class="slide-title">🏦 Banking & Financial Jobs</h2>
+                            <p class="slide-subtitle">SBI PO • IBPS • RBI - High-Growth Careers</p>
+                        </div>
+                        
+                        <div class="slide-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">₹23K - ₹80K</div>
+                                <div class="stat-label">Salary Range</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">Work-Life Balance</div>
+                                <div class="stat-label">Key Benefit</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">50,000+</div>
+                                <div class="stat-label">Annual Openings</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">₹3-5 Cr</div>
+                                <div class="stat-label">Lifetime Earnings</div>
+                            </div>
+                        </div>
+                        
+                        <div class="slide-tags">
+                            <span class="tag">Grade B</span>
+                            <span class="tag">Banking Sector</span>
+                            <span class="tag">Probationary Officer</span>
+                            <span class="tag">Fast Promotion</span>
+                            <span class="tag">Private Options</span>
+                        </div>
+                        
+                        <div class="slide-actions">
+                            <a href="job-template-basic.html?job=sbi_po" class="action-btn primary">SBI PO Calculator</a>
+                            <a href="job-template-advanced.html?job=ibps_po" class="action-btn secondary">IBPS Analysis</a>
+                            <a href="job-template-retirement.html?job=rbi" class="action-btn tertiary">RBI Retirement</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3: Railway & Defense Jobs -->
+                <div class="carousel-slide">
+                    <div class="slide-content">
+                        <div class="slide-header">
+                            <h2 class="slide-title">🚄 Railway & Defense Careers</h2>
+                            <p class="slide-subtitle">RRB • Army • Navy • Air Force - Secure Future</p>
+                        </div>
+                        
+                        <div class="slide-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">₹19K - ₹2L</div>
+                                <div class="stat-label">Salary Range</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">Job Security</div>
+                                <div class="stat-label">Key Advantage</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">1,00,000+</div>
+                                <div class="stat-label">Annual Recruitments</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">₹2-6 Cr</div>
+                                <div class="stat-label">Lifetime Earnings</div>
+                            </div>
+                        </div>
+                        
+                        <div class="slide-tags">
+                            <span class="tag">Grade C & B</span>
+                            <span class="tag">Railway Sector</span>
+                            <span class="tag">Defense Forces</span>
+                            <span class="tag">Technical Posts</span>
+                            <span class="tag">Early Retirement</span>
+                        </div>
+                        
+                        <div class="slide-actions">
+                            <a href="job-template-basic.html?job=rrb_ntpc" class="action-btn primary">Railway Calculator</a>
+                            <a href="job-template-advanced.html?job=indian_army" class="action-btn secondary">Army Analysis</a>
+                            <a href="job-template-retirement.html?job=navy" class="action-btn tertiary">Defense Pension</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-controls">
+                <button class="carousel-btn" onclick="previousSlide()">‹</button>
+                <div class="carousel-indicators">
+                    <div class="carousel-indicator active" onclick="goToSlide(0)">1</div>
+                    <div class="carousel-indicator" onclick="goToSlide(1)">2</div>
+                    <div class="carousel-indicator" onclick="goToSlide(2)">3</div>
+                </div>
+                <button class="carousel-btn" onclick="nextSlide()">›</button>
+            </div>
+
+            <div class="carousel-ads">
+                <div class="ad-slot" id="topAd">
+                    <div class="ad-placeholder">Top Banner Advertisement</div>
+                    <div class="ad-refresh-indicator" id="topAdRefresh" style="display: none;">↻</div>
+                </div>
+                <div class="ad-slot" id="bottomAd">
+                    <div class="ad-placeholder">Bottom Banner Advertisement</div>
+                    <div class="ad-refresh-indicator" id="bottomAdRefresh" style="display: none;">↻</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar Ad -->
+        <div class="sidebar-ad">
+            <div class="sidebar-ad-content" id="rightSidebarAd">
+                <div class="ad-placeholder">Right Sidebar Ad</div>
+                <div class="ad-refresh-indicator" id="rightAdRefresh" style="display: none;">↻</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo-info">
+        <h3>🎯 Carousel Features</h3>
+        <p>✅ Auto-rotation every 10 seconds (pauses on hover)</p>
+        <p>✅ Click navigation buttons or indicators</p>
+        <p>✅ Keyboard support (arrow keys)</p>
+        <p>✅ Touch/swipe on mobile</p>
+        <p>✅ Ads refresh automatically on slide change</p>
+        <p>✅ Links to all 3 calculator modes</p>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 3;
+        let autoRotateTimer;
+
+        function goToSlide(slideIndex) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            
+            if (slideIndex === currentSlide) return; // Already on this slide
+            
+            // Remove all classes from all slides
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev', 'next');
+                if (index < slideIndex) {
+                    slide.classList.add('prev');
+                } else if (index > slideIndex) {
+                    slide.classList.add('next');
+                }
+            });
+            
+            // Remove active class from all indicators
+            indicators.forEach(indicator => {
+                indicator.classList.remove('active');
+            });
+            
+            // Update current slide
+            currentSlide = slideIndex;
+            
+            // Add active class to new slide and indicator
+            slides[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active');
+            
+            // Refresh ads with visual indicator
+            refreshAds();
+            
+            console.log(`Switched to slide ${currentSlide + 1}`);
+        }
+
+        function nextSlide() {
+            console.log('Next slide clicked');
+            const nextIndex = (currentSlide + 1) % totalSlides;
+            goToSlide(nextIndex);
+        }
+
+        function previousSlide() {
+            console.log('Previous slide clicked');
+            const prevIndex = (currentSlide - 1 + totalSlides) % totalSlides;
+            goToSlide(prevIndex);
+        }
+
+        function refreshAds() {
+            // Show refresh indicators for all ads
+            document.getElementById('topAdRefresh').style.display = 'flex';
+            document.getElementById('bottomAdRefresh').style.display = 'flex';
+            document.getElementById('leftAdRefresh').style.display = 'flex';
+            document.getElementById('rightAdRefresh').style.display = 'flex';
+            
+            // Simulate ad refresh (in real implementation, this would call AdSense API)
+            setTimeout(() => {
+                // Hide refresh indicators
+                document.getElementById('topAdRefresh').style.display = 'none';
+                document.getElementById('bottomAdRefresh').style.display = 'none';
+                document.getElementById('leftAdRefresh').style.display = 'none';
+                document.getElementById('rightAdRefresh').style.display = 'none';
+                
+                // Update ad placeholder text to show refresh
+                const topAd = document.getElementById('topAd').querySelector('.ad-placeholder');
+                const bottomAd = document.getElementById('bottomAd').querySelector('.ad-placeholder');
+                const leftAd = document.getElementById('leftSidebarAd').querySelector('.ad-placeholder');
+                const rightAd = document.getElementById('rightSidebarAd').querySelector('.ad-placeholder');
+                
+                topAd.textContent = `Top Banner Advertisement (Slide ${currentSlide + 1})`;
+                bottomAd.textContent = `Bottom Banner Advertisement (Slide ${currentSlide + 1})`;
+                leftAd.textContent = `Left Sidebar Ad (Slide ${currentSlide + 1})`;
+                rightAd.textContent = `Right Sidebar Ad (Slide ${currentSlide + 1})`;
+                
+                console.log(`All ads refreshed for slide ${currentSlide + 1}`);
+            }, 1000);
+        }
+
+        function startAutoRotation() {
+            autoRotateTimer = setInterval(() => {
+                nextSlide();
+            }, 10000); // 10 seconds
+        }
+
+        function stopAutoRotation() {
+            if (autoRotateTimer) {
+                clearInterval(autoRotateTimer);
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                previousSlide();
+            } else if (e.key === 'ArrowRight') {
+                nextSlide();
+            }
+        });
+
+        // Auto-rotation with pause on hover
+        const carousel = document.querySelector('.carousel-container');
+        carousel.addEventListener('mouseenter', stopAutoRotation);
+        carousel.addEventListener('mouseleave', startAutoRotation);
+
+        // Touch/swipe support
+        let startX = 0;
+        let endX = 0;
+
+        carousel.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        carousel.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+            
+            if (Math.abs(diff) > 50) { // Minimum swipe distance
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    previousSlide();
+                }
+            }
+        });
+
+        // Start auto-rotation
+        startAutoRotation();
+
+        // Initial ad setup
+        refreshAds();
+    </script>
+</body>
+</html>

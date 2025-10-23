@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SARKARI SALARY - Government Job Salary Calculator & Pay Scale Guide 2025</title>
+    <meta name="description" content="Complete government job salary calculator. Check pay scale, allowances, DA, HRA for IAS, IPS, Banking, Railway, SSC and all sarkari naukri positions.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+            background: #ffffff;
+            color: #333333;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border: 3px solid #333333;
+            padding: 40px;
+            background: #ffffff;
+            box-shadow: 8px 8px 0px #333333;
+        }
+
+        .main-title {
+            font-size: 36px;
+            font-weight: 900;
+            color: #333333;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #666666;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .search-container {
+            max-width: 500px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px 50px 15px 15px;
+            border: 3px solid #333333;
+            font-size: 14px;
+            font-family: inherit;
+            background: #ffffff;
+            outline: none;
+        }
+
+        .search-btn {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background: #333333;
+            color: #ffffff;
+            border: none;
+            padding: 0 20px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 12px;
+        }
+
+        .search-btn:hover {
+            background: #000000;
+        }
+
+        .trending-section {
+            margin: 40px 0;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #333333;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .trending-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .job-card {
+            border: 3px solid #333333;
+            background: #ffffff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .job-card:hover {
+            box-shadow: 6px 6px 0px #333333;
+            transform: translateY(-2px);
+        }
+
+        .job-header {
+            padding: 15px;
+            border-bottom: 1px solid #333333;
+            background: #f8f8f8;
+        }
+
+        .job-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+
+        .job-dept {
+            font-size: 11px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .job-body {
+            padding: 15px;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+        }
+
+        .salary-amount {
+            font-size: 18px;
+            font-weight: 900;
+            color: #333333;
+        }
+
+        .job-badge {
+            background: #333333;
+            color: #ffffff;
+            padding: 4px 8px;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .trending-tag {
+            background: #ff4444;
+        }
+
+        .new-tag {
+            background: #00aa00;
+        }
+
+        .deadline-tag {
+            background: #ff8800;
+        }
+
+        .categories-section {
+            margin: 40px 0;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .category-card {
+            border: 3px solid #333333;
+            background: #ffffff;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .category-card:hover {
+            background: #333333;
+            color: #ffffff;
+            transform: scale(1.02);
+        }
+
+        .category-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .category-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .category-count {
+            font-size: 11px;
+            opacity: 0.8;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 3px solid #333333;
+            margin: 40px 0;
+            box-shadow: 4px 4px 0px #333333;
+        }
+
+        .stat-box {
+            border-right: 1px solid #333333;
+            padding: 20px 16px;
+            text-align: center;
+            background: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:last-child {
+            border-right: none;
+        }
+
+        .stat-box:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        .stat-number {
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 6px;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            font-weight: 600;
+        }
+
+        .latest-jobs {
+            border: 3px solid #333333;
+            margin: 40px 0;
+            background: #ffffff;
+            box-shadow: 4px 4px 0px #333333;
+            overflow: hidden;
+        }
+
+        .latest-header {
+            padding: 15px;
+            background: #333333;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .rolling-banner {
+            padding: 15px;
+            background: #f8f8f8;
+            white-space: nowrap;
+            overflow: hidden;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .rolling-text {
+            display: inline-block;
+            animation: scroll 30s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            border-top: 3px solid #333333;
+            padding-top: 30px;
+            font-size: 12px;
+            color: #666666;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: #333333;
+            text-decoration: none;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            padding: 6px 12px;
+            border: 2px solid #333333;
+            background: #ffffff;
+            transition: all 0.2s ease;
+        }
+
+        .footer-link:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .main-title {
+                font-size: 28px;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .quick-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat-box {
+                border-right: none;
+                border-bottom: 1px solid #333333;
+            }
+
+            .stat-box:nth-child(2n) {
+                border-right: 1px solid #333333;
+            }
+
+            .stat-box:nth-last-child(-n+2) {
+                border-bottom: none;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-box {
+                border-right: none;
+                border-bottom: 1px solid #333333;
+            }
+
+            .stat-box:last-child {
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="main-title">SARKARI SALARY<span style="font-size: 12px; color: #666; font-weight: 400;">.today</span></h1>
+            <p class="subtitle">Complete Government Job Salary Calculator & Pay Scale Guide</p>
+            <div class="search-container">
+                <input type="text" class="search-box" placeholder="Search job title, department, or pay scale...">
+                <button class="search-btn">SEARCH</button>
+            </div>
+        </header>
+
+        <div class="quick-stats">
+            <div class="stat-box">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Government Jobs</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Departments</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">25+</div>
+                <div class="stat-label">Pay Scales</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">Daily</div>
+                <div class="stat-label">Updates</div>
+            </div>
+        </div>
+
+        <section class="trending-section">
+            <h2 class="section-title">🔥 Trending High Salary Jobs</h2>
+            <div class="trending-grid">
+                <div class="job-card" onclick="openJob('ias')">
+                    <div class="job-header">
+                        <div class="job-title">IAS Officer</div>
+                        <div class="job-dept">UPSC - All India Service</div>
+                    </div>
+                    <div class="job-body">
+                        <div class="salary-amount">₹99,000/month</div>
+                        <div class="job-badge trending-tag">TRENDING</div>
+                    </div>
+                </div>
+
+                <div class="job-card" onclick="openJob('ips')">
+                    <div class="job-header">
+                        <div class="job-title">IPS Officer</div>
+                        <div class="job-dept">UPSC - Police Service</div>
+                    </div>
+                    <div class="job-body">
+                        <div class="salary-amount">₹99,000/month</div>
+                        <div class="job-badge trending-tag">TRENDING</div>
+                    </div>
+                </div>
+
+                <div class="job-card" onclick="openJob('sbi-po')">
+                    <div class="job-header">
+                        <div class="job-title">SBI PO</div>
+                        <div class="job-dept">State Bank of India</div>
+                    </div>
+                    <div class="job-body">
+                        <div class="salary-amount">₹82,000/month</div>
+                        <div class="job-badge new-tag">NEW OPENING</div>
+                    </div>
+                </div>
+
+                <div class="job-card" onclick="openJob('railway-officer')">
+                    <div class="job-header">
+                        <div class="job-title">Railway Officer</div>
+                        <div class="job-dept">Indian Railways</div>
+                    </div>
+                    <div class="job-body">
+                        <div class="salary-amount">₹78,000/month</div>
+                        <div class="job-badge deadline-tag">LAST DATE</div>
+                    </div>
+                </div>
+
+                <div class="job-card" onclick="openJob('ssc-cgl')">
+                    <div class="job-header">
+                        <div class="job-title">SSC CGL Officer</div>
+                        <div class="job-dept">Staff Selection Commission</div>
+                    </div>
+                    <div class="job-body">
+                        <div class="salary-amount">₹56,100/month</div>
+                        <div class="job-badge new-tag">NEW</div>
+                    </div>
+                </div>
+
+                <div class="job-card" onclick="openJob('bank-manager')">
+                    <div class="job-header">
+                        <div class="job-title">Bank Manager</div>
+                        <div class="job-dept">Public Sector Banks</div>
+                    </div>
+                    <div class="job-body">
+                        <div class="salary-amount">₹90,000/month</div>
+                        <div class="job-badge trending-tag">HIGH DEMAND</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="latest-jobs">
+            <div class="latest-header">Latest Job Notifications</div>
+            <div class="rolling-banner">
+                <div class="rolling-text">
+                    SBI PO 2024 - ₹82,000 | IBPS PO - ₹78,000 | Railway ALP - ₹45,000 | SSC CGL - ₹56,100 | UPSC CSE - ₹99,000 | Banking SO - ₹65,000 | Police SI - ₹44,900
+                </div>
+            </div>
+        </div>
+
+        <section class="categories-section">
+            <h2 class="section-title">📂 Browse by Category</h2>
+            <div class="categories-grid">
+                <a href="banking-jobs.html" class="category-card">
+                    <span class="category-icon">🏦</span>
+                    <div class="category-title">Banking Jobs</div>
+                    <div class="category-count banking-count">Loading...</div>
+                </a>
+
+                <a href="railway-jobs.html" class="category-card">
+                    <span class="category-icon">🚂</span>
+                    <div class="category-title">Railway Jobs</div>
+                    <div class="category-count railway-count">Loading...</div>
+                </a>
+
+                <a href="police-jobs.html" class="category-card">
+                    <span class="category-icon">👮</span>
+                    <div class="category-title">Police Jobs</div>
+                    <div class="category-count police-count">Loading...</div>
+                </a>
+
+                <a href="civil-services.html" class="category-card">
+                    <span class="category-icon">🏛️</span>
+                    <div class="category-title">Civil Services</div>
+                    <div class="category-count civil-count">Loading...</div>
+                </a>
+
+                <a href="teaching-jobs.html" class="category-card">
+                    <span class="category-icon">📚</span>
+                    <div class="category-title">Teaching Jobs</div>
+                    <div class="category-count teaching-count">Loading...</div>
+                </a>
+
+                <a href="defense-jobs.html" class="category-card">
+                    <span class="category-icon">⚔️</span>
+                    <div class="category-title">Defense Jobs</div>
+                    <div class="category-count defense-count">Loading...</div>
+                </a>
+
+                <a href="medical-jobs.html" class="category-card">
+                    <span class="category-icon">🏥</span>
+                    <div class="category-title">Medical Jobs</div>
+                    <div class="category-count medical-count">Loading...</div>
+                </a>
+
+                <a href="technical-jobs.html" class="category-card">
+                    <span class="category-icon">💻</span>
+                    <div class="category-title">Technical Jobs</div>
+                    <div class="category-count technical-count">Loading...</div>
+                </a>
+
+                <a href="ssc-jobs.html" class="category-card">
+                    <span class="category-icon">📊</span>
+                    <div class="category-title">SSC Jobs</div>
+                    <div class="category-count ssc-count">Loading...</div>
+                </a>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="salary-calculator.html" class="footer-link">Salary Calculator</a>
+                <a href="pay-scale-chart.html" class="footer-link">Pay Scale Chart</a>
+                <a href="allowances.html" class="footer-link">Allowances Guide</a>
+                <a href="pension-calculator.html" class="footer-link">Pension Calculator</a>
+                <a href="latest-notifications.html" class="footer-link">Latest Updates</a>
+            </div>
+            <div>© 2025 Sarkari Salary • Complete Government Job Salary Information Portal</div>
+            <div style="font-size: 10px; color: #999; margin-top: 8px;">.today</div>
+        </footer>
+    </div>
+
+    <script>
+        function openJob(jobType) {
+            // Map job types to actual template URLs
+            const jobUrls = {
+                'ias': 'job-template-basic.html?job=ias',
+                'ips': 'job-template-basic.html?job=ips', 
+                'sbi-po': 'job-template-basic.html?job=sbi_po',
+                'railway-officer': 'job-template-basic.html?job=railway',
+                'ssc-cgl': 'job-template-basic.html?job=ssc_cgl',
+                'bank-manager': 'job-template-basic.html?job=bank_manager'
+            };
+            
+            if (jobUrls[jobType]) {
+                window.location.href = jobUrls[jobType];
+            }
+        }
+
+        // Search functionality
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const searchTerm = document.querySelector('.search-box').value.toLowerCase();
+            
+            // Simple search logic - in real implementation would be more sophisticated
+            const searchMappings = {
+                'ias': 'job-template-basic.html?job=ias',
+                'ips': 'job-template-basic.html?job=ips',
+                'sbi': 'job-template-basic.html?job=sbi_po',
+                'bank': 'banking-jobs.html',
+                'railway': 'railway-jobs.html',
+                'police': 'police-jobs.html',
+                'ssc': 'ssc-jobs.html'
+            };
+            
+            for (const [key, url] of Object.entries(searchMappings)) {
+                if (searchTerm.includes(key)) {
+                    window.location.href = url;
+                    return;
+                }
+            }
+            
+            // If no match found, show all jobs
+            alert('Search results will be shown here. Feature coming soon!');
+        });
+
+        // Enter key search
+        document.querySelector('.search-box').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.search-btn').click();
+            }
+        });
+
+        // Job counts data
+        const jobCounts = {
+            banking: 87,
+            railway: 124, 
+            police: 96,
+            civil: 52,
+            teaching: 108,
+            defense: 73,
+            medical: 64,
+            technical: 89,
+            ssc: 156
+        };
+
+        // Update category counts automatically
+        function updateCategoryCounts() {
+            Object.keys(jobCounts).forEach(category => {
+                const element = document.querySelector(`.${category}-count`);
+                if (element) {
+                    element.textContent = `${jobCounts[category]}+ Positions`;
+                }
+            });
+        }
+
+        // Add hover effects and interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update counts when page loads
+            updateCategoryCounts();
+            
+            // Animate rolling banner on page load
+            const rollingText = document.querySelector('.rolling-text');
+            if (rollingText) {
+                rollingText.style.animationDelay = '0s';
+            }
+        });
+    </script>
+</body>
+</html>

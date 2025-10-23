@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Government Jobs Analytics Dashboard - Vacancy Trends & Statistics</title>
+  <meta name="description" content="Complete analytics of government job vacancies, yearly trends, state-wise distribution and success rates across all sectors.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #fafafa;
+      color: #0a0a0a;
+      line-height: 1.5;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    /* Header */
+    .header {
+      padding: 40px 0;
+      border-bottom: 1px solid #e5e5e5;
+      margin-bottom: 40px;
+    }
+    
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0a0a0a;
+    }
+    
+    .breadcrumb {
+      font-size: 14px;
+      color: #737373;
+    }
+    
+    .breadcrumb a {
+      color: #0a0a0a;
+      text-decoration: none;
+    }
+    
+    /* Dashboard Header */
+    .dashboard-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    
+    .dashboard-title {
+      font-size: 42px;
+      font-weight: 800;
+      color: #0a0a0a;
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+    
+    .dashboard-subtitle {
+      font-size: 18px;
+      color: #525252;
+      margin-bottom: 32px;
+    }
+    
+    /* Key Metrics */
+    .key-metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    
+    .metric-card {
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+    
+    .metric-number {
+      font-size: 32px;
+      font-weight: 800;
+      color: #0a0a0a;
+      margin-bottom: 8px;
+      display: block;
+    }
+    
+    .metric-label {
+      font-size: 14px;
+      color: #737373;
+      margin-bottom: 8px;
+    }
+    
+    .metric-change {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+    
+    .metric-change.positive {
+      background: #f0fdf4;
+      color: #16a34a;
+    }
+    
+    .metric-change.negative {
+      background: #fef2f2;
+      color: #dc2626;
+    }
+    
+    /* Charts Section */
+    .charts-section {
+      margin-bottom: 48px;
+    }
+    
+    .section-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #0a0a0a;
+      margin-bottom: 24px;
+    }
+    
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    
+    .chart-card {
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 24px;
+    }
+    
+    .chart-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #0a0a0a;
+      margin-bottom: 16px;
+    }
+    
+    .chart-placeholder {
+      height: 300px;
+      background: #f8fafc;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #737373;
+      font-size: 14px;
+    }
+    
+    /* Vacancy Table */
+    .vacancy-table-section {
+      margin-bottom: 48px;
+    }
+    
+    .table-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    
+    .search-box {
+      flex: 1;
+      max-width: 300px;
+      padding: 10px 16px;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    
+    .filter-dropdown {
+      padding: 10px 16px;
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      background: #ffffff;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    
+    .vacancy-table {
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    
+    .table-wrapper {
+      overflow-x: auto;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    th, td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    
+    th {
+      background: #f8fafc;
+      font-weight: 600;
+      color: #374151;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+    
+    td {
+      font-size: 14px;
+    }
+    
+    .job-name {
+      font-weight: 600;
+      color: #0a0a0a;
+    }
+    
+    .vacancy-number {
+      font-weight: 700;
+      color: #0a0a0a;
+    }
+    
+    .success-rate {
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 11px;
+    }
+    
+    .success-rate.very-low {
+      background: #fef2f2;
+      color: #dc2626;
+    }
+    
+    .success-rate.low {
+      background: #fef3c7;
+      color: #d97706;
+    }
+    
+    .success-rate.medium {
+      background: #f0fdf4;
+      color: #16a34a;
+    }
+    
+    .success-rate.high {
+      background: #eff6ff;
+      color: #2563eb;
+    }
+    
+    .trend-indicator {
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .trend-up {
+      color: #16a34a;
+    }
+    
+    .trend-down {
+      color: #dc2626;
+    }
+    
+    .trend-stable {
+      color: #737373;
+    }
+    
+    /* State-wise Section */
+    .state-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    
+    .state-card {
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    
+    .state-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    
+    .state-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0a0a0a;
+    }
+    
+    .state-total {
+      font-size: 14px;
+      font-weight: 600;
+      color: #16a34a;
+    }
+    
+    .state-jobs {
+      display: grid;
+      gap: 8px;
+    }
+    
+    .job-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    
+    .job-row:last-child {
+      border-bottom: none;
+    }
+    
+    .job-name-small {
+      font-size: 13px;
+      color: #525252;
+    }
+    
+    .job-count {
+      font-size: 13px;
+      font-weight: 600;
+      color: #0a0a0a;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 16px;
+      }
+      
+      .dashboard-title {
+        font-size: 28px;
+      }
+      
+      .key-metrics {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .charts-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .table-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      
+      .search-box {
+        max-width: none;
+      }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <nav class="nav">
+        <div class="logo">SarkariSalary</div>
+        <div class="breadcrumb">
+          <a href="/">Home</a> → <a href="/jobs/">Jobs</a> → Analytics Dashboard
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Dashboard Header -->
+    <section class="dashboard-header">
+      <h1 class="dashboard-title">Government Jobs Analytics</h1>
+      <p class="dashboard-subtitle">Complete data analysis of vacancy trends, competition levels, and success rates across all government sectors</p>
+    </section>
+
+    <!-- Key Metrics -->
+    <section class="key-metrics">
+      <div class="metric-card">
+        <span class="metric-number">4,50,000</span>
+        <div class="metric-label">Total Vacancies (2024)</div>
+        <span class="metric-change positive">+18.4% from 2023</span>
+      </div>
+      <div class="metric-card">
+        <span class="metric-number">4.5 Cr</span>
+        <div class="metric-label">Total Applications</div>
+        <span class="metric-change positive">+18.4% from 2023</span>
+      </div>
+      <div class="metric-card">
+        <span class="metric-number">10:1</span>
+        <div class="metric-label">Average Competition</div>
+        <span class="metric-change negative">+2% from 2023</span>
+      </div>
+      <div class="metric-card">
+        <span class="metric-number">150+</span>
+        <div class="metric-label">Job Categories</div>
+        <span class="metric-change positive">+12% from 2023</span>
+      </div>
+    </section>
+
+    <!-- Charts Section -->
+    <section class="charts-section">
+      <h2 class="section-title">📊 Vacancy Trends & Analysis</h2>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3 class="chart-title">Yearly Vacancy Trends (2019-2024)</h3>
+          <div class="chart-placeholder">
+            Interactive Line Chart: Showing vacancy trends across sectors
+            <br>• Central Services: Stable (40-45K annually)
+            <br>• Railway: High growth (35K→52K)
+            <br>• Banking: Moderate (30-35K)
+            <br>• Teaching: Significant growth (60K→85K)
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3 class="chart-title">Sector-wise Distribution</h3>
+          <div class="chart-placeholder">
+            Pie Chart:
+            <br>• State Govt: 33%
+            <br>• Teaching: 19%
+            <br>• Railway: 12%
+            <br>• Central: 10%
+            <br>• Banking: 8%
+            <br>• Others: 18%
+          </div>
+        </div>
+      </div>
+      
+      <div class="chart-card">
+        <h3 class="chart-title">Competition Level Heatmap</h3>
+        <div class="chart-placeholder">
+          Competition Analysis:
+          <br>🔴 Extreme (0.05-0.1%): IFS, IAS, IPS
+          <br>🟠 Very High (1-3%): Banking PO, SSC CGL, UPSC Others
+          <br>🟡 High (3-5%): Railway NTPC, SSC CHSL, Banking Clerk
+          <br>🟢 Moderate (5-15%): Teaching, State PCS, PSU
+          <br>🔵 Accessible (15%+): Group D, MTS, State Police
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Vacancy Table -->
+    <section class="vacancy-table-section">
+      <h2 class="section-title">🎯 Detailed Vacancy Breakdown</h2>
+      
+      <div class="table-controls">
+        <input type="text" class="search-box" placeholder="Search jobs...">
+        <select class="filter-dropdown">
+          <option>All Sectors</option>
+          <option>Central Services</option>
+          <option>Railway</option>
+          <option>Banking</option>
+          <option>SSC</option>
+          <option>Teaching</option>
+          <option>State Govt</option>
+        </select>
+        <select class="filter-dropdown">
+          <option>All Years</option>
+          <option>2024</option>
+          <option>2023</option>
+          <option>2022</option>
+        </select>
+      </div>
+
+      <div class="vacancy-table">
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Job Position</th>
+                <th>Sector</th>
+                <th>2024 Vacancies</th>
+                <th>2023 Vacancies</th>
+                <th>Applications</th>
+                <th>Success Rate</th>
+                <th>Trend</th>
+                <th>Salary Range</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="job-name">RRB Group D</td>
+                <td>Railway</td>
+                <td class="vacancy-number">1,03,769</td>
+                <td>35,000</td>
+                <td>45,00,000</td>
+                <td><span class="success-rate medium">4.3%</span></td>
+                <td><span class="trend-indicator trend-up">↗ +196%</span></td>
+                <td>₹18,000 - ₹56,900</td>
+              </tr>
+              <tr>
+                <td class="job-name">UP Police Constable</td>
+                <td>State Police</td>
+                <td class="vacancy-number">60,244</td>
+                <td>49,568</td>
+                <td>28,50,000</td>
+                <td><span class="success-rate medium">21.1%</span></td>
+                <td><span class="trend-indicator trend-up">↗ +21%</span></td>
+                <td>₹21,700 - ₹69,100</td>
+              </tr>
+              <tr>
+                <td class="job-name">RRB NTPC</td>
+                <td>Railway</td>
+                <td class="vacancy-number">35,208</td>
+                <td>35,000</td>
+                <td>35,00,000</td>
+                <td><span class="success-rate low">1.0%</span></td>
+                <td><span class="trend-indicator trend-stable">→ +0.6%</span></td>
+                <td>₹35,400 - ₹1,12,400</td>
+              </tr>
+              <tr>
+                <td class="job-name">SSC CGL</td>
+                <td>Central</td>
+                <td class="vacancy-number">17,323</td>
+                <td>14,925</td>
+                <td>28,00,000</td>
+                <td><span class="success-rate very-low">0.62%</span></td>
+                <td><span class="trend-indicator trend-up">↗ +16%</span></td>
+                <td>₹25,500 - ₹1,51,100</td>
+              </tr>
+              <tr>
+                <td class="job-name">IBPS Clerk</td>
+                <td>Banking</td>
+                <td class="vacancy-number">11,560</td>
+                <td>11,000</td>
+                <td>25,00,000</td>
+                <td><span class="success-rate very-low">0.46%</span></td>
+                <td><span class="trend-indicator trend-up">↗ +5%</span></td>
+                <td>₹19,900 - ₹63,200</td>
+              </tr>
+              <tr>
+                <td class="job-name">KVS Teacher (All)</td>
+                <td>Teaching</td>
+                <td class="vacancy-number">25,996</td>
+                <td>21,000</td>
+                <td>14,50,000</td>
+                <td><span class="success-rate low">1.79%</span></td>
+                <td><span class="trend-indicator trend-up">↗ +24%</span></td>
+                <td>₹35,400 - ₹1,12,400</td>
+              </tr>
+              <tr>
+                <td class="job-name">SBI (PO + Clerk)</td>
+                <td>Banking</td>
+                <td class="vacancy-number">10,500</td>
+                <td>6,910</td>
+                <td>23,00,000</td>
+                <td><span class="success-rate very-low">0.46%</span></td>
+                <td><span class="trend-indicator trend-up">↗ +52%</span></td>
+                <td>₹23,700 - ₹1,51,100</td>
+              </tr>
+              <tr>
+                <td class="job-name">Coal India Ltd</td>
+                <td>PSU</td>
+                <td class="vacancy-number">8,000</td>
+                <td>6,500</td>
+                <td>8,50,000</td>
+                <td><span class="success-rate medium">9.4%</span></td>
+                <td><span class="trend-indicator trend-up">↗ +23%</span></td>
+                <td>₹50,000 - ₹1,60,000</td>
+              </tr>
+              <tr>
+                <td class="job-name">SSC MTS</td>
+                <td>Central</td>
+                <td class="vacancy-number">8,500</td>
+                <td>7,502</td>
+                <td>9,50,000</td>
+                <td><span class="success-rate medium">8.9%</span></td>
+                <td><span class="trend-indicator trend-up">↗ +13%</span></td>
+                <td>₹18,000 - ₹56,900</td>
+              </tr>
+              <tr>
+                <td class="job-name">IBPS PO</td>
+                <td>Banking</td>
+                <td class="vacancy-number">4,135</td>
+                <td>4,100</td>
+                <td>12,00,000</td>
+                <td><span class="success-rate very-low">0.34%</span></td>
+                <td><span class="trend-indicator trend-stable">→ +0.9%</span></td>
+                <td>₹41,960 - ₹1,51,100</td>
+              </tr>
+              <tr>
+                <td class="job-name">IAS</td>
+                <td>UPSC</td>
+                <td class="vacancy-number">180</td>
+                <td>172</td>
+                <td>1,80,000</td>
+                <td><span class="success-rate very-low">0.10%</span></td>
+                <td><span class="trend-indicator trend-up">↗ +4.7%</span></td>
+                <td>₹56,100 - ₹2,50,000</td>
+              </tr>
+              <tr>
+                <td class="job-name">IPS</td>
+                <td>UPSC</td>
+                <td class="vacancy-number">150</td>
+                <td>147</td>
+                <td>1,60,000</td>
+                <td><span class="success-rate very-low">0.09%</span></td>
+                <td><span class="trend-indicator trend-up">↗ +2.0%</span></td>
+                <td>₹56,100 - ₹2,25,000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- State-wise Breakdown -->
+    <section>
+      <h2 class="section-title">🗺️ State-wise Job Distribution</h2>
+      <div class="state-grid">
+        <div class="state-card">
+          <div class="state-header">
+            <div class="state-name">Uttar Pradesh</div>
+            <div class="state-total">1,08,500 jobs</div>
+          </div>
+          <div class="state-jobs">
+            <div class="job-row">
+              <span class="job-name-small">Teacher</span>
+              <span class="job-count">68,500</span>
+            </div>
+            <div class="job-row">
+              <span class="job-name-small">Police</span>
+              <span class="job-count">25,000</span>
+            </div>
+            <div class="job-row">
+              <span class="job-name-small">Clerk</span>
+              <span class="job-count">15,000</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="state-card">
+          <div class="state-header">
+            <div class="state-name">Bihar</div>
+            <div class="state-total">1,15,865 jobs</div>
+          </div>
+          <div class="state-jobs">
+            <div class="job-row">
+              <span class="job-name-small">Teacher</span>
+              <span class="job-count">94,000</span>
+            </div>
+            <div class="job-row">
+              <span class="job-name-small">Police</span>
+              <span class="job-count">21,000</span>
+            </div>
+            <div class="job-row">
+              <span class="job-name-small">BPSC</span>
+              <span class="job-count">865</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="state-card">
+          <div class="state-header">
+            <div class="state-name">Maharashtra</div>
+            <div class="state-total">85,000 jobs</div>
+          </div>
+          <div class="state-jobs">
+            <div class="job-row">
+              <span class="job-name-small">Police</span>
+              <span class="job-count">35,000</span>
+            </div>
+            <div class="job-row">
+              <span class="job-name-small">MPSC</span>
+              <span class="job-count">1,200</span>
+            </div>
+            <div class="job-row">
+              <span class="job-name-small">Teacher</span>
+              <span class="job-count">48,800</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="state-card">
+          <div class="state-header">
+            <div class="state-name">West Bengal</div>
+            <div class="state-total">72,500 jobs</div>
+          </div>
+          <div class="state-jobs">
+            <div class="job-row">
+              <span class="job-name-small">Teacher</span>
+              <span class="job-count">55,000</span>
+            </div>
+            <div class="job-row">
+              <span class="job-name-small">Police</span>
+              <span class="job-count">15,000</span>
+            </div>
+            <div class="job-row">
+              <span class="job-name-small">WBPSC</span>
+              <span class="job-count">2,500</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Search functionality
+    const searchBox = document.querySelector('.search-box');
+    const tableRows = document.querySelectorAll('tbody tr');
+
+    searchBox.addEventListener('input', (e) => {
+      const searchTerm = e.target.value.toLowerCase();
+      
+      tableRows.forEach(row => {
+        const jobName = row.querySelector('.job-name').textContent.toLowerCase();
+        const sector = row.cells[1].textContent.toLowerCase();
+        
+        if (jobName.includes(searchTerm) || sector.includes(searchTerm)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+
+    // Filter functionality
+    const filterDropdowns = document.querySelectorAll('.filter-dropdown');
+    filterDropdowns.forEach(dropdown => {
+      dropdown.addEventListener('change', () => {
+        // Implementation for filtering by sector/year
+        console.log('Filter changed:', dropdown.value);
+      });
+    });
+
+    // Analytics tracking
+    console.log('Dashboard loaded with', tableRows.length, 'job entries');
+  </script>
+</body>
+</html>

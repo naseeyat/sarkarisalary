@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IAS Career Timeline</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+            background: #ffffff;
+            color: #333333;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 80px 60px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 500;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #333333;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -67px;
+            top: 8px;
+            width: 16px;
+            height: 16px;
+            border: 3px solid #333333;
+            border-radius: 50%;
+            background: #ffffff;
+        }
+
+        .stage-number {
+            position: absolute;
+            left: -75px;
+            top: 32px;
+            font-size: 12px;
+            color: #666666;
+            font-weight: 500;
+        }
+
+        .stage-header {
+            margin-bottom: 16px;
+        }
+
+        .stage-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+
+        .stage-years {
+            font-size: 12px;
+            color: #666666;
+            margin-bottom: 8px;
+        }
+
+        .stage-salary {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        .stage-description {
+            font-size: 13px;
+            color: #666666;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .stage-responsibilities {
+            list-style: none;
+        }
+
+        .stage-responsibilities li {
+            font-size: 12px;
+            color: #666666;
+            margin-bottom: 4px;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .stage-responsibilities li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #333333;
+        }
+
+        .stats-section {
+            border: 2px solid #333333;
+            margin: 80px 0;
+            background: #ffffff;
+        }
+
+        .stats-header {
+            padding: 16px 20px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333333;
+            border-bottom: 1px solid #333333;
+            background: #f8f8f8;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .stat-item {
+            border-right: 1px solid #333333;
+            border-bottom: 1px solid #333333;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-item:nth-child(even) {
+            border-right: none;
+        }
+
+        .stat-item:nth-last-child(-n+2) {
+            border-bottom: none;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .calculator {
+            border: 2px solid #333333;
+            padding: 24px;
+            margin: 80px 0;
+            background: #ffffff;
+        }
+
+        .calc-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333333;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .calc-form {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-label {
+            font-size: 11px;
+            font-weight: 500;
+            color: #333333;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .form-select {
+            padding: 8px 12px;
+            border: 2px solid #333333;
+            border-radius: 0;
+            font-family: inherit;
+            font-size: 13px;
+            color: #333333;
+            background: #ffffff;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8"><path fill="%23333333" d="M6 8L0 2h12z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 12px 8px;
+            padding-right: 35px;
+            cursor: pointer;
+        }
+
+        .result-display {
+            border: 2px solid #333333;
+            margin-top: 16px;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .result-item {
+            border-right: 1px solid #333333;
+            border-bottom: 1px solid #333333;
+            padding: 16px;
+            text-align: center;
+            background: #ffffff;
+        }
+
+        .result-item:nth-child(even) {
+            border-right: none;
+        }
+
+        .result-item:nth-last-child(-n+2) {
+            border-bottom: none;
+        }
+
+        .result-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+
+        .result-label {
+            font-size: 10px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer {
+            margin-top: 100px;
+            padding-top: 20px;
+            border-top: 2px solid #333333;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 11px;
+            color: #666666;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+            
+            .timeline {
+                padding-left: 40px;
+            }
+            
+            .timeline-item::before {
+                left: -47px;
+            }
+            
+            .stage-number {
+                left: -55px;
+            }
+            
+            .stats-grid,
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-item,
+            .result-item {
+                border-right: none;
+                border-bottom: 1px solid #333333;
+            }
+            
+            .stat-item:last-child,
+            .result-item:last-child {
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">IAS Career Timeline</h1>
+            <p class="subtitle">Complete progression from SDM to Secretary</p>
+        </header>
+
+        <!-- Key Stats -->
+        <div class="stats-section">
+            <div class="stats-header">Career Overview</div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-value">30+</div>
+                    <div class="stat-label">Years Career</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">₹99K-₹2.8L</div>
+                    <div class="stat-label">Salary Range</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">7</div>
+                    <div class="stat-label">Major Stages</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">180</div>
+                    <div class="stat-label">Annual Vacancies</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline">
+            
+            <div class="timeline-item">
+                <div class="stage-number">Stage 1</div>
+                <div class="stage-header">
+                    <div class="stage-title">Sub Divisional Magistrate (SDM)</div>
+                    <div class="stage-years">0-2 Years Experience</div>
+                    <div class="stage-salary">₹99,000</div>
+                </div>
+                <div class="stage-description">
+                    Entry-level position handling revenue administration, licensing, and sub-division management. First exposure to field administration.
+                </div>
+                <ul class="stage-responsibilities">
+                    <li>Revenue administration and land records</li>
+                    <li>Public grievance redressal</li>
+                    <li>Licensing and permits</li>
+                    <li>Magisterial duties</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="stage-number">Stage 2</div>
+                <div class="stage-header">
+                    <div class="stage-title">Assistant Collector (ADM)</div>
+                    <div class="stage-years">2-4 Years Experience</div>
+                    <div class="stage-salary">₹1,20,000</div>
+                </div>
+                <div class="stage-description">
+                    Land acquisition, development programs, district coordination and project management. Building administrative experience.
+                </div>
+                <ul class="stage-responsibilities">
+                    <li>Land acquisition projects</li>
+                    <li>Development scheme implementation</li>
+                    <li>Inter-departmental coordination</li>
+                    <li>Project management skills</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="stage-number">Stage 3</div>
+                <div class="stage-header">
+                    <div class="stage-title">District Collector (DC)</div>
+                    <div class="stage-years">4-8 Years Experience</div>
+                    <div class="stage-salary">₹1,60,000</div>
+                </div>
+                <div class="stage-description">
+                    Head of district administration, law & order coordination, crisis management. Peak field experience role.
+                </div>
+                <ul class="stage-responsibilities">
+                    <li>District administration leadership</li>
+                    <li>Law and order coordination</li>
+                    <li>Disaster management</li>
+                    <li>Elections and poll duties</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="stage-number">Stage 4</div>
+                <div class="stage-header">
+                    <div class="stage-title">Deputy Secretary (DS)</div>
+                    <div class="stage-years">8-12 Years Experience</div>
+                    <div class="stage-salary">₹1,80,000</div>
+                </div>
+                <div class="stage-description">
+                    Central government policy work, inter-ministerial coordination, file management. Transition to policy making.
+                </div>
+                <ul class="stage-responsibilities">
+                    <li>Central government policy work</li>
+                    <li>File management and processing</li>
+                    <li>Inter-ministerial coordination</li>
+                    <li>Parliamentary questions</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="stage-number">Stage 5</div>
+                <div class="stage-header">
+                    <div class="stage-title">Joint Secretary (JS)</div>
+                    <div class="stage-years">12-16 Years Experience</div>
+                    <div class="stage-salary">₹2,00,000</div>
+                </div>
+                <div class="stage-description">
+                    Policy formulation, parliamentary questions, minister briefings, strategic planning. Senior policy role.
+                </div>
+                <ul class="stage-responsibilities">
+                    <li>Policy formulation and analysis</li>
+                    <li>Minister briefings</li>
+                    <li>Parliamentary work</li>
+                    <li>Strategic planning</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="stage-number">Stage 6</div>
+                <div class="stage-header">
+                    <div class="stage-title">Additional Secretary (AS)</div>
+                    <div class="stage-years">16-22 Years Experience</div>
+                    <div class="stage-salary">₹2,40,000</div>
+                </div>
+                <div class="stage-description">
+                    Senior policy making, cabinet note preparation, high-level negotiations. Pre-secretary leadership role.
+                </div>
+                <ul class="stage-responsibilities">
+                    <li>Senior policy making</li>
+                    <li>Cabinet note preparation</li>
+                    <li>High-level negotiations</li>
+                    <li>Administrative reforms</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="stage-number">Peak</div>
+                <div class="stage-header">
+                    <div class="stage-title">Secretary to Government</div>
+                    <div class="stage-years">22+ Years Experience</div>
+                    <div class="stage-salary">₹2,80,000+</div>
+                </div>
+                <div class="stage-description">
+                    Ministry head, direct minister interface, policy leadership, transformational changes. Apex administrative position.
+                </div>
+                <ul class="stage-responsibilities">
+                    <li>Ministry leadership</li>
+                    <li>Cabinet interactions</li>
+                    <li>Policy leadership</li>
+                    <li>Transformational changes</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Salary Calculator -->
+        <div class="calculator">
+            <div class="calc-title">Calculate Your Potential IAS Salary</div>
+            <div class="calc-form">
+                <div class="form-group">
+                    <label class="form-label">Career Stage</label>
+                    <select class="form-select" id="stage" onchange="calculateIAS()">
+                        <option value="">Select career stage</option>
+                        <option value="99000">SDM - Sub Divisional Magistrate (₹99,000)</option>
+                        <option value="120000">ADM - Assistant Collector (₹1,20,000)</option>
+                        <option value="160000">DC - District Collector (₹1,60,000)</option>
+                        <option value="180000">DS - Deputy Secretary (₹1,80,000)</option>
+                        <option value="200000">JS - Joint Secretary (₹2,00,000)</option>
+                        <option value="240000">AS - Additional Secretary (₹2,40,000)</option>
+                        <option value="280000">Secretary to Government (₹2,80,000)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">City Type</label>
+                    <select class="form-select" id="city" onchange="calculateIAS()">
+                        <option value="metro">Metro Cities (24% HRA)</option>
+                        <option value="major">Major Cities (16% HRA)</option>
+                        <option value="other">Other Cities (8% HRA)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="iasResult" class="result-display hidden">
+                <div class="result-grid">
+                    <div class="result-item">
+                        <div class="result-value" id="iasBasic">₹0</div>
+                        <div class="result-label">Basic Pay</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-value" id="iasDA">₹0</div>
+                        <div class="result-label">DA (53%)</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-value" id="iasHRA">₹0</div>
+                        <div class="result-label">HRA</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-value" id="iasTotal">₹0</div>
+                        <div class="result-label">Total Monthly</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-text">
+                © 2025 Government Pay Navigator • IAS Career Timeline
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function calculateIAS() {
+            const basicPay = parseInt(document.getElementById('stage').value);
+            const cityType = document.getElementById('city').value;
+            
+            if (!basicPay) {
+                document.getElementById('iasResult').classList.add('hidden');
+                return;
+            }
+            
+            const da = Math.round(basicPay * 0.53);
+            
+            let hraRate = 0.08;
+            if (cityType === 'metro') hraRate = 0.24;
+            else if (cityType === 'major') hraRate = 0.16;
+            const hra = Math.round(basicPay * hraRate);
+            
+            const otherAllowances = 5000;
+            const totalSalary = basicPay + da + hra + otherAllowances;
+            
+            document.getElementById('iasBasic').textContent = '₹' + basicPay.toLocaleString();
+            document.getElementById('iasDA').textContent = '₹' + da.toLocaleString();
+            document.getElementById('iasHRA').textContent = '₹' + hra.toLocaleString();
+            document.getElementById('iasTotal').textContent = '₹' + totalSalary.toLocaleString();
+            
+            document.getElementById('iasResult').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IAS Officer Career Journey - Enhanced Timeline</title>
+  <meta name="description" content="Complete IAS officer career journey from SDM to Secretary with enhanced interactive timeline.">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #fafafa;
+      color: #0a0a0a;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    
+    /* Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #0a0a0a, #404040);
+      z-index: 1000;
+      transition: width 0.3s ease;
+    }
+    
+    /* Header */
+    .header {
+      padding: 40px 0;
+      border-bottom: 1px solid #e5e5e5;
+      margin-bottom: 60px;
+      position: sticky;
+      top: 0;
+      background: rgba(250, 250, 250, 0.95);
+      backdrop-filter: blur(20px);
+      z-index: 100;
+    }
+    
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0a0a0a;
+      letter-spacing: -0.5px;
+    }
+    
+    .breadcrumb {
+      font-size: 14px;
+      color: #737373;
+    }
+    
+    .breadcrumb a {
+      color: #0a0a0a;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .breadcrumb a:hover {
+      color: #2563eb;
+    }
+    
+    /* Hero */
+    .hero {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+    
+    .hero-title {
+      font-size: clamp(32px, 6vw, 56px);
+      font-weight: 800;
+      color: #0a0a0a;
+      margin-bottom: 16px;
+      letter-spacing: -2px;
+      animation: fadeInUp 0.8s ease;
+    }
+    
+    .hero-subtitle {
+      font-size: 18px;
+      color: #525252;
+      margin-bottom: 48px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeInUp 0.8s ease 0.2s both;
+    }
+    
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 40px;
+      max-width: 600px;
+      margin: 0 auto;
+      animation: fadeInUp 0.8s ease 0.4s both;
+    }
+    
+    .stat {
+      text-align: center;
+      padding: 24px 16px;
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .stat:hover {
+      transform: translateY(-4px);
+      border-color: #2563eb;
+      box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+    }
+    
+    .stat-number {
+      font-size: 28px;
+      font-weight: 800;
+      color: #0a0a0a;
+      display: block;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #0a0a0a, #404040);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .stat-label {
+      font-size: 12px;
+      color: #737373;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    /* Quick Jump Navigation */
+    .quick-nav {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+    }
+    
+    .quick-nav-item {
+      padding: 6px 12px;
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 20px;
+      font-size: 12px;
+      color: #737373;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+    
+    .quick-nav-item:hover {
+      background: #0a0a0a;
+      color: #ffffff;
+      border-color: #0a0a0a;
+    }
+    
+    /* Timeline */
+    .timeline {
+      position: relative;
+    }
+    
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 40px;
+      margin-bottom: 80px;
+      position: relative;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+    
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 70px;
+      top: 24px;
+      bottom: -60px;
+      width: 2px;
+      background: linear-gradient(180deg, #e5e5e5, #f5f5f5);
+    }
+    
+    .timeline-item:last-child::before {
+      background: linear-gradient(180deg, #e5e5e5, transparent);
+      bottom: 50%;
+    }
+    
+    /* Timeline Meta */
+    .timeline-meta {
+      text-align: center;
+      padding-top: 4px;
+    }
+    
+    .timeline-step {
+      width: 48px;
+      height: 48px;
+      background: #0a0a0a;
+      color: #fafafa;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      margin: 0 auto 16px;
+      position: relative;
+      z-index: 2;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .timeline-step:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 25px rgba(10, 10, 10, 0.25);
+    }
+    
+    .timeline-years {
+      font-size: 11px;
+      color: #737373;
+      font-weight: 600;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .timeline-salary {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0a0a0a;
+      line-height: 1.3;
+    }
+    
+    .salary-main {
+      display: block;
+      margin-bottom: 4px;
+    }
+    
+    .salary-growth {
+      font-size: 11px;
+      color: #16a34a;
+      font-weight: 600;
+    }
+    
+    /* Timeline Content */
+    .timeline-content {
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 16px;
+      padding: 36px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .timeline-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #0a0a0a, #404040);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .timeline-content:hover {
+      border-color: #0a0a0a;
+      transform: translateY(-6px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+    }
+    
+    .timeline-content:hover::before {
+      opacity: 1;
+    }
+    
+    .position-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+    
+    .position-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: all 0.3s ease;
+    }
+    
+    .timeline-content:hover .position-icon {
+      background: linear-gradient(135deg, #0a0a0a, #404040);
+      color: white;
+      border-color: #0a0a0a;
+    }
+    
+    .position-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: #0a0a0a;
+      letter-spacing: -0.5px;
+      line-height: 1.2;
+    }
+    
+    .position-desc {
+      font-size: 15px;
+      color: #525252;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    
+    .responsibilities {
+      list-style: none;
+    }
+    
+    .responsibilities li {
+      font-size: 14px;
+      color: #737373;
+      margin-bottom: 8px;
+      position: relative;
+      padding-left: 20px;
+      line-height: 1.5;
+    }
+    
+    .responsibilities li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #16a34a;
+      font-weight: 700;
+      font-size: 12px;
+    }
+    
+    /* Special Styling for Secretary */
+    .timeline-item:last-child .timeline-step {
+      background: linear-gradient(135deg, #0a0a0a, #404040);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      border: 3px solid #ffffff;
+    }
+    
+    .timeline-item:last-child .timeline-content {
+      background: linear-gradient(135deg, #fafafa, #f5f5f5);
+      border: 2px solid #0a0a0a;
+    }
+    
+    .timeline-item:last-child .position-icon {
+      background: linear-gradient(135deg, #0a0a0a, #404040);
+      color: white;
+      border-color: #0a0a0a;
+    }
+    
+    /* Bottom CTA */
+    .bottom-cta {
+      text-align: center;
+      margin: 100px 0 80px;
+      padding: 48px 40px;
+      background: #0a0a0a;
+      color: #fafafa;
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .bottom-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: shimmer 3s infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+    
+    .cta-title {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+    
+    .cta-subtitle {
+      font-size: 16px;
+      color: #a3a3a3;
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background: #fafafa;
+      color: #0a0a0a;
+      padding: 14px 28px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255,255,255,0.25);
+    }
+    
+    .cta-button.secondary {
+      background: transparent;
+      color: #fafafa;
+      border-color: #525252;
+    }
+    
+    .cta-button.secondary:hover {
+      background: #fafafa;
+      color: #0a0a0a;
+      border-color: #fafafa;
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 20px;
+      }
+      
+      .timeline-item {
+        grid-template-columns: 100px 1fr;
+        gap: 24px;
+        margin-bottom: 60px;
+      }
+      
+      .timeline-item::before {
+        left: 50px;
+      }
+      
+      .timeline-step {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+      }
+      
+      .timeline-content {
+        padding: 28px;
+      }
+      
+      .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .quick-nav {
+        display: none;
+      }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="progress-bar" id="progressBar"></div>
+
+  <header class="header">
+    <div class="container">
+      <nav class="nav">
+        <div class="logo">SarkariSalary</div>
+        <div class="breadcrumb">
+          <a href="/">Home</a> → <a href="/central-government/">Central Government</a> → IAS Journey
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <section class="hero">
+      <h1 class="hero-title">IAS Officer Journey</h1>
+      <p class="hero-subtitle">Complete career progression from entry-level administrator to top government position with detailed salary growth analysis</p>
+      
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-number">₹65K</span>
+          <div class="stat-label">Starting Salary</div>
+        </div>
+        <div class="stat">
+          <span class="stat-number">₹3.8L</span>
+          <div class="stat-label">Peak Salary</div>
+        </div>
+        <div class="stat">
+          <span class="stat-number">7</span>
+          <div class="stat-label">Career Stages</div>
+        </div>
+        <div class="stat">
+          <span class="stat-number">30</span>
+          <div class="stat-label">Service Years</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="quick-nav">
+      <a href="#stage1" class="quick-nav-item">SDM</a>
+      <a href="#stage2" class="quick-nav-item">ADM</a>
+      <a href="#stage3" class="quick-nav-item">Collector</a>
+      <a href="#stage4" class="quick-nav-item">Dy. Secretary</a>
+      <a href="#stage5" class="quick-nav-item">Jt. Secretary</a>
+      <a href="#stage6" class="quick-nav-item">Add. Secretary</a>
+      <a href="#stage7" class="quick-nav-item">Secretary</a>
+    </div>
+
+    <section class="timeline">
+      <!-- Stage 1 -->
+      <div class="timeline-item" id="stage1">
+        <div class="timeline-meta">
+          <div class="timeline-step">1</div>
+          <div class="timeline-years">0-2 Years</div>
+          <div class="timeline-salary">
+            <span class="salary-main">₹65K - ₹85K</span>
+          </div>
+        </div>
+        <div class="timeline-content">
+          <div class="position-header">
+            <div class="position-icon">👨‍💼</div>
+            <h3 class="position-title">Sub Divisional Magistrate</h3>
+          </div>
+          <p class="position-desc">Entry level administrative position handling revenue cases, licensing, and basic administrative duties at sub-division level.</p>
+          <ul class="responsibilities">
+            <li>Revenue case management and land records maintenance</li>
+            <li>Business licensing and permits issuance</li>
+            <li>Basic administrative oversight and coordination</li>
+            <li>Public grievance handling and citizen services</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Stage 2 -->
+      <div class="timeline-item" id="stage2">
+        <div class="timeline-meta">
+          <div class="timeline-step">2</div>
+          <div class="timeline-years">2-4 Years</div>
+          <div class="timeline-salary">
+            <span class="salary-main">₹85K - ₹1.1L</span>
+            <span class="salary-growth">↗ +30% Growth</span>
+          </div>
+        </div>
+        <div class="timeline-content">
+          <div class="position-header">
+            <div class="position-icon">📊</div>
+            <h3 class="position-title">Assistant Collector</h3>
+          </div>
+          <p class="position-desc">Assistant to District Collector with expanded responsibilities in land acquisition, revenue collection, and district administration support.</p>
+          <ul class="responsibilities">
+            <li>Land acquisition projects and compensation handling</li>
+            <li>Revenue collection oversight and monitoring</li>
+            <li>District administration support and coordination</li>
+            <li>Development scheme implementation and monitoring</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Stage 3 -->
+      <div class="timeline-item" id="stage3">
+        <div class="timeline-meta">
+          <div class="timeline-step">3</div>
+          <div class="timeline-years">4-8 Years</div>
+          <div class="timeline-salary">
+            <span class="salary-main">₹1.2L - ₹1.6L</span>
+            <span class="salary-growth">↗ +40% Growth</span>
+          </div>
+        </div>
+        <div class="timeline-content">
+          <div class="position-header">
+            <div class="position-icon">🏛️</div>
+            <h3 class="position-title">District Collector</h3>
+          </div>
+          <p class="position-desc">Head of district administration and CEO of Zilla Panchayat. Most prestigious field posting with complete executive powers over district.</p>
+          <ul class="responsibilities">
+            <li>District administration head and chief executive officer</li>
+            <li>Law & order coordination with police department</li>
+            <li>Development programs oversight and implementation</li>
+            <li>Emergency management and disaster response coordination</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Stage 4 -->
+      <div class="timeline-item" id="stage4">
+        <div class="timeline-meta">
+          <div class="timeline-step">4</div>
+          <div class="timeline-years">8-12 Years</div>
+          <div class="timeline-salary">
+            <span class="salary-main">₹1.4L - ₹1.8L</span>
+            <span class="salary-growth">↗ +20% Growth</span>
+          </div>
+        </div>
+        <div class="timeline-content">
+          <div class="position-header">
+            <div class="position-icon">📋</div>
+            <h3 class="position-title">Deputy Secretary</h3>
+          </div>
+          <p class="position-desc">Central government secretariat posting involving policy formulation, file handling, and inter-ministerial coordination at national level.</p>
+          <ul class="responsibilities">
+            <li>Policy formulation and strategic analysis</li>
+            <li>Inter-ministerial coordination and liaison work</li>
+            <li>File processing, examination and approval systems</li>
+            <li>Parliamentary work and question handling procedures</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Stage 5 -->
+      <div class="timeline-item" id="stage5">
+        <div class="timeline-meta">
+          <div class="timeline-step">5</div>
+          <div class="timeline-years">12-16 Years</div>
+          <div class="timeline-salary">
+            <span class="salary-main">₹1.8L - ₹2.2L</span>
+            <span class="salary-growth">↗ +22% Growth</span>
+          </div>
+        </div>
+        <div class="timeline-content">
+          <div class="position-header">
+            <div class="position-icon">⚖️</div>
+            <h3 class="position-title">Joint Secretary</h3>
+          </div>
+          <p class="position-desc">Senior policy making position heading important divisions, briefing ministers, and handling Parliament questions with significant decision-making authority.</p>
+          <ul class="responsibilities">
+            <li>Division head with comprehensive team management</li>
+            <li>Minister briefings and strategic policy advice</li>
+            <li>Parliament question preparation and handling</li>
+            <li>Policy implementation oversight and monitoring</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Stage 6 -->
+      <div class="timeline-item" id="stage6">
+        <div class="timeline-meta">
+          <div class="timeline-step">6</div>
+          <div class="timeline-years">16-22 Years</div>
+          <div class="timeline-salary">
+            <span class="salary-main">₹2.2L - ₹2.5L</span>
+            <span class="salary-growth">↗ +15% Growth</span>
+          </div>
+        </div>
+        <div class="timeline-content">
+          <div class="position-header">
+            <div class="position-icon">🎯</div>
+            <h3 class="position-title">Additional Secretary</h3>
+          </div>
+          <p class="position-desc">Senior administrative position assisting Secretary in ministry functioning, handling complex policy issues and inter-state coordination matters.</p>
+          <ul class="responsibilities">
+            <li>Ministry functioning support and strategic coordination</li>
+            <li>Complex policy issues resolution and management</li>
+            <li>Inter-state coordination and federal liaison</li>
+            <li>Cabinet note preparation and policy drafting</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Stage 7 -->
+      <div class="timeline-item" id="stage7">
+        <div class="timeline-meta">
+          <div class="timeline-step">👑</div>
+          <div class="timeline-years">22+ Years</div>
+          <div class="timeline-salary">
+            <span class="salary-main">₹2.5L - ₹3.8L+</span>
+            <span class="salary-growth">🏆 Peak Level</span>
+          </div>
+        </div>
+        <div class="timeline-content">
+          <div class="position-header">
+            <div class="position-icon">🏆</div>
+            <h3 class="position-title">Secretary to Government</h3>
+          </div>
+          <p class="position-desc">Highest administrative position as head of ministry/department with direct interface with ministers, shaping national policies and governance.</p>
+          <ul class="responsibilities">
+            <li>Ministry/department head and chief administrator</li>
+            <li>Direct minister interface and policy advice</li>
+            <li>National policy shaping and strategic planning</li>
+            <li>Government decision making and implementation oversight</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="bottom-cta">
+      <h2 class="cta-title">Ready to Calculate Your Potential?</h2>
+      <p class="cta-subtitle">Use our advanced tools to estimate your salary at each career stage and plan your government service journey</p>
+      <div class="cta-buttons">
+        <a href="/salary-calculator/" class="cta-button">Calculate Salary</a>
+        <a href="/ips-salary/" class="cta-button secondary">Compare with IPS</a>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Progress bar
+    window.addEventListener('scroll', () => {
+      const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+      document.getElementById('progressBar').style.width = scrolled + '%';
+    });
+
+    // Intersection observer for timeline items
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.timeline-item').forEach(item => {
+      observer.observe(item);
+    });
+
+    // Smooth scroll for quick nav
+    document.querySelectorAll('.quick-nav-item').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Pay Scale Navigator | ASCII Terminal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #00ff00;
+            padding: 20px;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        .terminal {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #000;
+            border: 2px solid #333;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .header {
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .prompt {
+            color: #ffff00;
+        }
+
+        .input {
+            color: #ffffff;
+        }
+
+        .output {
+            color: #00ff00;
+            margin: 10px 0;
+        }
+
+        .error {
+            color: #ff0000;
+        }
+
+        .warning {
+            color: #ffa500;
+        }
+
+        .highlight {
+            color: #00ffff;
+        }
+
+        .menu {
+            border: 1px solid #333;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .menu-title {
+            color: #ffffff;
+            text-decoration: underline;
+            margin-bottom: 10px;
+        }
+
+        .menu-item {
+            margin: 5px 0;
+            cursor: pointer;
+            padding: 2px 5px;
+        }
+
+        .menu-item:hover {
+            background: #222;
+            color: #ffff00;
+        }
+
+        .pay-matrix {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+        }
+
+        .level-box {
+            border: 1px solid #333;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        input[type="text"], select {
+            background: #111;
+            border: 1px solid #333;
+            color: #00ff00;
+            padding: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        button {
+            background: #222;
+            border: 1px solid #555;
+            color: #00ff00;
+            padding: 8px 15px;
+            font-family: 'Courier New', monospace;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #333;
+            color: #ffff00;
+        }
+
+        .ascii-art {
+            color: #666;
+            font-size: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .career-path {
+            border-left: 3px solid #00ff00;
+            padding-left: 20px;
+            margin: 20px 0;
+        }
+
+        .timeline {
+            position: relative;
+        }
+
+        .timeline-item {
+            margin: 15px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #ffff00;
+        }
+
+        .blink {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="header">
+            <div class="ascii-art">
+┌─────────────────────────────────────────────────────────────────┐
+│    ██████╗  ██████╗ ██╗   ██╗███████╗██████╗ ███╗   ██╗███╗   ███╗ ███████╗███╗   ██╗████████╗    ██████╗  █████╗ ██╗   ██╗    ███╗   ██╗ █████╗ ██╗   ██╗██╗ ██████╗  █████╗ ████████╗ ██████╗ ██████╗  │
+│   ██╔════╝ ██╔═══██╗██║   ██║██╔════╝██╔══██╗████╗  ██║████╗ ████║ ██╔════╝████╗  ██║╚══██╔══╝    ██╔══██╗██╔══██╗╚██╗ ██╔╝    ████╗  ██║██╔══██╗██║   ██║██║██╔════╝ ██╔══██╗╚══██╔══╝██╔═══██╗██╔══██╗ │
+│   ██║  ███╗██║   ██║██║   ██║█████╗  ██████╔╝██╔██╗ ██║██╔████╔██║ █████╗  ██╔██╗ ██║   ██║       ██████╔╝███████║ ╚████╔╝     ██╔██╗ ██║███████║██║   ██║██║██║  ███╗███████║   ██║   ██║   ██║██████╔╝ │
+│   ██║   ██║██║   ██║╚██╗ ██╔╝██╔══╝  ██╔══██╗██║╚██╗██║██║╚██╔╝██║ ██╔══╝  ██║╚██╗██║   ██║       ██╔═══╝ ██╔══██║  ╚██╔╝      ██║╚██╗██║██╔══██║╚██╗ ██╔╝██║██║   ██║██╔══██║   ██║   ██║   ██║██╔══██╗ │
+│   ╚██████╔╝╚██████╔╝ ╚████╔╝ ███████╗██║  ██║██║ ╚████║██║ ╚═╝ ██║ ███████╗██║ ╚████║   ██║       ██║     ██║  ██║   ██║       ██║ ╚████║██║  ██║ ╚████╔╝ ██║╚██████╔╝██║  ██║   ██║   ╚██████╔╝██║  ██║ │
+│    ╚═════╝  ╚═════╝   ╚═══╝  ╚══════╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝     ╚═╝ ╚══════╝╚═╝  ╚═══╝   ╚═╝       ╚═╝     ╚═╝  ╚═╝   ╚═╝       ╚═╝  ╚═══╝╚═╝  ╚═╝  ╚═══╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝ │
+└─────────────────────────────────────────────────────────────────┘
+            </div>
+            <div class="prompt">root@paynavigator:~$ <span class="input">welcome</span></div>
+            <div class="output">7th Pay Commission Navigator v2.0 - Terminal Interface</div>
+            <div class="output">Type 'help' for available commands or use menu below</div>
+        </div>
+
+        <div class="menu">
+            <div class="menu-title">MAIN MENU</div>
+            <div class="menu-item" onclick="showPayMatrix()">[1] View Pay Matrix & Levels</div>
+            <div class="menu-item" onclick="showCareerPath()">[2] Career Path Calculator</div>
+            <div class="menu-item" onclick="showProfileSetup()">[3] Setup Your Profile</div>
+            <div class="menu-item" onclick="showTimeline()">[4] Career Timeline Generator</div>
+            <div class="menu-item" onclick="showComparison()">[5] Compare Positions</div>
+            <div class="menu-item" onclick="showHelp()">[?] Help & Documentation</div>
+        </div>
+
+        <div id="output-area">
+            <div class="output">
+┌─────────────────────────────────────────────────────────────────┐
+│                        SYSTEM STATUS                            │
+├─────────────────────────────────────────────────────────────────┤
+│ ▸ 7th Pay Commission: <span class="highlight">ACTIVE</span>                          │
+│ ▸ DA Rate (Current): <span class="highlight">53%</span>                             │
+│ ▸ Last Updated: <span class="highlight">January 2025</span>                         │
+│ ▸ Database Status: <span class="highlight">ONLINE</span> <span class="blink">●</span>                         │
+│ ▸ Career Profiles: <span class="highlight">247,583</span> records                   │
+└─────────────────────────────────────────────────────────────────┘
+            </div>
+        </div>
+
+        <div class="prompt">
+            root@paynavigator:~$ <span class="blink">_</span>
+        </div>
+    </div>
+
+    <script>
+        let userProfile = {
+            education: '',
+            experience: 0,
+            preferences: [],
+            currentLevel: null
+        };
+
+        function showPayMatrix() {
+            document.getElementById('output-area').innerHTML = `
+                <div class="output">
+┌─────────────────────────────────────────────────────────────────┐
+│                    7th PAY COMMISSION MATRIX                    │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│ Level │ Entry Pay │ Max Pay   │ Common Positions               │
+│ ───── │ ───────── │ ───────── │ ─────────────────────────────  │
+│   1   │   18,000  │   56,900  │ MTS, Safai Karmachari        │
+│   2   │   19,900  │   63,200  │ Peon, Helper                  │
+│   3   │   21,700  │   69,100  │ Cook, Mali                    │
+│   4   │   25,500  │   81,100  │ LDC, UDC, SSC CHSL           │
+│   5   │   29,200  │   92,300  │ Clerk, Typist                │
+│   6   │   35,400  │  1,12,400 │ ASO, DEO, SSC CGL            │
+│   7   │   44,900  │  1,42,400 │ Inspector, AO                │
+│   8   │   47,600  │  1,51,100 │ Section Officer              │
+│   9   │   53,100  │  1,68,300 │ ASO (Senior)                 │
+│  10   │   56,100  │  1,77,500 │ IAS/IPS Entry, Group A       │
+│  11   │   67,700  │  2,08,700 │ Under Secretary              │
+│  12   │   78,800  │  2,09,200 │ Deputy Secretary             │
+│  13   │  1,18,500 │  2,14,100 │ Director, Joint Secretary    │
+│  14   │  1,44,200 │  2,18,200 │ Additional Secretary         │
+│  15   │  1,82,200 │  2,24,100 │ Special Secretary            │
+│  16   │  2,05,400 │  2,24,400 │ Secretary (Junior)           │
+│  17   │  2,25,000 │  2,50,000 │ Cabinet Secretary            │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+
+<div class="warning">Note: Actual salary = Basic Pay + DA(53%) + HRA + Allowances</div>
+                </div>
+            `;
+        }
+
+        function showProfileSetup() {
+            document.getElementById('output-area').innerHTML = `
+                <div class="output">
+┌─────────────────────────────────────────────────────────────────┐
+│                    PROFILE SETUP WIZARD                        │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│ Step 1: Education Level                                         │
+│ ─────────────────────                                          │
+│ <select id="education" onchange="updateProfile()">                              │
+│   <option value="">Select Education</option>                   │
+│   <option value="12th">12th Pass</option>                      │
+│   <option value="graduate">Graduate</option>                   │
+│   <option value="postgraduate">Post Graduate</option>          │
+│ </select>                                                       │
+│                                                                 │
+│ Step 2: Work Experience                                         │
+│ ─────────────────────────                                      │
+│ <input type="number" id="experience" placeholder="Years of experience" onchange="updateProfile()"> │
+│                                                                 │
+│ Step 3: Job Preferences                                         │
+│ ─────────────────────────                                      │
+│ <label><input type="checkbox" value="central"> Central Govt</label>    │
+│ <label><input type="checkbox" value="state"> State Govt</label>        │
+│ <label><input type="checkbox" value="psu"> PSU</label>                 │
+│ <label><input type="checkbox" value="banking"> Banking</label>         │
+│                                                                 │
+│ <button onclick="generateRecommendations()">Generate Career Path</button> │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+                </div>
+            `;
+        }
+
+        function showCareerPath() {
+            document.getElementById('output-area').innerHTML = `
+                <div class="output">
+┌─────────────────────────────────────────────────────────────────┐
+│                    CAREER PATH CALCULATOR                       │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│ Current Status: <input type="text" id="currentPos" placeholder="Enter current position"> │
+│                                                                 │
+│ Recommended Career Progressions:                                │
+│ ───────────────────────────────────                            │
+│                                                                 │
+│ PATH A: Administrative Services                                 │
+│ ┌─────────────────────────────────────────────────────────────┐ │
+│ │ Year 0: SSC CGL (Level 4) → ₹25,500 basic                  │ │
+│ │ Year 2: Promotion to Level 5 → ₹29,200 basic               │ │
+│ │ Year 5: Senior Grade (Level 6) → ₹35,400 basic             │ │
+│ │ Year 8: Inspector Level 7 → ₹44,900 basic                  │ │
+│ │ Year 12: Section Officer Level 8 → ₹47,600 basic           │ │
+│ └─────────────────────────────────────────────────────────────┘ │
+│                                                                 │
+│ PATH B: Civil Services (UPSC)                                  │
+│ ┌─────────────────────────────────────────────────────────────┐ │
+│ │ Year 0: IAS Entry (Level 10) → ₹56,100 basic               │ │
+│ │ Year 2: SDM/ADM → ₹56,100 basic + field allowances         │ │
+│ │ Year 5: District Collector → Level 11/12 promotion         │ │
+│ │ Year 12: Joint Secretary Level 13 → ₹1,18,500 basic        │ │
+│ │ Year 20: Additional Secretary Level 14 → ₹1,44,200 basic   │ │
+│ └─────────────────────────────────────────────────────────────┘ │
+│                                                                 │
+│ PATH C: Banking Sector                                          │
+│ ┌─────────────────────────────────────────────────────────────┐ │
+│ │ Year 0: PO Scale I → ₹41,960 basic                          │ │
+│ │ Year 2: Scale II → ₹47,000 basic                            │ │
+│ │ Year 7: Scale III → ₹59,000 basic                           │ │
+│ │ Year 15: Scale IV → ₹76,000 basic                           │ │
+│ │ Year 20: Scale V → ₹85,000+ basic                           │ │
+│ └─────────────────────────────────────────────────────────────┘ │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+                </div>
+            `;
+        }
+
+        function showTimeline() {
+            document.getElementById('output-area').innerHTML = `
+                <div class="output">
+┌─────────────────────────────────────────────────────────────────┐
+│                    CAREER TIMELINE GENERATOR                    │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│ Timeline for: IAS Officer (Example)                             │
+│ ─────────────────────────────────────                          │
+│                                                                 │
+│ <div class="timeline">
+│   <div class="timeline-item">Year 0-2: Sub Divisional Magistrate (SDM)</div>
+│   <div class="timeline-item">  └─ Basic: ₹56,100 | Total: ~₹99,000</div>
+│   <div class="timeline-item">  └─ Learning: Revenue admin, licensing</div>
+│   <div class="timeline-item"></div>
+│   <div class="timeline-item">Year 2-5: Additional District Magistrate</div>
+│   <div class="timeline-item">  └─ Basic: ₹56,100+ | Total: ~₹1,05,000</div>
+│   <div class="timeline-item">  └─ Learning: Development programs, coordination</div>
+│   <div class="timeline-item"></div>
+│   <div class="timeline-item">Year 5-10: District Collector/DM</div>
+│   <div class="timeline-item">  └─ Basic: ₹67,700-78,800 | Total: ~₹1,40,000</div>
+│   <div class="timeline-item">  └─ Leadership: Full district administration</div>
+│   <div class="timeline-item"></div>
+│   <div class="timeline-item">Year 12-18: Joint Secretary</div>
+│   <div class="timeline-item">  └─ Basic: ₹1,18,500 | Total: ~₹2,00,000</div>
+│   <div class="timeline-item">  └─ Policy: Central govt policy making</div>
+│   <div class="timeline-item"></div>
+│   <div class="timeline-item">Year 20+: Additional/Special Secretary</div>
+│   <div class="timeline-item">  └─ Basic: ₹1,44,200+ | Total: ~₹2,50,000+</div>
+│   <div class="timeline-item">  └─ Strategic: High-level decision making</div>
+│ </div>
+│                                                                 │
+│ <button onclick="generateCustomTimeline()">Generate Your Timeline</button> │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+                </div>
+            `;
+        }
+
+        function showComparison() {
+            document.getElementById('output-area').innerHTML = `
+                <div class="output">
+┌─────────────────────────────────────────────────────────────────┐
+│                    POSITION COMPARISON TOOL                     │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│ Compare: IAS vs IPS vs SSC CGL                                  │
+│ ────────────────────────────────                               │
+│                                                                 │
+│                │  IAS      │  IPS      │  SSC CGL   │          │
+│ ──────────────────────────────────────────────────────────────  │
+│ Entry Level    │  Level 10 │  Level 10 │  Level 4   │          │
+│ Starting Basic │  ₹56,100  │  ₹56,100  │  ₹25,500   │          │
+│ Starting Total │  ₹99,000  │  ₹99,000  │  ₹44,000   │          │
+│ Max Level      │  Level 17 │  Level 17 │  Level 8   │          │
+│ Max Basic      │ ₹2,50,000 │ ₹2,25,000 │  ₹47,600   │          │
+│ Job Security   │  Highest  │  Highest  │  High      │          │
+│ Transfers      │  Frequent │  Frequent │  Limited   │          │
+│ Power/Status   │  Maximum  │  High     │  Moderate  │          │
+│ Work Pressure  │  High     │  Very High│  Moderate  │          │
+│ Exam Difficulty│ Extreme   │  Extreme  │  High      │          │
+│                                                                 │
+│ Recommendation Engine:                                          │
+│ ─────────────────────────                                       │
+│ For Leadership & Policy: → Choose IAS                          │
+│ For Law & Order: → Choose IPS                                  │
+│ For Quick Entry & Stability: → Choose SSC CGL                  │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+                </div>
+            `;
+        }
+
+        function showHelp() {
+            document.getElementById('output-area').innerHTML = `
+                <div class="output">
+┌─────────────────────────────────────────────────────────────────┐
+│                    HELP & DOCUMENTATION                         │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│ AVAILABLE COMMANDS:                                             │
+│ ─────────────────────                                          │
+│                                                                 │
+│ help           - Show this help menu                            │
+│ matrix         - Display 7th Pay Commission matrix              │
+│ profile        - Setup your career profile                     │
+│ path           - Generate career path recommendations           │
+│ timeline       - Create detailed career timeline               │
+│ compare        - Compare different government positions         │
+│ clear          - Clear the terminal screen                     │
+│                                                                 │
+│ PAY SCALE EXPLANATION:                                          │
+│ ─────────────────────────                                      │
+│                                                                 │
+│ • Level 1-3: Entry level positions (10th-12th pass)            │
+│ • Level 4-6: Graduate level positions (SSC CGL, Clerk)         │
+│ • Level 7-9: Senior positions, specialized roles               │
+│ • Level 10+: Group A services (IAS, IPS, etc.)                 │
+│                                                                 │
+│ SALARY CALCULATION:                                             │
+│ ─────────────────────                                          │
+│                                                                 │
+│ Total Salary = Basic Pay + DA(53%) + HRA + Allowances          │
+│                                                                 │
+│ • DA (Dearness Allowance): Currently 53% of basic              │
+│ • HRA: 24%/16%/8% based on city category                       │
+│ • Other allowances: Transport, Medical, etc.                   │
+│                                                                 │
+│ For detailed information, visit official government websites.   │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+                </div>
+            `;
+        }
+
+        function updateProfile() {
+            // Update user profile based on inputs
+            console.log('Profile updated');
+        }
+
+        function generateRecommendations() {
+            const education = document.getElementById('education').value;
+            const experience = document.getElementById('experience').value;
+            
+            let recommendations = '';
+            
+            if (education === 'graduate') {
+                recommendations = `
+Based on your Graduate qualification:
+▸ Immediate Options: SSC CGL (Level 4-6)
+▸ Long-term Goal: UPSC Civil Services
+▸ Alternative: Banking PO positions
+▸ Quick Entry: State PSC positions
+                `;
+            } else if (education === '12th') {
+                recommendations = `
+Based on your 12th qualification:
+▸ Immediate Options: SSC CHSL (Level 4)
+▸ Upgrade Path: Complete graduation → SSC CGL
+▸ Alternative: Railway Group D, Banking Clerk
+▸ Defense: Indian Army, Navy positions
+                `;
+            }
+            
+            document.getElementById('output-area').innerHTML = `
+                <div class="output">
+┌─────────────────────────────────────────────────────────────────┐
+│                  PERSONALIZED RECOMMENDATIONS                   │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│ ${recommendations}                                              │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+                </div>
+            `;
+        }
+
+        function generateCustomTimeline() {
+            alert('Custom timeline generator will be implemented based on your profile!');
+        }
+
+        // Terminal commands
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                // Handle terminal input
+            }
+        });
+    </script>
+</body>
+</html>

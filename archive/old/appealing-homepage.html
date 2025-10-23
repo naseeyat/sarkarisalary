@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SarkariSalary.today - Latest Government Jobs Salary 2025 | Live Updates</title>
+    <meta name="description" content="🔥 Latest Government Jobs Salary 2025 - IAS, IPS, SSC, Banking, Railway Jobs with Live Salary Calculator | Updated Daily ✅">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: #f8fafe;
+        }
+
+        /* Header with live updates */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .live-badge {
+            background: #ff4444;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Breaking news ticker */
+        .breaking-news {
+            background: #ff4444;
+            color: white;
+            padding: 10px 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .breaking-news span {
+            display: inline-block;
+            animation: scroll 30s linear infinite;
+            font-weight: bold;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Main container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Quick stats cards */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* Main content grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        /* Left column - Job categories */
+        .job-categories {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .job-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            padding: 20px;
+        }
+
+        .job-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .job-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.15);
+            transform: translateY(-3px);
+        }
+
+        .job-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a202c;
+            margin-bottom: 8px;
+        }
+
+        .job-salary {
+            font-size: 20px;
+            font-weight: bold;
+            color: #059669;
+            margin-bottom: 10px;
+        }
+
+        .job-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 12px 0;
+        }
+
+        .detail-tag {
+            background: #f0f9ff;
+            color: #0c4a6e;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .job-button {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .job-button:hover {
+            background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+            transform: translateY(-2px);
+        }
+
+        /* Right sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .widget {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .widget-header {
+            background: #1f2937;
+            color: white;
+            padding: 15px 20px;
+            font-weight: bold;
+        }
+
+        .widget-content {
+            padding: 20px;
+        }
+
+        .trending-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .trending-item:last-child {
+            border-bottom: none;
+        }
+
+        .trending-icon {
+            width: 8px;
+            height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0.3; }
+        }
+
+        /* WhatsApp/Telegram buttons */
+        .social-alerts {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .social-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .whatsapp {
+            background: #25d366;
+            color: white;
+        }
+
+        .telegram {
+            background: #0088cc;
+            color: white;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .job-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Floating action button */
+        .fab {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(5, 150, 105, 0.4);
+            z-index: 1000;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">🏛️ SarkariSalary.today</div>
+            <div class="live-badge">🔴 LIVE UPDATES</div>
+        </div>
+    </header>
+
+    <!-- Breaking News -->
+    <div class="breaking-news">
+        <span>🚨 Breaking: IAS Salary Hiked by 15% | SSC CGL 2025 Notification Released | SBI PO Applications Open | Railway Recruitment 2025 Soon</span>
+    </div>
+
+    <div class="container">
+        <!-- Quick Stats -->
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-number">5,00,000+</div>
+                <div class="stat-label">Current Vacancies</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">₹18K-₹2.5L</div>
+                <div class="stat-label">Salary Range</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Job Categories</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">10L+</div>
+                <div class="stat-label">Users Trust Us</div>
+            </div>
+        </div>
+
+        <!-- Social Media Alerts -->
+        <div class="social-alerts">
+            <button class="social-btn whatsapp">
+                📱 WhatsApp Updates
+            </button>
+            <button class="social-btn telegram">
+                📢 Telegram Channel
+            </button>
+        </div>
+
+        <div class="main-grid">
+            <!-- Main Content -->
+            <div class="job-categories">
+                <div class="section-header">
+                    🔥 Hot Government Jobs Salary 2025
+                </div>
+                <div class="job-grid">
+                    <!-- IAS Card -->
+                    <div class="job-card">
+                        <div class="job-title">🏛️ Indian Administrative Service (IAS)</div>
+                        <div class="job-salary">₹56,100 - ₹2,50,000</div>
+                        <div class="job-details">
+                            <span class="detail-tag">180 Vacancies</span>
+                            <span class="detail-tag">Level 10-17</span>
+                            <span class="detail-tag">6 Stages</span>
+                        </div>
+                        <p style="color: #666; font-size: 14px; margin: 10px 0;">Complete career timeline from SDM to Secretary level with detailed salary breakdown</p>
+                        <button class="job-button">💰 View Complete Salary Details</button>
+                    </div>
+
+                    <!-- IPS Card -->
+                    <div class="job-card">
+                        <div class="job-title">👮‍♂️ Indian Police Service (IPS)</div>
+                        <div class="job-salary">₹56,100 - ₹2,25,000</div>
+                        <div class="job-details">
+                            <span class="detail-tag">150 Vacancies</span>
+                            <span class="detail-tag">Level 10-17</span>
+                            <span class="detail-tag">5 Stages</span>
+                        </div>
+                        <p style="color: #666; font-size: 14px; margin: 10px 0;">Police service progression from ASP to Additional Director General with benefits</p>
+                        <button class="job-button">💰 View Complete Salary Details</button>
+                    </div>
+
+                    <!-- SSC CGL Card -->
+                    <div class="job-card">
+                        <div class="job-title">📊 SSC Combined Graduate Level</div>
+                        <div class="job-salary">₹25,500 - ₹56,100</div>
+                        <div class="job-details">
+                            <span class="detail-tag">17,323 Vacancies</span>
+                            <span class="detail-tag">Level 4-8</span>
+                            <span class="detail-tag">4 Stages</span>
+                        </div>
+                        <p style="color: #666; font-size: 14px; margin: 10px 0;">Administrative positions across departments with growth opportunities</p>
+                        <button class="job-button">💰 View Complete Salary Details</button>
+                    </div>
+
+                    <!-- SBI PO Card -->
+                    <div class="job-card">
+                        <div class="job-title">🏦 SBI Probationary Officer</div>
+                        <div class="job-salary">₹41,960 - ₹1,00,000</div>
+                        <div class="job-details">
+                            <span class="detail-tag">2,000 Vacancies</span>
+                            <span class="detail-tag">JMGS-I to SMGS-V</span>
+                            <span class="detail-tag">5 Stages</span>
+                        </div>
+                        <p style="color: #666; font-size: 14px; margin: 10px 0;">Banking career from PO to AGM level with attractive perks</p>
+                        <button class="job-button">💰 View Complete Salary Details</button>
+                    </div>
+
+                    <!-- Railway Card -->
+                    <div class="job-card">
+                        <div class="job-title">🚂 Railway Group D</div>
+                        <div class="job-salary">₹18,000 - ₹35,400</div>
+                        <div class="job-details">
+                            <span class="detail-tag">1,03,769 Vacancies</span>
+                            <span class="detail-tag">Level 1-4</span>
+                            <span class="detail-tag">3 Stages</span>
+                        </div>
+                        <p style="color: #666; font-size: 14px; margin: 10px 0;">Entry level railway jobs with excellent job security and benefits</p>
+                        <button class="job-button">💰 View Complete Salary Details</button>
+                    </div>
+
+                    <!-- Teaching Card -->
+                    <div class="job-card">
+                        <div class="job-title">👨‍🏫 KVS Teacher (TGT/PGT)</div>
+                        <div class="job-salary">₹44,900 - ₹78,800</div>
+                        <div class="job-details">
+                            <span class="detail-tag">13,404 Vacancies</span>
+                            <span class="detail-tag">Level 7-11</span>
+                            <span class="detail-tag">4 Stages</span>
+                        </div>
+                        <p style="color: #666; font-size: 14px; margin: 10px 0;">Teaching positions in Kendriya Vidyalayas with summer vacations</p>
+                        <button class="job-button">💰 View Complete Salary Details</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Trending Now -->
+                <div class="widget">
+                    <div class="widget-header">🔥 Trending Now</div>
+                    <div class="widget-content">
+                        <div class="trending-item">
+                            <div class="trending-icon"></div>
+                            <div>7th Pay Commission DA Hiked to 53%</div>
+                        </div>
+                        <div class="trending-item">
+                            <div class="trending-icon"></div>
+                            <div>UPSC CSE 2025 Notification Soon</div>
+                        </div>
+                        <div class="trending-item">
+                            <div class="trending-icon"></div>
+                            <div>SSC CGL Tier 1 Result Declared</div>
+                        </div>
+                        <div class="trending-item">
+                            <div class="trending-icon"></div>
+                            <div>Railway Recruitment 2025 Update</div>
+                        </div>
+                        <div class="trending-item">
+                            <div class="trending-icon"></div>
+                            <div>Banking Jobs Salary Increased</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Tools -->
+                <div class="widget">
+                    <div class="widget-header">🧮 Quick Tools</div>
+                    <div class="widget-content">
+                        <button style="width: 100%; padding: 12px; margin: 8px 0; background: #3b82f6; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                            💰 Salary Calculator
+                        </button>
+                        <button style="width: 100%; padding: 12px; margin: 8px 0; background: #059669; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                            📊 Pay Scale Converter
+                        </button>
+                        <button style="width: 100%; padding: 12px; margin: 8px 0; background: #dc2626; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                            🏠 HRA Calculator
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Latest Updates -->
+                <div class="widget">
+                    <div class="widget-header">📰 Latest Updates</div>
+                    <div class="widget-content">
+                        <div style="font-size: 14px; color: #666; line-height: 1.8;">
+                            <p><strong>Today:</strong> IAS salary revision approved</p>
+                            <p><strong>Yesterday:</strong> SSC CGL notification updated</p>
+                            <p><strong>2 days ago:</strong> Banking sector salary hike</p>
+                            <p><strong>3 days ago:</strong> Railway recruitment begins</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Action Button -->
+    <button class="fab" title="Quick Salary Check">💰</button>
+
+    <script>
+        // Add some interactivity
+        document.querySelectorAll('.job-button').forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Opening detailed salary breakdown...');
+            });
+        });
+
+        // WhatsApp button
+        document.querySelector('.whatsapp').addEventListener('click', function() {
+            window.open('https://wa.me/+919999999999', '_blank');
+        });
+
+        // Telegram button  
+        document.querySelector('.telegram').addEventListener('click', function() {
+            window.open('https://t.me/sarkarisalary', '_blank');
+        });
+    </script>
+</body>
+</html>

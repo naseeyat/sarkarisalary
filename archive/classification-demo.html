@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Classification System Demo</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .classification-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .classification-card {
+            border: 2px solid #333;
+            padding: 20px;
+            border-radius: 8px;
+            background: #fff;
+        }
+        
+        .classification-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+            background: #333;
+            color: white;
+            padding: 10px;
+            margin: -20px -20px 15px -20px;
+        }
+        
+        .category-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .category-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .category-item:hover {
+            background: #f8f8f8;
+            padding-left: 10px;
+        }
+        
+        .category-name {
+            font-weight: 500;
+        }
+        
+        .job-count {
+            background: #333;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+        }
+        
+        .demo-section {
+            margin-top: 40px;
+            padding: 20px;
+            background: #f8f8f8;
+            border-radius: 8px;
+        }
+        
+        .demo-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        
+        .job-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .job-card {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border-left: 4px solid #007bff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .job-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .job-details {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .job-tags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+        
+        .job-tag {
+            background: #e9ecef;
+            color: #495057;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+        }
+        
+        .filter-section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+        }
+        
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        
+        .filter-label {
+            font-weight: bold;
+            min-width: 100px;
+        }
+        
+        .filter-option {
+            padding: 5px 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .filter-option:hover,
+        .filter-option.active {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Government Job Classification System</h1>
+            <p>किस तरह से jobs को organize करते हैं</p>
+        </div>
+
+        <div class="classification-grid">
+            <!-- Skill-wise Classification -->
+            <div class="classification-card">
+                <div class="classification-title">🛠️ Skill-wise Classification</div>
+                <ul class="category-list">
+                    <li class="category-item" onclick="showJobs('technical')">
+                        <span class="category-name">Technical/Engineering</span>
+                        <span class="job-count">150+</span>
+                    </li>
+                    <li class="category-item" onclick="showJobs('administrative')">
+                        <span class="category-name">Administrative</span>
+                        <span class="job-count">200+</span>
+                    </li>
+                    <li class="category-item" onclick="showJobs('financial')">
+                        <span class="category-name">Banking/Finance</span>
+                        <span class="job-count">80+</span>
+                    </li>
+                    <li class="category-item" onclick="showJobs('medical')">
+                        <span class="category-name">Medical/Healthcare</span>
+                        <span class="job-count">60+</span>
+                    </li>
+                    <li class="category-item" onclick="showJobs('teaching')">
+                        <span class="category-name">Teaching/Education</span>
+                        <span class="job-count">100+</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- State-wise Classification -->
+            <div class="classification-card">
+                <div class="classification-title">🗺️ State-wise Classification</div>
+                <ul class="category-list">
+                    <li class="category-item" onclick="showJobs('central')">
+                        <span class="category-name">Central Government</span>
+                        <span class="job-count">300+</span>
+                    </li>
+                    <li class="category-item" onclick="showJobs('up')">
+                        <span class="category-name">Uttar Pradesh</span>
+                        <span class="job-count">120+</span>
+                    </li>
+                    <li class="category-item" onclick="showJobs('bihar')">
+                        <span class="category-name">Bihar</span>
+                        <span class="job-count">80+</span>
+                    </li>
+                    <li class="category-item" onclick="showJobs('maharashtra')">
+                        <span class="category-name">Maharashtra</span>
+                        <span class="job-count">90+</span>
+                    </li>
+                    <li class="category-item" onclick="showJobs('rajasthan')">
+                        <span class="category-name">Rajasthan</span>
+                        <span class="job-count">70+</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Salary-wise Classification -->
+            <div class="classification-card">
+                <div class="classification-title">💰 Salary-wise Classification</div>
+                <ul class="category-list">
+                    <li class="category-item" onclick="showJobs('premium')">
+                        <span class="category-name">Premium (₹1L+)</span>
+                        <span class="job-count">50+</span>
+                    </li>
+                    <li class="category-item" onclick="showJobs('high')">
+                        <span class="category-name">High (₹50K-1L)</span>
+                        <span class="job-count">150+</span>
+                    </li>
+                    <li class="category-item" onclick="showJobs('moderate')">
+                        <span class="category-name">Moderate (₹25K-50K)</span>
+                        <span class="job-count">200+</span>
+                    </li>
+                    <li class="category-item" onclick="showJobs('entry')">
+                        <span class="category-name">Entry Level (₹18K-25K)</span>
+                        <span class="job-count">100+</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Difficulty-wise Classification -->
+            <div class="classification-card">
+                <div class="classification-title">📊 Difficulty-wise Classification</div>
+                <ul class="category-list">
+                    <li class="category-item" onclick="showJobs('extremely-hard')">
+                        <span class="category-name">Extremely Hard</span>
+                        <span class="job-count">10+</span>
+                    </li>
+                    <li class="category-item" onclick="showJobs('very-hard')">
+                        <span class="category-name">Very Hard</span>
+                        <span class="job-count">50+</span>
+                    </li>
+                    <li class="category-item" onclick="showJobs('hard')">
+                        <span class="category-name">Hard</span>
+                        <span class="job-count">150+</span>
+                    </li>
+                    <li class="category-item" onclick="showJobs('moderate')">
+                        <span class="category-name">Moderate</span>
+                        <span class="job-count">200+</span>
+                    </li>
+                    <li class="category-item" onclick="showJobs('easy')">
+                        <span class="category-name">Easy</span>
+                        <span class="job-count">90+</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Filter Demo -->
+        <div class="filter-section">
+            <h3>🔍 Smart Filter System</h3>
+            <div class="filter-group">
+                <div class="filter-label">Skill:</div>
+                <div class="filter-option" onclick="toggleFilter(this)">Technical</div>
+                <div class="filter-option" onclick="toggleFilter(this)">Banking</div>
+                <div class="filter-option" onclick="toggleFilter(this)">Administrative</div>
+                <div class="filter-option" onclick="toggleFilter(this)">Medical</div>
+            </div>
+            <div class="filter-group">
+                <div class="filter-label">State:</div>
+                <div class="filter-option" onclick="toggleFilter(this)">Central</div>
+                <div class="filter-option" onclick="toggleFilter(this)">UP</div>
+                <div class="filter-option" onclick="toggleFilter(this)">Bihar</div>
+                <div class="filter-option" onclick="toggleFilter(this)">Maharashtra</div>
+            </div>
+            <div class="filter-group">
+                <div class="filter-label">Salary:</div>
+                <div class="filter-option" onclick="toggleFilter(this)">₹1L+</div>
+                <div class="filter-option" onclick="toggleFilter(this)">₹50K-1L</div>
+                <div class="filter-option" onclick="toggleFilter(this)">₹25K-50K</div>
+            </div>
+        </div>
+
+        <!-- Demo Jobs Display -->
+        <div class="demo-section">
+            <div class="demo-title">📋 Sample Jobs (Click categories above to filter)</div>
+            <div class="job-grid" id="jobGrid">
+                <!-- Jobs will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample job data
+        const sampleJobs = {
+            technical: [
+                { title: "Junior Engineer (Civil)", salary: "₹44,900", state: "Central", tags: ["technical", "civil", "je"] },
+                { title: "Assistant Engineer", salary: "₹56,100", state: "UP", tags: ["technical", "ae", "engineering"] },
+                { title: "DRDO Scientist", salary: "₹78,800", state: "Central", tags: ["technical", "research", "defense"] }
+            ],
+            administrative: [
+                { title: "IAS Officer", salary: "₹99,000", state: "Central", tags: ["administrative", "ias", "premium"] },
+                { title: "Section Officer", salary: "₹44,900", state: "Central", tags: ["administrative", "officer"] },
+                { title: "Assistant", salary: "₹35,400", state: "UP", tags: ["administrative", "assistant"] }
+            ],
+            financial: [
+                { title: "SBI PO", salary: "₹82,000", state: "Central", tags: ["banking", "po", "sbi"] },
+                { title: "Bank Clerk", salary: "₹45,000", state: "Central", tags: ["banking", "clerk"] },
+                { title: "Accounts Officer", salary: "₹56,100", state: "Bihar", tags: ["finance", "accounts"] }
+            ],
+            medical: [
+                { title: "Medical Officer", salary: "₹78,800", state: "UP", tags: ["medical", "doctor"] },
+                { title: "Staff Nurse", salary: "₹35,400", state: "Central", tags: ["medical", "nursing"] },
+                { title: "Pharmacist", salary: "₹29,200", state: "Bihar", tags: ["medical", "pharmacy"] }
+            ],
+            teaching: [
+                { title: "Professor", salary: "₹1,31,400", state: "Central", tags: ["teaching", "professor", "university"] },
+                { title: "TGT Teacher", salary: "₹47,600", state: "UP", tags: ["teaching", "tgt", "school"] },
+                { title: "PRT Teacher", salary: "₹35,400", state: "Bihar", tags: ["teaching", "prt", "primary"] }
+            ]
+        };
+
+        function showJobs(category) {
+            const jobGrid = document.getElementById('jobGrid');
+            let jobs = [];
+
+            // Get jobs based on category
+            if (sampleJobs[category]) {
+                jobs = sampleJobs[category];
+            } else {
+                // Show all jobs if category not found
+                jobs = Object.values(sampleJobs).flat();
+            }
+
+            // Generate job cards
+            jobGrid.innerHTML = jobs.map(job => `
+                <div class="job-card">
+                    <div class="job-title">${job.title}</div>
+                    <div class="job-details">
+                        💰 ${job.salary} | 📍 ${job.state}
+                    </div>
+                    <div class="job-tags">
+                        ${job.tags.map(tag => `<span class="job-tag">${tag}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+
+            // Update demo title
+            document.querySelector('.demo-title').textContent = 
+                `📋 ${category.charAt(0).toUpperCase() + category.slice(1)} Jobs (${jobs.length} found)`;
+        }
+
+        function toggleFilter(element) {
+            element.classList.toggle('active');
+            
+            // Get all active filters
+            const activeFilters = Array.from(document.querySelectorAll('.filter-option.active'))
+                .map(el => el.textContent.toLowerCase());
+            
+            console.log('Active filters:', activeFilters);
+            
+            // Here you would filter jobs based on active filters
+            // For demo, just show a message
+            if (activeFilters.length > 0) {
+                document.querySelector('.demo-title').textContent = 
+                    `🔍 Filtered Jobs (${activeFilters.join(', ')})`;
+            }
+        }
+
+        // Show all jobs initially
+        showJobs('all');
+    </script>
+</body>
+</html>

@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Career Journey Template</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+            background: #ffffff;
+            color: #333333;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .header {
+            margin-bottom: 40px;
+            text-align: center;
+            border: 3px solid #333333;
+            padding: 30px;
+            background: #ffffff;
+            box-shadow: 8px 8px 0px #333333;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 20px;
+        }
+
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .badge {
+            background: #333333;
+            color: #ffffff;
+            padding: 6px 14px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 3px solid #333333;
+            margin-bottom: 30px;
+            box-shadow: 4px 4px 0px #333333;
+        }
+
+        .stat-box {
+            border-right: 1px solid #333333;
+            padding: 20px 16px;
+            text-align: center;
+            background: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:last-child {
+            border-right: none;
+        }
+
+        .stat-box:hover {
+            background: #333333;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .stat-number {
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 3px solid #333333;
+            margin-bottom: 30px;
+            box-shadow: 4px 4px 0px #333333;
+        }
+
+        .control-btn {
+            padding: 16px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #333333;
+            cursor: pointer;
+            border-right: 1px solid #333333;
+            background: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            border: none;
+        }
+
+        .control-btn:last-child {
+            border-right: none;
+        }
+
+        .control-btn.active,
+        .control-btn:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        .stage {
+            border: 3px solid #333333;
+            margin-bottom: 4px;
+            background: #ffffff;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stage:hover {
+            box-shadow: 8px 8px 0px #333333;
+            transform: translateY(-2px);
+        }
+
+        .stage.selected {
+            background: #f8f8f8;
+            box-shadow: 8px 8px 0px #333333;
+            transform: translateY(-2px);
+        }
+
+        .stage-main {
+            display: grid;
+            grid-template-columns: 80px 1fr 140px 50px;
+            min-height: 90px;
+        }
+
+        .stage-number {
+            border-right: 1px solid #333333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 900;
+            color: #333333;
+            background: #f8f8f8;
+        }
+
+        .stage-info {
+            border-right: 1px solid #333333;
+            padding: 18px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .stage-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 6px;
+        }
+
+        .stage-years {
+            font-size: 11px;
+            color: #666666;
+            background: #ffffff;
+            padding: 4px 10px;
+            border: 1px solid #333333;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .stage-salary {
+            border-right: 1px solid #333333;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 900;
+            color: #333333;
+            background: #f8f8f8;
+        }
+
+        .expand-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #333333;
+            font-weight: 900;
+            transition: transform 0.4s ease;
+        }
+
+        .stage.expanded .expand-indicator {
+            transform: rotate(180deg);
+        }
+
+        .stage-description {
+            border-top: 1px solid #333333;
+            padding: 24px;
+            font-size: 14px;
+            color: #444444;
+            line-height: 1.6;
+            background: #fafafa;
+        }
+
+        .stage-details {
+            border-top: 1px solid #333333;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: #f8f8f8;
+        }
+
+        .stage.expanded .stage-details {
+            max-height: 400px;
+        }
+
+        .details-content {
+            padding: 24px;
+        }
+
+        .duties-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3px;
+            background: #333333;
+            padding: 3px;
+        }
+
+        .duty-item {
+            background: #ffffff;
+            padding: 16px 20px;
+            font-size: 13px;
+            color: #555555;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .duty-item:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        .salary-calculator {
+            border: 3px solid #333333;
+            margin-top: 40px;
+            background: #ffffff;
+            box-shadow: 8px 8px 0px #333333;
+        }
+
+        .calc-header {
+            padding: 24px;
+            border-bottom: 1px solid #333333;
+            font-size: 18px;
+            font-weight: 800;
+            color: #333333;
+            text-align: center;
+            background: #f8f8f8;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .calc-form {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .form-section {
+            padding: 28px;
+            border-right: 1px solid #333333;
+        }
+
+        .form-section:last-child {
+            border-right: none;
+        }
+
+        .form-label {
+            font-size: 13px;
+            color: #333333;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 3px solid #333333;
+            border-radius: 0;
+            font-family: inherit;
+            font-size: 14px;
+            color: #333333;
+            background: #ffffff;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewBox="0 0 16 10"><path fill="%23333333" stroke="%23333333" stroke-width="2" d="M2 2l6 6 6-6"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 16px 10px;
+            padding-right: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .form-select:focus {
+            outline: none;
+            background-color: #f8f8f8;
+        }
+
+        .results-section {
+            border-top: 1px solid #333333;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+        }
+
+        .result-box {
+            border-right: 1px solid #333333;
+            padding: 24px 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .result-box:last-child {
+            border-right: none;
+        }
+
+        .result-box:hover {
+            background: #333333;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .result-value {
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 6px;
+        }
+
+        .result-label {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            font-weight: 600;
+        }
+
+        .per-hour-section {
+            border-top: 1px solid #333333;
+            padding: 24px;
+            background: #f8f8f8;
+            text-align: center;
+        }
+
+        .per-hour-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .per-hour-breakdown {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .per-hour-item {
+            background: #ffffff;
+            padding: 16px;
+            border: 2px solid #333333;
+        }
+
+        .per-hour-value {
+            font-size: 20px;
+            font-weight: 900;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+
+        .per-hour-label {
+            font-size: 10px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            font-size: 12px;
+            color: #666666;
+            border-top: 3px solid #333333;
+            padding-top: 24px;
+            font-weight: 600;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+            
+            .stage-main {
+                grid-template-columns: 60px 1fr 110px 40px;
+            }
+            
+            .quick-stats,
+            .calc-form,
+            .results-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .controls {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .duties-grid,
+            .per-hour-breakdown {
+                grid-template-columns: 1fr;
+            }
+
+            .control-btn,
+            .result-box,
+            .stat-box {
+                border-right: none;
+                border-bottom: 1px solid #333333;
+            }
+
+            .control-btn:nth-child(2n),
+            .stat-box:nth-child(2n),
+            .result-box:nth-child(2n) {
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title" id="jobTitle">Loading...</h1>
+            <p class="subtitle" id="jobSubtitle">Loading...</p>
+            <div class="badge-container" id="jobBadges">
+                <!-- Badges will be loaded dynamically -->
+            </div>
+        </header>
+
+        <div class="quick-stats" id="jobStats">
+            <!-- Stats will be loaded dynamically -->
+        </div>
+
+        <div class="controls">
+            <button class="control-btn active" onclick="setView('all')">Show All</button>
+            <button class="control-btn" onclick="setView('early')">Early Career</button>
+            <button class="control-btn" onclick="setView('mid')">Mid Career</button>
+            <button class="control-btn" onclick="setView('senior')">Senior Level</button>
+        </div>
+
+        <main class="timeline-container" id="jobTimeline">
+            <!-- Timeline stages will be loaded dynamically -->
+        </main>
+
+        <div class="salary-calculator">
+            <div class="calc-header" id="calcTitle">Salary Calculator</div>
+            <div class="calc-form">
+                <div class="form-section">
+                    <div class="form-label">Career Stage</div>
+                    <select class="form-select" id="stage" onchange="calculate()">
+                        <option value="">Choose your level</option>
+                        <!-- Options will be loaded dynamically -->
+                    </select>
+                </div>
+                <div class="form-section">
+                    <div class="form-label">City Type</div>
+                    <select class="form-select" id="city" onchange="calculate()">
+                        <option value="metro">Metro Cities (24% HRA)</option>
+                        <option value="major">Major Cities (16% HRA)</option>
+                        <option value="other">Other Cities (8% HRA)</option>
+                    </select>
+                </div>
+                <div class="form-section">
+                    <div class="form-label">Experience</div>
+                    <select class="form-select" id="experience" onchange="calculate()">
+                        <option value="0">Fresher</option>
+                        <option value="1">1 Year</option>
+                        <option value="2">2 Years</option>
+                        <option value="3">3 Years</option>
+                        <option value="5">5+ Years</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="result" class="results-section hidden">
+                <div class="result-box">
+                    <div class="result-value" id="basic">₹0</div>
+                    <div class="result-label">Basic Pay</div>
+                </div>
+                <div class="result-box">
+                    <div class="result-value" id="da">₹0</div>
+                    <div class="result-label">DA</div>
+                </div>
+                <div class="result-box">
+                    <div class="result-value" id="hra">₹0</div>
+                    <div class="result-label">HRA</div>
+                </div>
+                <div class="result-box">
+                    <div class="result-value" id="allowances">₹0</div>
+                    <div class="result-label">Allowances</div>
+                </div>
+                <div class="result-box">
+                    <div class="result-value" id="total">₹0</div>
+                    <div class="result-label">Total Monthly</div>
+                </div>
+            </div>
+
+            <div id="perHourSection" class="per-hour-section hidden">
+                <div class="per-hour-title">Per Hour Breakdown</div>
+                <div class="per-hour-breakdown">
+                    <div class="per-hour-item">
+                        <div class="per-hour-value" id="perHourMonthly">₹0</div>
+                        <div class="per-hour-label">Per Hour (Monthly)</div>
+                    </div>
+                    <div class="per-hour-item">
+                        <div class="per-hour-value" id="perHourDaily">₹0</div>
+                        <div class="per-hour-label">Per Hour (Daily)</div>
+                    </div>
+                    <div class="per-hour-item">
+                        <div class="per-hour-value" id="perMinute">₹0</div>
+                        <div class="per-hour-label">Per Minute</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer" id="footerText">
+            © 2025 Government Pay Navigator
+        </footer>
+    </div>
+
+    <script>
+        // Job data template - this will be populated dynamically
+        let currentJobData = {};
+
+        // Sample job data for IAS
+        const jobDataTemplates = {
+            ias: {
+                title: "IAS Career Journey",
+                subtitle: "Complete progression from SDM to Secretary",
+                badges: ["All India Service", "Grade A"],
+                stats: [
+                    { number: "30+ Years", label: "Career Length" },
+                    { number: "₹99K", label: "Starting Pay" },
+                    { number: "₹2.8L", label: "Peak Salary" },
+                    { number: "7 Levels", label: "Progression" }
+                ],
+                stages: [
+                    {
+                        number: "1",
+                        title: "Sub Divisional Magistrate",
+                        years: "0-2 years",
+                        salary: "₹99,000",
+                        category: "early",
+                        description: "Your first taste of administrative power. Handle revenue disputes, issue licenses, and manage sub-division affairs.",
+                        duties: ["Revenue administration", "Public grievances", "Licensing & permits", "Magisterial duties"]
+                    },
+                    {
+                        number: "2", 
+                        title: "Assistant Collector",
+                        years: "2-4 years",
+                        salary: "₹1,20,000",
+                        category: "early",
+                        description: "Step up to district-level coordination. Manage land acquisition projects and development schemes.",
+                        duties: ["Land acquisition", "Development programs", "Inter-dept coordination", "Project management"]
+                    },
+                    {
+                        number: "3",
+                        title: "District Collector", 
+                        years: "4-8 years",
+                        salary: "₹1,60,000",
+                        category: "mid",
+                        description: "The crown jewel of field postings. Lead an entire district and coordinate with police.",
+                        duties: ["District leadership", "Law & order", "Disaster management", "Election duties"]
+                    },
+                    {
+                        number: "4",
+                        title: "Deputy Secretary",
+                        years: "8-12 years", 
+                        salary: "₹1,80,000",
+                        category: "mid",
+                        description: "Transition to central government. Handle policy files and coordinate between ministries.",
+                        duties: ["Policy work", "File management", "Ministry coordination", "Parliamentary questions"]
+                    },
+                    {
+                        number: "5",
+                        title: "Joint Secretary",
+                        years: "12-16 years",
+                        salary: "₹2,00,000", 
+                        category: "senior",
+                        description: "Senior policy leadership. Brief ministers and formulate policies that shape national direction.",
+                        duties: ["Policy formulation", "Minister briefings", "Parliamentary work", "Strategic planning"]
+                    },
+                    {
+                        number: "6",
+                        title: "Additional Secretary",
+                        years: "16-22 years",
+                        salary: "₹2,40,000",
+                        category: "senior", 
+                        description: "Pre-secretary leadership. Prepare cabinet notes and drive administrative reforms.",
+                        duties: ["Senior policy making", "Cabinet notes", "High-level negotiations", "Administrative reforms"]
+                    },
+                    {
+                        number: "★",
+                        title: "Secretary to Government",
+                        years: "22+ years",
+                        salary: "₹2,80,000+",
+                        category: "senior",
+                        description: "The apex. Lead entire ministries and interface directly with Cabinet ministers.",
+                        duties: ["Ministry leadership", "Cabinet interactions", "Policy leadership", "Legacy building"]
+                    }
+                ],
+                calculatorOptions: [
+                    { value: "99000", text: "SDM (₹99,000)" },
+                    { value: "120000", text: "Assistant Collector (₹1,20,000)" },
+                    { value: "160000", text: "District Collector (₹1,60,000)" },
+                    { value: "180000", text: "Deputy Secretary (₹1,80,000)" },
+                    { value: "200000", text: "Joint Secretary (₹2,00,000)" },
+                    { value: "240000", text: "Additional Secretary (₹2,40,000)" },
+                    { value: "280000", text: "Secretary (₹2,80,000)" }
+                ]
+            }
+        };
+
+        function loadJobData(jobType) {
+            currentJobData = jobDataTemplates[jobType];
+            
+            // Update title and subtitle
+            document.getElementById('pageTitle').textContent = currentJobData.title;
+            document.getElementById('jobTitle').textContent = currentJobData.title;
+            document.getElementById('jobSubtitle').textContent = currentJobData.subtitle;
+            
+            // Update badges
+            const badgesContainer = document.getElementById('jobBadges');
+            badgesContainer.innerHTML = currentJobData.badges.map(badge => 
+                `<div class="badge">${badge}</div>`
+            ).join('');
+            
+            // Update stats
+            const statsContainer = document.getElementById('jobStats');
+            statsContainer.innerHTML = currentJobData.stats.map(stat =>
+                `<div class="stat-box">
+                    <div class="stat-number">${stat.number}</div>
+                    <div class="stat-label">${stat.label}</div>
+                </div>`
+            ).join('');
+            
+            // Update timeline
+            const timelineContainer = document.getElementById('jobTimeline');
+            timelineContainer.innerHTML = currentJobData.stages.map(stage =>
+                `<div class="stage ${stage.category}-career" onclick="toggleStage(this)">
+                    <div class="stage-main">
+                        <div class="stage-number">${stage.number}</div>
+                        <div class="stage-info">
+                            <div class="stage-title">${stage.title}</div>
+                            <div class="stage-years">${stage.years}</div>
+                        </div>
+                        <div class="stage-salary">${stage.salary}</div>
+                        <div class="expand-indicator">▼</div>
+                    </div>
+                    <div class="stage-description">
+                        ${stage.description}
+                    </div>
+                    <div class="stage-details">
+                        <div class="details-content">
+                            <div class="duties-grid">
+                                ${stage.duties.map(duty => `<div class="duty-item">${duty}</div>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+            ).join('');
+            
+            // Update calculator options
+            const stageSelect = document.getElementById('stage');
+            stageSelect.innerHTML = '<option value="">Choose your level</option>' + 
+                currentJobData.calculatorOptions.map(option =>
+                    `<option value="${option.value}">${option.text}</option>`
+                ).join('');
+        }
+
+        function calculate() {
+            const basic = parseInt(document.getElementById('stage').value);
+            const cityType = document.getElementById('city').value;
+            const experience = parseInt(document.getElementById('experience').value) || 0;
+            
+            if (!basic) {
+                document.getElementById('result').classList.add('hidden');
+                document.getElementById('perHourSection').classList.add('hidden');
+                return;
+            }
+            
+            // Apply experience increment
+            const adjustedBasic = basic + (experience * Math.floor(basic * 0.03));
+            
+            const da = Math.round(adjustedBasic * 0.53);
+            let hraRate = 0.08;
+            if (cityType === 'metro') hraRate = 0.24;
+            else if (cityType === 'major') hraRate = 0.16;
+            const hra = Math.round(adjustedBasic * hraRate);
+            const allowances = 5000;
+            const total = adjustedBasic + da + hra + allowances;
+            
+            // Update monthly salary display
+            document.getElementById('basic').textContent = '₹' + adjustedBasic.toLocaleString();
+            document.getElementById('da').textContent = '₹' + da.toLocaleString();
+            document.getElementById('hra').textContent = '₹' + hra.toLocaleString();
+            document.getElementById('allowances').textContent = '₹' + allowances.toLocaleString();
+            document.getElementById('total').textContent = '₹' + total.toLocaleString();
+            
+            // Calculate per-hour rates
+            const monthlyHours = 22 * 8; // 22 working days * 8 hours
+            const dailyHours = 8;
+            
+            const perHourMonthly = Math.round(total / monthlyHours);
+            const perHourDaily = Math.round(total / (30 * dailyHours)); // 30 days
+            const perMinute = Math.round(perHourMonthly / 60);
+            
+            document.getElementById('perHourMonthly').textContent = '₹' + perHourMonthly.toLocaleString();
+            document.getElementById('perHourDaily').textContent = '₹' + perHourDaily.toLocaleString();
+            document.getElementById('perMinute').textContent = '₹' + perMinute.toLocaleString();
+            
+            document.getElementById('result').classList.remove('hidden');
+            document.getElementById('perHourSection').classList.remove('hidden');
+        }
+
+        function toggleStage(element) {
+            // Close other expanded stages
+            document.querySelectorAll('.stage.expanded').forEach(stage => {
+                if (stage !== element) {
+                    stage.classList.remove('expanded');
+                    stage.classList.remove('selected');
+                }
+            });
+            
+            element.classList.toggle('expanded');
+            element.classList.toggle('selected');
+        }
+
+        function setView(viewType) {
+            // Update active button
+            document.querySelectorAll('.control-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Show/hide stages based on view
+            const stages = document.querySelectorAll('.stage');
+            stages.forEach(stage => {
+                if (viewType === 'all') {
+                    stage.style.display = 'block';
+                } else {
+                    const categoryClass = viewType + '-career';
+                    stage.style.display = stage.classList.contains(categoryClass) ? 'block' : 'none';
+                }
+            });
+        }
+
+        // Load IAS data by default
+        loadJobData('ias');
+    </script>
+</body>
+</html>

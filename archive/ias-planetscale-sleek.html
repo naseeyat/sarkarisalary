@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IAS Officer Career Journey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #ffffff;
+            color: #333333;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #333333;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 500;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border: 2px solid #333333;
+            margin-bottom: 40px;
+        }
+
+        .info-box {
+            border-right: 1px solid #333333;
+            padding: 30px 20px;
+            text-align: center;
+            background: #ffffff;
+        }
+
+        .info-box:last-child {
+            border-right: none;
+        }
+
+        .info-number {
+            font-size: 28px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .timeline-section {
+            border: 2px solid #333333;
+            margin: 40px 0;
+            background: #ffffff;
+        }
+
+        .section-title {
+            padding: 20px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333333;
+            border-bottom: 1px solid #333333;
+            background: #f8f8f8;
+        }
+
+        .timeline-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .timeline-item {
+            border-right: 1px solid #333333;
+            border-bottom: 1px solid #333333;
+            padding: 24px 20px;
+            min-height: 120px;
+        }
+
+        .timeline-item:nth-child(even) {
+            border-right: none;
+        }
+
+        .timeline-item:nth-last-child(-n+2) {
+            border-bottom: none;
+        }
+
+        .stage-number {
+            font-size: 12px;
+            color: #666666;
+            margin-bottom: 4px;
+        }
+
+        .stage-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333333;
+            margin-bottom: 6px;
+        }
+
+        .stage-duration {
+            font-size: 12px;
+            color: #666666;
+            margin-bottom: 8px;
+        }
+
+        .stage-salary {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        .salary-calculator {
+            border: 2px solid #333333;
+            padding: 30px 20px;
+            margin: 40px 0;
+            background: #ffffff;
+        }
+
+        .calc-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .calc-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .calc-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #333333;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+
+        .calc-select,
+        .calc-input {
+            padding: 8px 12px;
+            border: 2px solid #333333;
+            border-radius: 0;
+            font-family: inherit;
+            font-size: 14px;
+            color: #333333;
+            background: #ffffff;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+        .calc-select {
+            background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8"><path fill="%23333333" d="M6 8L0 2h12z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 12px 8px;
+            padding-right: 35px;
+            cursor: pointer;
+        }
+
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 2px solid #333333;
+            margin-top: 20px;
+        }
+
+        .result-box {
+            border-right: 1px solid #333333;
+            padding: 16px;
+            text-align: center;
+            background: #ffffff;
+        }
+
+        .result-box:last-child {
+            border-right: none;
+        }
+
+        .result-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+
+        .result-label {
+            font-size: 10px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .requirements-section {
+            border: 2px solid #333333;
+            margin: 40px 0;
+            background: #ffffff;
+        }
+
+        .req-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .req-item {
+            border-right: 1px solid #333333;
+            border-bottom: 1px solid #333333;
+            padding: 20px;
+        }
+
+        .req-item:nth-child(even) {
+            border-right: none;
+        }
+
+        .req-item:nth-last-child(-n+2) {
+            border-bottom: none;
+        }
+
+        .req-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .req-list {
+            list-style: none;
+        }
+
+        .req-list li {
+            font-size: 12px;
+            color: #666666;
+            margin-bottom: 4px;
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .req-list li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #333333;
+        }
+
+        .comparison-table {
+            border: 2px solid #333333;
+            margin: 40px 0;
+            background: #ffffff;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th {
+            padding: 12px 16px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 500;
+            color: #333333;
+            border-bottom: 1px solid #333333;
+            background: #f8f8f8;
+        }
+
+        .table td {
+            padding: 12px 16px;
+            font-size: 12px;
+            color: #666666;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 2px solid #333333;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: #666666;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .main-grid,
+            .timeline-grid,
+            .calc-grid,
+            .req-grid,
+            .result-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-item,
+            .req-item,
+            .result-box {
+                border-right: none;
+                border-bottom: 1px solid #333333;
+            }
+            
+            .timeline-item:last-child,
+            .req-item:last-child,
+            .result-box:last-child {
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">IAS Officer Career Journey</h1>
+            <p class="subtitle">Complete progression from training to secretary level</p>
+        </header>
+
+        <!-- Quick Stats -->
+        <div class="main-grid">
+            <div class="info-box">
+                <div class="info-number">25-35</div>
+                <div class="info-label">Years Career</div>
+            </div>
+            <div class="info-box">
+                <div class="info-number">₹56K-₹2.8L</div>
+                <div class="info-label">Salary Range</div>
+            </div>
+            <div class="info-box">
+                <div class="info-number">180</div>
+                <div class="info-label">Annual Vacancies</div>
+            </div>
+        </div>
+
+        <!-- Career Timeline -->
+        <div class="timeline-section">
+            <div class="section-title">Career Progression Timeline</div>
+            <div class="timeline-grid">
+                <div class="timeline-item">
+                    <div class="stage-number">Stage 1</div>
+                    <div class="stage-title">Training at LBSNAA</div>
+                    <div class="stage-duration">2 years</div>
+                    <div class="stage-salary">₹56,100</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="stage-number">Stage 2</div>
+                    <div class="stage-title">Sub Divisional Magistrate</div>
+                    <div class="stage-duration">2-4 years</div>
+                    <div class="stage-salary">₹99,000</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="stage-number">Stage 3</div>
+                    <div class="stage-title">Additional District Magistrate</div>
+                    <div class="stage-duration">3-5 years</div>
+                    <div class="stage-salary">₹1,20,000</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="stage-number">Stage 4</div>
+                    <div class="stage-title">District Collector</div>
+                    <div class="stage-duration">5-8 years</div>
+                    <div class="stage-salary">₹1,60,000</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="stage-number">Stage 5</div>
+                    <div class="stage-title">Joint Secretary</div>
+                    <div class="stage-duration">4-6 years</div>
+                    <div class="stage-salary">₹2,00,000</div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="stage-number">Stage 6</div>
+                    <div class="stage-title">Secretary</div>
+                    <div class="stage-duration">Until retirement</div>
+                    <div class="stage-salary">₹2,80,000+</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Salary Calculator -->
+        <div class="salary-calculator">
+            <div class="calc-title">IAS Salary Calculator</div>
+            <div class="calc-grid">
+                <div class="calc-item">
+                    <label class="calc-label">Career Stage</label>
+                    <select class="calc-select" id="stage" onchange="calculateIAS()">
+                        <option value="">Select stage</option>
+                        <option value="56100">Training (₹56,100)</option>
+                        <option value="99000">SDM (₹99,000)</option>
+                        <option value="120000">ADM (₹1,20,000)</option>
+                        <option value="160000">Collector (₹1,60,000)</option>
+                        <option value="200000">Joint Secretary (₹2,00,000)</option>
+                        <option value="280000">Secretary (₹2,80,000)</option>
+                    </select>
+                </div>
+
+                <div class="calc-item">
+                    <label class="calc-label">City Type</label>
+                    <select class="calc-select" id="city" onchange="calculateIAS()">
+                        <option value="metro">Metro (24% HRA)</option>
+                        <option value="major">Major (16% HRA)</option>
+                        <option value="other">Other (8% HRA)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="iasResult" class="result-grid hidden">
+                <div class="result-box">
+                    <div class="result-value" id="iasBasic">₹0</div>
+                    <div class="result-label">Basic Pay</div>
+                </div>
+                <div class="result-box">
+                    <div class="result-value" id="iasDA">₹0</div>
+                    <div class="result-label">DA (53%)</div>
+                </div>
+                <div class="result-box">
+                    <div class="result-value" id="iasHRA">₹0</div>
+                    <div class="result-label">HRA</div>
+                </div>
+                <div class="result-box">
+                    <div class="result-value" id="iasTotal">₹0</div>
+                    <div class="result-label">Total</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Requirements -->
+        <div class="requirements-section">
+            <div class="section-title">Entry Requirements & Process</div>
+            <div class="req-grid">
+                <div class="req-item">
+                    <div class="req-title">Eligibility</div>
+                    <ul class="req-list">
+                        <li>Bachelor's degree from recognized university</li>
+                        <li>Age: 21-32 years (General category)</li>
+                        <li>Indian citizenship required</li>
+                        <li>6 attempts allowed (General)</li>
+                    </ul>
+                </div>
+
+                <div class="req-item">
+                    <div class="req-title">Exam Pattern</div>
+                    <ul class="req-list">
+                        <li>Prelims: 2 papers (objective)</li>
+                        <li>Mains: 9 papers (descriptive)</li>
+                        <li>Interview: 275 marks</li>
+                        <li>Total: 2025 marks</li>
+                    </ul>
+                </div>
+
+                <div class="req-item">
+                    <div class="req-title">Key Subjects</div>
+                    <ul class="req-list">
+                        <li>General Studies (4 papers)</li>
+                        <li>Essay writing</li>
+                        <li>Optional subject (2 papers)</li>
+                        <li>Language papers (2)</li>
+                    </ul>
+                </div>
+
+                <div class="req-item">
+                    <div class="req-title">Timeline</div>
+                    <ul class="req-list">
+                        <li>Notification: February</li>
+                        <li>Prelims: June</li>
+                        <li>Mains: September-October</li>
+                        <li>Interview: February-April</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="comparison-table">
+            <div class="section-title">IAS vs Other Services Comparison</div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>IAS</th>
+                        <th>IPS</th>
+                        <th>SSC CGL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Entry Salary</td>
+                        <td>₹99,000</td>
+                        <td>₹99,000</td>
+                        <td>₹44,000</td>
+                    </tr>
+                    <tr>
+                        <td>Peak Salary</td>
+                        <td>₹2,80,000+</td>
+                        <td>₹2,50,000+</td>
+                        <td>₹95,000</td>
+                    </tr>
+                    <tr>
+                        <td>Job Security</td>
+                        <td>Highest</td>
+                        <td>Highest</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td>Growth Rate</td>
+                        <td>Fast</td>
+                        <td>Fast</td>
+                        <td>Moderate</td>
+                    </tr>
+                    <tr>
+                        <td>Work Pressure</td>
+                        <td>Very High</td>
+                        <td>Very High</td>
+                        <td>High</td>
+                    </tr>
+                    <tr>
+                        <td>Transfers</td>
+                        <td>Frequent</td>
+                        <td>Frequent</td>
+                        <td>Limited</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-text">
+                © 2025 Government Pay Navigator. IAS career guidance and salary information.
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        function calculateIAS() {
+            const basicPay = parseInt(document.getElementById('stage').value);
+            const cityType = document.getElementById('city').value;
+            
+            if (!basicPay) {
+                document.getElementById('iasResult').classList.add('hidden');
+                return;
+            }
+            
+            const da = Math.round(basicPay * 0.53);
+            
+            let hraRate = 0.08;
+            if (cityType === 'metro') hraRate = 0.24;
+            else if (cityType === 'major') hraRate = 0.16;
+            const hra = Math.round(basicPay * hraRate);
+            
+            const otherAllowances = 5000; // IAS gets higher allowances
+            const totalSalary = basicPay + da + hra + otherAllowances;
+            
+            document.getElementById('iasBasic').textContent = '₹' + basicPay.toLocaleString();
+            document.getElementById('iasDA').textContent = '₹' + da.toLocaleString();
+            document.getElementById('iasHRA').textContent = '₹' + hra.toLocaleString();
+            document.getElementById('iasTotal').textContent = '₹' + totalSalary.toLocaleString();
+            
+            document.getElementById('iasResult').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

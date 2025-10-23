@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IAS Career Progression</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+            background: #ffffff;
+            color: #333333;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 100px 80px;
+        }
+
+        .header {
+            margin-bottom: 100px;
+        }
+
+        .title {
+            font-size: 20px;
+            font-weight: 500;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: #666666;
+        }
+
+        .stage {
+            margin-bottom: 80px;
+        }
+
+        .stage:last-child {
+            margin-bottom: 0;
+        }
+
+        .stage-header {
+            border-bottom: 1px solid #333333;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stage-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 6px;
+        }
+
+        .stage-number {
+            font-size: 11px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stage-years {
+            font-size: 11px;
+            color: #666666;
+        }
+
+        .stage-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+
+        .stage-salary {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        .stage-content {
+            margin-bottom: 16px;
+        }
+
+        .stage-description {
+            font-size: 13px;
+            color: #666666;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .stage-duties {
+            list-style: none;
+        }
+
+        .stage-duties li {
+            font-size: 12px;
+            color: #666666;
+            margin-bottom: 3px;
+            padding-left: 8px;
+            position: relative;
+        }
+
+        .stage-duties li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: #333333;
+        }
+
+        .calculator {
+            margin-top: 120px;
+            padding: 40px;
+            border: 1px solid #333333;
+            background: #fafafa;
+        }
+
+        .calc-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: #333333;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .calc-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 16px;
+        }
+
+        .calc-group {
+            flex: 1;
+        }
+
+        .calc-label {
+            font-size: 10px;
+            color: #666666;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .calc-select {
+            width: 100%;
+            padding: 6px 8px;
+            border: 1px solid #333333;
+            border-radius: 0;
+            font-family: inherit;
+            font-size: 12px;
+            color: #333333;
+            background: #ffffff;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+        .calc-select:focus {
+            outline: none;
+            border-color: #000000;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #333333;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 4px 0;
+            font-size: 12px;
+        }
+
+        .result-label {
+            color: #666666;
+        }
+
+        .result-value {
+            color: #333333;
+            font-weight: 500;
+        }
+
+        .result-total {
+            border-top: 1px solid #333333;
+            padding-top: 8px;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        .footer {
+            margin-top: 120px;
+            text-align: center;
+            font-size: 10px;
+            color: #666666;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 60px 40px;
+            }
+            
+            .calc-row {
+                flex-direction: column;
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">IAS Career Progression</h1>
+            <p class="subtitle">Complete journey from SDM to Secretary level</p>
+        </header>
+
+        <main>
+            <div class="stage">
+                <div class="stage-header">
+                    <div class="stage-meta">
+                        <span class="stage-number">Stage One</span>
+                        <span class="stage-years">0-2 years</span>
+                    </div>
+                    <h2 class="stage-title">Sub Divisional Magistrate</h2>
+                    <div class="stage-salary">₹99,000 monthly</div>
+                </div>
+                <div class="stage-content">
+                    <p class="stage-description">Entry-level position handling revenue administration, licensing, and sub-division management. First exposure to field administration with direct public interface.</p>
+                    <ul class="stage-duties">
+                        <li>Revenue administration and land records</li>
+                        <li>Public grievance redressal</li>
+                        <li>Licensing and permits</li>
+                        <li>Magisterial duties</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="stage">
+                <div class="stage-header">
+                    <div class="stage-meta">
+                        <span class="stage-number">Stage Two</span>
+                        <span class="stage-years">2-4 years</span>
+                    </div>
+                    <h2 class="stage-title">Assistant Collector</h2>
+                    <div class="stage-salary">₹1,20,000 monthly</div>
+                </div>
+                <div class="stage-content">
+                    <p class="stage-description">Land acquisition, development programs, district coordination and project management. Building comprehensive administrative experience.</p>
+                    <ul class="stage-duties">
+                        <li>Land acquisition projects</li>
+                        <li>Development scheme implementation</li>
+                        <li>Inter-departmental coordination</li>
+                        <li>Project management</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="stage">
+                <div class="stage-header">
+                    <div class="stage-meta">
+                        <span class="stage-number">Stage Three</span>
+                        <span class="stage-years">4-8 years</span>
+                    </div>
+                    <h2 class="stage-title">District Collector</h2>
+                    <div class="stage-salary">₹1,60,000 monthly</div>
+                </div>
+                <div class="stage-content">
+                    <p class="stage-description">Head of district administration, law & order coordination, crisis management. Peak field experience role with maximum responsibility.</p>
+                    <ul class="stage-duties">
+                        <li>District administration leadership</li>
+                        <li>Law and order coordination</li>
+                        <li>Disaster management</li>
+                        <li>Elections and poll duties</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="stage">
+                <div class="stage-header">
+                    <div class="stage-meta">
+                        <span class="stage-number">Stage Four</span>
+                        <span class="stage-years">8-12 years</span>
+                    </div>
+                    <h2 class="stage-title">Deputy Secretary</h2>
+                    <div class="stage-salary">₹1,80,000 monthly</div>
+                </div>
+                <div class="stage-content">
+                    <p class="stage-description">Central government policy work, inter-ministerial coordination, file management. Transition from field to policy making.</p>
+                    <ul class="stage-duties">
+                        <li>Central government policy work</li>
+                        <li>File management and processing</li>
+                        <li>Inter-ministerial coordination</li>
+                        <li>Parliamentary questions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="stage">
+                <div class="stage-header">
+                    <div class="stage-meta">
+                        <span class="stage-number">Stage Five</span>
+                        <span class="stage-years">12-16 years</span>
+                    </div>
+                    <h2 class="stage-title">Joint Secretary</h2>
+                    <div class="stage-salary">₹2,00,000 monthly</div>
+                </div>
+                <div class="stage-content">
+                    <p class="stage-description">Policy formulation, parliamentary questions, minister briefings, strategic planning. Senior policy leadership role.</p>
+                    <ul class="stage-duties">
+                        <li>Policy formulation and analysis</li>
+                        <li>Minister briefings</li>
+                        <li>Parliamentary work</li>
+                        <li>Strategic planning</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="stage">
+                <div class="stage-header">
+                    <div class="stage-meta">
+                        <span class="stage-number">Stage Six</span>
+                        <span class="stage-years">16-22 years</span>
+                    </div>
+                    <h2 class="stage-title">Additional Secretary</h2>
+                    <div class="stage-salary">₹2,40,000 monthly</div>
+                </div>
+                <div class="stage-content">
+                    <p class="stage-description">Senior policy making, cabinet note preparation, high-level negotiations. Pre-secretary leadership responsibilities.</p>
+                    <ul class="stage-duties">
+                        <li>Senior policy making</li>
+                        <li>Cabinet note preparation</li>
+                        <li>High-level negotiations</li>
+                        <li>Administrative reforms</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="stage">
+                <div class="stage-header">
+                    <div class="stage-meta">
+                        <span class="stage-number">Peak Level</span>
+                        <span class="stage-years">22+ years</span>
+                    </div>
+                    <h2 class="stage-title">Secretary to Government</h2>
+                    <div class="stage-salary">₹2,80,000+ monthly</div>
+                </div>
+                <div class="stage-content">
+                    <p class="stage-description">Ministry head, direct minister interface, policy leadership. Apex administrative position with transformational responsibility.</p>
+                    <ul class="stage-duties">
+                        <li>Ministry leadership</li>
+                        <li>Cabinet interactions</li>
+                        <li>Policy leadership</li>
+                        <li>Transformational changes</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+
+        <div class="calculator">
+            <div class="calc-title">Salary Calculator</div>
+            <div class="calc-row">
+                <div class="calc-group">
+                    <div class="calc-label">Stage</div>
+                    <select class="calc-select" id="stage" onchange="calculate()">
+                        <option value="">Select stage</option>
+                        <option value="99000">SDM (₹99,000)</option>
+                        <option value="120000">Assistant Collector (₹1,20,000)</option>
+                        <option value="160000">District Collector (₹1,60,000)</option>
+                        <option value="180000">Deputy Secretary (₹1,80,000)</option>
+                        <option value="200000">Joint Secretary (₹2,00,000)</option>
+                        <option value="240000">Additional Secretary (₹2,40,000)</option>
+                        <option value="280000">Secretary (₹2,80,000)</option>
+                    </select>
+                </div>
+                <div class="calc-group">
+                    <div class="calc-label">City</div>
+                    <select class="calc-select" id="city" onchange="calculate()">
+                        <option value="metro">Metro (24% HRA)</option>
+                        <option value="major">Major (16% HRA)</option>
+                        <option value="other">Other (8% HRA)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="result" class="result hidden">
+                <div class="result-row">
+                    <span class="result-label">Basic Pay</span>
+                    <span class="result-value" id="basic">₹0</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">DA (53%)</span>
+                    <span class="result-value" id="da">₹0</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">HRA</span>
+                    <span class="result-value" id="hra">₹0</span>
+                </div>
+                <div class="result-row">
+                    <span class="result-label">Other Allowances</span>
+                    <span class="result-value" id="other">₹5,000</span>
+                </div>
+                <div class="result-row result-total">
+                    <span class="result-label">Total Monthly</span>
+                    <span class="result-value" id="total">₹0</span>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>© 2025 Government Pay Navigator</p>
+        </footer>
+    </div>
+
+    <script>
+        function calculate() {
+            const basic = parseInt(document.getElementById('stage').value);
+            const cityType = document.getElementById('city').value;
+            
+            if (!basic) {
+                document.getElementById('result').classList.add('hidden');
+                return;
+            }
+            
+            const da = Math.round(basic * 0.53);
+            let hraRate = 0.08;
+            if (cityType === 'metro') hraRate = 0.24;
+            else if (cityType === 'major') hraRate = 0.16;
+            const hra = Math.round(basic * hraRate);
+            const other = 5000;
+            const total = basic + da + hra + other;
+            
+            document.getElementById('basic').textContent = '₹' + basic.toLocaleString();
+            document.getElementById('da').textContent = '₹' + da.toLocaleString();
+            document.getElementById('hra').textContent = '₹' + hra.toLocaleString();
+            document.getElementById('total').textContent = '₹' + total.toLocaleString();
+            
+            document.getElementById('result').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

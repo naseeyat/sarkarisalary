@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IAS Career Journey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+            background: #ffffff;
+            color: #333333;
+            line-height: 1.4;
+            font-size: 14px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .header {
+            margin-bottom: 40px;
+            text-align: center;
+            border: 3px solid #333333;
+            padding: 30px;
+            background: #ffffff;
+            position: relative;
+            box-shadow: 8px 8px 0px #333333;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #666666;
+            margin-bottom: 20px;
+        }
+
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .badge {
+            background: #333333;
+            color: #ffffff;
+            padding: 6px 14px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            position: relative;
+        }
+
+        .badge::after {
+            content: "";
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            bottom: 2px;
+            left: 2px;
+            border: 1px solid #ffffff;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 3px solid #333333;
+            margin-bottom: 30px;
+            box-shadow: 4px 4px 0px #333333;
+        }
+
+        .stat-box {
+            border-right: 1px solid #333333;
+            padding: 20px 16px;
+            text-align: center;
+            background: #ffffff;
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .stat-box:last-child {
+            border-right: none;
+        }
+
+        .stat-box:hover {
+            background: #333333;
+            color: #ffffff;
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .stat-number {
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border: 3px solid #333333;
+            margin-bottom: 30px;
+            box-shadow: 4px 4px 0px #333333;
+        }
+
+        .control-btn {
+            padding: 16px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: #333333;
+            cursor: pointer;
+            border-right: 1px solid #333333;
+            background: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            border: none;
+        }
+
+        .control-btn:last-child {
+            border-right: none;
+        }
+
+        .control-btn.active,
+        .control-btn:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        .timeline-container {
+            position: relative;
+        }
+
+        .stage {
+            border: 3px solid #333333;
+            margin-bottom: 4px;
+            background: #ffffff;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stage::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .stage:hover::before {
+            left: 100%;
+        }
+
+        .stage:hover {
+            box-shadow: 8px 8px 0px #333333;
+            transform: translateY(-2px);
+        }
+
+        .stage.selected {
+            background: #f8f8f8;
+            box-shadow: 8px 8px 0px #333333;
+            transform: translateY(-2px);
+        }
+
+        .stage-main {
+            display: grid;
+            grid-template-columns: 80px 1fr 140px 50px;
+            min-height: 90px;
+        }
+
+        .stage-number {
+            border-right: 1px solid #333333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 900;
+            color: #333333;
+            background: #f8f8f8;
+            position: relative;
+        }
+
+        .stage-number::after {
+            content: "";
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 8px solid #f8f8f8;
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            z-index: 2;
+        }
+
+        .stage-info {
+            border-right: 1px solid #333333;
+            padding: 18px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .stage-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+
+        .stage-years {
+            font-size: 11px;
+            color: #666666;
+            background: #ffffff;
+            padding: 4px 10px;
+            border: 1px solid #333333;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .stage-salary {
+            border-right: 1px solid #333333;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 900;
+            color: #333333;
+            background: #f8f8f8;
+        }
+
+        .expand-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #333333;
+            font-weight: 900;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .stage.expanded .expand-indicator {
+            transform: rotate(180deg);
+        }
+
+        .stage-description {
+            border-top: 1px solid #333333;
+            padding: 24px;
+            font-size: 14px;
+            color: #444444;
+            line-height: 1.6;
+            background: #fafafa;
+        }
+
+        .stage-details {
+            border-top: 1px solid #333333;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #f8f8f8;
+        }
+
+        .stage.expanded .stage-details {
+            max-height: 400px;
+        }
+
+        .details-content {
+            padding: 24px;
+        }
+
+        .duties-header {
+            font-size: 13px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .duties-header::after {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: #333333;
+        }
+
+        .duties-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3px;
+            background: #333333;
+            padding: 3px;
+        }
+
+        .duty-item {
+            background: #ffffff;
+            padding: 16px 20px;
+            font-size: 13px;
+            color: #555555;
+            position: relative;
+            padding-left: 40px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .duty-item:hover {
+            background: #333333;
+            color: #ffffff;
+            transform: scale(1.02);
+        }
+
+        .duty-item::before {
+            content: "◆";
+            position: absolute;
+            left: 16px;
+            color: #333333;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .duty-item:hover::before {
+            color: #ffffff;
+        }
+
+        .salary-calculator {
+            border: 3px solid #333333;
+            margin-top: 40px;
+            background: #ffffff;
+            box-shadow: 8px 8px 0px #333333;
+        }
+
+        .calc-header {
+            padding: 24px;
+            border-bottom: 1px solid #333333;
+            font-size: 18px;
+            font-weight: 800;
+            color: #333333;
+            text-align: center;
+            background: #f8f8f8;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .calc-header::before {
+            content: "💰";
+            position: absolute;
+            left: 24px;
+            font-size: 20px;
+        }
+
+        .calc-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .form-section {
+            padding: 28px;
+            border-right: 1px solid #333333;
+        }
+
+        .form-section:last-child {
+            border-right: none;
+        }
+
+        .form-label {
+            font-size: 13px;
+            color: #333333;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 3px solid #333333;
+            border-radius: 0;
+            font-family: inherit;
+            font-size: 14px;
+            color: #333333;
+            background: #ffffff;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="10" viewBox="0 0 16 10"><path fill="%23333333" stroke="%23333333" stroke-width="2" d="M2 2l6 6 6-6"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 16px 10px;
+            padding-right: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .form-select:focus {
+            outline: none;
+            background-color: #f8f8f8;
+            box-shadow: inset 4px 4px 0px #e0e0e0;
+        }
+
+        .results-section {
+            border-top: 1px solid #333333;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .result-box {
+            border-right: 1px solid #333333;
+            padding: 28px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .result-box:last-child {
+            border-right: none;
+        }
+
+        .result-box:hover {
+            background: #333333;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .result-value {
+            font-size: 20px;
+            font-weight: 900;
+            margin-bottom: 6px;
+        }
+
+        .result-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            font-weight: 600;
+        }
+
+        .footer {
+            margin-top: 60px;
+            text-align: center;
+            font-size: 12px;
+            color: #666666;
+            border-top: 3px solid #333333;
+            padding-top: 24px;
+            font-weight: 600;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stage {
+            animation: slideInUp 0.6s ease forwards;
+        }
+
+        .stage:nth-child(1) { animation-delay: 0.1s; }
+        .stage:nth-child(2) { animation-delay: 0.2s; }
+        .stage:nth-child(3) { animation-delay: 0.3s; }
+        .stage:nth-child(4) { animation-delay: 0.4s; }
+        .stage:nth-child(5) { animation-delay: 0.5s; }
+        .stage:nth-child(6) { animation-delay: 0.6s; }
+        .stage:nth-child(7) { animation-delay: 0.7s; }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+            
+            .stage-main {
+                grid-template-columns: 60px 1fr 110px 40px;
+            }
+            
+            .quick-stats,
+            .calc-form,
+            .results-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .duties-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .result-box,
+            .stat-box {
+                border-right: none;
+                border-bottom: 1px solid #333333;
+            }
+
+            .stat-box:nth-child(2n),
+            .result-box:nth-child(2n) {
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">IAS Career Journey</h1>
+            <p class="subtitle">Complete progression from SDM to Secretary</p>
+            <div class="badge-container">
+                <div class="badge">All India Service</div>
+                <div class="badge">Grade A</div>
+            </div>
+        </header>
+
+        <div class="quick-stats">
+            <div class="stat-box">
+                <div class="stat-number">30+ Years</div>
+                <div class="stat-label">Career Length</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">₹99K</div>
+                <div class="stat-label">Starting Pay</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">₹2.8L</div>
+                <div class="stat-label">Peak Salary</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">7 Levels</div>
+                <div class="stat-label">Progression</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="control-btn active" onclick="setView('all')">Show All</button>
+            <button class="control-btn" onclick="setView('field')">Field Postings</button>
+            <button class="control-btn" onclick="setView('secretariat')">Secretariat</button>
+        </div>
+
+        <main class="timeline-container">
+            <div class="stage field-posting" onclick="toggleStage(this)">
+                <div class="stage-main">
+                    <div class="stage-number">1</div>
+                    <div class="stage-info">
+                        <div class="stage-title">Sub Divisional Magistrate</div>
+                        <div class="stage-years">0-2 years</div>
+                    </div>
+                    <div class="stage-salary">₹99,000</div>
+                    <div class="expand-indicator">▼</div>
+                </div>
+                <div class="stage-description">
+                    Your first taste of administrative power. Handle revenue disputes, issue licenses, and manage sub-division affairs. Direct interface with citizens and ground-level governance.
+                </div>
+                <div class="stage-details">
+                    <div class="details-content">
+                        <div class="duties-header">Core Responsibilities</div>
+                        <div class="duties-grid">
+                            <div class="duty-item">Revenue administration</div>
+                            <div class="duty-item">Public grievances</div>
+                            <div class="duty-item">Licensing & permits</div>
+                            <div class="duty-item">Magisterial duties</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stage field-posting" onclick="toggleStage(this)">
+                <div class="stage-main">
+                    <div class="stage-number">2</div>
+                    <div class="stage-info">
+                        <div class="stage-title">Assistant Collector</div>
+                        <div class="stage-years">2-4 years</div>
+                    </div>
+                    <div class="stage-salary">₹1,20,000</div>
+                    <div class="expand-indicator">▼</div>
+                </div>
+                <div class="stage-description">
+                    Step up to district-level coordination. Manage land acquisition projects, oversee development schemes, and coordinate between departments. Build your project management skills.
+                </div>
+                <div class="stage-details">
+                    <div class="details-content">
+                        <div class="duties-header">Core Responsibilities</div>
+                        <div class="duties-grid">
+                            <div class="duty-item">Land acquisition</div>
+                            <div class="duty-item">Development programs</div>
+                            <div class="duty-item">Inter-dept coordination</div>
+                            <div class="duty-item">Project management</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stage field-posting" onclick="toggleStage(this)">
+                <div class="stage-main">
+                    <div class="stage-number">3</div>
+                    <div class="stage-info">
+                        <div class="stage-title">District Collector</div>
+                        <div class="stage-years">4-8 years</div>
+                    </div>
+                    <div class="stage-salary">₹1,60,000</div>
+                    <div class="expand-indicator">▼</div>
+                </div>
+                <div class="stage-description">
+                    The crown jewel of field postings. Lead an entire district, coordinate with police, handle disasters, and be the face of government. Maximum responsibility and visibility.
+                </div>
+                <div class="stage-details">
+                    <div class="details-content">
+                        <div class="duties-header">Core Responsibilities</div>
+                        <div class="duties-grid">
+                            <div class="duty-item">District leadership</div>
+                            <div class="duty-item">Law & order</div>
+                            <div class="duty-item">Disaster management</div>
+                            <div class="duty-item">Election duties</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stage secretariat-posting" onclick="toggleStage(this)">
+                <div class="stage-main">
+                    <div class="stage-number">4</div>
+                    <div class="stage-info">
+                        <div class="stage-title">Deputy Secretary</div>
+                        <div class="stage-years">8-12 years</div>
+                    </div>
+                    <div class="stage-salary">₹1,80,000</div>
+                    <div class="expand-indicator">▼</div>
+                </div>
+                <div class="stage-description">
+                    Transition to central government. Handle policy files, coordinate between ministries, and support ministers. Learn the art of bureaucratic navigation and policy crafting.
+                </div>
+                <div class="stage-details">
+                    <div class="details-content">
+                        <div class="duties-header">Core Responsibilities</div>
+                        <div class="duties-grid">
+                            <div class="duty-item">Policy work</div>
+                            <div class="duty-item">File management</div>
+                            <div class="duty-item">Ministry coordination</div>
+                            <div class="duty-item">Parliamentary questions</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stage secretariat-posting" onclick="toggleStage(this)">
+                <div class="stage-main">
+                    <div class="stage-number">5</div>
+                    <div class="stage-info">
+                        <div class="stage-title">Joint Secretary</div>
+                        <div class="stage-years">12-16 years</div>
+                    </div>
+                    <div class="stage-salary">₹2,00,000</div>
+                    <div class="expand-indicator">▼</div>
+                </div>
+                <div class="stage-description">
+                    Senior policy leadership. Brief ministers, formulate policies, handle Parliament, and shape national direction. Your decisions impact millions of citizens across the country.
+                </div>
+                <div class="stage-details">
+                    <div class="details-content">
+                        <div class="duties-header">Core Responsibilities</div>
+                        <div class="duties-grid">
+                            <div class="duty-item">Policy formulation</div>
+                            <div class="duty-item">Minister briefings</div>
+                            <div class="duty-item">Parliamentary work</div>
+                            <div class="duty-item">Strategic planning</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stage secretariat-posting" onclick="toggleStage(this)">
+                <div class="stage-main">
+                    <div class="stage-number">6</div>
+                    <div class="stage-info">
+                        <div class="stage-title">Additional Secretary</div>
+                        <div class="stage-years">16-22 years</div>
+                    </div>
+                    <div class="stage-salary">₹2,40,000</div>
+                    <div class="expand-indicator">▼</div>
+                </div>
+                <div class="stage-description">
+                    Pre-secretary leadership. Prepare cabinet notes, negotiate with stakeholders, and drive administrative reforms. You're now in the inner circle of government decision-making.
+                </div>
+                <div class="stage-details">
+                    <div class="details-content">
+                        <div class="duties-header">Core Responsibilities</div>
+                        <div class="duties-grid">
+                            <div class="duty-item">Senior policy making</div>
+                            <div class="duty-item">Cabinet notes</div>
+                            <div class="duty-item">High-level negotiations</div>
+                            <div class="duty-item">Administrative reforms</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stage secretariat-posting" onclick="toggleStage(this)">
+                <div class="stage-main">
+                    <div class="stage-number">★</div>
+                    <div class="stage-info">
+                        <div class="stage-title">Secretary to Government</div>
+                        <div class="stage-years">22+ years</div>
+                    </div>
+                    <div class="stage-salary">₹2,80,000+</div>
+                    <div class="expand-indicator">▼</div>
+                </div>
+                <div class="stage-description">
+                    The apex. Lead entire ministries, interface directly with Cabinet ministers, and shape India's future. Your legacy is measured in transformational policies and institutional changes.
+                </div>
+                <div class="stage-details">
+                    <div class="details-content">
+                        <div class="duties-header">Core Responsibilities</div>
+                        <div class="duties-grid">
+                            <div class="duty-item">Ministry leadership</div>
+                            <div class="duty-item">Cabinet interactions</div>
+                            <div class="duty-item">Policy leadership</div>
+                            <div class="duty-item">Legacy building</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="salary-calculator">
+            <div class="calc-header">Salary Calculator</div>
+            <div class="calc-form">
+                <div class="form-section">
+                    <div class="form-label">Career Stage</div>
+                    <select class="form-select" id="stage" onchange="calculate()">
+                        <option value="">Choose your level</option>
+                        <option value="99000">SDM (₹99,000)</option>
+                        <option value="120000">Assistant Collector (₹1,20,000)</option>
+                        <option value="160000">District Collector (₹1,60,000)</option>
+                        <option value="180000">Deputy Secretary (₹1,80,000)</option>
+                        <option value="200000">Joint Secretary (₹2,00,000)</option>
+                        <option value="240000">Additional Secretary (₹2,40,000)</option>
+                        <option value="280000">Secretary (₹2,80,000)</option>
+                    </select>
+                </div>
+                <div class="form-section">
+                    <div class="form-label">City Type</div>
+                    <select class="form-select" id="city" onchange="calculate()">
+                        <option value="metro">Metro Cities (24% HRA)</option>
+                        <option value="major">Major Cities (16% HRA)</option>
+                        <option value="other">Other Cities (8% HRA)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="result" class="results-section hidden">
+                <div class="result-box">
+                    <div class="result-value" id="basic">₹0</div>
+                    <div class="result-label">Basic Pay</div>
+                </div>
+                <div class="result-box">
+                    <div class="result-value" id="da">₹0</div>
+                    <div class="result-label">DA (53%)</div>
+                </div>
+                <div class="result-box">
+                    <div class="result-value" id="hra">₹0</div>
+                    <div class="result-label">HRA</div>
+                </div>
+                <div class="result-box">
+                    <div class="result-value" id="total">₹0</div>
+                    <div class="result-label">Total Monthly</div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            © 2025 Government Pay Navigator • Premium IAS Career Guide
+        </footer>
+    </div>
+
+    <script>
+        function calculate() {
+            const basic = parseInt(document.getElementById('stage').value);
+            const cityType = document.getElementById('city').value;
+            
+            if (!basic) {
+                document.getElementById('result').classList.add('hidden');
+                return;
+            }
+            
+            const da = Math.round(basic * 0.53);
+            let hraRate = 0.08;
+            if (cityType === 'metro') hraRate = 0.24;
+            else if (cityType === 'major') hraRate = 0.16;
+            const hra = Math.round(basic * hraRate);
+            const other = 5000;
+            const total = basic + da + hra + other;
+            
+            document.getElementById('basic').textContent = '₹' + basic.toLocaleString();
+            document.getElementById('da').textContent = '₹' + da.toLocaleString();
+            document.getElementById('hra').textContent = '₹' + hra.toLocaleString();
+            document.getElementById('total').textContent = '₹' + total.toLocaleString();
+            
+            document.getElementById('result').classList.remove('hidden');
+        }
+
+        function toggleStage(element) {
+            // Close other expanded stages
+            document.querySelectorAll('.stage.expanded').forEach(stage => {
+                if (stage !== element) {
+                    stage.classList.remove('expanded');
+                    stage.classList.remove('selected');
+                }
+            });
+            
+            element.classList.toggle('expanded');
+            element.classList.toggle('selected');
+        }
+
+        function setView(viewType) {
+            // Update active button
+            document.querySelectorAll('.control-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Show/hide stages based on view
+            const stages = document.querySelectorAll('.stage');
+            stages.forEach(stage => {
+                if (viewType === 'all') {
+                    stage.style.display = 'block';
+                } else if (viewType === 'field') {
+                    stage.style.display = stage.classList.contains('field-posting') ? 'block' : 'none';
+                } else if (viewType === 'secretariat') {
+                    stage.style.display = stage.classList.contains('secretariat-posting') ? 'block' : 'none';
+                }
+            });
+        }
+
+        // Add shimmer effect to stats on load
+        setTimeout(() => {
+            document.querySelectorAll('.stat-box').forEach((box, index) => {
+                setTimeout(() => {
+                    box.style.animation = 'none';
+                    box.style.background = '#333333';
+                    box.style.color = '#ffffff';
+                    setTimeout(() => {
+                        box.style.background = '#ffffff';
+                        box.style.color = '#333333';
+                    }, 200);
+                }, index * 100);
+            });
+        }, 1000);
+    </script>
+</body>
+</html>
