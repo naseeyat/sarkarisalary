@@ -284,6 +284,35 @@ function build() {
     fs.writeFileSync('dist/index.html', homepage);
     console.log('✅ Generated: index.html');
     
+    // Generate sitemap.xml automatically
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://sarkarisalary.today/</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+${Object.keys(jobs).map(key => {
+    const filename = key.replace('_', '-') + '.html';
+    return `  <url>
+    <loc>https://sarkarisalary.today/${filename}</loc>
+    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>`;
+}).join('\n')}
+</urlset>`;
+    
+    fs.writeFileSync('dist/sitemap.xml', sitemap);
+    console.log('✅ Generated: sitemap.xml');
+    
+    // Copy robots.txt
+    fs.writeFileSync('dist/robots.txt', `User-agent: *
+Allow: /
+Sitemap: https://sarkarisalary.today/sitemap.xml`);
+    console.log('✅ Generated: robots.txt');
+    
     console.log('🎉 Build complete! Files in dist/ folder');
     console.log(`📄 Generated ${Object.keys(jobs).length + 1} pages`);
 }

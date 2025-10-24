@@ -1,0 +1,90 @@
+{
+  "payCommissions": {
+    "6th": {
+      "title": "6th Pay Commission",
+      "status": "historical",
+      "period": "2006-2015",
+      "effective": "January 1, 2006",
+      "superseded": "7th Pay Commission (2016)",
+      "structure": "Pay Band + Grade Pay",
+      "minSalary": 7000,
+      "gradePays": [
+        {"amount": 1800, "posts": "MTS, Peon, Sweeper"},
+        {"amount": 1900, "posts": "Attendant, Helper"},
+        {"amount": 2000, "posts": "Constable, Driver"},
+        {"amount": 2400, "posts": "Clerk, Typist"},
+        {"amount": 2800, "posts": "Senior Clerk"},
+        {"amount": 4200, "posts": "Assistant, Inspector"},
+        {"amount": 4600, "posts": "Section Officer"},
+        {"amount": 4800, "posts": "Assistant Section Officer"},
+        {"amount": 5400, "posts": "Assistant Professor"},
+        {"amount": 6600, "posts": "Deputy Superintendent"},
+        {"amount": 7600, "posts": "Under Secretary"},
+        {"amount": 8700, "posts": "Deputy Secretary"},
+        {"amount": 10000, "posts": "Joint Secretary"}
+      ]
+    },
+    "7th": {
+      "title": "7th Pay Commission", 
+      "status": "current",
+      "period": "2016-present",
+      "effective": "January 1, 2016",
+      "nextRevision": "Expected 2026",
+      "structure": "Pay Levels (1-17)",
+      "minSalary": 18000,
+      "payLevels": [
+        {"level": 1, "entry": 18000, "max": 56900, "posts": "MTS, Peon, Sweeper"},
+        {"level": 2, "entry": 19900, "max": 63200, "posts": "Attendant, Helper"},
+        {"level": 3, "entry": 21700, "max": 69100, "posts": "Constable, Driver"},
+        {"level": 4, "entry": 25500, "max": 81100, "posts": "Clerk, Typist"},
+        {"level": 5, "entry": 29200, "max": 92300, "posts": "Senior Clerk, Cashier"},
+        {"level": 6, "entry": 35400, "max": 112400, "posts": "Assistant, Inspector"},
+        {"level": 7, "entry": 44900, "max": 142400, "posts": "Section Officer, Accountant"},
+        {"level": 8, "entry": 47600, "max": 151100, "posts": "Assistant Section Officer"},
+        {"level": 9, "entry": 53100, "max": 167800, "posts": "Senior Supervisor"},
+        {"level": 10, "entry": 56100, "max": 177500, "posts": "Assistant Professor, SO"},
+        {"level": 11, "entry": 67700, "max": 208700, "posts": "Deputy Superintendent"},
+        {"level": 12, "entry": 78800, "max": 209200, "posts": "Under Secretary, Superintendent"},
+        {"level": 13, "entry": 118500, "max": 214100, "posts": "Deputy Secretary, Professor"},
+        {"level": 14, "entry": 144200, "max": 218200, "posts": "Joint Secretary"},
+        {"level": 15, "entry": 182200, "max": 224100, "posts": "Additional Secretary"},
+        {"level": 16, "entry": 205400, "max": 224400, "posts": "Secretary"},
+        {"level": 17, "entry": 225000, "max": 225000, "posts": "Cabinet Secretary"}
+      ]
+    },
+    "8th": {
+      "title": "8th Pay Commission",
+      "status": "upcoming", 
+      "period": "2026-onwards",
+      "effective": "Expected January 1, 2026",
+      "formation": "Expected 2025",
+      "structure": "Expected Pay Levels",
+      "expectedMinSalary": 25000,
+      "fitmentFactor": 2.86,
+      "projectedLevels": [
+        {"level": 1, "current": 18000, "expected": 25000, "increase": 39},
+        {"level": 2, "current": 19900, "expected": 28000, "increase": 41},
+        {"level": 3, "current": 21700, "expected": 31000, "increase": 43},
+        {"level": 4, "current": 25500, "expected": 36000, "increase": 41},
+        {"level": 5, "current": 29200, "expected": 42000, "increase": 44},
+        {"level": 6, "current": 35400, "expected": 50000, "increase": 41},
+        {"level": 7, "current": 44900, "expected": 64000, "increase": 43},
+        {"level": 8, "current": 47600, "expected": 68000, "increase": 43},
+        {"level": 9, "current": 53100, "expected": 76000, "increase": 43},
+        {"level": 10, "current": 56100, "expected": 80000, "increase": 43},
+        {"level": 11, "current": 67700, "expected": 97000, "increase": 43},
+        {"level": 12, "current": 78800, "expected": 113000, "increase": 43},
+        {"level": 13, "current": 118500, "expected": 170000, "increase": 43},
+        {"level": 14, "current": 144200, "expected": 205000, "increase": 42},
+        {"level": 15, "current": 182200, "expected": 260000, "increase": 43},
+        {"level": 16, "current": 205400, "expected": 294000, "increase": 43},
+        {"level": 17, "current": 225000, "expected": 322000, "increase": 43}
+      ]
+    }
+  },
+  "navigation": {
+    "currentCommission": "7th",
+    "previousCommission": "6th", 
+    "nextCommission": "8th"
+  }
+}
