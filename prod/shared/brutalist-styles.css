@@ -1,0 +1,56 @@
+/* Brutalist Design System - Left Shadow Variant */
+
+/* Main containers with left + bottom shadow */
+.brutalist-container {
+    border: 3px solid #333333;
+    background: #ffffff;
+    box-shadow: -8px 8px 0px #333333;
+}
+
+/* Card elements with left + bottom shadow */
+.brutalist-card {
+    border: 3px solid #333333;
+    background: #ffffff;
+    box-shadow: -4px 4px 0px #333333;
+    transition: all 0.2s ease;
+}
+
+.brutalist-card:hover {
+    transform: translate(2px, -2px);
+    box-shadow: -6px 6px 0px #333333;
+}
+
+/* Small elements with left + bottom shadow */
+.brutalist-small {
+    border: 2px solid #333333;
+    background: #ffffff;
+    box-shadow: -3px 3px 0px #333333;
+}
+
+/* Table elements with left + bottom shadow */
+.brutalist-table {
+    border: 3px solid #333333;
+    background: #ffffff;
+    box-shadow: -6px 6px 0px #333333;
+}
+
+/* Button elements with left + bottom shadow */
+.brutalist-button {
+    border: 2px solid #333333;
+    background: #333333;
+    color: #ffffff;
+    box-shadow: -3px 3px 0px #666666;
+    transition: all 0.2s ease;
+}
+
+.brutalist-button:hover {
+    transform: translate(1px, -1px);
+    box-shadow: -4px 4px 0px #666666;
+}
+
+/* Header sections with left + bottom shadow */
+.brutalist-header {
+    border: 3px solid #333333;
+    background: #ffffff;
+    box-shadow: -8px 8px 0px #333333;
+}

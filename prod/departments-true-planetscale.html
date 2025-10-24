@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Departments Directory</title>
+    <meta name="description" content="Complete directory of government departments and recruitment bodies">
+    <link rel="icon" type="image/svg+xml" href="shared/favicon.svg">
+    
+    <!-- Global JavaScript -->
+    <script src="shared/global.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+            background: #ffffff;
+            color: #333333;
+            line-height: 1.4;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: 400;
+            color: #333333;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #666666;
+            margin-bottom: 40px;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .nav a {
+            color: #666666;
+            text-decoration: none;
+            font-size: 14px;
+            padding: 4px 0;
+        }
+
+        .nav a:hover,
+        .nav a.active {
+            color: #333333;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #333333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Central Government Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 2px solid #333333;
+            margin-bottom: 60px;
+        }
+
+        .dept-box {
+            border-right: 1px solid #333333;
+            border-bottom: 1px solid #333333;
+            padding: 24px 20px;
+            min-height: 200px;
+            background: #ffffff;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333333;
+            display: block;
+        }
+
+        .dept-box:nth-child(4n) {
+            border-right: none;
+        }
+
+        .dept-box:nth-child(n+13) {
+            border-bottom: none;
+        }
+
+        .dept-box:hover {
+            background: #f8f8f8;
+        }
+
+        .dept-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .dept-desc {
+            font-size: 12px;
+            color: #666666;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .dept-stats {
+            font-size: 11px;
+            color: #888888;
+            margin-bottom: 8px;
+        }
+
+        .dept-jobs {
+            font-size: 12px;
+            color: #333333;
+            line-height: 1.3;
+        }
+
+        .dept-status {
+            font-size: 10px;
+            color: #666666;
+            text-align: right;
+            margin-top: 8px;
+        }
+
+        .status-live { color: #22c55e; }
+        .status-soon { color: #f59e0b; }
+        .status-closed { color: #ef4444; }
+
+        /* State Governments Grid */
+        .state-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            border: 2px solid #333333;
+            margin-bottom: 60px;
+        }
+
+        .state-box {
+            border-right: 1px solid #333333;
+            border-bottom: 1px solid #333333;
+            padding: 20px 16px;
+            min-height: 160px;
+            background: #ffffff;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333333;
+            display: block;
+        }
+
+        .state-box:nth-child(5n) {
+            border-right: none;
+        }
+
+        .state-box:nth-child(n+16) {
+            border-bottom: none;
+        }
+
+        .state-box:hover {
+            background: #f8f8f8;
+        }
+
+        .state-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .state-desc {
+            font-size: 11px;
+            color: #666666;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .state-jobs {
+            font-size: 11px;
+            color: #333333;
+            line-height: 1.2;
+        }
+
+        /* PSU Grid */
+        .psu-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            border: 2px solid #333333;
+            margin-bottom: 60px;
+        }
+
+        .psu-box {
+            border-right: 1px solid #333333;
+            border-bottom: 1px solid #333333;
+            padding: 20px 12px;
+            min-height: 140px;
+            background: #ffffff;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333333;
+            display: block;
+        }
+
+        .psu-box:nth-child(6n) {
+            border-right: none;
+        }
+
+        .psu-box:nth-child(n+19) {
+            border-bottom: none;
+        }
+
+        .psu-box:hover {
+            background: #f8f8f8;
+        }
+
+        .psu-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 6px;
+            text-align: center;
+        }
+
+        .psu-sector {
+            font-size: 10px;
+            color: #666666;
+            margin-bottom: 6px;
+            text-align: center;
+        }
+
+        .psu-salary {
+            font-size: 11px;
+            color: #333333;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        /* Quick Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            border: 2px solid #333333;
+            margin-bottom: 40px;
+        }
+
+        .stat-box {
+            border-right: 1px solid #333333;
+            padding: 20px 16px;
+            min-height: 80px;
+            background: #ffffff;
+            text-align: center;
+        }
+
+        .stat-box:last-child {
+            border-right: none;
+        }
+
+        .stat-number {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 4px;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: #666666;
+        }
+
+        @media (max-width: 768px) {
+            .main-grid { grid-template-columns: repeat(2, 1fr); }
+            .state-grid { grid-template-columns: repeat(3, 1fr); }
+            .psu-grid { grid-template-columns: repeat(3, 1fr); }
+            .stats-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <div class="nav">
+            <a href="index.html">Home</a>
+            <a href="pages/pay-scales/pay-scale-chart.html">Pay Scales</a>
+            <a href="level-1-jobs.html">Jobs by Level</a>
+            <a href="salary-calculator.html">Calculator</a>
+            <a href="#" class="active">Departments</a>
+            <a href="latest-notifications.html">Notifications</a>
+        </div>
+
+        <!-- Header -->
+        <div class="header">
+            <h1 class="title">Government Departments Directory</h1>
+            <p class="subtitle">108 Departments • 525 Job Types • 1.2M+ Vacancies</p>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-number">108</div>
+                <div class="stat-label">Departments</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">525</div>
+                <div class="stat-label">Job Types</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">87</div>
+                <div class="stat-label">Active Now</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">1.2M</div>
+                <div class="stat-label">Vacancies</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">28</div>
+                <div class="stat-label">States</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">17</div>
+                <div class="stat-label">Pay Levels</div>
+            </div>
+        </div>
+
+        <!-- Central Government Departments -->
+        <div class="section">
+            <h2 class="section-title">Central Government Departments</h2>
+            <div class="main-grid">
+                <a href="upsc-jobs.html" class="dept-box">
+                    <div class="dept-name">UPSC</div>
+                    <div class="dept-desc">Union Public Service Commission</div>
+                    <div class="dept-stats">8 Active Exams • ₹56K+ Starting</div>
+                    <div class="dept-jobs">IAS • IPS • IFS • IRS<br>Medical Officer • Assistant Commandant</div>
+                    <div class="dept-status status-live">● CSE 2024 Active</div>
+                </a>
+
+                <a href="ssc-jobs.html" class="dept-box">
+                    <div class="dept-name">SSC</div>
+                    <div class="dept-desc">Staff Selection Commission</div>
+                    <div class="dept-stats">15 Active Exams • ₹18K+ Starting</div>
+                    <div class="dept-jobs">CGL • CHSL • MTS • JE<br>CPO • Stenographer • Selection Posts</div>
+                    <div class="dept-status status-live">● MTS 2024 Live</div>
+                </a>
+
+                <a href="railway-jobs.html" class="dept-box">
+                    <div class="dept-name">Railways</div>
+                    <div class="dept-desc">21 Railway Recruitment Boards</div>
+                    <div class="dept-stats">25 Posts • ₹18K+ Starting</div>
+                    <div class="dept-jobs">NTPC • Group D • JE • ALP<br>Station Master • RPF • Goods Guard</div>
+                    <div class="dept-status status-soon">● Dec 2024 Expected</div>
+                </a>
+
+                <a href="banking-jobs.html" class="dept-box">
+                    <div class="dept-name">Banking</div>
+                    <div class="dept-desc">Public Sector Banks</div>
+                    <div class="dept-stats">18 Banks • ₹25K+ Starting</div>
+                    <div class="dept-jobs">SBI PO/Clerk • IBPS<br>RBI • NABARD • Security Guard</div>
+                    <div class="dept-status status-live">● Multiple Banks Active</div>
+                </a>
+
+                <a href="defence-jobs.html" class="dept-box">
+                    <div class="dept-name">Defence</div>
+                    <div class="dept-desc">Armed Forces & Paramilitary</div>
+                    <div class="dept-stats">20 Rallies • ₹21K+ Starting</div>
+                    <div class="dept-jobs">NDA • CDS • AFCAT<br>Soldier • Sailor • Airman</div>
+                    <div class="dept-status status-live">● Open Rally Active</div>
+                </a>
+
+                <a href="insurance-jobs.html" class="dept-box">
+                    <div class="dept-name">Insurance</div>
+                    <div class="dept-desc">Public Sector Insurance</div>
+                    <div class="dept-stats">8 Companies • ₹21K+ Starting</div>
+                    <div class="dept-jobs">LIC AAO/ADO • NIACL<br>Oriental • United India</div>
+                    <div class="dept-status status-closed">● Results Declared</div>
+                </a>
+
+                <a href="postal-jobs.html" class="dept-box">
+                    <div class="dept-name">India Post</div>
+                    <div class="dept-desc">Department of Posts</div>
+                    <div class="dept-stats">Circle wise • ₹18K+ Starting</div>
+                    <div class="dept-jobs">Postman • MTS • PA<br>Postal Assistant • Sorting Assistant</div>
+                    <div class="dept-status status-live">● Multiple Circles</div>
+                </a>
+
+                <a href="isro-jobs.html" class="dept-box">
+                    <div class="dept-name">ISRO</div>
+                    <div class="dept-desc">Space Research Organization</div>
+                    <div class="dept-stats">Technical • ₹56K+ Starting</div>
+                    <div class="dept-jobs">Scientist • Engineer<br>Technical Assistant • JRF</div>
+                    <div class="dept-status status-soon">● Jan 2025 Expected</div>
+                </a>
+
+                <a href="drdo-jobs.html" class="dept-box">
+                    <div class="dept-name">DRDO</div>
+                    <div class="dept-desc">Defence Research</div>
+                    <div class="dept-stats">Research • ₹56K+ Starting</div>
+                    <div class="dept-jobs">Scientist • JRF<br>Technical Assistant • Admin</div>
+                    <div class="dept-status status-live">● CEPTAM Active</div>
+                </a>
+
+                <a href="aiims-jobs.html" class="dept-box">
+                    <div class="dept-name">AIIMS</div>
+                    <div class="dept-desc">Medical Institutions</div>
+                    <div class="dept-stats">Multiple • ₹25K+ Starting</div>
+                    <div class="dept-jobs">Nursing Officer • Technical<br>Security Guard • MTS</div>
+                    <div class="dept-status status-live">● Multiple AIIMS</div>
+                </a>
+
+                <a href="capf-jobs.html" class="dept-box">
+                    <div class="dept-name">CAPF</div>
+                    <div class="dept-desc">Central Armed Police Forces</div>
+                    <div class="dept-stats">5 Forces • ₹21K+ Starting</div>
+                    <div class="dept-jobs">CRPF • BSF • CISF • ITBP<br>SSB • Constable • Officer</div>
+                    <div class="dept-status status-soon">● CAPF AC Expected</div>
+                </a>
+
+                <a href="university-jobs.html" class="dept-box">
+                    <div class="dept-name">Universities</div>
+                    <div class="dept-desc">Central Universities</div>
+                    <div class="dept-stats">45+ Unis • ₹57K+ Starting</div>
+                    <div class="dept-jobs">Professor • Assistant Prof<br>JRF • Technical • Admin</div>
+                    <div class="dept-status status-live">● UGC NET Results</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- State Governments -->
+        <div class="section">
+            <h2 class="section-title">State Government Departments</h2>
+            <div class="state-grid">
+                <a href="uttar-pradesh-jobs.html" class="state-box">
+                    <div class="state-name">Uttar Pradesh</div>
+                    <div class="state-desc">UPPSC • UPSSSC • UP Police</div>
+                    <div class="state-jobs">PCS • Police • Teacher<br>JE • Lekhpal • VDO</div>
+                </a>
+
+                <a href="bihar-jobs.html" class="state-box">
+                    <div class="state-name">Bihar</div>
+                    <div class="state-desc">BPSC • Bihar Police • BTSC</div>
+                    <div class="state-jobs">PCS • Police • Teacher<br>Clerk • JE • Medical</div>
+                </a>
+
+                <a href="maharashtra-jobs.html" class="state-box">
+                    <div class="state-name">Maharashtra</div>
+                    <div class="state-desc">MPSC • Police • MSRTC</div>
+                    <div class="state-jobs">PSI • ASO • Clerk<br>Driver • Talathi</div>
+                </a>
+
+                <a href="rajasthan-jobs.html" class="state-box">
+                    <div class="state-name">Rajasthan</div>
+                    <div class="state-desc">RPSC • Police • RSMSSB</div>
+                    <div class="state-jobs">RAS • Police • Teacher<br>JE • Patwari</div>
+                </a>
+
+                <a href="west-bengal-jobs.html" class="state-box">
+                    <div class="state-name">West Bengal</div>
+                    <div class="state-desc">WBPSC • Police • WBBSE</div>
+                    <div class="state-jobs">WBCS • Police • Teacher<br>Clerk • Food SI</div>
+                </a>
+
+                <a href="tamil-nadu-jobs.html" class="state-box">
+                    <div class="state-name">Tamil Nadu</div>
+                    <div class="state-desc">TNPSC • Police • TNEB</div>
+                    <div class="state-jobs">Group I • Police • Teacher<br>AE • VAO</div>
+                </a>
+
+                <a href="gujarat-jobs.html" class="state-box">
+                    <div class="state-name">Gujarat</div>
+                    <div class="state-desc">GPSC • Police • GSRTC</div>
+                    <div class="state-jobs">Class 1-2 • Police<br>Teacher • Clerk</div>
+                </a>
+
+                <a href="karnataka-jobs.html" class="state-box">
+                    <div class="state-name">Karnataka</div>
+                    <div class="state-desc">KPSC • Police • KSRTC</div>
+                    <div class="state-jobs">KAS • Police • Teacher<br>FDA • ADA</div>
+                </a>
+
+                <a href="madhya-pradesh-jobs.html" class="state-box">
+                    <div class="state-name">Madhya Pradesh</div>
+                    <div class="state-desc">MPPSC • Police • MPPEB</div>
+                    <div class="state-jobs">State Service • Police<br>Teacher • Patwari</div>
+                </a>
+
+                <a href="andhra-pradesh-jobs.html" class="state-box">
+                    <div class="state-name">Andhra Pradesh</div>
+                    <div class="state-desc">APPSC • Police • APSRTC</div>
+                    <div class="state-jobs">Group I • Police<br>Teacher • VRO</div>
+                </a>
+
+                <a href="telangana-jobs.html" class="state-box">
+                    <div class="state-name">Telangana</div>
+                    <div class="state-desc">TSPSC • Police • TSRTC</div>
+                    <div class="state-jobs">Group I • Police<br>Teacher • VRO</div>
+                </a>
+
+                <a href="odisha-jobs.html" class="state-box">
+                    <div class="state-name">Odisha</div>
+                    <div class="state-desc">OPSC • Police • OSSSC</div>
+                    <div class="state-jobs">OAS • Police • Teacher<br>Clerk • RI</div>
+                </a>
+
+                <a href="punjab-jobs.html" class="state-box">
+                    <div class="state-name">Punjab</div>
+                    <div class="state-desc">PPSC • Police • PSSSB</div>
+                    <div class="state-jobs">PCS • Police • Teacher<br>Clerk • Patwari</div>
+                </a>
+
+                <a href="haryana-jobs.html" class="state-box">
+                    <div class="state-name">Haryana</div>
+                    <div class="state-desc">HPSC • Police • HSSC</div>
+                    <div class="state-jobs">HCS • Police • Teacher<br>Clerk • JE</div>
+                </a>
+
+                <a href="kerala-jobs.html" class="state-box">
+                    <div class="state-name">Kerala</div>
+                    <div class="state-desc">Kerala PSC • Police • KSRTC</div>
+                    <div class="state-jobs">KAS • Police • Teacher<br>LDC • UDC</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- PSUs -->
+        <div class="section">
+            <h2 class="section-title">Public Sector Undertakings</h2>
+            <div class="psu-grid">
+                <a href="ongc-jobs.html" class="psu-box">
+                    <div class="psu-name">ONGC</div>
+                    <div class="psu-sector">Oil & Gas</div>
+                    <div class="psu-salary">₹30K+</div>
+                </a>
+
+                <a href="iocl-jobs.html" class="psu-box">
+                    <div class="psu-name">IOCL</div>
+                    <div class="psu-sector">Oil Refining</div>
+                    <div class="psu-salary">₹30K+</div>
+                </a>
+
+                <a href="bpcl-jobs.html" class="psu-box">
+                    <div class="psu-name">BPCL</div>
+                    <div class="psu-sector">Petroleum</div>
+                    <div class="psu-salary">₹30K+</div>
+                </a>
+
+                <a href="hpcl-jobs.html" class="psu-box">
+                    <div class="psu-name">HPCL</div>
+                    <div class="psu-sector">Petroleum</div>
+                    <div class="psu-salary">₹30K+</div>
+                </a>
+
+                <a href="gail-jobs.html" class="psu-box">
+                    <div class="psu-name">GAIL</div>
+                    <div class="psu-sector">Gas Pipeline</div>
+                    <div class="psu-salary">₹30K+</div>
+                </a>
+
+                <a href="ntpc-jobs.html" class="psu-box">
+                    <div class="psu-name">NTPC</div>
+                    <div class="psu-sector">Power Generation</div>
+                    <div class="psu-salary">₹28K+</div>
+                </a>
+
+                <a href="coal-india-jobs.html" class="psu-box">
+                    <div class="psu-name">Coal India</div>
+                    <div class="psu-sector">Mining</div>
+                    <div class="psu-salary">₹28K+</div>
+                </a>
+
+                <a href="sail-jobs.html" class="psu-box">
+                    <div class="psu-name">SAIL</div>
+                    <div class="psu-sector">Steel Production</div>
+                    <div class="psu-salary">₹28K+</div>
+                </a>
+
+                <a href="bhel-jobs.html" class="psu-box">
+                    <div class="psu-name">BHEL</div>
+                    <div class="psu-sector">Heavy Engineering</div>
+                    <div class="psu-salary">₹28K+</div>
+                </a>
+
+                <a href="hal-jobs.html" class="psu-box">
+                    <div class="psu-name">HAL</div>
+                    <div class="psu-sector">Aerospace</div>
+                    <div class="psu-salary">₹30K+</div>
+                </a>
+
+                <a href="bel-jobs.html" class="psu-box">
+                    <div class="psu-name">BEL</div>
+                    <div class="psu-sector">Electronics</div>
+                    <div class="psu-salary">₹30K+</div>
+                </a>
+
+                <a href="ril-jobs.html" class="psu-box">
+                    <div class="psu-name">RIL</div>
+                    <div class="psu-sector">Petrochemicals</div>
+                    <div class="psu-salary">₹35K+</div>
+                </a>
+
+                <a href="nmdc-jobs.html" class="psu-box">
+                    <div class="psu-name">NMDC</div>
+                    <div class="psu-sector">Mining</div>
+                    <div class="psu-salary">₹25K+</div>
+                </a>
+
+                <a href="pgcil-jobs.html" class="psu-box">
+                    <div class="psu-name">PGCIL</div>
+                    <div class="psu-sector">Power Grid</div>
+                    <div class="psu-salary">₹28K+</div>
+                </a>
+
+                <a href="nhpc-jobs.html" class="psu-box">
+                    <div class="psu-name">NHPC</div>
+                    <div class="psu-sector">Hydro Power</div>
+                    <div class="psu-salary">₹28K+</div>
+                </a>
+
+                <a href="rec-jobs.html" class="psu-box">
+                    <div class="psu-name">REC</div>
+                    <div class="psu-sector">Power Finance</div>
+                    <div class="psu-salary">₹35K+</div>
+                </a>
+
+                <a href="pfc-jobs.html" class="psu-box">
+                    <div class="psu-name">PFC</div>
+                    <div class="psu-sector">Power Finance</div>
+                    <div class="psu-salary">₹35K+</div>
+                </a>
+
+                <a href="rites-jobs.html" class="psu-box">
+                    <div class="psu-name">RITES</div>
+                    <div class="psu-sector">Engineering</div>
+                    <div class="psu-salary">₹25K+</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Back to Home -->
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="index.html" style="color: #666666; text-decoration: none; font-size: 14px;">← Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>

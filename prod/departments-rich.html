@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Departments - Complete Directory of 100+ Hiring Bodies</title>
+    <meta name="description" content="Complete marketplace of government departments. Browse 100+ departments, 500+ job types, live notifications, salary comparisons and recruitment updates.">
+    <link rel="icon" type="image/svg+xml" href="shared/favicon.svg">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VCKVNDH46X"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-VCKVNDH46X');
+    </script>
+    
+    <!-- Global JavaScript -->
+    <script src="shared/global.js"></script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: ui-monospace, SFMono-Regular, monospace;
+            background: #ffffff; color: #333333; line-height: 1.4; font-size: 14px;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 30px 15px; }
+        
+        /* Header */
+        .header {
+            text-align: center; margin-bottom: 30px; border: 3px solid #333333;
+            padding: 30px; background: #ffffff; box-shadow: 8px 8px 0px #333333;
+        }
+        .main-title {
+            font-size: 42px; font-weight: 900; color: #333333;
+            margin-bottom: 8px; letter-spacing: 2px;
+        }
+        .subtitle { font-size: 16px; color: #666666; margin-bottom: 15px; font-weight: 600; }
+        
+        /* Stats Bar */
+        .stats-bar {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px; margin-bottom: 25px;
+        }
+        .stat-item {
+            border: 2px solid #333333; padding: 12px; text-align: center;
+            background: #f8f8f8; font-size: 11px; font-weight: 700;
+        }
+        .stat-number { font-size: 18px; color: #1890ff; font-weight: 900; }
+        
+        /* Quick Actions */
+        .quick-actions {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px; margin-bottom: 25px;
+        }
+        .action-btn {
+            padding: 10px 15px; border: 2px solid #333333; background: #333333;
+            color: #ffffff; text-decoration: none; font-size: 11px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px; text-align: center;
+            transition: all 0.2s ease;
+        }
+        .action-btn:hover { background: #000000; transform: translate(-1px, -1px); }
+        
+        /* Live Updates Ticker */
+        .live-ticker {
+            background: #e6f7ff; border: 2px solid #1890ff; padding: 15px;
+            margin-bottom: 25px; overflow: hidden; position: relative;
+        }
+        .ticker-content {
+            animation: scroll-left 30s linear infinite;
+            white-space: nowrap; font-size: 12px; font-weight: 600;
+        }
+        @keyframes scroll-left {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        /* Department Grid */
+        .dept-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px; margin-bottom: 25px;
+        }
+        .dept-card {
+            border: 3px solid #333333; background: #ffffff; box-shadow: 4px 4px 0px #333333;
+            padding: 15px; text-decoration: none; color: #333333; transition: all 0.2s ease;
+            display: block; position: relative;
+        }
+        .dept-card:hover {
+            transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #333333;
+            background: #f8f8f8;
+        }
+        .dept-header {
+            display: flex; justify-content: space-between; align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        .dept-name {
+            font-size: 14px; font-weight: 700; text-transform: uppercase; 
+            letter-spacing: 1px; line-height: 1.2;
+        }
+        .dept-badge {
+            font-size: 9px; padding: 3px 6px; background: #333333; color: #ffffff;
+            text-transform: uppercase; font-weight: 700;
+        }
+        .dept-type {
+            font-size: 11px; color: #666666; margin-bottom: 8px; font-weight: 600;
+        }
+        .dept-stats {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;
+        }
+        .stat-mini {
+            background: #f8f8f8; padding: 5px 8px; font-size: 10px; font-weight: 600;
+            text-align: center; border: 1px solid #ddd;
+        }
+        .dept-jobs {
+            font-size: 10px; color: #333333; font-weight: 600;
+            margin-bottom: 8px; line-height: 1.3;
+        }
+        .dept-recent {
+            font-size: 9px; color: #888888; font-weight: 500;
+            display: flex; justify-content: space-between;
+        }
+        
+        /* Category Headers */
+        .category-section {
+            margin-bottom: 30px;
+        }
+        .category-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 20px; background: #333333; color: #ffffff;
+            margin-bottom: 15px; font-weight: 700;
+        }
+        .category-title {
+            font-size: 16px; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .category-count {
+            font-size: 11px; background: #ffffff; color: #333333;
+            padding: 4px 8px; font-weight: 700;
+        }
+        
+        /* Special Sections */
+        .trending-section {
+            background: #fff8dc; border: 3px solid #daa520; padding: 20px;
+            margin-bottom: 25px;
+        }
+        .trending-title {
+            font-size: 16px; font-weight: 700; margin-bottom: 15px;
+            text-align: center; text-transform: uppercase;
+        }
+        .trending-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+        .trending-item {
+            background: #ffffff; border: 2px solid #daa520; padding: 10px;
+            text-align: center; font-size: 11px; font-weight: 600;
+        }
+        
+        /* Premium Highlights */
+        .premium-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff; padding: 20px; margin-bottom: 25px;
+            border: 3px solid #333333;
+        }
+        .premium-title {
+            font-size: 18px; font-weight: 700; margin-bottom: 15px;
+            text-align: center; text-transform: uppercase;
+        }
+        .premium-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+        }
+        .premium-card {
+            background: rgba(255,255,255,0.1); border: 2px solid #ffffff;
+            padding: 12px; text-align: center; font-size: 11px; font-weight: 600;
+            text-decoration: none; color: #ffffff;
+        }
+        .premium-card:hover { background: rgba(255,255,255,0.2); }
+        
+        /* Sidebar Stats */
+        .sidebar-stats {
+            position: fixed; right: 20px; top: 50%; transform: translateY(-50%);
+            width: 150px; background: #333333; color: #ffffff; padding: 15px;
+            font-size: 10px; z-index: 1000;
+        }
+        .sidebar-stats h4 {
+            margin-bottom: 10px; font-size: 11px; text-align: center;
+        }
+        .sidebar-stat {
+            display: flex; justify-content: space-between; margin-bottom: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 15px 10px; }
+            .main-title { font-size: 32px; }
+            .dept-grid { grid-template-columns: 1fr; }
+            .sidebar-stats { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <div style="display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; justify-content: center;">
+            <a href="index.html" style="padding: 6px 12px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 10px; text-transform: uppercase;">🏠 Home</a>
+            <a href="pages/pay-scales/pay-scale-chart.html" style="padding: 6px 12px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 10px; text-transform: uppercase;">📊 Pay Scales</a>
+            <a href="level-1-jobs.html" style="padding: 6px 12px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 10px; text-transform: uppercase;">💼 Jobs by Level</a>
+            <a href="salary-calculator.html" style="padding: 6px 12px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 10px; text-transform: uppercase;">🧮 Calculator</a>
+        </div>
+        
+        <!-- Header -->
+        <header class="header">
+            <h1 class="main-title">Government Departments</h1>
+            <p class="subtitle">Complete Marketplace of 100+ Hiring Bodies & 500+ Job Categories</p>
+            
+            <!-- Stats Bar -->
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-number">108</div>
+                    <div>Departments</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">525</div>
+                    <div>Job Types</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">45</div>
+                    <div>Active Now</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1.2M</div>
+                    <div>Vacancies</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">28</div>
+                    <div>States</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15</div>
+                    <div>Pay Levels</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <a href="trending-jobs.html" class="action-btn">🔥 Trending Now</a>
+            <a href="high-salary-jobs.html" class="action-btn">💰 High Salary</a>
+            <a href="no-exam-jobs.html" class="action-btn">📝 No Exam</a>
+            <a href="10th-pass-jobs.html" class="action-btn">🎓 10th Pass</a>
+            <a href="graduate-jobs.html" class="action-btn">🎓 Graduate</a>
+            <a href="female-jobs.html" class="action-btn">👩 Women Only</a>
+            <a href="remote-jobs.html" class="action-btn">🏠 Work from Home</a>
+            <a href="latest-notifications.html" class="action-btn">🔔 New Alerts</a>
+        </div>
+
+        <!-- Live Ticker -->
+        <div class="live-ticker">
+            <div class="ticker-content">
+                🚨 BREAKING: SSC MTS 2024 Notification Released - 15,000 Vacancies • Railway Group D Expected Dec 2024 • UPSC CSE Prelims Result Out • SBI PO 2024 Apply Till Nov 30 • IBPS Clerk Mains Admit Card Released • 
+            </div>
+        </div>
+
+        <!-- Premium Highlights -->
+        <div class="premium-section">
+            <div class="premium-title">🌟 Premium Government Jobs</div>
+            <div class="premium-grid">
+                <a href="ias-jobs.html" class="premium-card">
+                    <div style="font-size: 14px; margin-bottom: 5px;">IAS</div>
+                    <div>₹56,100 - ₹2,50,000</div>
+                </a>
+                <a href="ips-jobs.html" class="premium-card">
+                    <div style="font-size: 14px; margin-bottom: 5px;">IPS</div>
+                    <div>₹56,100 - ₹2,25,000</div>
+                </a>
+                <a href="ifs-jobs.html" class="premium-card">
+                    <div style="font-size: 14px; margin-bottom: 5px;">IFS</div>
+                    <div>₹56,100 - ₹2,05,400</div>
+                </a>
+                <a href="bank-po-jobs.html" class="premium-card">
+                    <div style="font-size: 14px; margin-bottom: 5px;">Bank PO</div>
+                    <div>₹36,000 - ₹69,000</div>
+                </a>
+                <a href="railway-officer.html" class="premium-card">
+                    <div style="font-size: 14px; margin-bottom: 5px;">Railway Officer</div>
+                    <div>₹35,400 - ₹1,12,400</div>
+                </a>
+                <a href="isro-scientist.html" class="premium-card">
+                    <div style="font-size: 14px; margin-bottom: 5px;">ISRO Scientist</div>
+                    <div>₹56,100 - ₹1,77,500</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Trending This Week -->
+        <div class="trending-section">
+            <div class="trending-title">🔥 Trending This Week</div>
+            <div class="trending-grid">
+                <div class="trending-item">SSC MTS<br><span style="color: #d4871c;">15K Vacancies</span></div>
+                <div class="trending-item">Railway Group D<br><span style="color: #d4871c;">Expected Soon</span></div>
+                <div class="trending-item">Bank PO<br><span style="color: #d4871c;">Multiple Banks</span></div>
+                <div class="trending-item">UPSC Mains<br><span style="color: #d4871c;">Preparation Mode</span></div>
+                <div class="trending-item">State Police<br><span style="color: #d4871c;">5 States Active</span></div>
+                <div class="trending-item">Teaching Jobs<br><span style="color: #d4871c;">25K+ Vacancies</span></div>
+                <div class="trending-item">Medical Posts<br><span style="color: #d4871c;">AIIMS + ESIC</span></div>
+                <div class="trending-item">Defence Jobs<br><span style="color: #d4871c;">Ongoing Rally</span></div>
+            </div>
+        </div>
+
+        <!-- Central Government Departments -->
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-title">🏛️ Central Government Departments</div>
+                <div class="category-count">35 Departments</div>
+            </div>
+            <div class="dept-grid">
+                <a href="upsc-jobs.html" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-name">UPSC</div>
+                        <div class="dept-badge">PREMIUM</div>
+                    </div>
+                    <div class="dept-type">Union Public Service Commission</div>
+                    <div class="dept-stats">
+                        <div class="stat-mini">Active: 8</div>
+                        <div class="stat-mini">Salary: ₹56K+</div>
+                    </div>
+                    <div class="dept-jobs">• IAS • IPS • IFS • IRS • Central Services<br>• Assistant Commandant • Medical Officer</div>
+                    <div class="dept-recent">
+                        <span>Updated: 2 hrs ago</span>
+                        <span style="color: #28a745;">●LIVE</span>
+                    </div>
+                </a>
+                
+                <a href="ssc-jobs.html" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-name">SSC</div>
+                        <div class="dept-badge">HOT</div>
+                    </div>
+                    <div class="dept-type">Staff Selection Commission</div>
+                    <div class="dept-stats">
+                        <div class="stat-mini">Active: 12</div>
+                        <div class="stat-mini">Salary: ₹18K+</div>
+                    </div>
+                    <div class="dept-jobs">• CGL • CHSL • MTS • JE • CPO<br>• Stenographer • Selection Posts</div>
+                    <div class="dept-recent">
+                        <span>Updated: 1 hr ago</span>
+                        <span style="color: #28a745;">●LIVE</span>
+                    </div>
+                </a>
+                
+                <a href="railway-jobs.html" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-name">Indian Railways</div>
+                        <div class="dept-badge">MEGA</div>
+                    </div>
+                    <div class="dept-type">Railway Recruitment Boards (21 RRBs)</div>
+                    <div class="dept-stats">
+                        <div class="stat-mini">Active: 25</div>
+                        <div class="stat-mini">Salary: ₹18K+</div>
+                    </div>
+                    <div class="dept-jobs">• RRB NTPC • Group D • JE • ALP<br>• Station Master • Goods Guard • RPF</div>
+                    <div class="dept-recent">
+                        <span>Updated: 4 hrs ago</span>
+                        <span style="color: #ffc107;">●SOON</span>
+                    </div>
+                </a>
+                
+                <a href="defence-jobs.html" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-name">Defence Forces</div>
+                        <div class="dept-badge">ONGOING</div>
+                    </div>
+                    <div class="dept-type">Army, Navy, Air Force & Para Military</div>
+                    <div class="dept-stats">
+                        <div class="stat-mini">Active: 18</div>
+                        <div class="stat-mini">Salary: ₹21K+</div>
+                    </div>
+                    <div class="dept-jobs">• NDA • CDS • AFCAT • Technical Entry<br>• Soldier • Sailor • Airman • Officers</div>
+                    <div class="dept-recent">
+                        <span>Updated: 6 hrs ago</span>
+                        <span style="color: #28a745;">●LIVE</span>
+                    </div>
+                </a>
+                
+                <a href="banking-jobs.html" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-name">Banking Sector</div>
+                        <div class="dept-badge">HIGH PAY</div>
+                    </div>
+                    <div class="dept-type">Public Sector Banks & Financial Institutions</div>
+                    <div class="dept-stats">
+                        <div class="stat-mini">Active: 15</div>
+                        <div class="stat-mini">Salary: ₹25K+</div>
+                    </div>
+                    <div class="dept-jobs">• SBI • IBPS • RBI • NABARD<br>• PO • Clerk • SO • Security Guard</div>
+                    <div class="dept-recent">
+                        <span>Updated: 3 hrs ago</span>
+                        <span style="color: #28a745;">●LIVE</span>
+                    </div>
+                </a>
+                
+                <a href="insurance-jobs.html" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-name">Insurance Sector</div>
+                        <div class="dept-badge">STABLE</div>
+                    </div>
+                    <div class="dept-type">Public Sector Insurance Companies</div>
+                    <div class="dept-stats">
+                        <div class="stat-mini">Active: 8</div>
+                        <div class="stat-mini">Salary: ₹21K+</div>
+                    </div>
+                    <div class="dept-jobs">• LIC • NIACL • Oriental • United India<br>• AAO • ADO • Assistant • Agent</div>
+                    <div class="dept-recent">
+                        <span>Updated: 5 hrs ago</span>
+                        <span style="color: #ffc107;">●RESULT</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Continue with more sections... -->
+        
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="index.html" style="background: #333333; color: #ffffff; padding: 15px 25px; text-decoration: none; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin: 10px 5px; display: inline-block;">🏠 Home</a>
+        </div>
+    </div>
+
+    <!-- Floating Stats Sidebar -->
+    <div class="sidebar-stats">
+        <h4>LIVE STATS</h4>
+        <div class="sidebar-stat">
+            <span>Today's Applications:</span>
+            <span>2.3K</span>
+        </div>
+        <div class="sidebar-stat">
+            <span>Active Recruitments:</span>
+            <span>87</span>
+        </div>
+        <div class="sidebar-stat">
+            <span>Results Pending:</span>
+            <span>23</span>
+        </div>
+        <div class="sidebar-stat">
+            <span>New Notifications:</span>
+            <span>5</span>
+        </div>
+        <hr style="margin: 10px 0;">
+        <div class="sidebar-stat">
+            <span>High Salary Jobs:</span>
+            <span>156</span>
+        </div>
+        <div class="sidebar-stat">
+            <span>10th Pass Jobs:</span>
+            <span>89</span>
+        </div>
+    </div>
+
+</body>
+</html>
