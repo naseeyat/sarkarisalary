@@ -1,14 +1,22 @@
 class DataManager {
     constructor() {
         this.data = null;
+        this.jobPostings = null;
         this.loadData();
     }
 
     async loadData() {
         try {
-            const response = await fetch('/data/unified-data.json');
-            this.data = await response.json();
+            const [unifiedResponse, jobsResponse] = await Promise.all([
+                fetch('/data/unified-data.json'),
+                fetch('/data/job-postings.json')
+            ]);
+            
+            this.data = await unifiedResponse.json();
+            this.jobPostings = await jobsResponse.json();
+            
             console.log('Data loaded successfully:', this.data.metadata);
+            console.log('Active jobs loaded:', this.jobPostings.activeJobs.length);
         } catch (error) {
             console.error('Error loading data:', error);
         }
@@ -199,6 +207,248 @@ class DataManager {
         if (stateJobs.includes(jobId)) return 'stateSpecific';
         
         return 'multiState';
+    }
+
+    // Job Posting System Functions
+    getJobsForPage(pageType, pageId = null) {
+        if (!this.jobPostings) return [];
+        
+        const mapping = this.jobPostings.pageMapping;
+        let jobIds = [];
+        
+        switch(pageType) {
+            case 'homepage':
+                return this.getHomepageJobs();
+            case 'state':
+                jobIds = mapping.statePages[pageId] || [];
+                break;
+            case 'district':
+                jobIds = mapping.districtPages[pageId] || [];
+                break;
+            case 'category':
+                jobIds = mapping.categoryPages[pageId] || [];
+                break;
+            default:
+                return [];
+        }
+        
+        return this.getJobsByIds(jobIds);
+    }
+
+    getHomepageJobs() {
+        if (!this.jobPostings) return {};
+        
+        const sections = this.jobPostings.pageMapping.homepage.sections;
+        return {
+            trending: this.getJobsByIds(sections.trending),
+            featured: this.getJobsByIds(sections.featured), 
+            local: this.getJobsByIds(sections.local),
+            latest: this.getJobsByIds(sections.latest)
+        };
+    }
+
+    getJobsByIds(jobIds) {
+        if (!this.jobPostings || !jobIds) return [];
+        
+        return jobIds.map(id => 
+            this.jobPostings.activeJobs.find(job => job.id === id)
+        ).filter(job => job !== undefined);
+    }
+
+    async addNewJob(jobData) {
+        if (!this.jobPostings) return false;
+        
+        // Auto-generate distribution based on tags
+        const autoDistribution = this.generateAutoDistribution(jobData.tags);
+        jobData.autoDistribution = autoDistribution;
+        jobData.isNew = true;
+        
+        try {
+            // Send to Cloudflare Pages Function
+            const response = await fetch('/functions/update-jobs', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    action: 'addJob',
+                    jobData: jobData
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                // Update local data
+                jobData.id = result.jobId;
+                this.jobPostings.activeJobs.push(jobData);
+                this.updatePageMappings(jobData);
+                
+                console.log('✅ Job posted to server:', jobData.title);
+                console.log('📍 Distributed to:', result.distributedTo.join(', '));
+                
+                // Refresh data from server to ensure sync
+                await this.refreshJobData();
+                
+                return {
+                    success: true,
+                    jobId: result.jobId,
+                    distributedTo: result.distributedTo
+                };
+            } else {
+                throw new Error(result.error || 'Unknown error');
+            }
+            
+        } catch (error) {
+            console.error('❌ Failed to post job:', error);
+            
+            // Fallback to local storage for demo
+            jobData.id = `job_${Date.now()}`;
+            jobData.postedDate = new Date().toISOString().split('T')[0];
+            this.jobPostings.activeJobs.push(jobData);
+            this.updatePageMappings(jobData);
+            
+            console.log('📝 Job added locally (demo mode):', jobData.title);
+            return {
+                success: true,
+                jobId: jobData.id,
+                distributedTo: this.calculateDistributionFromTags(jobData.tags),
+                mode: 'local'
+            };
+        }
+    }
+
+    async refreshJobData() {
+        try {
+            const response = await fetch('/data/job-postings.json');
+            if (response.ok) {
+                this.jobPostings = await response.json();
+                console.log('🔄 Job data refreshed from server');
+            }
+        } catch (error) {
+            console.log('⚠️ Could not refresh from server, using local data');
+        }
+    }
+
+    calculateDistributionFromTags(tags) {
+        const pages = ['Homepage'];
+        
+        tags.forEach(tag => {
+            if (tag === 'all-states') {
+                pages.push('All State Pages', 'All District Pages');
+            } else if (tag.endsWith('-only')) {
+                const location = tag.replace('-only', '');
+                pages.push(location.replace('-', ' ').toUpperCase() + ' Page');
+            } else if (tag.endsWith('-category')) {
+                const category = tag.replace('-category', '');
+                pages.push(category.toUpperCase() + ' Jobs Page');
+            }
+        });
+        
+        return [...new Set(pages)];
+    }
+
+    generateAutoDistribution(tags) {
+        const showOnPages = [];
+        let scope = 'local';
+        let priority = 'medium';
+        
+        // Determine scope and pages based on tags
+        if (tags.includes('all-states')) {
+            scope = 'national';
+            showOnPages.push('homepage', 'all-state-pages', 'all-district-pages');
+            priority = 'high';
+        } else if (tags.includes('state-only') || tags.some(tag => tag.endsWith('-only'))) {
+            scope = 'state';
+            showOnPages.push('homepage');
+        } else if (tags.includes('district-only')) {
+            scope = 'district';
+            showOnPages.push('homepage');
+        }
+        
+        // Add category pages
+        tags.forEach(tag => {
+            if (tag.endsWith('-category')) {
+                showOnPages.push(tag.replace('-category', '-jobs'));
+            }
+        });
+        
+        return { scope, showOnPages, priority };
+    }
+
+    updatePageMappings(job) {
+        const mapping = this.jobPostings.pageMapping;
+        
+        // Add to homepage based on priority
+        if (job.autoDistribution.priority === 'high') {
+            mapping.homepage.sections.trending.unshift(job.id);
+            mapping.homepage.sections.featured.unshift(job.id);
+        } else {
+            mapping.homepage.sections.latest.unshift(job.id);
+        }
+        
+        // Add to relevant state/district pages based on tags
+        job.tags.forEach(tag => {
+            if (tag.endsWith('-only')) {
+                const location = tag.replace('-only', '');
+                if (mapping.statePages[location]) {
+                    mapping.statePages[location].unshift(job.id);
+                }
+                if (mapping.districtPages[location]) {
+                    mapping.districtPages[location].unshift(job.id);
+                }
+            }
+        });
+        
+        // Add to category pages
+        job.tags.forEach(tag => {
+            if (tag.endsWith('-category')) {
+                const category = tag.replace('-category', '-jobs');
+                if (!mapping.categoryPages[category]) {
+                    mapping.categoryPages[category] = [];
+                }
+                mapping.categoryPages[category].unshift(job.id);
+            }
+        });
+    }
+
+    isJobNew(job) {
+        if (!job || !job.postedDate) return false;
+        
+        const postedDate = new Date(job.postedDate);
+        const now = new Date();
+        const diffHours = (now - postedDate) / (1000 * 60 * 60);
+        
+        return diffHours <= (this.jobPostings?.newJobThreshold || 168); // Default 7 days
+    }
+
+    renderJobCard(job, showNewBadge = true) {
+        const isNew = showNewBadge && this.isJobNew(job);
+        
+        return `
+            <div class="job-card ${isNew ? 'new-job' : ''}">
+                ${isNew ? '<span class="new-badge">NEW</span>' : ''}
+                <h3>${job.title}</h3>
+                <div class="job-meta">
+                    <span class="department">${job.department}</span>
+                    <span class="positions">${job.positions} Posts</span>
+                    <span class="salary">${job.salaryRange}</span>
+                </div>
+                <div class="job-dates">
+                    <span class="last-date">Last Date: ${job.lastDate}</span>
+                    <span class="exam-date">Exam: ${job.examDate}</span>
+                </div>
+                <div class="job-tags">
+                    ${job.tags.slice(0, 3).map(tag => 
+                        `<span class="tag">${tag.replace('-', ' ')}</span>`
+                    ).join('')}
+                </div>
+            </div>
+        `;
     }
 }
 

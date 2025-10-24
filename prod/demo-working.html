@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Working Job Posting Demo</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 20px;
+        }
+
+        .post-section, .display-section {
+            background: white;
+            border: 3px solid #333;
+            box-shadow: 6px 6px 0 #000;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            margin: 0 0 20px 0;
+            text-transform: uppercase;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #333;
+            border-radius: 0;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+
+        .tag-section {
+            background: #f8f8f8;
+            border: 2px solid #333;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .tag-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag-btn {
+            padding: 8px 12px;
+            background: white;
+            border: 2px solid #333;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .tag-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .tag-btn.selected {
+            background: #44dd44;
+            color: #333;
+        }
+
+        .post-btn {
+            width: 100%;
+            padding: 15px;
+            background: #ff4444;
+            color: white;
+            border: 3px solid #333;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-family: inherit;
+        }
+
+        .post-btn:hover {
+            background: #dd2222;
+        }
+
+        .job-card {
+            border: 2px solid #333;
+            background: white;
+            margin: 10px 0;
+            padding: 15px;
+            position: relative;
+        }
+
+        .job-card.new {
+            border-color: #ff4444;
+            background: #fff9f9;
+        }
+
+        .job-card.new::before {
+            content: 'NEW';
+            position: absolute;
+            top: -5px;
+            right: 10px;
+            background: #ff4444;
+            color: white;
+            padding: 2px 8px;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .job-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .job-meta {
+            font-size: 12px;
+            color: #666;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .page-tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+        }
+
+        .page-tab {
+            padding: 8px 12px;
+            background: #ccc;
+            border: 2px solid #333;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .page-tab.active {
+            background: #44dd44;
+        }
+
+        .job-count {
+            background: #333;
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <!-- Posting Section -->
+        <div class="post-section">
+            <h2>📝 Post Job</h2>
+            
+            <div class="form-group">
+                <label>Job Title</label>
+                <input type="text" id="jobTitle" placeholder="e.g. Railway NTPC">
+            </div>
+            
+            <div class="form-group">
+                <label>Department</label>
+                <input type="text" id="department" placeholder="e.g. Indian Railways">
+            </div>
+            
+            <div class="form-group">
+                <label>Posts</label>
+                <input type="number" id="posts" placeholder="1000">
+            </div>
+
+            <div class="tag-section">
+                <label>Location (select one)</label>
+                <div class="tag-buttons" id="locationTags">
+                    <div class="tag-btn" data-tag="all-states">🇮🇳 All India</div>
+                    <div class="tag-btn" data-tag="uttar-pradesh-only">🏛️ UP Only</div>
+                    <div class="tag-btn" data-tag="bihar-only">🏛️ Bihar Only</div>
+                    <div class="tag-btn" data-tag="delhi-only">🏛️ Delhi Only</div>
+                </div>
+            </div>
+
+            <div class="tag-section">
+                <label>Category (select one)</label>
+                <div class="tag-buttons" id="categoryTags">
+                    <div class="tag-btn" data-tag="railway-category">🚂 Railway</div>
+                    <div class="tag-btn" data-tag="banking-category">🏦 Banking</div>
+                    <div class="tag-btn" data-tag="police-category">👮 Police</div>
+                    <div class="tag-btn" data-tag="psc-category">🏛️ PSC</div>
+                </div>
+            </div>
+
+            <button class="post-btn" onclick="postJob()">🚀 Post Job</button>
+        </div>
+
+        <!-- Display Section -->
+        <div class="display-section">
+            <h2>📱 Live Pages</h2>
+            
+            <div class="page-tabs">
+                <div class="page-tab active" onclick="showPage('homepage')">🏠 Homepage</div>
+                <div class="page-tab" onclick="showPage('up')">🏛️ UP</div>
+                <div class="page-tab" onclick="showPage('bihar')">🏛️ Bihar</div>
+                <div class="page-tab" onclick="showPage('railway')">🚂 Railway</div>
+                <div class="page-tab" onclick="showPage('police')">👮 Police</div>
+            </div>
+
+            <div id="currentPage">
+                <div class="job-count">HOMEPAGE - 0 Jobs</div>
+                <div id="jobsList">
+                    <p style="color: #666; font-style: italic;">No jobs posted yet. Post a job to see it appear here!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let jobs = [];
+        let selectedLocation = '';
+        let selectedCategory = '';
+        let currentPageView = 'homepage';
+
+        // Tag selection
+        document.querySelectorAll('.tag-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const section = this.closest('.tag-section');
+                const isLocation = section.querySelector('#locationTags');
+                
+                if (isLocation) {
+                    // Location tags - only one
+                    section.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedLocation = this.dataset.tag;
+                } else {
+                    // Category tags - only one
+                    section.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedCategory = this.dataset.tag;
+                }
+            });
+        });
+
+        // Page switching
+        function showPage(page) {
+            currentPageView = page;
+            
+            // Update active tab
+            document.querySelectorAll('.page-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            displayJobs();
+        }
+
+        // Post job
+        function postJob() {
+            const title = document.getElementById('jobTitle').value;
+            const department = document.getElementById('department').value;
+            const posts = document.getElementById('posts').value;
+
+            if (!title || !department || !posts) {
+                alert('Please fill all fields!');
+                return;
+            }
+
+            if (!selectedLocation || !selectedCategory) {
+                alert('Please select location and category!');
+                return;
+            }
+
+            const newJob = {
+                id: 'job_' + Date.now(),
+                title,
+                department,
+                posts: parseInt(posts),
+                postedDate: new Date().toISOString().split('T')[0],
+                tags: [selectedLocation, selectedCategory, 'homepage-trending'],
+                isNew: true
+            };
+
+            jobs.unshift(newJob);
+
+            // Clear form
+            document.getElementById('jobTitle').value = '';
+            document.getElementById('department').value = '';
+            document.getElementById('posts').value = '';
+            document.querySelectorAll('.tag-btn.selected').forEach(btn => btn.classList.remove('selected'));
+            selectedLocation = '';
+            selectedCategory = '';
+
+            alert('✅ Job posted successfully!\\n\\nWill appear on:\\n- Homepage\\n- ' + getPageName(selectedLocation) + '\\n- ' + getPageName(selectedCategory));
+
+            displayJobs();
+        }
+
+        // Display jobs based on current page
+        function displayJobs() {
+            const pageJobs = getJobsForPage(currentPageView);
+            const pageTitle = getPageTitle(currentPageView);
+            
+            document.querySelector('.job-count').textContent = `${pageTitle} - ${pageJobs.length} Jobs`;
+            
+            const jobsList = document.getElementById('jobsList');
+            
+            if (pageJobs.length === 0) {
+                jobsList.innerHTML = '<p style="color: #666; font-style: italic;">No jobs found for this page.</p>';
+                return;
+            }
+
+            jobsList.innerHTML = pageJobs.map(job => `
+                <div class="job-card ${job.isNew ? 'new' : ''}">
+                    <div class="job-title">${job.title}</div>
+                    <div class="job-meta">
+                        <span>🏢 ${job.department}</span>
+                        <span>👥 ${job.posts} Posts</span>
+                        <span>📅 ${job.postedDate}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Get jobs for specific page
+        function getJobsForPage(page) {
+            return jobs.filter(job => {
+                switch(page) {
+                    case 'homepage':
+                        return job.tags.includes('homepage-trending');
+                    case 'up':
+                        return job.tags.includes('all-states') || job.tags.includes('uttar-pradesh-only');
+                    case 'bihar':
+                        return job.tags.includes('all-states') || job.tags.includes('bihar-only');
+                    case 'railway':
+                        return job.tags.includes('railway-category');
+                    case 'police':
+                        return job.tags.includes('police-category');
+                    default:
+                        return false;
+                }
+            });
+        }
+
+        function getPageTitle(page) {
+            const titles = {
+                'homepage': 'HOMEPAGE',
+                'up': 'UTTAR PRADESH',
+                'bihar': 'BIHAR',
+                'railway': 'RAILWAY JOBS',
+                'police': 'POLICE JOBS'
+            };
+            return titles[page] || page.toUpperCase();
+        }
+
+        function getPageName(tag) {
+            const names = {
+                'all-states': 'All India Pages',
+                'uttar-pradesh-only': 'UP Page',
+                'bihar-only': 'Bihar Page',
+                'delhi-only': 'Delhi Page',
+                'railway-category': 'Railway Jobs Page',
+                'banking-category': 'Banking Jobs Page',
+                'police-category': 'Police Jobs Page',
+                'psc-category': 'PSC Jobs Page'
+            };
+            return names[tag] || tag;
+        }
+
+        // Initial display
+        displayJobs();
+    </script>
+</body>
+</html>

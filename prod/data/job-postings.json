@@ -1,0 +1,201 @@
+{
+  "activeJobs": [
+    {
+      "id": "job_001",
+      "title": "Railway NTPC Recruitment 2024",
+      "department": "Indian Railways",
+      "positions": 35000,
+      "lastDate": "2024-11-15",
+      "postedDate": "2024-10-20",
+      "isNew": true,
+      "tags": [
+        "all-states",
+        "all-districts", 
+        "homepage-trending",
+        "railway-category",
+        "level-2-jobs",
+        "technical-jobs"
+      ],
+      "autoDistribution": {
+        "scope": "national",
+        "showOnPages": [
+          "homepage",
+          "all-state-pages",
+          "all-district-pages",
+          "railway-jobs",
+          "level-2-jobs",
+          "technical-jobs"
+        ],
+        "priority": "high"
+      },
+      "salaryRange": "₹25,500 - ₹81,100",
+      "eligibility": "12th Pass",
+      "examDate": "2024-12-10"
+    },
+    {
+      "id": "job_002", 
+      "title": "UP Police Constable Recruitment",
+      "department": "Uttar Pradesh Police",
+      "positions": 25000,
+      "lastDate": "2024-11-08",
+      "postedDate": "2024-10-18",
+      "isNew": true,
+      "tags": [
+        "uttar-pradesh-only",
+        "up-districts",
+        "homepage-trending",
+        "police-category",
+        "level-1-jobs",
+        "state-govt"
+      ],
+      "autoDistribution": {
+        "scope": "state",
+        "targetState": "uttar-pradesh",
+        "showOnPages": [
+          "homepage",
+          "uttar-pradesh-page",
+          "all-up-district-pages",
+          "police-jobs",
+          "level-1-jobs",
+          "state-government-jobs"
+        ],
+        "priority": "high"
+      },
+      "salaryRange": "₹21,700 - ₹69,100",
+      "eligibility": "12th Pass",
+      "examDate": "2024-11-25"
+    },
+    {
+      "id": "job_003",
+      "title": "Varanasi Municipal Corporation Clerk",
+      "department": "Varanasi Municipal Corporation", 
+      "positions": 150,
+      "lastDate": "2024-10-30",
+      "postedDate": "2024-10-22",
+      "isNew": true,
+      "tags": [
+        "varanasi-only",
+        "homepage-local",
+        "municipal-category",
+        "level-1-jobs",
+        "local-govt"
+      ],
+      "autoDistribution": {
+        "scope": "district",
+        "targetDistrict": "varanasi",
+        "targetState": "uttar-pradesh",
+        "showOnPages": [
+          "homepage",
+          "varanasi-district-page",
+          "uttar-pradesh-page",
+          "municipal-jobs",
+          "level-1-jobs",
+          "local-government-jobs"
+        ],
+        "priority": "medium"
+      },
+      "salaryRange": "₹18,000 - ₹56,900",
+      "eligibility": "Graduate",
+      "examDate": "2024-11-12"
+    },
+    {
+      "id": "job_004",
+      "title": "SBI PO Recruitment 2024",
+      "department": "State Bank of India",
+      "positions": 2000,
+      "lastDate": "2024-11-20",
+      "postedDate": "2024-10-21",
+      "isNew": true,
+      "tags": [
+        "all-states",
+        "all-districts",
+        "homepage-featured",
+        "banking-category", 
+        "level-3-jobs",
+        "officer-level"
+      ],
+      "autoDistribution": {
+        "scope": "national",
+        "showOnPages": [
+          "homepage",
+          "all-state-pages",
+          "all-district-pages", 
+          "banking-jobs",
+          "level-3-jobs",
+          "officer-jobs"
+        ],
+        "priority": "high"
+      },
+      "salaryRange": "₹48,000 - ₹1,50,000",
+      "eligibility": "Graduate",
+      "examDate": "2024-12-15"
+    },
+    {
+      "id": "job_005",
+      "title": "Bihar PSC Assistant Posts",
+      "department": "Bihar Public Service Commission",
+      "positions": 500,
+      "lastDate": "2024-11-05",
+      "postedDate": "2024-10-19",
+      "isNew": true,
+      "tags": [
+        "bihar-only",
+        "bihar-districts",
+        "homepage-trending",
+        "psc-category",
+        "level-2-jobs",
+        "state-govt"
+      ],
+      "autoDistribution": {
+        "scope": "state",
+        "targetState": "bihar", 
+        "showOnPages": [
+          "homepage",
+          "bihar-page",
+          "all-bihar-district-pages",
+          "psc-jobs",
+          "level-2-jobs",
+          "state-government-jobs"
+        ],
+        "priority": "medium"
+      },
+      "salaryRange": "₹25,500 - ₹81,100", 
+      "eligibility": "Graduate",
+      "examDate": "2024-11-18"
+    }
+  ],
+  "pageMapping": {
+    "homepage": {
+      "sections": {
+        "trending": ["job_001", "job_002", "job_005"],
+        "featured": ["job_004"],
+        "local": ["job_003"],
+        "latest": ["job_001", "job_002", "job_003", "job_004", "job_005"]
+      }
+    },
+    "statePages": {
+      "uttar-pradesh": ["job_001", "job_002", "job_003", "job_004"],
+      "bihar": ["job_001", "job_004", "job_005"],
+      "maharashtra": ["job_001", "job_004"],
+      "tamil-nadu": ["job_001", "job_004"]
+    },
+    "districtPages": {
+      "varanasi": ["job_001", "job_002", "job_003", "job_004"],
+      "patna": ["job_001", "job_004", "job_005"],
+      "mumbai": ["job_001", "job_004"]
+    },
+    "categoryPages": {
+      "railway-jobs": ["job_001"],
+      "banking-jobs": ["job_004"],
+      "police-jobs": ["job_002"],
+      "psc-jobs": ["job_005"],
+      "municipal-jobs": ["job_003"]
+    }
+  },
+  "newJobThreshold": 7,
+  "autoUpdateSettings": {
+    "refreshInterval": 3600,
+    "maxJobsPerPage": 20,
+    "newBadgeDuration": 168
+  }
+}
