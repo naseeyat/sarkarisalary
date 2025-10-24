@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All States Government Jobs - Sarkari Salary</title>
+    <meta name="description" content="Browse government jobs by state. Find latest recruitment notifications for all Indian states and union territories.">
+    <link rel="stylesheet" href="shared/brutalist-styles.css">
+    <link rel="stylesheet" href="shared/header-footer.css">
+    <style>
+        .page-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            border-bottom: 4px solid #333;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .states-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .state-card {
+            background: white;
+            border: 3px solid #333;
+            padding: 25px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .state-card:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 6px 6px 0 #333;
+        }
+
+        .state-card.popular {
+            border-color: #ff4444;
+            background: #fff9f9;
+        }
+
+        .state-card.popular::before {
+            content: 'POPULAR';
+            position: absolute;
+            top: -8px;
+            right: 15px;
+            background: #ff4444;
+            color: white;
+            padding: 4px 12px;
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .state-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .state-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .state-description {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .state-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: 2px solid #333;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-decoration: none;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #44dd44;
+            color: #333;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #333;
+        }
+
+        .btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0 #333;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #333;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 32px;
+            }
+            
+            .states-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .state-meta {
+                grid-template-columns: 1fr;
+            }
+            
+            .state-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header and Breadcrumb will be loaded automatically via JavaScript -->
+
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="hero-container">
+            <h1 class="hero-title">All States Jobs</h1>
+            <p class="hero-subtitle">Find government job opportunities across all Indian states and union territories</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="section-header">
+            <h2 class="section-title">Browse Jobs by State</h2>
+            <p class="section-subtitle">Select your state to view latest government job notifications</p>
+        </div>
+
+        <div class="states-grid">
+            <!-- Popular States -->
+            <div class="state-card popular">
+                <h3 class="state-name">Uttar Pradesh</h3>
+                <div class="state-meta">
+                    <div class="meta-item">👥 <span>2,800+ Jobs</span></div>
+                    <div class="meta-item">🏢 <span>75 Districts</span></div>
+                    <div class="meta-item">💰 <span>₹18K-1.12L</span></div>
+                    <div class="meta-item">🌍 <span>199M+ Population</span></div>
+                </div>
+                <p class="state-description">
+                    Largest state with highest number of government job opportunities. UP PSC, UP Police, 
+                    teaching and clerk positions available across 75 districts.
+                </p>
+                <div class="state-actions">
+                    <a href="states/uttar-pradesh.html" class="btn btn-primary">View Jobs</a>
+                    <a href="states/uttar-pradesh.html#districts" class="btn btn-secondary">Districts</a>
+                </div>
+            </div>
+
+            <div class="state-card popular">
+                <h3 class="state-name">Maharashtra</h3>
+                <div class="state-meta">
+                    <div class="meta-item">👥 <span>2,200+ Jobs</span></div>
+                    <div class="meta-item">🏢 <span>36 Districts</span></div>
+                    <div class="meta-item">💰 <span>₹21K-1.5L</span></div>
+                    <div class="meta-item">🌍 <span>112M+ Population</span></div>
+                </div>
+                <p class="state-description">
+                    Financial capital with diverse opportunities. MPSC, Maharashtra Police, MSEB, 
+                    and banking sector jobs with competitive salaries.
+                </p>
+                <div class="state-actions">
+                    <a href="states/maharashtra.html" class="btn btn-primary">View Jobs</a>
+                    <a href="states/maharashtra.html#districts" class="btn btn-secondary">Districts</a>
+                </div>
+            </div>
+
+            <div class="state-card popular">
+                <h3 class="state-name">Bihar</h3>
+                <div class="state-meta">
+                    <div class="meta-item">👥 <span>1,800+ Jobs</span></div>
+                    <div class="meta-item">🏢 <span>38 Districts</span></div>
+                    <div class="meta-item">💰 <span>₹19K-80K</span></div>
+                    <div class="meta-item">🌍 <span>104M+ Population</span></div>
+                </div>
+                <p class="state-description">
+                    High recruitment volume state. BPSC, Bihar Police, education department, 
+                    and various state government positions regularly updated.
+                </p>
+                <div class="state-actions">
+                    <a href="states/bihar.html" class="btn btn-primary">View Jobs</a>
+                    <a href="states/bihar.html#districts" class="btn btn-secondary">Districts</a>
+                </div>
+            </div>
+
+            <div class="state-card">
+                <h3 class="state-name">West Bengal</h3>
+                <div class="state-meta">
+                    <div class="meta-item">👥 <span>1,600+ Jobs</span></div>
+                    <div class="meta-item">🏢 <span>23 Districts</span></div>
+                    <div class="meta-item">💰 <span>₹20K-1L</span></div>
+                    <div class="meta-item">🌍 <span>91M+ Population</span></div>
+                </div>
+                <p class="state-description">
+                    Cultural hub with steady government recruitment. WBPSC, WB Police, 
+                    education and health department opportunities.
+                </p>
+                <div class="state-actions">
+                    <a href="states/west-bengal.html" class="btn btn-primary">View Jobs</a>
+                    <a href="states/west-bengal.html#districts" class="btn btn-secondary">Districts</a>
+                </div>
+            </div>
+
+            <div class="state-card">
+                <h3 class="state-name">Tamil Nadu</h3>
+                <div class="state-meta">
+                    <div class="meta-item">👥 <span>1,400+ Jobs</span></div>
+                    <div class="meta-item">🏢 <span>38 Districts</span></div>
+                    <div class="meta-item">💰 <span>₹22K-1.2L</span></div>
+                    <div class="meta-item">🌍 <span>72M+ Population</span></div>
+                </div>
+                <p class="state-description">
+                    Industrial state with technical opportunities. TNPSC, TN Police, 
+                    engineering and medical department recruitments.
+                </p>
+                <div class="state-actions">
+                    <a href="states/tamil-nadu.html" class="btn btn-primary">View Jobs</a>
+                    <a href="states/tamil-nadu.html#districts" class="btn btn-secondary">Districts</a>
+                </div>
+            </div>
+
+            <div class="state-card">
+                <h3 class="state-name">Karnataka</h3>
+                <div class="state-meta">
+                    <div class="meta-item">👥 <span>1,300+ Jobs</span></div>
+                    <div class="meta-item">🏢 <span>31 Districts</span></div>
+                    <div class="meta-item">💰 <span>₹25K-1.3L</span></div>
+                    <div class="meta-item">🌍 <span>61M+ Population</span></div>
+                </div>
+                <p class="state-description">
+                    IT capital with modern governance. KPSC, Karnataka Police, 
+                    technical and administrative positions with good growth.
+                </p>
+                <div class="state-actions">
+                    <a href="states/karnataka.html" class="btn btn-primary">View Jobs</a>
+                    <a href="states/karnataka.html#districts" class="btn btn-secondary">Districts</a>
+                </div>
+            </div>
+
+            <div class="state-card">
+                <h3 class="state-name">Rajasthan</h3>
+                <div class="state-meta">
+                    <div class="meta-item">👥 <span>1,500+ Jobs</span></div>
+                    <div class="meta-item">🏢 <span>33 Districts</span></div>
+                    <div class="meta-item">💰 <span>₹18K-90K</span></div>
+                    <div class="meta-item">🌍 <span>68M+ Population</span></div>
+                </div>
+                <p class="state-description">
+                    Desert state with regular recruitment drives. RPSC, Rajasthan Police, 
+                    rural development and education sector opportunities.
+                </p>
+                <div class="state-actions">
+                    <a href="states/rajasthan.html" class="btn btn-primary">View Jobs</a>
+                    <a href="states/rajasthan.html#districts" class="btn btn-secondary">Districts</a>
+                </div>
+            </div>
+
+            <div class="state-card">
+                <h3 class="state-name">Gujarat</h3>
+                <div class="state-meta">
+                    <div class="meta-item">👥 <span>1,100+ Jobs</span></div>
+                    <div class="meta-item">🏢 <span>33 Districts</span></div>
+                    <div class="meta-item">💰 <span>₹20K-1.1L</span></div>
+                    <div class="meta-item">🌍 <span>60M+ Population</span></div>
+                </div>
+                <p class="state-description">
+                    Industrial powerhouse with diverse opportunities. GPSC, Gujarat Police, 
+                    PSU and government department regular recruitments.
+                </p>
+                <div class="state-actions">
+                    <a href="states/gujarat.html" class="btn btn-primary">View Jobs</a>
+                    <a href="states/gujarat.html#districts" class="btn btn-secondary">Districts</a>
+                </div>
+            </div>
+
+            <div class="state-card">
+                <h3 class="state-name">Delhi</h3>
+                <div class="state-meta">
+                    <div class="meta-item">👥 <span>800+ Jobs</span></div>
+                    <div class="meta-item">🏢 <span>11 Districts</span></div>
+                    <div class="meta-item">💰 <span>₹25K-1.5L</span></div>
+                    <div class="meta-item">🌍 <span>17M+ Population</span></div>
+                </div>
+                <p class="state-description">
+                    National capital with premium opportunities. DSSSB, Delhi Police, 
+                    central government and high-paying administrative positions.
+                </p>
+                <div class="state-actions">
+                    <a href="states/delhi.html" class="btn btn-primary">View Jobs</a>
+                    <a href="states/delhi.html#districts" class="btn btn-secondary">Districts</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer will be loaded automatically via JavaScript -->
+
+    <script src="js/data-manager.js"></script>
+    <script src="js/header-footer-loader.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('States page loaded');
+            
+            // This will be populated from unified-data.json eventually
+            // For now showing static data
+        });
+    </script>
+</body>
+</html>

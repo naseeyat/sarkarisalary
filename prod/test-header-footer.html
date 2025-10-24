@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Header Footer - Sarkari Salary</title>
+    <link rel="stylesheet" href="shared/brutalist-styles.css">
+    <link rel="stylesheet" href="shared/header-footer.css">
+    <style>
+        .test-content {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 40px;
+            background: white;
+            border: 3px solid #333;
+            box-shadow: 6px 6px 0 #000;
+        }
+        
+        .test-info {
+            background: #e8f5e8;
+            border: 2px solid #22aa22;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .debug {
+            background: #f8f8f8;
+            border: 2px solid #333;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header and Footer will load here automatically -->
+
+    <main class="test-content">
+        <h1>🧪 Header-Footer Test Page</h1>
+        
+        <div class="test-info">
+            <h3>✅ Testing Status:</h3>
+            <ul>
+                <li id="headerStatus">Header: Loading...</li>
+                <li id="footerStatus">Footer: Loading...</li>
+                <li id="pathStatus">Current Path: <span id="currentPath"></span></li>
+                <li id="depthStatus">Page Depth: <span id="pageDepth"></span></li>
+            </ul>
+        </div>
+
+        <div class="debug">
+            <h4>Debug Info:</h4>
+            <div id="debugInfo">Checking header-footer system...</div>
+        </div>
+
+        <h2>Navigation Test:</h2>
+        <p>Check if header navigation appears above and footer appears below this content.</p>
+        <p>The "Home" link should be highlighted since this is a root-level page.</p>
+
+        <h2>Expected Behavior:</h2>
+        <ul>
+            <li>Header should appear at top with navigation menu</li>
+            <li>Footer should appear at bottom with links</li>
+            <li>"Home" should be highlighted in navigation</li>
+            <li>All links should work properly</li>
+        </ul>
+    </main>
+
+    <script src="js/header-footer-loader.js"></script>
+    <script>
+        // Test and debug script
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🧪 Test page loaded');
+            
+            // Show current path info
+            document.getElementById('currentPath').textContent = window.location.pathname;
+            
+            const depth = window.location.pathname.split('/').filter(segment => segment && segment !== 'index.html').length;
+            document.getElementById('pageDepth').textContent = depth + ' levels deep';
+
+            // Check if header and footer loaded
+            setTimeout(() => {
+                const header = document.querySelector('.site-header');
+                const footer = document.querySelector('.site-footer');
+                
+                document.getElementById('headerStatus').innerHTML = header ? 
+                    '✅ Header: Loaded successfully' : 
+                    '❌ Header: Failed to load';
+                    
+                document.getElementById('footerStatus').innerHTML = footer ? 
+                    '✅ Footer: Loaded successfully' : 
+                    '❌ Footer: Failed to load';
+
+                // Debug info
+                let debugText = '';
+                debugText += `Header element found: ${!!header}\n`;
+                debugText += `Footer element found: ${!!footer}\n`;
+                debugText += `Navigation links count: ${document.querySelectorAll('.nav-link').length}\n`;
+                debugText += `Active nav link: ${document.querySelector('.nav-link.active')?.textContent || 'None'}\n`;
+                debugText += `Footer sections count: ${document.querySelectorAll('.footer-section').length}\n`;
+                
+                document.getElementById('debugInfo').innerHTML = `<pre>${debugText}</pre>`;
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
