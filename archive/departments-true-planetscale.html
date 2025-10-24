@@ -27,9 +27,9 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 40px 20px;
         }
 
         .header {
@@ -290,11 +290,106 @@
             color: #666666;
         }
 
+        /* View Toggle Buttons */
+        .view-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            border: 2px solid #333333;
+            width: fit-content;
+            margin: 0 auto;
+        }
+
+        .view-btn {
+            padding: 10px 20px;
+            background: #ffffff;
+            border: none;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            border-right: 1px solid #333333;
+        }
+
+        .view-btn:last-child {
+            border-right: none;
+        }
+
+        .view-btn.active,
+        .view-btn:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        /* List View Styles */
+        .list-view {
+            display: none;
+        }
+
+        .list-view.active {
+            display: block;
+        }
+
+        .dept-list {
+            border: 2px solid #333333;
+            margin-bottom: 60px;
+        }
+
+        .dept-list-item {
+            display: grid;
+            grid-template-columns: 200px 1fr 120px 80px;
+            border-bottom: 1px solid #333333;
+            padding: 16px;
+            background: #ffffff;
+            text-decoration: none;
+            color: #333333;
+            align-items: center;
+        }
+
+        .dept-list-item:last-child {
+            border-bottom: none;
+        }
+
+        .dept-list-item:hover {
+            background: #f8f8f8;
+        }
+
+        .list-dept-name {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .list-dept-desc {
+            font-size: 12px;
+            color: #666666;
+        }
+
+        .list-dept-salary {
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .list-dept-status {
+            font-size: 10px;
+            text-align: center;
+        }
+
         @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+            
             .main-grid { grid-template-columns: repeat(2, 1fr); }
             .state-grid { grid-template-columns: repeat(3, 1fr); }
             .psu-grid { grid-template-columns: repeat(3, 1fr); }
             .stats-grid { grid-template-columns: repeat(3, 1fr); }
+            
+            .dept-list-item {
+                grid-template-columns: 1fr;
+                gap: 8px;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -314,6 +409,12 @@
         <div class="header">
             <h1 class="title">Government Departments Directory</h1>
             <p class="subtitle">108 Departments • 525 Job Types • 1.2M+ Vacancies</p>
+            
+            <!-- View Toggle -->
+            <div class="view-toggle" style="margin-top: 20px;">
+                <button class="view-btn active" onclick="setView('grid')">Grid View</button>
+                <button class="view-btn" onclick="setView('list')">List View</button>
+            </div>
         </div>
 
         <!-- Quick Stats -->
@@ -347,8 +448,11 @@
         <!-- Central Government Departments -->
         <div class="section">
             <h2 class="section-title">Central Government Departments</h2>
-            <div class="main-grid">
-                <a href="upsc-jobs.html" class="dept-box">
+            
+            <!-- Grid View -->
+            <div class="grid-view active">
+                <div class="main-grid">
+                <a href="pages/jobs/job-template-basic.html?job=upsc" class="dept-box">
                     <div class="dept-name">UPSC</div>
                     <div class="dept-desc">Union Public Service Commission</div>
                     <div class="dept-stats">8 Active Exams • ₹56K+ Starting</div>
@@ -356,7 +460,7 @@
                     <div class="dept-status status-live">● CSE 2024 Active</div>
                 </a>
 
-                <a href="ssc-jobs.html" class="dept-box">
+                <a href="pages/jobs/job-template-basic.html?job=ssc" class="dept-box">
                     <div class="dept-name">SSC</div>
                     <div class="dept-desc">Staff Selection Commission</div>
                     <div class="dept-stats">15 Active Exams • ₹18K+ Starting</div>
@@ -364,7 +468,7 @@
                     <div class="dept-status status-live">● MTS 2024 Live</div>
                 </a>
 
-                <a href="railway-jobs.html" class="dept-box">
+                <a href="pages/jobs/job-template-basic.html?job=railway" class="dept-box">
                     <div class="dept-name">Railways</div>
                     <div class="dept-desc">21 Railway Recruitment Boards</div>
                     <div class="dept-stats">25 Posts • ₹18K+ Starting</div>
@@ -372,7 +476,7 @@
                     <div class="dept-status status-soon">● Dec 2024 Expected</div>
                 </a>
 
-                <a href="banking-jobs.html" class="dept-box">
+                <a href="pages/jobs/job-template-basic.html?job=banking" class="dept-box">
                     <div class="dept-name">Banking</div>
                     <div class="dept-desc">Public Sector Banks</div>
                     <div class="dept-stats">18 Banks • ₹25K+ Starting</div>
@@ -380,7 +484,7 @@
                     <div class="dept-status status-live">● Multiple Banks Active</div>
                 </a>
 
-                <a href="defence-jobs.html" class="dept-box">
+                <a href="pages/jobs/job-template-basic.html?job=defence" class="dept-box">
                     <div class="dept-name">Defence</div>
                     <div class="dept-desc">Armed Forces & Paramilitary</div>
                     <div class="dept-stats">20 Rallies • ₹21K+ Starting</div>
@@ -388,7 +492,7 @@
                     <div class="dept-status status-live">● Open Rally Active</div>
                 </a>
 
-                <a href="insurance-jobs.html" class="dept-box">
+                <a href="pages/jobs/job-template-basic.html?job=insurance" class="dept-box">
                     <div class="dept-name">Insurance</div>
                     <div class="dept-desc">Public Sector Insurance</div>
                     <div class="dept-stats">8 Companies • ₹21K+ Starting</div>
@@ -396,7 +500,7 @@
                     <div class="dept-status status-closed">● Results Declared</div>
                 </a>
 
-                <a href="postal-jobs.html" class="dept-box">
+                <a href="pages/jobs/job-template-basic.html?job=postal" class="dept-box">
                     <div class="dept-name">India Post</div>
                     <div class="dept-desc">Department of Posts</div>
                     <div class="dept-stats">Circle wise • ₹18K+ Starting</div>
@@ -404,7 +508,7 @@
                     <div class="dept-status status-live">● Multiple Circles</div>
                 </a>
 
-                <a href="isro-jobs.html" class="dept-box">
+                <a href="pages/jobs/job-template-basic.html?job=isro" class="dept-box">
                     <div class="dept-name">ISRO</div>
                     <div class="dept-desc">Space Research Organization</div>
                     <div class="dept-stats">Technical • ₹56K+ Starting</div>
@@ -412,7 +516,7 @@
                     <div class="dept-status status-soon">● Jan 2025 Expected</div>
                 </a>
 
-                <a href="drdo-jobs.html" class="dept-box">
+                <a href="pages/jobs/job-template-basic.html?job=drdo" class="dept-box">
                     <div class="dept-name">DRDO</div>
                     <div class="dept-desc">Defence Research</div>
                     <div class="dept-stats">Research • ₹56K+ Starting</div>
@@ -420,7 +524,7 @@
                     <div class="dept-status status-live">● CEPTAM Active</div>
                 </a>
 
-                <a href="aiims-jobs.html" class="dept-box">
+                <a href="pages/jobs/job-template-basic.html?job=aiims" class="dept-box">
                     <div class="dept-name">AIIMS</div>
                     <div class="dept-desc">Medical Institutions</div>
                     <div class="dept-stats">Multiple • ₹25K+ Starting</div>
@@ -428,7 +532,7 @@
                     <div class="dept-status status-live">● Multiple AIIMS</div>
                 </a>
 
-                <a href="capf-jobs.html" class="dept-box">
+                <a href="pages/jobs/job-template-basic.html?job=capf" class="dept-box">
                     <div class="dept-name">CAPF</div>
                     <div class="dept-desc">Central Armed Police Forces</div>
                     <div class="dept-stats">5 Forces • ₹21K+ Starting</div>
@@ -436,13 +540,92 @@
                     <div class="dept-status status-soon">● CAPF AC Expected</div>
                 </a>
 
-                <a href="university-jobs.html" class="dept-box">
+                <a href="pages/jobs/job-template-basic.html?job=university" class="dept-box">
                     <div class="dept-name">Universities</div>
                     <div class="dept-desc">Central Universities</div>
                     <div class="dept-stats">45+ Unis • ₹57K+ Starting</div>
                     <div class="dept-jobs">Professor • Assistant Prof<br>JRF • Technical • Admin</div>
                     <div class="dept-status status-live">● UGC NET Results</div>
                 </a>
+                </div>
+            </div>
+            
+            <!-- List View -->
+            <div class="list-view">
+                <div class="dept-list">
+                    <a href="pages/jobs/job-template-basic.html?job=upsc" class="dept-list-item">
+                        <div class="list-dept-name">UPSC</div>
+                        <div class="list-dept-desc">Union Public Service Commission - IAS, IPS, IFS, IRS</div>
+                        <div class="list-dept-salary">₹56K+ Starting</div>
+                        <div class="list-dept-status status-live">● Active</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=ssc" class="dept-list-item">
+                        <div class="list-dept-name">SSC</div>
+                        <div class="list-dept-desc">Staff Selection Commission - CGL, CHSL, MTS, JE</div>
+                        <div class="list-dept-salary">₹18K+ Starting</div>
+                        <div class="list-dept-status status-live">● Live</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=railway" class="dept-list-item">
+                        <div class="list-dept-name">Railways</div>
+                        <div class="list-dept-desc">Railway Recruitment Boards - NTPC, Group D, JE, ALP</div>
+                        <div class="list-dept-salary">₹18K+ Starting</div>
+                        <div class="list-dept-status status-soon">● Expected</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=banking" class="dept-list-item">
+                        <div class="list-dept-name">Banking</div>
+                        <div class="list-dept-desc">Public Sector Banks - SBI PO/Clerk, IBPS, RBI</div>
+                        <div class="list-dept-salary">₹25K+ Starting</div>
+                        <div class="list-dept-status status-live">● Active</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=defence" class="dept-list-item">
+                        <div class="list-dept-name">Defence</div>
+                        <div class="list-dept-desc">Armed Forces & Paramilitary - NDA, CDS, AFCAT</div>
+                        <div class="list-dept-salary">₹21K+ Starting</div>
+                        <div class="list-dept-status status-live">● Active</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=insurance" class="dept-list-item">
+                        <div class="list-dept-name">Insurance</div>
+                        <div class="list-dept-desc">Public Sector Insurance - LIC AAO/ADO, NIACL</div>
+                        <div class="list-dept-salary">₹21K+ Starting</div>
+                        <div class="list-dept-status status-closed">● Closed</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=postal" class="dept-list-item">
+                        <div class="list-dept-name">India Post</div>
+                        <div class="list-dept-desc">Department of Posts - Postman, MTS, PA</div>
+                        <div class="list-dept-salary">₹18K+ Starting</div>
+                        <div class="list-dept-status status-live">● Live</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=isro" class="dept-list-item">
+                        <div class="list-dept-name">ISRO</div>
+                        <div class="list-dept-desc">Space Research Organization - Scientist, Engineer</div>
+                        <div class="list-dept-salary">₹56K+ Starting</div>
+                        <div class="list-dept-status status-soon">● Expected</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=drdo" class="dept-list-item">
+                        <div class="list-dept-name">DRDO</div>
+                        <div class="list-dept-desc">Defence Research - Scientist, JRF, Technical</div>
+                        <div class="list-dept-salary">₹56K+ Starting</div>
+                        <div class="list-dept-status status-live">● Active</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=aiims" class="dept-list-item">
+                        <div class="list-dept-name">AIIMS</div>
+                        <div class="list-dept-desc">Medical Institutions - Nursing Officer, Technical</div>
+                        <div class="list-dept-salary">₹25K+ Starting</div>
+                        <div class="list-dept-status status-live">● Active</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=capf" class="dept-list-item">
+                        <div class="list-dept-name">CAPF</div>
+                        <div class="list-dept-desc">Central Armed Police Forces - CRPF, BSF, CISF</div>
+                        <div class="list-dept-salary">₹21K+ Starting</div>
+                        <div class="list-dept-status status-soon">● Expected</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=university" class="dept-list-item">
+                        <div class="list-dept-name">Universities</div>
+                        <div class="list-dept-desc">Central Universities - Professor, Assistant Prof, JRF</div>
+                        <div class="list-dept-salary">₹57K+ Starting</div>
+                        <div class="list-dept-status status-live">● Active</div>
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -661,5 +844,37 @@
             <a href="index.html" style="color: #666666; text-decoration: none; font-size: 14px;">← Back to Home</a>
         </div>
     </div>
+
+    <script>
+        function setView(viewType) {
+            // Update button states
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Toggle views
+            const gridView = document.querySelector('.grid-view');
+            const listView = document.querySelector('.list-view');
+            
+            if (viewType === 'grid') {
+                gridView.classList.add('active');
+                listView.classList.remove('active');
+                gridView.style.display = 'block';
+                listView.style.display = 'none';
+            } else {
+                gridView.classList.remove('active');
+                listView.classList.add('active');
+                gridView.style.display = 'none';
+                listView.style.display = 'block';
+            }
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default view to grid
+            setView('grid');
+        });
+    </script>
 </body>
 </html>

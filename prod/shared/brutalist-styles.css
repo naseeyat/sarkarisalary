@@ -1,56 +1,165 @@
-/* Brutalist Design System - Left Shadow Variant */
+/* Brutalist Design System - Component-Based Classes */
 
-/* Main containers with left + bottom shadow */
-.brutalist-container {
-    border: 3px solid #333333;
-    background: #ffffff;
-    box-shadow: -8px 8px 0px #333333;
+/* Global shadow disable - applies to ALL elements */
+*, *::before, *::after {
+    box-shadow: none !important;
 }
 
-/* Card elements with left + bottom shadow */
-.brutalist-card {
+/* Force remove shadows from common elements */
+div, header, section, article, aside, nav, main, footer, 
+table, tr, td, th, button, input, select, textarea {
+    box-shadow: none !important;
+}
+
+/* Base brutalist styling - apply to any element */
+.brutalist {
     border: 3px solid #333333;
     background: #ffffff;
-    box-shadow: -4px 4px 0px #333333;
+    /* box-shadow: -4px 4px 0px #333333; */
     transition: all 0.2s ease;
 }
 
-.brutalist-card:hover {
-    transform: translate(2px, -2px);
-    box-shadow: -6px 6px 0px #333333;
-}
-
-/* Small elements with left + bottom shadow */
-.brutalist-small {
+/* Size variants */
+.brutalist-sm {
     border: 2px solid #333333;
     background: #ffffff;
-    box-shadow: -3px 3px 0px #333333;
+    /* box-shadow: -3px 3px 0px #333333; */
+    transition: all 0.2s ease;
 }
 
-/* Table elements with left + bottom shadow */
+.brutalist-md {
+    border: 3px solid #333333;
+    background: #ffffff;
+    /* box-shadow: -4px 4px 0px #333333; */
+    transition: all 0.2s ease;
+}
+
+.brutalist-lg {
+    border: 3px solid #333333;
+    background: #ffffff;
+    /* box-shadow: -6px 6px 0px #333333; */
+    transition: all 0.2s ease;
+}
+
+.brutalist-xl {
+    border: 3px solid #333333;
+    background: #ffffff;
+    /* box-shadow: -8px 8px 0px #333333; */
+    transition: all 0.2s ease;
+}
+
+/* Hover effects - disabled */
+/*
+.brutalist:hover, .brutalist-sm:hover {
+    transform: translate(1px, -1px);
+    box-shadow: -4px 4px 0px #333333;
+}
+
+.brutalist-md:hover {
+    transform: translate(1px, -1px);
+    box-shadow: -5px 5px 0px #333333;
+}
+
+.brutalist-lg:hover {
+    transform: translate(2px, -2px);
+    box-shadow: -7px 7px 0px #333333;
+}
+
+.brutalist-xl:hover {
+    transform: translate(2px, -2px);
+    box-shadow: -10px 10px 0px #333333;
+}
+*/
+
+/* Component-specific classes */
+.brutalist-header {
+    border: 3px solid #333333;
+    background: #ffffff;
+    /* box-shadow: -8px 8px 0px #333333; */
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.brutalist-card {
+    border: 3px solid #333333;
+    background: #ffffff;
+    /* box-shadow: -4px 4px 0px #333333; */
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.brutalist-card:hover {
+    background: #f8f8f8;
+}
+
 .brutalist-table {
     border: 3px solid #333333;
     background: #ffffff;
-    box-shadow: -6px 6px 0px #333333;
+    /* box-shadow: -6px 6px 0px #333333; */
+    margin-bottom: 30px;
+    overflow-x: auto;
 }
 
-/* Button elements with left + bottom shadow */
 .brutalist-button {
     border: 2px solid #333333;
     background: #333333;
     color: #ffffff;
-    box-shadow: -3px 3px 0px #666666;
+    /* box-shadow: -3px 3px 0px #666666; */
     transition: all 0.2s ease;
+    cursor: pointer;
+    padding: 8px 16px;
+    font-family: inherit;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .brutalist-button:hover {
-    transform: translate(1px, -1px);
-    box-shadow: -4px 4px 0px #666666;
+    background: #000000;
 }
 
-/* Header sections with left + bottom shadow */
-.brutalist-header {
+.brutalist-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     border: 3px solid #333333;
-    background: #ffffff;
-    box-shadow: -8px 8px 0px #333333;
+    /* box-shadow: -4px 4px 0px #333333; */
+    margin: 40px 0;
+}
+
+.brutalist-grid {
+    display: grid;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.brutalist-grid-2 { grid-template-columns: repeat(2, 1fr); }
+.brutalist-grid-3 { grid-template-columns: repeat(3, 1fr); }
+.brutalist-grid-4 { grid-template-columns: repeat(4, 1fr); }
+.brutalist-grid-auto { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+/* Utility classes */
+.brutalist-no-shadow {
+    box-shadow: none !important;
+}
+
+.brutalist-no-hover:hover {
+    transform: none !important;
+    box-shadow: -4px 4px 0px #333333 !important;
+}
+
+/* Theme variants */
+.brutalist-dark {
+    background: #333333;
+    color: #ffffff;
+    border-color: #666666;
+}
+
+.brutalist-accent {
+    border-color: #1890ff;
+    box-shadow: -4px 4px 0px #1890ff;
+}
+
+.brutalist-accent:hover {
+    box-shadow: -6px 6px 0px #1890ff;
 }

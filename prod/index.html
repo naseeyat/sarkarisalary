@@ -20,6 +20,9 @@
     <!-- Global JavaScript -->
     <script src="shared/global.js"></script>
     
+    <!-- Brutalist Styles -->
+    <link rel="stylesheet" href="shared/brutalist-styles.css">
+    
     <style>
         * {
             margin: 0;
@@ -41,14 +44,7 @@
             padding: 40px 20px;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            border: 3px solid #333333;
-            padding: 40px;
-            background: #ffffff;
-            box-shadow: -8px 8px 0px #333333;
-        }
+        /* Header styles handled by .brutalist-header */
 
         .main-title {
             font-size: 36px;
@@ -121,18 +117,7 @@
             margin-bottom: 30px;
         }
 
-        .job-card {
-            border: 3px solid #333333;
-            background: #ffffff;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .job-card:hover {
-            box-shadow: -6px 6px 0px #333333;
-            transform: translateY(-2px);
-        }
+        /* Job card styles handled by .brutalist-card */
 
         .job-header {
             padding: 15px;
@@ -236,13 +221,7 @@
             opacity: 0.8;
         }
 
-        .quick-stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            border: 3px solid #333333;
-            margin: 40px 0;
-            box-shadow: -4px 4px 0px #333333;
-        }
+        /* Quick stats styles handled by .brutalist-stats */
 
         .stat-box {
             border-right: 1px solid #333333;
@@ -275,11 +254,8 @@
             font-weight: 600;
         }
 
+        /* Latest jobs styles handled by .brutalist-md */
         .latest-jobs {
-            border: 3px solid #333333;
-            margin: 40px 0;
-            background: #ffffff;
-            box-shadow: -4px 4px 0px #333333;
             overflow: hidden;
         }
 
@@ -407,7 +383,7 @@
 </head>
 <body>
     <div class="container">
-        <header class="header">
+        <header class="brutalist-header brutalist-no-shadow">
             <h1 class="main-title">SARKARI SALARY<span style="font-size: 12px; color: #666; font-weight: 400;">.today</span></h1>
             <p class="subtitle">Complete Government Job Salary Calculator & Pay Scale Guide</p>
             <div class="search-container">
@@ -416,7 +392,7 @@
             </div>
         </header>
 
-        <div class="quick-stats">
+        <div class="brutalist-stats">
             <div class="stat-box">
                 <div class="stat-number">500+</div>
                 <div class="stat-label">Government Jobs</div>
@@ -426,7 +402,7 @@
                 <div class="stat-label">Departments</div>
             </div>
             <div class="stat-box" onclick="window.location.href='pages/pay-scales/pay-scale-chart.html'" style="cursor: pointer;">
-                <div class="stat-number">25+</div>
+                <div class="stat-number">17</div>
                 <div class="stat-label">Pay Scales</div>
             </div>
             <div class="stat-box">
@@ -438,7 +414,7 @@
         <section class="trending-section">
             <h2 class="section-title">🔥 Trending High Salary Jobs</h2>
             <div class="trending-grid" style="grid-template-columns: 1fr; gap: 10px;">
-                <div class="job-card" onclick="openJob('ias')">
+                <div class="brutalist-card job-card" onclick="openJob('ias')">
                     <div class="job-header">
                         <div class="job-title">IAS Officer</div>
                         <div class="job-dept">UPSC - All India Service</div>
@@ -449,7 +425,7 @@
                     </div>
                 </div>
 
-                <div class="job-card" onclick="openJob('ips')">
+                <div class="brutalist-card job-card" onclick="openJob('ips')">
                     <div class="job-header">
                         <div class="job-title">IPS Officer</div>
                         <div class="job-dept">UPSC - Police Service</div>
@@ -460,7 +436,7 @@
                     </div>
                 </div>
 
-                <div class="job-card" onclick="openJob('sbi-po')">
+                <div class="brutalist-card job-card" onclick="openJob('sbi-po')">
                     <div class="job-header">
                         <div class="job-title">SBI PO</div>
                         <div class="job-dept">State Bank of India</div>
@@ -471,7 +447,7 @@
                     </div>
                 </div>
 
-                <div class="job-card" onclick="openJob('railway-officer')">
+                <div class="brutalist-card job-card" onclick="openJob('railway-officer')">
                     <div class="job-header">
                         <div class="job-title">Railway Officer</div>
                         <div class="job-dept">Indian Railways</div>
@@ -482,7 +458,7 @@
                     </div>
                 </div>
 
-                <div class="job-card" onclick="openJob('ssc-cgl')">
+                <div class="brutalist-card job-card" onclick="openJob('ssc-cgl')">
                     <div class="job-header">
                         <div class="job-title">SSC CGL Officer</div>
                         <div class="job-dept">Staff Selection Commission</div>
@@ -493,7 +469,7 @@
                     </div>
                 </div>
 
-                <div class="job-card" onclick="openJob('bank-manager')">
+                <div class="brutalist-card job-card" onclick="openJob('bank-manager')">
                     <div class="job-header">
                         <div class="job-title">Bank Manager</div>
                         <div class="job-dept">Public Sector Banks</div>
@@ -506,7 +482,7 @@
             </div>
         </section>
 
-        <div class="latest-jobs">
+        <div class="brutalist-md latest-jobs">
             <div class="latest-header">Latest Job Notifications</div>
             <div class="rolling-banner">
                 <div class="rolling-text">

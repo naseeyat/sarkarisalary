@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Government Departments Directory - SARKARI SALARY</title>
+    <meta name="description" content="Comprehensive directory of all government departments, ministries, PSUs, and recruitment bodies across India">
+    <link rel="icon" type="image/svg+xml" href="shared/favicon.svg">
+    
+    <!-- Global JavaScript -->
+    <script src="shared/global.js"></script>
+    
+    <!-- Brutalist Styles -->
+    <link rel="stylesheet" href="shared/brutalist-styles.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+            background: #ffffff;
+            color: #333333;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .main-title {
+            font-size: 36px;
+            font-weight: 900;
+            color: #333333;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #666666;
+            margin-bottom: 25px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #333333;
+            margin: 40px 0 20px 0;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 15px;
+            border: 3px solid #333333;
+            background: #f8f8f8;
+        }
+
+        /* Quick Stats */
+        .brutalist-stats {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            border: 3px solid #333333;
+            margin-bottom: 30px;
+        }
+
+        .stat-box {
+            border-right: 1px solid #333333;
+            padding: 20px 16px;
+            text-align: center;
+            background: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:last-child {
+            border-right: none;
+        }
+
+        .stat-box:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        .stat-number {
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 6px;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            font-weight: 600;
+        }
+
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 12px 20px;
+            background: #ffffff;
+            border: 3px solid #333333;
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+            border-right: none;
+        }
+
+        .tab-btn:last-child {
+            border-right: 3px solid #333333;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        /* Department Grid */
+        .departments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .dept-card {
+            border: 3px solid #333333;
+            background: #ffffff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .dept-card:hover {
+            background: #f8f8f8;
+            transform: translateY(-2px);
+        }
+
+        .dept-header {
+            padding: 12px;
+            border-bottom: 1px solid #333333;
+            background: #f8f8f8;
+        }
+
+        .dept-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .dept-category {
+            font-size: 9px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .dept-body {
+            padding: 12px;
+        }
+
+        .dept-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dept-salary {
+            font-size: 11px;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        .dept-badge {
+            background: #333333;
+            color: #ffffff;
+            padding: 2px 6px;
+            font-size: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+        }
+
+        .badge-live { background: #00aa00; }
+        .badge-expected { background: #ff8800; }
+        .badge-closed { background: #ff4444; }
+
+        /* States/UTs List */
+        .states-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 3px solid #333333;
+            margin-bottom: 30px;
+        }
+
+        /* Districts */
+        .district-search {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .search-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 12px;
+            border: 3px solid #333333;
+            font-family: inherit;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: #ffffff;
+            outline: none;
+        }
+
+        .state-filter {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 12px;
+            background: #ffffff;
+            border: 2px solid #333333;
+            font-family: inherit;
+            font-size: 9px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-right: none;
+        }
+
+        .filter-btn:last-child {
+            border-right: 2px solid #333333;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        .districts-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            border: 3px solid #333333;
+            margin-bottom: 30px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .district-item {
+            border-right: 1px solid #333333;
+            border-bottom: 1px solid #333333;
+            padding: 10px 8px;
+            background: #ffffff;
+            text-decoration: none;
+            color: #333333;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .district-item:nth-child(5n) {
+            border-right: none;
+        }
+
+        .district-item:hover {
+            background: #f8f8f8;
+        }
+
+        .district-name {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .district-state {
+            font-size: 8px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .jobs-info {
+            font-size: 8px;
+            color: #333333;
+            margin-top: 3px;
+            font-weight: 600;
+        }
+
+        .state-item {
+            border-right: 1px solid #333333;
+            border-bottom: 1px solid #333333;
+            padding: 12px 10px;
+            background: #ffffff;
+            text-decoration: none;
+            color: #333333;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .state-item:nth-child(4n) {
+            border-right: none;
+        }
+
+        .state-item:hover {
+            background: #f8f8f8;
+        }
+
+        .state-name {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 3px;
+        }
+
+        .state-type {
+            font-size: 8px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Hidden sections */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Navigation */
+        .nav-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .nav-link {
+            color: #333333;
+            text-decoration: none;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            padding: 8px 16px;
+            border: 3px solid #333333;
+            background: #ffffff;
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+
+        .nav-link:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .main-title {
+                font-size: 28px;
+            }
+
+            .brutalist-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .states-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .category-tabs {
+                flex-direction: column;
+            }
+
+            .tab-btn {
+                border-right: 3px solid #333333;
+                border-bottom: none;
+            }
+
+            .tab-btn:last-child {
+                border-bottom: 3px solid #333333;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brutalist-stats,
+            .states-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .departments-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="brutalist-header">
+            <h1 class="main-title">COMPLETE GOVERNMENT DIRECTORY</h1>
+            <p class="subtitle">All Ministries, Departments, PSUs, States & UTs - The Ultimate Sarkari Naukri Guide</p>
+        </header>
+
+        <!-- Quick Stats -->
+        <div class="brutalist-stats">
+            <div class="stat-box">
+                <div class="stat-number">300+</div>
+                <div class="stat-label">Total Depts</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">58</div>
+                <div class="stat-label">Ministries</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">150+</div>
+                <div class="stat-label">PSUs</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">28</div>
+                <div class="stat-label">States</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">8</div>
+                <div class="stat-label">UTs</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">Live</div>
+                <div class="stat-label">Updates</div>
+            </div>
+        </div>
+
+        <!-- Category Tabs -->
+        <div class="category-tabs">
+            <button class="tab-btn active" onclick="showTab('central')">Central Ministries</button>
+            <button class="tab-btn" onclick="showTab('autonomous')">Autonomous Bodies</button>
+            <button class="tab-btn" onclick="showTab('psu')">PSUs & Corporations</button>
+            <button class="tab-btn" onclick="showTab('defence')">Defence & Security</button>
+            <button class="tab-btn" onclick="showTab('states')">States & UTs</button>
+        </div>
+
+        <!-- Central Ministries -->
+        <div id="central" class="tab-content active">
+            <h2 class="section-title">🏛️ Central Government Ministries</h2>
+            <div class="departments-grid">
+                <!-- Major Ministries -->
+                <a href="pages/jobs/job-template-basic.html?job=home_ministry" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">Home Ministry</div>
+                        <div class="dept-category">MHA</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹25K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=defence_ministry" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">Defence Ministry</div>
+                        <div class="dept-category">MOD</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹21K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=finance_ministry" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">Finance Ministry</div>
+                        <div class="dept-category">MOF</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹35K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=external_affairs" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">External Affairs</div>
+                        <div class="dept-category">MEA</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹56K+</div>
+                            <div class="dept-badge badge-expected">EXPECTED</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=railways_ministry" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">Railways Ministry</div>
+                        <div class="dept-category">MOR</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹18K+</div>
+                            <div class="dept-badge badge-expected">EXPECTED</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=health_ministry" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">Health Ministry</div>
+                        <div class="dept-category">MOHFW</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹25K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=education_ministry" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">Education Ministry</div>
+                        <div class="dept-category">MOE</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹35K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=agriculture_ministry" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">Agriculture Ministry</div>
+                        <div class="dept-category">MOA&FW</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹25K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=law_ministry" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">Law Ministry</div>
+                        <div class="dept-category">MOL&J</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹35K+</div>
+                            <div class="dept-badge badge-expected">EXPECTED</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=commerce_ministry" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">Commerce Ministry</div>
+                        <div class="dept-category">MOCI</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹35K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=power_ministry" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">Power Ministry</div>
+                        <div class="dept-category">MOP</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹28K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=petroleum_ministry" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">Petroleum Ministry</div>
+                        <div class="dept-category">MOP&NG</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹30K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Autonomous Bodies -->
+        <div id="autonomous" class="tab-content">
+            <h2 class="section-title">🎯 Autonomous Bodies & Commissions</h2>
+            <div class="departments-grid">
+                <a href="pages/jobs/job-template-basic.html?job=upsc" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">UPSC</div>
+                        <div class="dept-category">Constitutional Body</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹56K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=ssc" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">SSC</div>
+                        <div class="dept-category">Subordinate Services</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹18K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=election_commission" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">Election Commission</div>
+                        <div class="dept-category">Constitutional Body</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹35K+</div>
+                            <div class="dept-badge badge-expected">EXPECTED</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=cbi" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">CBI</div>
+                        <div class="dept-category">Investigation Agency</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹35K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=isro" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">ISRO</div>
+                        <div class="dept-category">Space Agency</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹56K+</div>
+                            <div class="dept-badge badge-expected">EXPECTED</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=drdo" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">DRDO</div>
+                        <div class="dept-category">Defence Research</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹56K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- PSUs -->
+        <div id="psu" class="tab-content">
+            <h2 class="section-title">🏭 PSUs & Public Corporations</h2>
+            <div class="departments-grid">
+                <a href="pages/jobs/job-template-basic.html?job=ongc" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">ONGC</div>
+                        <div class="dept-category">Oil & Gas</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹30K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=iocl" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">IOCL</div>
+                        <div class="dept-category">Oil Refining</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹30K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=sbi" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">SBI</div>
+                        <div class="dept-category">Banking</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹25K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=ntpc" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">NTPC</div>
+                        <div class="dept-category">Power Generation</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹28K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=coal_india" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">Coal India</div>
+                        <div class="dept-category">Mining</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹28K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=bhel" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">BHEL</div>
+                        <div class="dept-category">Heavy Engineering</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹28K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Defence & Security -->
+        <div id="defence" class="tab-content">
+            <h2 class="section-title">⚔️ Defence & Security Forces</h2>
+            <div class="departments-grid">
+                <a href="pages/jobs/job-template-basic.html?job=indian_army" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">Indian Army</div>
+                        <div class="dept-category">Armed Forces</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹21K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=indian_navy" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">Indian Navy</div>
+                        <div class="dept-category">Armed Forces</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹21K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=indian_airforce" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">Indian Air Force</div>
+                        <div class="dept-category">Armed Forces</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹21K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=crpf" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">CRPF</div>
+                        <div class="dept-category">Paramilitary</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹21K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=bsf" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">BSF</div>
+                        <div class="dept-category">Border Security</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹21K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="pages/jobs/job-template-basic.html?job=cisf" class="dept-card">
+                    <div class="dept-header">
+                        <div class="dept-title">CISF</div>
+                        <div class="dept-category">Industrial Security</div>
+                    </div>
+                    <div class="dept-body">
+                        <div class="dept-info">
+                            <div class="dept-salary">₹21K+</div>
+                            <div class="dept-badge badge-live">LIVE</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- States & UTs -->
+        <div id="states" class="tab-content">
+            <h2 class="section-title">🗺️ All States & Union Territories</h2>
+            
+            <h3 style="font-size: 16px; font-weight: 700; margin: 20px 0 15px 0; text-align: center; color: #333;">28 STATES (Alphabetical)</h3>
+            <div class="states-grid">
+                <a href="andhra-pradesh-jobs.html" class="state-item">
+                    <div class="state-name">Andhra Pradesh</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="arunachal-pradesh-jobs.html" class="state-item">
+                    <div class="state-name">Arunachal Pradesh</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="assam-jobs.html" class="state-item">
+                    <div class="state-name">Assam</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="bihar-jobs.html" class="state-item">
+                    <div class="state-name">Bihar</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="chhattisgarh-jobs.html" class="state-item">
+                    <div class="state-name">Chhattisgarh</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="goa-jobs.html" class="state-item">
+                    <div class="state-name">Goa</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="gujarat-jobs.html" class="state-item">
+                    <div class="state-name">Gujarat</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="haryana-jobs.html" class="state-item">
+                    <div class="state-name">Haryana</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="himachal-pradesh-jobs.html" class="state-item">
+                    <div class="state-name">Himachal Pradesh</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="jharkhand-jobs.html" class="state-item">
+                    <div class="state-name">Jharkhand</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="karnataka-jobs.html" class="state-item">
+                    <div class="state-name">Karnataka</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="kerala-jobs.html" class="state-item">
+                    <div class="state-name">Kerala</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="madhya-pradesh-jobs.html" class="state-item">
+                    <div class="state-name">Madhya Pradesh</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="maharashtra-jobs.html" class="state-item">
+                    <div class="state-name">Maharashtra</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="manipur-jobs.html" class="state-item">
+                    <div class="state-name">Manipur</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="meghalaya-jobs.html" class="state-item">
+                    <div class="state-name">Meghalaya</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="mizoram-jobs.html" class="state-item">
+                    <div class="state-name">Mizoram</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="nagaland-jobs.html" class="state-item">
+                    <div class="state-name">Nagaland</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="odisha-jobs.html" class="state-item">
+                    <div class="state-name">Odisha</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="punjab-jobs.html" class="state-item">
+                    <div class="state-name">Punjab</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="rajasthan-jobs.html" class="state-item">
+                    <div class="state-name">Rajasthan</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="sikkim-jobs.html" class="state-item">
+                    <div class="state-name">Sikkim</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="tamil-nadu-jobs.html" class="state-item">
+                    <div class="state-name">Tamil Nadu</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="telangana-jobs.html" class="state-item">
+                    <div class="state-name">Telangana</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="tripura-jobs.html" class="state-item">
+                    <div class="state-name">Tripura</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="uttar-pradesh-jobs.html" class="state-item">
+                    <div class="state-name">Uttar Pradesh</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="uttarakhand-jobs.html" class="state-item">
+                    <div class="state-name">Uttarakhand</div>
+                    <div class="state-type">State</div>
+                </a>
+                <a href="west-bengal-jobs.html" class="state-item">
+                    <div class="state-name">West Bengal</div>
+                    <div class="state-type">State</div>
+                </a>
+            </div>
+
+            <h3 style="font-size: 16px; font-weight: 700; margin: 30px 0 15px 0; text-align: center; color: #333;">8 UNION TERRITORIES (Alphabetical)</h3>
+            <div class="states-grid">
+                <a href="andaman-nicobar-jobs.html" class="state-item">
+                    <div class="state-name">Andaman & Nicobar</div>
+                    <div class="state-type">UT</div>
+                </a>
+                <a href="chandigarh-jobs.html" class="state-item">
+                    <div class="state-name">Chandigarh</div>
+                    <div class="state-type">UT</div>
+                </a>
+                <a href="dadra-nagar-haveli-jobs.html" class="state-item">
+                    <div class="state-name">Dadra & Nagar Haveli</div>
+                    <div class="state-type">UT</div>
+                </a>
+                <a href="daman-diu-jobs.html" class="state-item">
+                    <div class="state-name">Daman & Diu</div>
+                    <div class="state-type">UT</div>
+                </a>
+                <a href="delhi-jobs.html" class="state-item">
+                    <div class="state-name">Delhi</div>
+                    <div class="state-type">UT</div>
+                </a>
+                <a href="jammu-kashmir-jobs.html" class="state-item">
+                    <div class="state-name">Jammu & Kashmir</div>
+                    <div class="state-type">UT</div>
+                </a>
+                <a href="ladakh-jobs.html" class="state-item">
+                    <div class="state-name">Ladakh</div>
+                    <div class="state-type">UT</div>
+                </a>
+                <a href="puducherry-jobs.html" class="state-item">
+                    <div class="state-name">Puducherry</div>
+                    <div class="state-type">UT</div>
+                </a>
+            </div>
+
+            <div style="text-align: center; margin: 30px 0; padding: 20px; border: 3px solid #333333; background: #f8f8f8;">
+                <div style="font-size: 16px; font-weight: 700; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">EXPLORE DISTRICT-LEVEL JOBS</div>
+                <div style="font-size: 12px; color: #666666; margin-bottom: 15px; line-height: 1.4;">
+                    Each state page contains all districts with specific job openings for:<br>
+                    District Collector • SDM • Tehsildar • BDO • Patwari • Lekhpal • VRO • Circle Officer
+                </div>
+                <div style="font-size: 10px; font-weight: 700; color: #333333; text-transform: uppercase; letter-spacing: 1px;">
+                    Click any state above to view all its districts & local job opportunities
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-section">
+            <a href="index.html" class="nav-link">← BACK TO HOME</a>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+        
+        function filterDistricts() {
+            const searchInput = document.getElementById('districtSearch').value.toLowerCase();
+            const districts = document.querySelectorAll('.district-item');
+            
+            districts.forEach(district => {
+                const districtName = district.querySelector('.district-name').textContent.toLowerCase();
+                const districtState = district.querySelector('.district-state').textContent.toLowerCase();
+                
+                if (districtName.includes(searchInput) || districtState.includes(searchInput)) {
+                    district.style.display = 'block';
+                } else {
+                    district.style.display = 'none';
+                }
+            });
+        }
+        
+        function filterByState(stateCode) {
+            // Update button states
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            const districts = document.querySelectorAll('.district-item');
+            
+            districts.forEach(district => {
+                const districtState = district.getAttribute('data-state');
+                
+                if (stateCode === 'all' || districtState === stateCode) {
+                    district.style.display = 'block';
+                } else {
+                    district.style.display = 'none';
+                }
+            });
+            
+            // Clear search when filtering by state
+            document.getElementById('districtSearch').value = '';
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Default to central tab
+            showTab('central');
+        });
+    </script>
+</body>
+</html>

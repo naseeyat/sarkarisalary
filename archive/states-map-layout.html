@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>India States Map - Government Jobs by State - SARKARI SALARY</title>
+    <meta name="description" content="Interactive map of India showing government job opportunities in all 28 states and 8 UTs">
+    <link rel="icon" type="image/svg+xml" href="shared/favicon.svg">
+    
+    <!-- Global JavaScript -->
+    <script src="shared/global.js"></script>
+    
+    <!-- Brutalist Styles -->
+    <link rel="stylesheet" href="shared/brutalist-styles.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+            background: #ffffff;
+            color: #333333;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .main-title {
+            font-size: 36px;
+            font-weight: 900;
+            color: #333333;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #666666;
+            margin-bottom: 25px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Map Container */
+        .map-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            height: 650px;
+            margin: 40px auto;
+            background: #f8f8f8;
+            border: 3px solid #333333;
+            overflow: visible;
+        }
+
+        .state-box {
+            position: absolute;
+            background: #ffffff;
+            border: 1px solid #333333;
+            padding: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: #333333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 7px;
+            line-height: 1.1;
+        }
+
+        .state-box:hover {
+            background: #333333;
+            color: #ffffff;
+            z-index: 100;
+            border-width: 2px;
+        }
+
+        .state-name {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 1px;
+            font-size: inherit;
+        }
+
+        .state-info {
+            color: #666666;
+            font-size: 5px;
+            margin-bottom: 1px;
+        }
+
+        .state-box:hover .state-info {
+            color: #ffffff;
+        }
+
+        .job-count {
+            font-weight: 700;
+            font-size: 5px;
+        }
+
+        /* State sizes based on actual geographical area */
+        /* Extra Large - Biggest states */
+        .xl-state {
+            width: 85px;
+            height: 65px;
+            font-size: 8px;
+        }
+
+        /* Large states */
+        .large-state {
+            width: 70px;
+            height: 55px;
+            font-size: 7px;
+        }
+
+        /* Medium states */
+        .medium-state {
+            width: 55px;
+            height: 45px;
+            font-size: 6px;
+        }
+
+        /* Small states */
+        .small-state {
+            width: 45px;
+            height: 35px;
+            font-size: 6px;
+        }
+
+        /* Tiny states and UTs */
+        .tiny-state {
+            width: 35px;
+            height: 25px;
+            font-size: 5px;
+        }
+
+        /* Precise India map positioning - NO GAPS */
+        
+        /* Northern region - Kashmir to Uttarakhand */
+        .jammu-kashmir { top: 10px; left: 110px; }
+        .ladakh { top: 15px; left: 155px; }
+        .himachal-pradesh { top: 45px; left: 130px; }
+        .punjab { top: 65px; left: 105px; }
+        .haryana { top: 80px; left: 140px; }
+        .delhi { top: 85px; left: 150px; }
+        .uttarakhand { top: 65px; left: 170px; }
+        .chandigarh { top: 70px; left: 125px; }
+
+        /* Western region */
+        .rajasthan { top: 105px; left: 80px; }
+        .gujarat { top: 180px; left: 55px; }
+        .dadra-nagar-haveli { top: 200px; left: 75px; }
+        .daman-diu { top: 195px; left: 65px; }
+
+        /* Central-Western region */
+        .maharashtra { top: 220px; left: 110px; }
+        .goa { top: 280px; left: 95px; }
+
+        /* Central region - Hindi heartland */
+        .uttar-pradesh { top: 90px; left: 200px; }
+        .madhya-pradesh { top: 150px; left: 165px; }
+        .chhattisgarh { top: 180px; left: 225px; }
+
+        /* Eastern region */
+        .bihar { top: 110px; left: 255px; }
+        .jharkhand { top: 150px; left: 255px; }
+        .west-bengal { top: 130px; left: 285px; }
+        .odisha { top: 170px; left: 270px; }
+
+        /* Northeastern region - Seven Sisters */
+        .sikkim { top: 95px; left: 315px; }
+        .assam { top: 85px; left: 345px; }
+        .arunachal-pradesh { top: 45px; left: 375px; }
+        .nagaland { top: 100px; left: 380px; }
+        .manipur { top: 125px; left: 380px; }
+        .mizoram { top: 150px; left: 375px; }
+        .tripura { top: 140px; left: 345px; }
+        .meghalaya { top: 115px; left: 345px; }
+
+        /* Southern region */
+        .telangana { top: 220px; left: 195px; }
+        .andhra-pradesh { top: 250px; left: 205px; }
+        .karnataka { top: 280px; left: 150px; }
+        .tamil-nadu { top: 320px; left: 175px; }
+        .kerala { top: 340px; left: 130px; }
+        .puducherry { top: 340px; left: 190px; }
+
+        /* Islands */
+        .andaman-nicobar { top: 380px; left: 240px; }
+
+        /* Legend */
+        .legend {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ffffff;
+            border: 3px solid #333333;
+            padding: 15px;
+            width: 200px;
+        }
+
+        .legend-title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+            font-size: 9px;
+        }
+
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            border: 1px solid #333333;
+            margin-right: 8px;
+        }
+
+        .state-color { background: #ffffff; }
+        .ut-color { background: #f0f0f0; }
+
+        /* Stats Panel */
+        .stats-panel {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 3px solid #333333;
+            margin: 30px 0;
+        }
+
+        .stat-item {
+            border-right: 1px solid #333333;
+            padding: 20px 15px;
+            text-align: center;
+            background: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:last-child {
+            border-right: none;
+        }
+
+        .stat-item:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        .stat-number {
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 6px;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            font-weight: 600;
+        }
+
+        /* Instructions */
+        .instructions {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            border: 3px solid #333333;
+            background: #f8f8f8;
+        }
+
+        .instruction-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .instruction-text {
+            font-size: 12px;
+            color: #666666;
+            line-height: 1.4;
+        }
+
+        /* Navigation */
+        .nav-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .nav-link {
+            color: #333333;
+            text-decoration: none;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            padding: 8px 16px;
+            border: 3px solid #333333;
+            background: #ffffff;
+            transition: all 0.2s ease;
+            display: inline-block;
+            margin: 0 5px;
+        }
+
+        .nav-link:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .main-title {
+                font-size: 28px;
+            }
+
+            .map-container {
+                height: 600px;
+                transform: scale(0.8);
+                transform-origin: top center;
+            }
+
+            .stats-panel {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .legend {
+                position: static;
+                width: 100%;
+                margin: 20px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .map-container {
+                height: 500px;
+                transform: scale(0.6);
+            }
+
+            .stats-panel {
+                grid-template-columns: 1fr;
+            }
+
+            .state-box {
+                min-width: 60px;
+                min-height: 40px;
+            }
+
+            .state-name {
+                font-size: 7px !important;
+            }
+
+            .state-info {
+                font-size: 5px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="brutalist-header">
+            <h1 class="main-title">INDIA GOVERNMENT JOBS MAP</h1>
+            <p class="subtitle">Explore State-wise Sarkari Naukri Opportunities - Click Any State</p>
+        </header>
+
+        <!-- Stats Panel -->
+        <div class="stats-panel">
+            <div class="stat-item">
+                <div class="stat-number">28</div>
+                <div class="stat-label">States</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Union Territories</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">780+</div>
+                <div class="stat-label">Districts</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50K+</div>
+                <div class="stat-label">Job Openings</div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="instructions">
+            <div class="instruction-title">How to Use This Map</div>
+            <div class="instruction-text">
+                Click on any state or UT box to view all government job opportunities in that region.<br>
+                Each state page contains district-wise job listings, salary information, and application details.
+            </div>
+        </div>
+
+        <!-- Interactive Map -->
+        <div class="map-container">
+            <!-- Legend -->
+            <div class="legend">
+                <div class="legend-title">Legend</div>
+                <div class="legend-item">
+                    <div class="legend-color state-color"></div>
+                    <span>States</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color ut-color"></div>
+                    <span>Union Territories</span>
+                </div>
+            </div>
+
+            <!-- States positioned as per India map -->
+
+            <!-- Northern States -->
+            <a href="jammu-kashmir-jobs.html" class="state-box large-state jammu-kashmir">
+                <div class="state-name">J&K</div>
+                <div class="state-info">UT</div>
+                <div class="job-count">45+</div>
+            </a>
+
+            <a href="ladakh-jobs.html" class="state-box large-state ladakh">
+                <div class="state-name">LADAKH</div>
+                <div class="state-info">UT</div>
+                <div class="job-count">25+</div>
+            </a>
+
+            <a href="himachal-pradesh-jobs.html" class="state-box medium-state himachal-pradesh">
+                <div class="state-name">H.P.</div>
+                <div class="state-info">State</div>
+                <div class="job-count">120+</div>
+            </a>
+
+            <a href="punjab-jobs.html" class="state-box medium-state punjab">
+                <div class="state-name">PUNJAB</div>
+                <div class="state-info">State</div>
+                <div class="job-count">180+</div>
+            </a>
+
+            <a href="haryana-jobs.html" class="state-box small-state haryana">
+                <div class="state-name">HARYANA</div>
+                <div class="state-info">State</div>
+                <div class="job-count">250+</div>
+            </a>
+
+            <a href="delhi-jobs.html" class="state-box tiny-state delhi">
+                <div class="state-name">DELHI</div>
+                <div class="state-info">UT</div>
+                <div class="job-count">500+</div>
+            </a>
+
+            <a href="uttarakhand-jobs.html" class="state-box medium-state uttarakhand">
+                <div class="state-name">U.K.</div>
+                <div class="state-info">State</div>
+                <div class="job-count">180+</div>
+            </a>
+
+            <a href="chandigarh-jobs.html" class="state-box tiny-state chandigarh">
+                <div class="state-name">CHD</div>
+                <div class="state-info">UT</div>
+                <div class="job-count">120+</div>
+            </a>
+
+            <!-- Western States -->
+            <a href="rajasthan-jobs.html" class="state-box xl-state rajasthan">
+                <div class="state-name">RAJASTHAN</div>
+                <div class="state-info">State</div>
+                <div class="job-count">450+</div>
+            </a>
+
+            <a href="gujarat-jobs.html" class="state-box large-state gujarat">
+                <div class="state-name">GUJARAT</div>
+                <div class="state-info">State</div>
+                <div class="job-count">380+</div>
+            </a>
+
+            <a href="maharashtra-jobs.html" class="state-box xl-state maharashtra">
+                <div class="state-name">MAHARASHTRA</div>
+                <div class="state-info">State</div>
+                <div class="job-count">650+</div>
+            </a>
+
+            <a href="goa-jobs.html" class="state-box tiny-state goa">
+                <div class="state-name">GOA</div>
+                <div class="state-info">State</div>
+                <div class="job-count">85+</div>
+            </a>
+
+            <a href="dadra-nagar-haveli-jobs.html" class="state-box tiny-state dadra-nagar-haveli">
+                <div class="state-name">D&NH</div>
+                <div class="state-info">UT</div>
+                <div class="job-count">35+</div>
+            </a>
+
+            <a href="daman-diu-jobs.html" class="state-box tiny-state daman-diu">
+                <div class="state-name">D&D</div>
+                <div class="state-info">UT</div>
+                <div class="job-count">30+</div>
+            </a>
+
+            <!-- Central States -->
+            <a href="uttar-pradesh-jobs.html" class="state-box xl-state uttar-pradesh">
+                <div class="state-name">U.P.</div>
+                <div class="state-info">State</div>
+                <div class="job-count">800+</div>
+            </a>
+
+            <a href="madhya-pradesh-jobs.html" class="state-box xl-state madhya-pradesh">
+                <div class="state-name">M.P.</div>
+                <div class="state-info">State</div>
+                <div class="job-count">520+</div>
+            </a>
+
+            <a href="chhattisgarh-jobs.html" class="state-box medium-state chhattisgarh">
+                <div class="state-name">CHHATTISGARH</div>
+                <div class="state-info">State</div>
+                <div class="job-count">280+</div>
+            </a>
+
+            <!-- Eastern States -->
+            <a href="bihar-jobs.html" class="state-box large-state bihar">
+                <div class="state-name">BIHAR</div>
+                <div class="state-info">State</div>
+                <div class="job-count">420+</div>
+            </a>
+
+            <a href="jharkhand-jobs.html" class="state-box medium-state jharkhand">
+                <div class="state-name">JHARKHAND</div>
+                <div class="state-info">State</div>
+                <div class="job-count">240+</div>
+            </a>
+
+            <a href="west-bengal-jobs.html" class="state-box large-state west-bengal">
+                <div class="state-name">W.B.</div>
+                <div class="state-info">State</div>
+                <div class="job-count">480+</div>
+            </a>
+
+            <a href="odisha-jobs.html" class="state-box large-state odisha">
+                <div class="state-name">ODISHA</div>
+                <div class="state-info">State</div>
+                <div class="job-count">320+</div>
+            </a>
+
+            <!-- Northeastern States -->
+            <a href="sikkim-jobs.html" class="state-box tiny-state sikkim">
+                <div class="state-name">SIKKIM</div>
+                <div class="state-info">State</div>
+                <div class="job-count">45+</div>
+            </a>
+
+            <a href="assam-jobs.html" class="state-box medium-state assam">
+                <div class="state-name">ASSAM</div>
+                <div class="state-info">State</div>
+                <div class="job-count">280+</div>
+            </a>
+
+            <a href="arunachal-pradesh-jobs.html" class="state-box large-state arunachal-pradesh">
+                <div class="state-name">A.P.</div>
+                <div class="state-info">State</div>
+                <div class="job-count">85+</div>
+            </a>
+
+            <a href="nagaland-jobs.html" class="state-box small-state nagaland">
+                <div class="state-name">NAGALAND</div>
+                <div class="state-info">State</div>
+                <div class="job-count">65+</div>
+            </a>
+
+            <a href="manipur-jobs.html" class="state-box small-state manipur">
+                <div class="state-name">MANIPUR</div>
+                <div class="state-info">State</div>
+                <div class="job-count">75+</div>
+            </a>
+
+            <a href="mizoram-jobs.html" class="state-box small-state mizoram">
+                <div class="state-name">MIZORAM</div>
+                <div class="state-info">State</div>
+                <div class="job-count">55+</div>
+            </a>
+
+            <a href="tripura-jobs.html" class="state-box small-state tripura">
+                <div class="state-name">TRIPURA</div>
+                <div class="state-info">State</div>
+                <div class="job-count">85+</div>
+            </a>
+
+            <a href="meghalaya-jobs.html" class="state-box small-state meghalaya">
+                <div class="state-name">MEGHALAYA</div>
+                <div class="state-info">State</div>
+                <div class="job-count">70+</div>
+            </a>
+
+            <!-- Southern States -->
+            <a href="telangana-jobs.html" class="state-box medium-state telangana">
+                <div class="state-name">TELANGANA</div>
+                <div class="state-info">State</div>
+                <div class="job-count">350+</div>
+            </a>
+
+            <a href="andhra-pradesh-jobs.html" class="state-box large-state andhra-pradesh">
+                <div class="state-name">A.P.</div>
+                <div class="state-info">State</div>
+                <div class="job-count">380+</div>
+            </a>
+
+            <a href="karnataka-jobs.html" class="state-box large-state karnataka">
+                <div class="state-name">KARNATAKA</div>
+                <div class="state-info">State</div>
+                <div class="job-count">450+</div>
+            </a>
+
+            <a href="tamil-nadu-jobs.html" class="state-box large-state tamil-nadu">
+                <div class="state-name">T.N.</div>
+                <div class="state-info">State</div>
+                <div class="job-count">580+</div>
+            </a>
+
+            <a href="kerala-jobs.html" class="state-box medium-state kerala">
+                <div class="state-name">KERALA</div>
+                <div class="state-info">State</div>
+                <div class="job-count">320+</div>
+            </a>
+
+            <a href="puducherry-jobs.html" class="state-box tiny-state puducherry">
+                <div class="state-name">PUDY</div>
+                <div class="state-info">UT</div>
+                <div class="job-count">85+</div>
+            </a>
+
+            <!-- Island Territories -->
+            <a href="andaman-nicobar-jobs.html" class="state-box small-state andaman-nicobar">
+                <div class="state-name">A&N</div>
+                <div class="state-info">UT</div>
+                <div class="job-count">65+</div>
+            </a>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-section">
+            <a href="index.html" class="nav-link">← HOME</a>
+            <a href="departments-complete.html" class="nav-link">DEPARTMENTS</a>
+            <a href="pages/pay-scales/pay-scale-chart.html" class="nav-link">PAY SCALES</a>
+        </div>
+    </div>
+
+    <script>
+        // Add hover effects and analytics
+        document.addEventListener('DOMContentLoaded', function() {
+            const stateBoxes = document.querySelectorAll('.state-box');
+            
+            stateBoxes.forEach(box => {
+                box.addEventListener('mouseenter', function() {
+                    // Could add analytics tracking here
+                    console.log('Viewing:', this.querySelector('.state-name').textContent);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

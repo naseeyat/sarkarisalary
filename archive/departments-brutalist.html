@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Departments Directory - SARKARI SALARY</title>
+    <meta name="description" content="Complete directory of government departments and recruitment bodies">
+    <link rel="icon" type="image/svg+xml" href="shared/favicon.svg">
+    
+    <!-- Global JavaScript -->
+    <script src="shared/global.js"></script>
+    
+    <!-- Brutalist Styles -->
+    <link rel="stylesheet" href="shared/brutalist-styles.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+            background: #ffffff;
+            color: #333333;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .main-title {
+            font-size: 36px;
+            font-weight: 900;
+            color: #333333;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #666666;
+            margin-bottom: 25px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 800;
+            color: #333333;
+            margin-bottom: 20px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* View Toggle */
+        .view-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin: 30px 0;
+        }
+
+        .view-btn {
+            padding: 12px 24px;
+            background: #ffffff;
+            border: 3px solid #333333;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+        }
+
+        .view-btn:first-child {
+            border-right: none;
+        }
+
+        .view-btn.active,
+        .view-btn:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        /* Quick Stats */
+        .brutalist-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border: 3px solid #333333;
+            margin-bottom: 30px;
+        }
+
+        .stat-box {
+            border-right: 1px solid #333333;
+            padding: 20px 16px;
+            text-align: center;
+            background: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:last-child {
+            border-right: none;
+        }
+
+        .stat-box:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        .stat-number {
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 6px;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+            font-weight: 600;
+        }
+
+        /* Grid View */
+        .departments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .dept-card {
+            border: 3px solid #333333;
+            background: #ffffff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .dept-card:hover {
+            background: #f8f8f8;
+        }
+
+        .dept-header {
+            padding: 15px;
+            border-bottom: 1px solid #333333;
+            background: #f8f8f8;
+        }
+
+        .dept-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .dept-category {
+            font-size: 11px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .dept-body {
+            padding: 15px;
+        }
+
+        .dept-desc {
+            font-size: 12px;
+            color: #666666;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .dept-info {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .dept-salary {
+            font-size: 13px;
+            font-weight: 700;
+            color: #333333;
+        }
+
+        .dept-badge {
+            background: #333333;
+            color: #ffffff;
+            padding: 4px 8px;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .badge-live {
+            background: #00aa00;
+        }
+
+        .badge-expected {
+            background: #ff8800;
+        }
+
+        .badge-closed {
+            background: #ff4444;
+        }
+
+        /* List View */
+        .list-view {
+            display: none;
+        }
+
+        .list-view.active {
+            display: block;
+        }
+
+        .departments-list {
+            border: 3px solid #333333;
+            margin-bottom: 30px;
+        }
+
+        .list-item {
+            display: grid;
+            grid-template-columns: 200px 1fr 120px 80px;
+            border-bottom: 1px solid #333333;
+            padding: 16px;
+            background: #ffffff;
+            text-decoration: none;
+            color: #333333;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .list-item:last-child {
+            border-bottom: none;
+        }
+
+        .list-item:hover {
+            background: #f8f8f8;
+        }
+
+        .list-name {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .list-desc {
+            font-size: 12px;
+            color: #666666;
+        }
+
+        .list-salary {
+            font-size: 12px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .list-status {
+            font-size: 10px;
+            text-align: center;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Categories Section */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .category-card {
+            border: 3px solid #333333;
+            background: #ffffff;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .category-card:hover {
+            background: #333333;
+            color: #ffffff;
+            transform: scale(1.02);
+        }
+
+        .category-icon {
+            font-size: 24px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .category-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .category-count {
+            font-size: 11px;
+            opacity: 0.8;
+        }
+
+        /* Navigation */
+        .nav-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .nav-link {
+            color: #333333;
+            text-decoration: none;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+            padding: 8px 16px;
+            border: 3px solid #333333;
+            background: #ffffff;
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+
+        .nav-link:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .main-title {
+                font-size: 28px;
+            }
+
+            .brutalist-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .list-item {
+                grid-template-columns: 1fr;
+                gap: 8px;
+                text-align: center;
+            }
+
+            .view-btn {
+                padding: 10px 16px;
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brutalist-stats,
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .departments-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .view-toggle {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .view-btn:first-child {
+                border-right: 3px solid #333333;
+                border-bottom: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="brutalist-header">
+            <h1 class="main-title">GOVERNMENT DEPARTMENTS</h1>
+            <p class="subtitle">Complete Directory of Sarkari Naukri Departments & Recruitment Bodies</p>
+        </header>
+
+        <!-- View Toggle -->
+        <div class="view-toggle">
+            <button class="view-btn active" onclick="setView('grid')">GRID VIEW</button>
+            <button class="view-btn" onclick="setView('list')">LIST VIEW</button>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="brutalist-stats">
+            <div class="stat-box">
+                <div class="stat-number">108</div>
+                <div class="stat-label">Departments</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">525</div>
+                <div class="stat-label">Job Types</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">87</div>
+                <div class="stat-label">Active Now</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number">1.2M</div>
+                <div class="stat-label">Vacancies</div>
+            </div>
+        </div>
+
+        <!-- Central Government Departments -->
+        <section>
+            <h2 class="section-title">🏛️ Central Government Departments</h2>
+            
+            <!-- Grid View -->
+            <div class="grid-view active">
+                <div class="departments-grid">
+                    <a href="pages/jobs/job-template-basic.html?job=upsc" class="dept-card">
+                        <div class="dept-header">
+                            <div class="dept-title">UPSC</div>
+                            <div class="dept-category">Union Public Service Commission</div>
+                        </div>
+                        <div class="dept-body">
+                            <div class="dept-desc">IAS • IPS • IFS • IRS<br>Medical Officer • Assistant Commandant</div>
+                            <div class="dept-info">
+                                <div class="dept-salary">₹56K+ Starting</div>
+                                <div class="dept-badge badge-live">ACTIVE</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="pages/jobs/job-template-basic.html?job=ssc" class="dept-card">
+                        <div class="dept-header">
+                            <div class="dept-title">SSC</div>
+                            <div class="dept-category">Staff Selection Commission</div>
+                        </div>
+                        <div class="dept-body">
+                            <div class="dept-desc">CGL • CHSL • MTS • JE<br>CPO • Stenographer • Selection Posts</div>
+                            <div class="dept-info">
+                                <div class="dept-salary">₹18K+ Starting</div>
+                                <div class="dept-badge badge-live">LIVE</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="pages/jobs/job-template-basic.html?job=railway" class="dept-card">
+                        <div class="dept-header">
+                            <div class="dept-title">RAILWAYS</div>
+                            <div class="dept-category">Railway Recruitment Boards</div>
+                        </div>
+                        <div class="dept-body">
+                            <div class="dept-desc">NTPC • Group D • JE • ALP<br>Station Master • RPF • Goods Guard</div>
+                            <div class="dept-info">
+                                <div class="dept-salary">₹18K+ Starting</div>
+                                <div class="dept-badge badge-expected">EXPECTED</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="pages/jobs/job-template-basic.html?job=banking" class="dept-card">
+                        <div class="dept-header">
+                            <div class="dept-title">BANKING</div>
+                            <div class="dept-category">Public Sector Banks</div>
+                        </div>
+                        <div class="dept-body">
+                            <div class="dept-desc">SBI PO/Clerk • IBPS<br>RBI • NABARD • Security Guard</div>
+                            <div class="dept-info">
+                                <div class="dept-salary">₹25K+ Starting</div>
+                                <div class="dept-badge badge-live">ACTIVE</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="pages/jobs/job-template-basic.html?job=defence" class="dept-card">
+                        <div class="dept-header">
+                            <div class="dept-title">DEFENCE</div>
+                            <div class="dept-category">Armed Forces & Paramilitary</div>
+                        </div>
+                        <div class="dept-body">
+                            <div class="dept-desc">NDA • CDS • AFCAT<br>Soldier • Sailor • Airman</div>
+                            <div class="dept-info">
+                                <div class="dept-salary">₹21K+ Starting</div>
+                                <div class="dept-badge badge-live">ACTIVE</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="pages/jobs/job-template-basic.html?job=insurance" class="dept-card">
+                        <div class="dept-header">
+                            <div class="dept-title">INSURANCE</div>
+                            <div class="dept-category">Public Sector Insurance</div>
+                        </div>
+                        <div class="dept-body">
+                            <div class="dept-desc">LIC AAO/ADO • NIACL<br>Oriental • United India</div>
+                            <div class="dept-info">
+                                <div class="dept-salary">₹21K+ Starting</div>
+                                <div class="dept-badge badge-closed">CLOSED</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="pages/jobs/job-template-basic.html?job=postal" class="dept-card">
+                        <div class="dept-header">
+                            <div class="dept-title">INDIA POST</div>
+                            <div class="dept-category">Department of Posts</div>
+                        </div>
+                        <div class="dept-body">
+                            <div class="dept-desc">Postman • MTS • PA<br>Postal Assistant • Sorting Assistant</div>
+                            <div class="dept-info">
+                                <div class="dept-salary">₹18K+ Starting</div>
+                                <div class="dept-badge badge-live">LIVE</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="pages/jobs/job-template-basic.html?job=isro" class="dept-card">
+                        <div class="dept-header">
+                            <div class="dept-title">ISRO</div>
+                            <div class="dept-category">Space Research Organization</div>
+                        </div>
+                        <div class="dept-body">
+                            <div class="dept-desc">Scientist • Engineer<br>Technical Assistant • JRF</div>
+                            <div class="dept-info">
+                                <div class="dept-salary">₹56K+ Starting</div>
+                                <div class="dept-badge badge-expected">EXPECTED</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="pages/jobs/job-template-basic.html?job=drdo" class="dept-card">
+                        <div class="dept-header">
+                            <div class="dept-title">DRDO</div>
+                            <div class="dept-category">Defence Research</div>
+                        </div>
+                        <div class="dept-body">
+                            <div class="dept-desc">Scientist • JRF<br>Technical Assistant • Admin</div>
+                            <div class="dept-info">
+                                <div class="dept-salary">₹56K+ Starting</div>
+                                <div class="dept-badge badge-live">ACTIVE</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="pages/jobs/job-template-basic.html?job=aiims" class="dept-card">
+                        <div class="dept-header">
+                            <div class="dept-title">AIIMS</div>
+                            <div class="dept-category">Medical Institutions</div>
+                        </div>
+                        <div class="dept-body">
+                            <div class="dept-desc">Nursing Officer • Technical<br>Security Guard • MTS</div>
+                            <div class="dept-info">
+                                <div class="dept-salary">₹25K+ Starting</div>
+                                <div class="dept-badge badge-live">ACTIVE</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="pages/jobs/job-template-basic.html?job=capf" class="dept-card">
+                        <div class="dept-header">
+                            <div class="dept-title">CAPF</div>
+                            <div class="dept-category">Central Armed Police Forces</div>
+                        </div>
+                        <div class="dept-body">
+                            <div class="dept-desc">CRPF • BSF • CISF • ITBP<br>SSB • Constable • Officer</div>
+                            <div class="dept-info">
+                                <div class="dept-salary">₹21K+ Starting</div>
+                                <div class="dept-badge badge-expected">EXPECTED</div>
+                            </div>
+                        </div>
+                    </a>
+
+                    <a href="pages/jobs/job-template-basic.html?job=university" class="dept-card">
+                        <div class="dept-header">
+                            <div class="dept-title">UNIVERSITIES</div>
+                            <div class="dept-category">Central Universities</div>
+                        </div>
+                        <div class="dept-body">
+                            <div class="dept-desc">Professor • Assistant Prof<br>JRF • Technical • Admin</div>
+                            <div class="dept-info">
+                                <div class="dept-salary">₹57K+ Starting</div>
+                                <div class="dept-badge badge-live">ACTIVE</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- List View -->
+            <div class="list-view">
+                <div class="departments-list">
+                    <a href="pages/jobs/job-template-basic.html?job=upsc" class="list-item">
+                        <div class="list-name">UPSC</div>
+                        <div class="list-desc">Union Public Service Commission - IAS, IPS, IFS, IRS</div>
+                        <div class="list-salary">₹56K+ Starting</div>
+                        <div class="list-status badge-live">ACTIVE</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=ssc" class="list-item">
+                        <div class="list-name">SSC</div>
+                        <div class="list-desc">Staff Selection Commission - CGL, CHSL, MTS, JE</div>
+                        <div class="list-salary">₹18K+ Starting</div>
+                        <div class="list-status badge-live">LIVE</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=railway" class="list-item">
+                        <div class="list-name">RAILWAYS</div>
+                        <div class="list-desc">Railway Recruitment Boards - NTPC, Group D, JE, ALP</div>
+                        <div class="list-salary">₹18K+ Starting</div>
+                        <div class="list-status badge-expected">EXPECTED</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=banking" class="list-item">
+                        <div class="list-name">BANKING</div>
+                        <div class="list-desc">Public Sector Banks - SBI PO/Clerk, IBPS, RBI</div>
+                        <div class="list-salary">₹25K+ Starting</div>
+                        <div class="list-status badge-live">ACTIVE</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=defence" class="list-item">
+                        <div class="list-name">DEFENCE</div>
+                        <div class="list-desc">Armed Forces & Paramilitary - NDA, CDS, AFCAT</div>
+                        <div class="list-salary">₹21K+ Starting</div>
+                        <div class="list-status badge-live">ACTIVE</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=insurance" class="list-item">
+                        <div class="list-name">INSURANCE</div>
+                        <div class="list-desc">Public Sector Insurance - LIC AAO/ADO, NIACL</div>
+                        <div class="list-salary">₹21K+ Starting</div>
+                        <div class="list-status badge-closed">CLOSED</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=postal" class="list-item">
+                        <div class="list-name">INDIA POST</div>
+                        <div class="list-desc">Department of Posts - Postman, MTS, PA</div>
+                        <div class="list-salary">₹18K+ Starting</div>
+                        <div class="list-status badge-live">LIVE</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=isro" class="list-item">
+                        <div class="list-name">ISRO</div>
+                        <div class="list-desc">Space Research Organization - Scientist, Engineer</div>
+                        <div class="list-salary">₹56K+ Starting</div>
+                        <div class="list-status badge-expected">EXPECTED</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=drdo" class="list-item">
+                        <div class="list-name">DRDO</div>
+                        <div class="list-desc">Defence Research - Scientist, JRF, Technical</div>
+                        <div class="list-salary">₹56K+ Starting</div>
+                        <div class="list-status badge-live">ACTIVE</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=aiims" class="list-item">
+                        <div class="list-name">AIIMS</div>
+                        <div class="list-desc">Medical Institutions - Nursing Officer, Technical</div>
+                        <div class="list-salary">₹25K+ Starting</div>
+                        <div class="list-status badge-live">ACTIVE</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=capf" class="list-item">
+                        <div class="list-name">CAPF</div>
+                        <div class="list-desc">Central Armed Police Forces - CRPF, BSF, CISF</div>
+                        <div class="list-salary">₹21K+ Starting</div>
+                        <div class="list-status badge-expected">EXPECTED</div>
+                    </a>
+                    <a href="pages/jobs/job-template-basic.html?job=university" class="list-item">
+                        <div class="list-name">UNIVERSITIES</div>
+                        <div class="list-desc">Central Universities - Professor, Assistant Prof, JRF</div>
+                        <div class="list-salary">₹57K+ Starting</div>
+                        <div class="list-status badge-live">ACTIVE</div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Browse by Category -->
+        <section>
+            <h2 class="section-title">📂 Browse by Category</h2>
+            <div class="categories-grid">
+                <a href="banking-jobs.html" class="category-card">
+                    <span class="category-icon">🏦</span>
+                    <div class="category-title">Banking Jobs</div>
+                    <div class="category-count">87+ Positions</div>
+                </a>
+
+                <a href="railway-jobs.html" class="category-card">
+                    <span class="category-icon">🚂</span>
+                    <div class="category-title">Railway Jobs</div>
+                    <div class="category-count">124+ Positions</div>
+                </a>
+
+                <a href="police-jobs.html" class="category-card">
+                    <span class="category-icon">👮</span>
+                    <div class="category-title">Police Jobs</div>
+                    <div class="category-count">96+ Positions</div>
+                </a>
+
+                <a href="civil-services.html" class="category-card">
+                    <span class="category-icon">🏛️</span>
+                    <div class="category-title">Civil Services</div>
+                    <div class="category-count">52+ Positions</div>
+                </a>
+
+                <a href="teaching-jobs.html" class="category-card">
+                    <span class="category-icon">📚</span>
+                    <div class="category-title">Teaching Jobs</div>
+                    <div class="category-count">108+ Positions</div>
+                </a>
+
+                <a href="defense-jobs.html" class="category-card">
+                    <span class="category-icon">⚔️</span>
+                    <div class="category-title">Defense Jobs</div>
+                    <div class="category-count">73+ Positions</div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Navigation -->
+        <div class="nav-section">
+            <a href="index.html" class="nav-link">← BACK TO HOME</a>
+        </div>
+    </div>
+
+    <script>
+        function setView(viewType) {
+            // Update button states
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Toggle views
+            const gridView = document.querySelector('.grid-view');
+            const listView = document.querySelector('.list-view');
+            
+            if (viewType === 'grid') {
+                gridView.classList.add('active');
+                listView.classList.remove('active');
+                gridView.style.display = 'block';
+                listView.style.display = 'none';
+            } else {
+                gridView.classList.remove('active');
+                listView.classList.add('active');
+                gridView.style.display = 'none';
+                listView.style.display = 'block';
+            }
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set default view to grid
+            const gridBtn = document.querySelector('.view-btn');
+            if (gridBtn) {
+                gridBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>
