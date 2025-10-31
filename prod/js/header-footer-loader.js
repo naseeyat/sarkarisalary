@@ -249,52 +249,52 @@ class HeaderFooterLoader {
         const footerHTML = `
         <div style="max-width: 900px; margin: 60px auto 0; padding: 0 20px 40px;">
             <!-- Brutalist Footer Box -->
-            <footer class="brutalist-footer" style="border: 3px solid #333333; padding: 40px; background: #ffffff; font-family: ui-monospace, SFMono-Regular, monospace;">
+            <footer class="brutalist-footer" style="border: 3px solid #333333; padding: 40px; background: #333333; font-family: ui-monospace, SFMono-Regular, monospace;">
                 <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; margin-bottom: 30px;">
                     <div class="footer-section">
-                        <h3 style="font-size: 14px; font-weight: 900; color: #333333; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #333333; padding-bottom: 8px;">Popular States</h3>
+                        <h3 style="font-size: 14px; font-weight: 900; color: #ffffff; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #ffffff; padding-bottom: 8px;">Popular States</h3>
                         <ul style="list-style: none; padding: 0; margin: 0;">
-                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}states/uttar-pradesh.html" style="color: #666666; text-decoration: none; font-size: 12px; font-weight: 600; display: block; padding: 4px 0; border-bottom: 1px solid #eeeeee;">Uttar Pradesh (2,800+ jobs)</a></li>
-                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}states/bihar.html" style="color: #666666; text-decoration: none; font-size: 12px; font-weight: 600; display: block; padding: 4px 0; border-bottom: 1px solid #eeeeee;">Bihar (1,800+ jobs)</a></li>
-                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}states/maharashtra.html" style="color: #666666; text-decoration: none; font-size: 12px; font-weight: 600; display: block; padding: 4px 0; border-bottom: 1px solid #eeeeee;">Maharashtra (2,200+ jobs)</a></li>
-                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}states.html" style="color: #333333; text-decoration: none; font-size: 12px; font-weight: 700; display: block; padding: 8px 12px; background: #f8f8f8; border: 2px solid #333333; text-align: center; text-transform: uppercase;">🗺️ View All States</a></li>
+                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}states/uttar-pradesh.html" target="_blank" style="color: #cccccc; text-decoration: none; font-size: 12px; font-weight: 600; display: block; padding: 4px 0; border-bottom: 1px solid #555555;">Uttar Pradesh (2,800+ jobs)</a></li>
+                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}states/bihar.html" target="_blank" style="color: #cccccc; text-decoration: none; font-size: 12px; font-weight: 600; display: block; padding: 4px 0; border-bottom: 1px solid #555555;">Bihar (1,800+ jobs)</a></li>
+                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}states/maharashtra.html" target="_blank" style="color: #cccccc; text-decoration: none; font-size: 12px; font-weight: 600; display: block; padding: 4px 0; border-bottom: 1px solid #555555;">Maharashtra (2,200+ jobs)</a></li>
+                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}states.html" target="_blank" style="color: #ffffff; text-decoration: none; font-size: 12px; font-weight: 700; display: block; padding: 8px 12px; background: #000000; border: 2px solid #ffffff; text-align: center; text-transform: uppercase;">🗺️ View All States</a></li>
                         </ul>
                     </div>
                     <div class="footer-section">
-                        <h3 style="font-size: 14px; font-weight: 900; color: #333333; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #333333; padding-bottom: 8px;">Top Categories</h3>
+                        <h3 style="font-size: 14px; font-weight: 900; color: #ffffff; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #ffffff; padding-bottom: 8px;">Top Categories</h3>
                         <ul style="list-style: none; padding: 0; margin: 0;">
-                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}categories/railway.html" style="color: #666666; text-decoration: none; font-size: 12px; font-weight: 600; display: block; padding: 4px 0; border-bottom: 1px solid #eeeeee;">Railway Jobs (2,500+ posts)</a></li>
-                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}categories/banking.html" style="color: #666666; text-decoration: none; font-size: 12px; font-weight: 600; display: block; padding: 4px 0; border-bottom: 1px solid #eeeeee;">Banking Jobs (1,800+ posts)</a></li>
-                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}categories/police.html" style="color: #666666; text-decoration: none; font-size: 12px; font-weight: 600; display: block; padding: 4px 0; border-bottom: 1px solid #eeeeee;">Police Jobs (1,600+ posts)</a></li>
-                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}level-1-jobs.html" style="color: #333333; text-decoration: none; font-size: 12px; font-weight: 700; display: block; padding: 8px 12px; background: #f8f8f8; border: 2px solid #333333; text-align: center; text-transform: uppercase;">📋 View All Jobs</a></li>
+                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}categories/railway.html" target="_blank" style="color: #cccccc; text-decoration: none; font-size: 12px; font-weight: 600; display: block; padding: 4px 0; border-bottom: 1px solid #555555;">Railway Jobs (2,500+ posts)</a></li>
+                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}categories/banking.html" target="_blank" style="color: #cccccc; text-decoration: none; font-size: 12px; font-weight: 600; display: block; padding: 4px 0; border-bottom: 1px solid #555555;">Banking Jobs (1,800+ posts)</a></li>
+                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}categories/police.html" target="_blank" style="color: #cccccc; text-decoration: none; font-size: 12px; font-weight: 600; display: block; padding: 4px 0; border-bottom: 1px solid #555555;">Police Jobs (1,600+ posts)</a></li>
+                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}level-1-jobs.html" target="_blank" style="color: #ffffff; text-decoration: none; font-size: 12px; font-weight: 700; display: block; padding: 8px 12px; background: #000000; border: 2px solid #ffffff; text-align: center; text-transform: uppercase;">📋 View All Jobs</a></li>
                         </ul>
                     </div>
                     <div class="footer-section">
-                        <h3 style="font-size: 14px; font-weight: 900; color: #333333; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #333333; padding-bottom: 8px;">Quick Tools</h3>
+                        <h3 style="font-size: 14px; font-weight: 900; color: #ffffff; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #ffffff; padding-bottom: 8px;">Quick Tools</h3>
                         <ul style="list-style: none; padding: 0; margin: 0;">
-                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}pages/pay-scales/pay-scale-chart.html" style="color: #666666; text-decoration: none; font-size: 12px; font-weight: 600; display: block; padding: 4px 0; border-bottom: 1px solid #eeeeee;">📊 Pay Scale Calculator</a></li>
-                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}pages/pay-scales/8th-pay-commission.html" style="color: #666666; text-decoration: none; font-size: 12px; font-weight: 600; display: block; padding: 4px 0; border-bottom: 1px solid #eeeeee;">💰 8th Pay Commission</a></li>
-                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}departments-complete.html" style="color: #666666; text-decoration: none; font-size: 12px; font-weight: 600; display: block; padding: 4px 0; border-bottom: 1px solid #eeeeee;">🏛️ All Departments</a></li>
-                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}index.html" style="color: #333333; text-decoration: none; font-size: 12px; font-weight: 700; display: block; padding: 8px 12px; background: #f8f8f8; border: 2px solid #333333; text-align: center; text-transform: uppercase;">🏠 Back to Home</a></li>
+                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}pages/pay-scales/pay-scale-chart.html" target="_blank" style="color: #cccccc; text-decoration: none; font-size: 12px; font-weight: 600; display: block; padding: 4px 0; border-bottom: 1px solid #555555;">📊 Pay Scale Calculator</a></li>
+                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}pages/pay-scales/8th-pay-commission.html" target="_blank" style="color: #cccccc; text-decoration: none; font-size: 12px; font-weight: 600; display: block; padding: 4px 0; border-bottom: 1px solid #555555;">💰 8th Pay Commission</a></li>
+                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}departments-complete.html" target="_blank" style="color: #cccccc; text-decoration: none; font-size: 12px; font-weight: 600; display: block; padding: 4px 0; border-bottom: 1px solid #555555;">🏛️ All Departments</a></li>
+                            <li style="margin-bottom: 8px;"><a href="${pathPrefix}index.html" target="_blank" style="color: #ffffff; text-decoration: none; font-size: 12px; font-weight: 700; display: block; padding: 8px 12px; background: #000000; border: 2px solid #ffffff; text-align: center; text-transform: uppercase;">🏠 Back to Home</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="footer-bottom" style="border-top: 3px solid #333333; padding-top: 20px; text-align: center;">
-                    <p style="margin-bottom: 15px; font-size: 14px; font-weight: 700; color: #333333;">SARKARI SALARY<span style="font-size: 10px; color: #666; font-weight: 400;">.today</span></p>
-                    <p style="margin-bottom: 10px; font-size: 11px; color: #666666; font-weight: 600;">&copy; 2025 Complete Government Job Portal. All rights reserved.</p>
+                <div class="footer-bottom" style="border-top: 3px solid #ffffff; padding-top: 20px; text-align: center;">
+                    <p style="margin-bottom: 15px; font-size: 14px; font-weight: 700; color: #ffffff;">SARKARI SALARY<span style="font-size: 10px; color: #cccccc; font-weight: 400;">.today</span></p>
+                    <p style="margin-bottom: 10px; font-size: 11px; color: #cccccc; font-weight: 600;">&copy; 2025 Complete Government Job Portal. All rights reserved.</p>
                     <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 15px;">
-                        <a href="${pathPrefix}index.html" style="color: #333333; text-decoration: none; font-weight: 600; font-size: 10px; text-transform: uppercase; padding: 4px 8px; border: 1px solid #333333;">Home</a>
-                        <a href="${pathPrefix}states.html" style="color: #333333; text-decoration: none; font-weight: 600; font-size: 10px; text-transform: uppercase; padding: 4px 8px; border: 1px solid #333333;">States</a>
-                        <a href="${pathPrefix}departments-complete.html" style="color: #333333; text-decoration: none; font-weight: 600; font-size: 10px; text-transform: uppercase; padding: 4px 8px; border: 1px solid #333333;">Departments</a>
-                        <a href="${pathPrefix}pages/pay-scales/pay-scale-chart.html" style="color: #333333; text-decoration: none; font-weight: 600; font-size: 10px; text-transform: uppercase; padding: 4px 8px; border: 1px solid #333333;">Pay Scales</a>
+                        <a href="${pathPrefix}index.html" style="color: #ffffff; text-decoration: none; font-weight: 600; font-size: 10px; text-transform: uppercase; padding: 4px 8px; border: 1px solid #ffffff;">Home</a>
+                        <a href="${pathPrefix}states.html" style="color: #ffffff; text-decoration: none; font-weight: 600; font-size: 10px; text-transform: uppercase; padding: 4px 8px; border: 1px solid #ffffff;">States</a>
+                        <a href="${pathPrefix}departments-complete.html" style="color: #ffffff; text-decoration: none; font-weight: 600; font-size: 10px; text-transform: uppercase; padding: 4px 8px; border: 1px solid #ffffff;">Departments</a>
+                        <a href="${pathPrefix}pages/pay-scales/pay-scale-chart.html" style="color: #ffffff; text-decoration: none; font-weight: 600; font-size: 10px; text-transform: uppercase; padding: 4px 8px; border: 1px solid #ffffff;">Pay Scales</a>
                     </div>
                 </div>
             </footer>
         </div>
         <style>
         .footer-section a:hover {
-            background: #333333 !important;
-            color: #ffffff !important;
+            background: #ffffff !important;
+            color: #333333 !important;
         }
         @media (max-width: 768px) {
             .footer-grid {
