@@ -38,10 +38,6 @@ class HeaderFooterLoader {
         const pageInfo = this.getPageInfo();
         
         const headerHTML = `
-        <!-- Google AdSense -->
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2954991378408470"
-             crossorigin="anonymous"></script>
-
         <div style="max-width: 900px; margin: 0 auto; padding: 40px 20px 0;">
             <!-- Brutalist Header Box -->
             <header class="brutalist-header brutalist-no-shadow" style="text-align: center; margin-bottom: 20px; border: 3px solid #333333; padding: 40px; background: #ffffff; font-family: ui-monospace, SFMono-Regular, monospace;">
