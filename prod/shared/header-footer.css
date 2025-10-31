@@ -120,6 +120,16 @@
     color: #999;
 }
 
+.footer-bottom a {
+    color: #ccc;
+    text-decoration: none;
+}
+
+.footer-bottom a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
 .breadcrumb {
     background: #f8f8f8;
     border-bottom: 2px solid #333;
