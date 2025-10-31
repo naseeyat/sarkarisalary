@@ -38,6 +38,10 @@ class HeaderFooterLoader {
         const pageInfo = this.getPageInfo();
         
         const headerHTML = `
+        <!-- Google AdSense -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2954991378408470"
+             crossorigin="anonymous"></script>
+
         <div style="max-width: 900px; margin: 0 auto; padding: 40px 20px 0;">
             <!-- Brutalist Header Box -->
             <header class="brutalist-header brutalist-no-shadow" style="text-align: center; margin-bottom: 20px; border: 3px solid #333333; padding: 40px; background: #ffffff; font-family: ui-monospace, SFMono-Regular, monospace;">
@@ -45,11 +49,7 @@ class HeaderFooterLoader {
                 <h2 class="page-title" style="font-size: 20px; font-weight: 800; color: #333333; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;">${pageInfo.title}</h2>
                 <p class="subtitle" style="font-size: 16px; color: #666666; margin-bottom: 25px; font-weight: 600;">${pageInfo.subtitle}</p>
                 <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
-                    <a href="${pathPrefix}index.html" class="back-link" style="display: inline-block; padding: 8px 16px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 5px;">🏠 Home</a>
-                    <a href="${pathPrefix}states.html" class="back-link" style="display: inline-block; padding: 8px 16px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 5px;">🗺️ States</a>
-                    <a href="${pathPrefix}departments-complete.html" class="back-link" style="display: inline-block; padding: 8px 16px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 5px;">🏛️ Departments</a>
-                    <a href="${pathPrefix}level-1-jobs.html" class="back-link" style="display: inline-block; padding: 8px 16px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 5px;">📋 Jobs</a>
-                    <a href="${pathPrefix}pages/pay-scales/pay-scale-chart.html" class="back-link" style="display: inline-block; padding: 8px 16px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 5px;">📊 Pay Scales</a>
+                    ${this.getContextualNavigation(pathPrefix)}
                 </div>
             </header>
         </div>
@@ -72,10 +72,82 @@ class HeaderFooterLoader {
         console.log('✅ Brutalist header box loaded with page-specific content');
     }
 
+    // Get contextual navigation based on page type
+    getContextualNavigation(pathPrefix) {
+        const currentPath = window.location.pathname;
+        const urlParams = new URLSearchParams(window.location.search);
+        const jobType = urlParams.get('job');
+        const stateType = urlParams.get('state');
+        
+        // Base navigation
+        let navLinks = [
+            `<a href="${pathPrefix}index.html" class="back-link" style="display: inline-block; padding: 8px 16px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 5px;">🏠 Home</a>`
+        ];
+        
+        // Add contextual links based on page type
+        if (currentPath.includes('/pay-scales/')) {
+            navLinks.push(
+                `<a href="${pathPrefix}pages/pay-scales/6th-pay-commission.html" class="back-link" style="display: inline-block; padding: 8px 16px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 5px;">6th Pay</a>`,
+                `<a href="${pathPrefix}pages/pay-scales/pay-scale-chart.html" class="back-link" style="display: inline-block; padding: 8px 16px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 5px;">7th Pay</a>`,
+                `<a href="${pathPrefix}pages/pay-scales/8th-pay-commission.html" class="back-link" style="display: inline-block; padding: 8px 16px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 5px;">8th Pay</a>`,
+                `<a href="${pathPrefix}pages/pay-scales/grade-pay-explained.html" class="back-link" style="display: inline-block; padding: 8px 16px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 5px;">Grade Pay</a>`
+            );
+        } else if (currentPath.includes('/jobs/') || jobType) {
+            navLinks.push(
+                `<a href="${pathPrefix}level-1-jobs.html" class="back-link" style="display: inline-block; padding: 8px 16px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 5px;">📋 All Jobs</a>`,
+                `<a href="${pathPrefix}departments-complete.html" class="back-link" style="display: inline-block; padding: 8px 16px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 5px;">🏛️ Departments</a>`,
+                `<a href="${pathPrefix}pages/pay-scales/pay-scale-chart.html" class="back-link" style="display: inline-block; padding: 8px 16px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 5px;">📊 Pay Scales</a>`
+            );
+        } else if (stateType || currentPath.includes('pradesh') || currentPath.includes('bihar')) {
+            navLinks.push(
+                `<a href="${pathPrefix}states.html" class="back-link" style="display: inline-block; padding: 8px 16px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 5px;">🗺️ All States</a>`,
+                `<a href="${pathPrefix}level-1-jobs.html" class="back-link" style="display: inline-block; padding: 8px 16px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 5px;">📋 Jobs</a>`,
+                `<a href="${pathPrefix}departments-complete.html" class="back-link" style="display: inline-block; padding: 8px 16px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 5px;">🏛️ Departments</a>`
+            );
+        } else {
+            // Default navigation for other pages
+            navLinks.push(
+                `<a href="${pathPrefix}states.html" class="back-link" style="display: inline-block; padding: 8px 16px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 5px;">🗺️ States</a>`,
+                `<a href="${pathPrefix}departments-complete.html" class="back-link" style="display: inline-block; padding: 8px 16px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 5px;">🏛️ Departments</a>`,
+                `<a href="${pathPrefix}level-1-jobs.html" class="back-link" style="display: inline-block; padding: 8px 16px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 5px;">📋 Jobs</a>`,
+                `<a href="${pathPrefix}pages/pay-scales/pay-scale-chart.html" class="back-link" style="display: inline-block; padding: 8px 16px; background: #333333; color: #ffffff; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin: 5px;">📊 Pay Scales</a>`
+            );
+        }
+        
+        return navLinks.join('');
+    }
+
     // Get page specific title and subtitle
     getPageInfo() {
         const currentPath = window.location.pathname;
         const fileName = currentPath.split('/').pop() || 'index.html';
+        
+        // Check for dynamic page data first (for generated pages)
+        if (window.pageHeaderData) {
+            console.log('🎯 Using dynamic page header data:', window.pageHeaderData);
+            return window.pageHeaderData;
+        }
+        
+        // Check for URL parameters (for template pages)
+        const urlParams = new URLSearchParams(window.location.search);
+        const jobType = urlParams.get('job');
+        const stateType = urlParams.get('state');
+        
+        if (jobType && window.jobDatabase && window.jobDatabase[jobType]) {
+            const jobData = window.jobDatabase[jobType];
+            return {
+                title: jobData.title || jobType.toUpperCase(),
+                subtitle: jobData.subtitle || 'Government Job Information'
+            };
+        }
+        
+        if (stateType) {
+            const stateName = stateType.replace('-', ' ').toUpperCase();
+            return {
+                title: stateName,
+                subtitle: `${stateName.charAt(0) + stateName.slice(1).toLowerCase()} Government Job Opportunities`
+            };
+        }
         
         // Check for existing meta tags or page title
         const pageTitle = document.title;
@@ -321,85 +393,88 @@ class HeaderFooterLoader {
     // Get path prefix for dynamic links
     getPathPrefix() {
         const currentPath = window.location.pathname;
-        const depth = currentPath.split('/').filter(segment => segment && segment !== 'index.html').length;
+        
+        // For file:// protocol, extract the relative path from prod/ directory
+        let relativePath = currentPath;
+        if (currentPath.includes('/prod/')) {
+            relativePath = currentPath.substring(currentPath.indexOf('/prod/') + 5);
+        }
+        
+        // Split by '/' and filter out empty parts
+        const pathParts = relativePath.split('/').filter(part => part && part !== '');
+        
+        // Remove the filename (last part) to get directory parts
+        const directories = pathParts.slice(0, -1);
+        
+        // If we're in a subdirectory, count how many levels deep
+        const depth = directories.length;
         
         if (depth === 0) {
             // Root level (index.html)
             return '';
         } else {
-            // Add ../ for each level deep
+            // Add ../ for each directory level
             return '../'.repeat(depth);
         }
     }
 
     // Get correct path based on current page location
     getCorrectPath(relativePath) {
-        const currentPath = window.location.pathname;
-        const depth = currentPath.split('/').filter(segment => segment && segment !== 'index.html').length;
-        
-        if (depth === 0) {
-            // Root level (index.html)
-            return relativePath;
-        } else if (depth === 1) {
-            // One level deep (/states/up.html)
-            return '../' + relativePath;
-        } else if (depth === 2) {
-            // Two levels deep (/pages/jobs/template.html)
-            return '../../' + relativePath;
-        } else {
-            // Deeper levels
-            return '../'.repeat(depth) + relativePath;
-        }
+        const pathPrefix = this.getPathPrefix();
+        return pathPrefix + relativePath;
     }
 
     // Fix header paths based on current page location
     fixHeaderPaths(headerHTML) {
-        const currentPath = window.location.pathname;
-        const depth = currentPath.split('/').filter(segment => segment && segment !== 'index.html').length;
+        const pathPrefix = this.getPathPrefix();
         
-        if (depth === 0) {
+        if (!pathPrefix) {
             // Root level - paths are correct
             return headerHTML;
         } else {
             // Need to fix relative paths
-            const prefix = '../'.repeat(depth);
-            
             return headerHTML
                 .replace(/href="([^"]*\.html)"/g, (match, url) => {
                     if (url.startsWith('http') || url.startsWith('#')) return match;
-                    return `href="${prefix}${url}"`;
+                    return `href="${pathPrefix}${url}"`;
                 })
                 .replace(/src="([^"]*)"/g, (match, url) => {
                     if (url.startsWith('http') || url.startsWith('#')) return match;
-                    return `src="${prefix}${url}"`;
+                    return `src="${pathPrefix}${url}"`;
                 });
         }
     }
 
     // Fix footer paths similarly
     fixFooterPaths(footerHTML) {
-        const currentPath = window.location.pathname;
-        const depth = currentPath.split('/').filter(segment => segment && segment !== 'index.html').length;
+        const pathPrefix = this.getPathPrefix();
         
-        if (depth === 0) {
+        if (!pathPrefix) {
             return footerHTML;
         } else {
-            const prefix = '../'.repeat(depth);
-            
             return footerHTML
                 .replace(/href="([^"]*\.html)"/g, (match, url) => {
                     if (url.startsWith('http') || url.startsWith('#')) return match;
-                    return `href="${prefix}${url}"`;
+                    return `href="${pathPrefix}${url}"`;
                 });
         }
     }
 }
 
 // Auto-load header footer when page loads
-document.addEventListener('DOMContentLoaded', async function() {
+function initializeHeaderFooter() {
+    console.log('🚀 Initializing header-footer system...');
     const loader = new HeaderFooterLoader();
-    await loader.loadBoth();
-});
+    loader.loadBoth();
+}
+
+// Check if DOM is already loaded, or wait for it
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeHeaderFooter);
+} else {
+    // DOM is already loaded, execute immediately
+    initializeHeaderFooter();
+}
 
 // Export for manual use
 window.HeaderFooterLoader = HeaderFooterLoader;

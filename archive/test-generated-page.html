@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Generated Page</title>
+    
+    <!-- Brutalist Styles -->
+    <link rel="stylesheet" href="shared/brutalist-styles.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+            background: #ffffff;
+            color: #333333;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .test-content {
+            border: 3px solid #333333;
+            padding: 30px;
+            margin: 20px 0;
+            background: #f8f8f8;
+        }
+
+        .test-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .test-desc {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .test-button {
+            background: #333333;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .test-button:hover {
+            background: #000000;
+        }
+
+        .status {
+            padding: 15px;
+            border: 2px solid #333333;
+            margin: 10px 0;
+            font-weight: 600;
+        }
+
+        .success {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .info {
+            background: #d1ecf1;
+            border-color: #17a2b8;
+            color: #0c5460;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // IMPORTANT: Set this BEFORE the header-footer script loads
+        window.pageHeaderData = {
+            title: "GENERATED TEST PAGE",
+            subtitle: "This title is set dynamically using window.pageHeaderData"
+        };
+        
+        console.log("✅ Page header data set:", window.pageHeaderData);
+    </script>
+
+    <div class="container">
+        <div class="test-content">
+            <div class="test-title">Dynamic Header Title Test</div>
+            <div class="test-desc">
+                This page demonstrates how to set custom titles for generated pages. 
+                The header should show "GENERATED TEST PAGE" as the title and 
+                "This title is set dynamically using window.pageHeaderData" as the subtitle.
+            </div>
+            
+            <div class="status info">
+                <strong>Method 1:</strong> Set window.pageHeaderData before the header-footer script loads
+            </div>
+            
+            <button class="test-button" onclick="changeTitle()">Change Title Dynamically</button>
+            <button class="test-button" onclick="resetTitle()">Reset to Original</button>
+        </div>
+
+        <div class="test-content">
+            <div class="test-title">How to Use in Generated Pages</div>
+            <div class="test-desc">
+                <strong>Step 1:</strong> Set the page data BEFORE loading header-footer script:
+                <pre style="background: #f0f0f0; padding: 10px; margin: 10px 0; font-family: monospace; border: 1px solid #333;">
+&lt;script&gt;
+window.pageHeaderData = {
+    title: "YOUR CUSTOM TITLE",
+    subtitle: "Your custom subtitle"
+};
+&lt;/script&gt;</pre>
+                
+                <strong>Step 2:</strong> Then load the header-footer script:
+                <pre style="background: #f0f0f0; padding: 10px; margin: 10px 0; font-family: monospace; border: 1px solid #333;">
+&lt;script src="js/header-footer-loader.js"&gt;&lt;/script&gt;</pre>
+            </div>
+        </div>
+
+        <div class="test-content">
+            <div class="test-title">Alternative: URL Parameters</div>
+            <div class="test-desc">
+                You can also use URL parameters for templates:
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li><strong>?job=ias</strong> - For job template pages</li>
+                    <li><strong>?state=maharashtra</strong> - For state template pages</li>
+                </ul>
+                
+                <a href="?job=ias" style="color: #333; text-decoration: underline;">Test with job parameter</a> | 
+                <a href="?state=bihar" style="color: #333; text-decoration: underline;">Test with state parameter</a> | 
+                <a href="?" style="color: #333; text-decoration: underline;">Reset parameters</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function changeTitle() {
+            window.pageHeaderData = {
+                title: "TITLE CHANGED!",
+                subtitle: "This was changed after page load - reload to see change"
+            };
+            
+            document.querySelector('.status').innerHTML = 
+                '<strong>Title Changed!</strong> Reload the page to see the new title in header.';
+            document.querySelector('.status').className = 'status success';
+        }
+        
+        function resetTitle() {
+            window.pageHeaderData = {
+                title: "GENERATED TEST PAGE",
+                subtitle: "This title is set dynamically using window.pageHeaderData"
+            };
+            
+            document.querySelector('.status').innerHTML = 
+                '<strong>Title Reset!</strong> Reload the page to see the original title.';
+            document.querySelector('.status').className = 'status info';
+        }
+        
+        // Log current URL parameters for testing
+        const urlParams = new URLSearchParams(window.location.search);
+        const jobType = urlParams.get('job');
+        const stateType = urlParams.get('state');
+        
+        if (jobType) {
+            console.log("🔍 Job parameter detected:", jobType);
+        }
+        if (stateType) {
+            console.log("🔍 State parameter detected:", stateType);
+        }
+    </script>
+    
+    <!-- Header Footer System - MUST be loaded AFTER setting window.pageHeaderData -->
+    <script src="js/header-footer-loader.js"></script>
+</body>
+</html>

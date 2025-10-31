@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Custom Title Test</title>
+    <style>
+        body { font-family: monospace; padding: 20px; }
+        .test-content { 
+            border: 2px solid #333; 
+            padding: 20px; 
+            margin: 20px 0; 
+            background: #f8f8f8; 
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // Set the custom data FIRST
+        window.pageHeaderData = {
+            title: "SIMPLE TEST TITLE",
+            subtitle: "Testing custom header generation"
+        };
+        
+        console.log("Setting pageHeaderData:", window.pageHeaderData);
+    </script>
+    
+    <div class="test-content">
+        <h2>Simple Custom Title Test</h2>
+        <p>This page should show "SIMPLE TEST TITLE" in the dynamic header.</p>
+        <p>Check the header above - it should be generated dynamically.</p>
+    </div>
+
+    <!-- Load header script -->
+    <script src="js/header-footer-loader.js"></script>
+
+    <script>
+        // Manual verification
+        setTimeout(() => {
+            console.log("Current pageHeaderData:", window.pageHeaderData);
+            
+            // Force reload header if needed
+            if (window.HeaderFooterLoader) {
+                console.log("HeaderFooterLoader available, testing manual load...");
+                const loader = new window.HeaderFooterLoader();
+                // Don't double-load, just verify the data is correct
+                console.log("Loader pageInfo:", loader.getPageInfo());
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

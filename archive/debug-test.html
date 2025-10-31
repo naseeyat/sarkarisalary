@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Custom Header Test</title>
+    
+    <style>
+        body { 
+            font-family: monospace; 
+            padding: 20px; 
+            max-width: 800px; 
+            margin: 0 auto; 
+        }
+        .debug-box { 
+            border: 2px solid #333; 
+            padding: 15px; 
+            margin: 10px 0; 
+            background: #f8f8f8; 
+        }
+        .success { border-color: green; background: #d4edda; }
+        .error { border-color: red; background: #f8d7da; }
+    </style>
+</head>
+<body>
+    <h1>Debug: Custom Header Title Test</h1>
+    
+    <div class="debug-box">
+        <h3>Step 1: Setting pageHeaderData</h3>
+        <p>Setting window.pageHeaderData before header loads...</p>
+    </div>
+
+    <script>
+        // Set BEFORE any other scripts
+        console.log("🔧 Setting pageHeaderData...");
+        
+        window.pageHeaderData = {
+            title: "DEBUG CUSTOM TITLE",
+            subtitle: "This should appear in the header if working correctly"
+        };
+        
+        console.log("✅ pageHeaderData set:", window.pageHeaderData);
+        
+        // Verify it's actually set
+        if (window.pageHeaderData) {
+            document.write('<div class="debug-box success"><strong>SUCCESS:</strong> pageHeaderData is set correctly!</div>');
+        } else {
+            document.write('<div class="debug-box error"><strong>ERROR:</strong> pageHeaderData not set!</div>');
+        }
+    </script>
+
+    <div class="debug-box">
+        <h3>Step 2: Loading Header-Footer Script</h3>
+        <p>Now loading the header-footer script...</p>
+    </div>
+
+    <div class="debug-box">
+        <h3>Expected Result:</h3>
+        <p>The header should show:</p>
+        <ul>
+            <li><strong>Title:</strong> "DEBUG CUSTOM TITLE"</li>
+            <li><strong>Subtitle:</strong> "This should appear in the header if working correctly"</li>
+        </ul>
+    </div>
+
+    <div class="debug-box">
+        <h3>Debug Console</h3>
+        <p>Check browser console for log messages starting with 🎯</p>
+    </div>
+
+    <!-- Load header-footer AFTER setting the data -->
+    <script src="js/header-footer-loader.js"></script>
+
+    <script>
+        // Additional debugging after header loads
+        setTimeout(() => {
+            console.log("🔍 Final check - pageHeaderData:", window.pageHeaderData);
+            console.log("🔍 Document title:", document.title);
+            
+            // Check if header was actually loaded
+            const headerElements = document.querySelectorAll('.brutalist-header, .main-title, .page-title');
+            console.log("🔍 Header elements found:", headerElements.length);
+            
+            headerElements.forEach((el, i) => {
+                console.log(`🔍 Header element ${i}:`, el.textContent);
+            });
+        }, 2000);
+    </script>
+</body>
+</html>
