@@ -29,24 +29,22 @@ window.addEventListener('scroll', handleScroll, { passive: true });
 
 // Hamburger menu toggle - using event delegation for dynamically loaded header
 document.addEventListener('click', function(e) {
-    if (e.target && e.target.id === 'hamburgerBtn') {
+    // Check if clicked element is hamburger button or its child
+    const hamburgerBtn = e.target.closest('#hamburgerBtn');
+
+    if (hamburgerBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+
         const nav = document.getElementById('mainNav');
         const btn = document.getElementById('hamburgerBtn');
 
         if (nav && btn) {
             nav.classList.toggle('nav-open');
             btn.classList.toggle('active');
-        }
-    }
-
-    // Also handle clicks on hamburger spans
-    if (e.target && e.target.parentElement && e.target.parentElement.id === 'hamburgerBtn') {
-        const nav = document.getElementById('mainNav');
-        const btn = document.getElementById('hamburgerBtn');
-
-        if (nav && btn) {
-            nav.classList.toggle('nav-open');
-            btn.classList.toggle('active');
+            console.log('Menu toggled:', nav.classList.contains('nav-open'));
+        } else {
+            console.log('Nav or btn not found:', {nav, btn});
         }
     }
 });
