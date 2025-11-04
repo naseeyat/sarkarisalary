@@ -163,3 +163,10 @@ table, tr, td, th, button, input, select, textarea {
 .brutalist-accent:hover {
     box-shadow: -6px 6px 0px #1890ff;
 }
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .brutalist-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
