@@ -7,6 +7,21 @@
     top: 0;
     z-index: 1000;
     background: #fff;
+    transition: all 0.3s ease;
+}
+
+.brutalist-header-wrapper.scrolled .page-title,
+.brutalist-header-wrapper.scrolled .page-subtitle {
+    display: none;
+}
+
+.brutalist-header-wrapper.scrolled .brutalist-header {
+    padding: 20px 30px;
+}
+
+.brutalist-header-wrapper.scrolled .site-main-title {
+    font-size: 28px;
+    margin-bottom: 15px;
 }
 
 .brutalist-header {
@@ -235,6 +250,15 @@
     .brutalist-header {
         padding: 12px;
         margin-bottom: 10px;
+    }
+
+    .brutalist-header-wrapper.scrolled .brutalist-header {
+        padding: 10px 12px;
+    }
+
+    .brutalist-header-wrapper.scrolled .site-main-title {
+        font-size: 20px;
+        margin-bottom: 0;
     }
 
     .site-main-title {

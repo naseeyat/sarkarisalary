@@ -1,5 +1,22 @@
 // Global JavaScript for all pages
 
+// Sticky header scroll behavior
+let lastScrollTop = 0;
+window.addEventListener('scroll', function() {
+    const header = document.querySelector('.brutalist-header-wrapper');
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    if (header) {
+        if (scrollTop > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    }
+
+    lastScrollTop = scrollTop;
+});
+
 // Hamburger menu toggle - using event delegation for dynamically loaded header
 document.addEventListener('click', function(e) {
     if (e.target && e.target.id === 'hamburgerBtn') {
