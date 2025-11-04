@@ -1,33 +1,35 @@
 // Global JavaScript for all pages
 
-// Sticky header scroll behavior - with debounce to prevent flickering
+// Sticky header scroll behavior - optimized to prevent initial glitches
 let headerElement = null;
 let isScrolled = false;
-let scrollTimeout = null;
+let ticking = false;
+
+const SCROLL_DOWN_THRESHOLD = 50;  // Scroll down 50px to activate
+const SCROLL_UP_THRESHOLD = 20;    // Scroll up to 20px to deactivate (30px buffer)
 
 function handleHeaderScroll() {
     if (!headerElement) {
         headerElement = document.querySelector('.brutalist-header-wrapper');
     }
 
-    if (headerElement) {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    if (headerElement && !ticking) {
+        ticking = true;
 
-        // Clear any pending timeout
-        if (scrollTimeout) {
-            clearTimeout(scrollTimeout);
-        }
+        requestAnimationFrame(() => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-        // Debounce the class toggle slightly
-        scrollTimeout = setTimeout(() => {
-            if (scrollTop > 10 && !isScrolled) {
+            // Only toggle if we're outside the buffer zone
+            if (scrollTop > SCROLL_DOWN_THRESHOLD && !isScrolled) {
                 isScrolled = true;
                 headerElement.classList.add('scrolled');
-            } else if (scrollTop <= 5 && isScrolled) {
+            } else if (scrollTop < SCROLL_UP_THRESHOLD && isScrolled) {
                 isScrolled = false;
                 headerElement.classList.remove('scrolled');
             }
-        }, 10);
+
+            ticking = false;
+        });
     }
 }
 
