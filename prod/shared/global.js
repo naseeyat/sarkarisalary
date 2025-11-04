@@ -1,38 +1,30 @@
 // Global JavaScript for all pages
 
-// Sticky header scroll behavior - with hysteresis to prevent flickering
-let lastScrollTop = 0;
-let ticking = false;
-const SCROLL_THRESHOLD_DOWN = 120; // Scroll down threshold
-const SCROLL_THRESHOLD_UP = 80;    // Scroll up threshold (lower to add buffer)
+// Sticky header scroll behavior - proper fix for flickering
+let headerElement = null;
+let isScrolled = false;
 
-function updateHeader() {
-    const header = document.querySelector('.brutalist-header-wrapper');
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-    if (header) {
-        const hasScrolledClass = header.classList.contains('scrolled');
-
-        // Add class when scrolling down past threshold
-        if (scrollTop > SCROLL_THRESHOLD_DOWN && !hasScrolledClass) {
-            header.classList.add('scrolled');
-        }
-        // Remove class when scrolling up past lower threshold
-        else if (scrollTop < SCROLL_THRESHOLD_UP && hasScrolledClass) {
-            header.classList.remove('scrolled');
-        }
+function handleHeaderScroll() {
+    if (!headerElement) {
+        headerElement = document.querySelector('.brutalist-header-wrapper');
     }
 
-    lastScrollTop = scrollTop;
-    ticking = false;
+    if (headerElement) {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+        // Use threshold > 1 to prevent flickering (best practice from search)
+        if (scrollTop > 1 && !isScrolled) {
+            isScrolled = true;
+            headerElement.classList.add('scrolled');
+        } else if (scrollTop <= 1 && isScrolled) {
+            isScrolled = false;
+            headerElement.classList.remove('scrolled');
+        }
+    }
 }
 
-window.addEventListener('scroll', function() {
-    if (!ticking) {
-        window.requestAnimationFrame(updateHeader);
-        ticking = true;
-    }
-});
+// Use passive listener for better performance
+window.addEventListener('scroll', handleHeaderScroll, { passive: true });
 
 // Hamburger menu toggle - using event delegation for dynamically loaded header
 document.addEventListener('click', function(e) {
