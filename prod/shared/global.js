@@ -1,20 +1,37 @@
 // Global JavaScript for all pages
 
-// Sticky header scroll behavior
+// Sticky header scroll behavior - with hysteresis to prevent flickering
 let lastScrollTop = 0;
-window.addEventListener('scroll', function() {
+let ticking = false;
+const SCROLL_THRESHOLD_DOWN = 120; // Scroll down threshold
+const SCROLL_THRESHOLD_UP = 80;    // Scroll up threshold (lower to add buffer)
+
+function updateHeader() {
     const header = document.querySelector('.brutalist-header-wrapper');
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
     if (header) {
-        if (scrollTop > 50) {
+        const hasScrolledClass = header.classList.contains('scrolled');
+
+        // Add class when scrolling down past threshold
+        if (scrollTop > SCROLL_THRESHOLD_DOWN && !hasScrolledClass) {
             header.classList.add('scrolled');
-        } else {
+        }
+        // Remove class when scrolling up past lower threshold
+        else if (scrollTop < SCROLL_THRESHOLD_UP && hasScrolledClass) {
             header.classList.remove('scrolled');
         }
     }
 
     lastScrollTop = scrollTop;
+    ticking = false;
+}
+
+window.addEventListener('scroll', function() {
+    if (!ticking) {
+        window.requestAnimationFrame(updateHeader);
+        ticking = true;
+    }
 });
 
 // Hamburger menu toggle - using event delegation for dynamically loaded header

@@ -16,12 +16,43 @@
 }
 
 .brutalist-header-wrapper.scrolled .brutalist-header {
-    padding: 20px 30px;
+    padding: 15px 20px;
+}
+
+.brutalist-header-wrapper.scrolled .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .brutalist-header-wrapper.scrolled .site-main-title {
-    font-size: 28px;
-    margin-bottom: 15px;
+    font-size: 24px;
+    margin-bottom: 0;
+    text-align: left;
+}
+
+.brutalist-header-wrapper.scrolled .hamburger-btn {
+    display: flex;
+}
+
+.brutalist-header-wrapper.scrolled .brutalist-nav {
+    display: none;
+}
+
+.brutalist-header-wrapper.scrolled .brutalist-nav.nav-open {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 15px;
+    border-top: 3px solid #333;
+    padding-top: 15px;
+}
+
+.brutalist-header-wrapper.scrolled .nav-btn {
+    border: none;
+    border-bottom: 2px solid #333;
+    width: 100%;
+    text-align: left;
 }
 
 .brutalist-header {
@@ -257,7 +288,7 @@
     }
 
     .brutalist-header-wrapper.scrolled .site-main-title {
-        font-size: 20px;
+        font-size: 24px;
         margin-bottom: 0;
     }
 
