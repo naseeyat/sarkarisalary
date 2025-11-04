@@ -1,40 +1,49 @@
 // Global JavaScript for all pages
 
-// Sticky header scroll behavior - optimized to prevent initial glitches
+// Sticky header scroll behavior - with debounce (activates after scroll stops)
 let headerElement = null;
 let isScrolled = false;
-let ticking = false;
+let debounceTimer = null;
 
-const SCROLL_DOWN_THRESHOLD = 50;  // Scroll down 50px to activate
-const SCROLL_UP_THRESHOLD = 20;    // Scroll up to 20px to deactivate (30px buffer)
+const SCROLL_ACTIVATE = 40;     // Must scroll down 40px to activate
+const SCROLL_DEACTIVATE = 10;   // Must scroll up to 10px to deactivate
+const DEBOUNCE_DELAY = 150;     // Wait 150ms after scroll stops
 
-function handleHeaderScroll() {
+function updateHeaderState() {
     if (!headerElement) {
         headerElement = document.querySelector('.brutalist-header-wrapper');
+        if (!headerElement) return;
     }
 
-    if (headerElement && !ticking) {
-        ticking = true;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-        requestAnimationFrame(() => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-            // Only toggle if we're outside the buffer zone
-            if (scrollTop > SCROLL_DOWN_THRESHOLD && !isScrolled) {
-                isScrolled = true;
-                headerElement.classList.add('scrolled');
-            } else if (scrollTop < SCROLL_UP_THRESHOLD && isScrolled) {
-                isScrolled = false;
-                headerElement.classList.remove('scrolled');
-            }
-
-            ticking = false;
-        });
+    // Activate: Must cross 40px threshold
+    if (scrollTop > SCROLL_ACTIVATE && !isScrolled) {
+        isScrolled = true;
+        headerElement.classList.add('scrolled');
+    }
+    // Deactivate: Must be below 10px
+    else if (scrollTop <= SCROLL_DEACTIVATE && isScrolled) {
+        isScrolled = false;
+        headerElement.classList.remove('scrolled');
     }
 }
 
+// Debounce function - executes only after scrolling stops
+function debouncedScrollHandler() {
+    // Clear previous timer
+    if (debounceTimer) {
+        clearTimeout(debounceTimer);
+    }
+
+    // Set new timer - will execute only if no more scroll events for 150ms
+    debounceTimer = setTimeout(() => {
+        updateHeaderState();
+    }, DEBOUNCE_DELAY);
+}
+
 // Use passive listener for better performance
-window.addEventListener('scroll', handleHeaderScroll, { passive: true });
+window.addEventListener('scroll', debouncedScrollHandler, { passive: true });
 
 // Hamburger menu toggle - using event delegation for dynamically loaded header
 document.addEventListener('click', function(e) {
