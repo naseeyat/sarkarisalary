@@ -1,8 +1,9 @@
 // Global JavaScript for all pages
 
-// Sticky header scroll behavior - proper fix for flickering
+// Sticky header scroll behavior - with debounce to prevent flickering
 let headerElement = null;
 let isScrolled = false;
+let scrollTimeout = null;
 
 function handleHeaderScroll() {
     if (!headerElement) {
@@ -12,14 +13,21 @@ function handleHeaderScroll() {
     if (headerElement) {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-        // Use threshold > 1 to prevent flickering (best practice from search)
-        if (scrollTop > 1 && !isScrolled) {
-            isScrolled = true;
-            headerElement.classList.add('scrolled');
-        } else if (scrollTop <= 1 && isScrolled) {
-            isScrolled = false;
-            headerElement.classList.remove('scrolled');
+        // Clear any pending timeout
+        if (scrollTimeout) {
+            clearTimeout(scrollTimeout);
         }
+
+        // Debounce the class toggle slightly
+        scrollTimeout = setTimeout(() => {
+            if (scrollTop > 10 && !isScrolled) {
+                isScrolled = true;
+                headerElement.classList.add('scrolled');
+            } else if (scrollTop <= 5 && isScrolled) {
+                isScrolled = false;
+                headerElement.classList.remove('scrolled');
+            }
+        }, 10);
     }
 }
 
