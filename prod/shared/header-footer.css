@@ -3,6 +3,10 @@
     max-width: 900px;
     margin: 0 auto;
     padding: 0 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #fff;
 }
 
 .brutalist-header {
@@ -222,6 +226,10 @@
 @media (max-width: 768px) {
     .brutalist-header-wrapper {
         padding: 10px 10px 0 10px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: #fff;
     }
 
     .brutalist-header {
