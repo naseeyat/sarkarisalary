@@ -1,14 +1,51 @@
-<!-- Global Site Header -->
-<header class="site-header">
-    <div class="header-container">
-        <a href="index.html" class="site-logo">Sarkari Salary</a>
-        <nav class="main-nav">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="states.html" class="nav-link">States</a>
-            <a href="departments-complete.html" class="nav-link">Departments</a>
-            <a href="categories.html" class="nav-link">Categories</a>
-            <a href="pages/pay-scales/pay-scale-chart.html" class="nav-link">Pay Scales</a>
-            <a href="about.html" class="nav-link">About</a>
+<!-- Brutalist Boxed Header -->
+<div class="brutalist-header-wrapper">
+    <header class="brutalist-header">
+        <h1 class="site-main-title">SARKARI SALARY<span class="domain-ext">.today</span></h1>
+        <h2 class="page-title" id="dynamicPageTitle">Government Job Portal</h2>
+        <p class="page-subtitle" id="dynamicPageSubtitle">Complete Career Guide</p>
+
+        <nav class="brutalist-nav">
+            <a href="index.html" class="nav-btn">🏠 HOME</a>
+            <a href="states.html" class="nav-btn">🗺️ STATES</a>
+            <a href="departments-complete.html" class="nav-btn">🏛️ DEPARTMENTS</a>
+            <a href="level-1-jobs.html" class="nav-btn">📋 JOBS</a>
+            <a href="pages/pay-scales/pay-scale-chart.html" class="nav-btn">📊 PAY SCALES</a>
         </nav>
-    </div>
-</header>
+    </header>
+</div>
+
+<script>
+// Set dynamic page title if available
+if (window.pageHeaderData) {
+    const titleEl = document.getElementById('dynamicPageTitle');
+    const subtitleEl = document.getElementById('dynamicPageSubtitle');
+    if (titleEl && window.pageHeaderData.title) {
+        titleEl.textContent = window.pageHeaderData.title;
+    }
+    if (subtitleEl && window.pageHeaderData.subtitle) {
+        subtitleEl.textContent = window.pageHeaderData.subtitle;
+    }
+}
+
+// Set active nav button based on current page
+(function() {
+    const currentPath = window.location.pathname;
+    const navButtons = document.querySelectorAll('.nav-btn');
+
+    navButtons.forEach(btn => {
+        const href = btn.getAttribute('href');
+
+        // Check if current page matches this button
+        if (currentPath.includes(href) ||
+            (currentPath === '/' && href === 'index.html') ||
+            (currentPath.endsWith('index.html') && href === 'index.html') ||
+            (currentPath.includes('states') && href.includes('states')) ||
+            (currentPath.includes('departments') && href.includes('departments')) ||
+            (currentPath.includes('level-1-jobs') && href.includes('level-1-jobs')) ||
+            (currentPath.includes('pay-scales') && href.includes('pay-scales'))) {
+            btn.classList.add('active');
+        }
+    });
+})();
+</script>
