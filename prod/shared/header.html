@@ -22,25 +22,6 @@
     </header>
 </div>
 
-<script>
-// Hamburger toggle - runs immediately after HTML is inserted
-(function() {
-    var btn = document.getElementById('hamburgerBtn');
-    var nav = document.getElementById('mainNav');
-
-    if (btn && nav) {
-        btn.onclick = function() {
-            if (nav.classList.contains('nav-open')) {
-                nav.classList.remove('nav-open');
-                btn.classList.remove('active');
-            } else {
-                nav.classList.add('nav-open');
-                btn.classList.add('active');
-            }
-        };
-    }
-})();
-</script>
 
 <script>
 // Set dynamic page title if available

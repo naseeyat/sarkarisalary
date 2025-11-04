@@ -1,4 +1,29 @@
 // Global JavaScript for all pages
+
+// Hamburger menu toggle - using event delegation for dynamically loaded header
+document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'hamburgerBtn') {
+        const nav = document.getElementById('mainNav');
+        const btn = document.getElementById('hamburgerBtn');
+
+        if (nav && btn) {
+            nav.classList.toggle('nav-open');
+            btn.classList.toggle('active');
+        }
+    }
+
+    // Also handle clicks on hamburger spans
+    if (e.target && e.target.parentElement && e.target.parentElement.id === 'hamburgerBtn') {
+        const nav = document.getElementById('mainNav');
+        const btn = document.getElementById('hamburgerBtn');
+
+        if (nav && btn) {
+            nav.classList.toggle('nav-open');
+            btn.classList.toggle('active');
+        }
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     // Make all links open in new tab (except anchors, mail, tel)
     const links = document.querySelectorAll('a[href]');
