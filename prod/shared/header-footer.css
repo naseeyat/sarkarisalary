@@ -14,37 +14,10 @@
     backface-visibility: hidden;
 }
 
-/* Smooth transitions for all header elements */
-.brutalist-header {
-    transition: padding 0.25s ease-in-out;
-    will-change: padding;
-}
-
-.site-main-title {
-    transition: font-size 0.25s ease-in-out,
-                margin 0.25s ease-in-out,
-                text-align 0.25s ease-in-out;
-    will-change: font-size, margin, text-align;
-}
-
+/* No transitions - instant changes to prevent glitches */
 .page-title,
 .page-subtitle {
-    transition: opacity 0.15s ease-in-out,
-                max-height 0.25s ease-in-out,
-                margin 0.25s ease-in-out;
     overflow: hidden;
-    will-change: opacity, max-height;
-}
-
-.brutalist-nav {
-    transition: opacity 0.15s ease-in-out;
-    will-change: opacity;
-}
-
-.hamburger-btn {
-    transition: opacity 0.15s ease-in-out,
-                transform 0.15s ease-in-out;
-    will-change: opacity, transform;
 }
 
 /* Desktop scrolled state */

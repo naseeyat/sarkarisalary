@@ -1,15 +1,10 @@
 // Global JavaScript for all pages
 
-// Sticky header scroll behavior - with debounce (activates after scroll stops)
+// Sticky header - instant compact on ANY scroll
 let headerElement = null;
 let isScrolled = false;
-let debounceTimer = null;
 
-const SCROLL_ACTIVATE = 40;     // Must scroll down 40px to activate
-const SCROLL_DEACTIVATE = 10;   // Must scroll up to 10px to deactivate
-const DEBOUNCE_DELAY = 150;     // Wait 150ms after scroll stops
-
-function updateHeaderState() {
+function handleScroll() {
     if (!headerElement) {
         headerElement = document.querySelector('.brutalist-header-wrapper');
         if (!headerElement) return;
@@ -17,33 +12,20 @@ function updateHeaderState() {
 
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-    // Activate: Must cross 40px threshold
-    if (scrollTop > SCROLL_ACTIVATE && !isScrolled) {
+    // INSTANT COMPACT: Single pixel scroll = compact
+    if (scrollTop > 0 && !isScrolled) {
         isScrolled = true;
         headerElement.classList.add('scrolled');
     }
-    // Deactivate: Must be below 10px
-    else if (scrollTop <= SCROLL_DEACTIVATE && isScrolled) {
+    // INSTANT EXPAND: Only at absolute top (0px)
+    else if (scrollTop === 0 && isScrolled) {
         isScrolled = false;
         headerElement.classList.remove('scrolled');
     }
 }
 
-// Debounce function - executes only after scrolling stops
-function debouncedScrollHandler() {
-    // Clear previous timer
-    if (debounceTimer) {
-        clearTimeout(debounceTimer);
-    }
-
-    // Set new timer - will execute only if no more scroll events for 150ms
-    debounceTimer = setTimeout(() => {
-        updateHeaderState();
-    }, DEBOUNCE_DELAY);
-}
-
 // Use passive listener for better performance
-window.addEventListener('scroll', debouncedScrollHandler, { passive: true });
+window.addEventListener('scroll', handleScroll, { passive: true });
 
 // Hamburger menu toggle - using event delegation for dynamically loaded header
 document.addEventListener('click', function(e) {
