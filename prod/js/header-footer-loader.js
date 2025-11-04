@@ -11,16 +11,22 @@ class HeaderFooterLoader {
             const headerPath = this.getCorrectPath('shared/header.html');
             const response = await fetch(headerPath);
             const headerHTML = await response.text();
-            
+
             // Fix relative paths in header based on current location
             const fixedHTML = this.fixHeaderPaths(headerHTML);
-            
+
+            // Remove skeleton placeholder
+            const skeleton = document.getElementById('header-skeleton');
+            if (skeleton) {
+                skeleton.remove();
+            }
+
             // Insert header at the beginning of body
             document.body.insertAdjacentHTML('afterbegin', fixedHTML);
-            
+
             // Set active nav link based on current page
             this.setActiveNavLink();
-            
+
             this.headerLoaded = true;
             console.log('✅ Header loaded successfully');
         } catch (error) {
