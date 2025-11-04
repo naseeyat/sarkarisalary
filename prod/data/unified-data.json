@@ -12,21 +12,34 @@
       "description": "Entry level government positions",
       "salaryRange": "₹18,000 - ₹56,900",
       "count": 8500,
-      "categories": ["Clerk", "Constable", "Helper", "Attendant"]
+      "categories": [
+        "Clerk",
+        "Constable",
+        "Helper",
+        "Attendant"
+      ]
     },
     "level2": {
-      "name": "Level 2 Jobs", 
+      "name": "Level 2 Jobs",
       "description": "Mid-level government positions",
       "salaryRange": "₹25,500 - ₹81,100",
       "count": 4200,
-      "categories": ["Assistant", "Junior Engineer", "Inspector"]
+      "categories": [
+        "Assistant",
+        "Junior Engineer",
+        "Inspector"
+      ]
     },
     "level3": {
       "name": "Level 3 Jobs",
-      "description": "Senior government positions", 
+      "description": "Senior government positions",
       "salaryRange": "₹35,400 - ₹1,12,400",
       "count": 2300,
-      "categories": ["Officer", "Manager", "Specialist"]
+      "categories": [
+        "Officer",
+        "Manager",
+        "Specialist"
+      ]
     }
   },
   "departments": {
@@ -37,8 +50,18 @@
         "fullName": "Ministry of Railways",
         "jobCount": 2500,
         "description": "Largest employer in India with opportunities across technical and non-technical roles",
-        "categories": ["Technical", "Non-Technical", "Medical", "Accounts"],
-        "popularJobs": ["ALP", "TC", "RPF", "JE"],
+        "categories": [
+          "Technical",
+          "Non-Technical",
+          "Medical",
+          "Accounts"
+        ],
+        "popularJobs": [
+          "ALP",
+          "TC",
+          "RPF",
+          "JE"
+        ],
         "website": "https://indianrailways.gov.in"
       },
       {
@@ -47,8 +70,17 @@
         "fullName": "Public Sector Banks",
         "jobCount": 1800,
         "description": "Public sector banks offering stable career opportunities",
-        "categories": ["PO", "Clerk", "SO", "Manager"],
-        "popularJobs": ["SBI PO", "IBPS Clerk", "RBI Grade B"],
+        "categories": [
+          "PO",
+          "Clerk",
+          "SO",
+          "Manager"
+        ],
+        "popularJobs": [
+          "SBI PO",
+          "IBPS Clerk",
+          "RBI Grade B"
+        ],
         "website": "https://ibps.in"
       },
       {
@@ -57,8 +89,18 @@
         "fullName": "Ministry of Defence",
         "jobCount": 1200,
         "description": "Armed forces and defence civilian positions",
-        "categories": ["Army", "Navy", "Air Force", "Civilian"],
-        "popularJobs": ["NDA", "CDS", "AFCAT", "Defence Civilian"],
+        "categories": [
+          "Army",
+          "Navy",
+          "Air Force",
+          "Civilian"
+        ],
+        "popularJobs": [
+          "NDA",
+          "CDS",
+          "AFCAT",
+          "Defence Civilian"
+        ],
         "website": "https://mod.gov.in"
       },
       {
@@ -67,8 +109,18 @@
         "fullName": "Union Public Service Commission",
         "jobCount": 900,
         "description": "Premier civil services and central government positions",
-        "categories": ["Civil Services", "Engineering", "Medical", "Defence"],
-        "popularJobs": ["IAS", "IPS", "IFS", "Engineering Services"],
+        "categories": [
+          "Civil Services",
+          "Engineering",
+          "Medical",
+          "Defence"
+        ],
+        "popularJobs": [
+          "IAS",
+          "IPS",
+          "IFS",
+          "Engineering Services"
+        ],
         "website": "https://upsc.gov.in"
       },
       {
@@ -77,8 +129,17 @@
         "fullName": "Staff Selection Commission",
         "jobCount": 3200,
         "description": "Central government Group B and C positions",
-        "categories": ["Graduate", "Higher Secondary", "Matriculation"],
-        "popularJobs": ["CGL", "CHSL", "MTS", "GD"],
+        "categories": [
+          "Graduate",
+          "Higher Secondary",
+          "Matriculation"
+        ],
+        "popularJobs": [
+          "CGL",
+          "CHSL",
+          "MTS",
+          "GD"
+        ],
         "website": "https://ssc.nic.in"
       }
     ],
@@ -89,8 +150,18 @@
         "fullName": "State Public Service Commissions",
         "jobCount": 2100,
         "description": "State-level administrative and executive positions",
-        "categories": ["Administrative", "Police", "Revenue", "Forest"],
-        "popularJobs": ["State PCS", "DSP", "BDO", "Tehsildar"],
+        "categories": [
+          "Administrative",
+          "Police",
+          "Revenue",
+          "Forest"
+        ],
+        "popularJobs": [
+          "State PCS",
+          "DSP",
+          "BDO",
+          "Tehsildar"
+        ],
         "states": "all"
       },
       {
@@ -99,8 +170,17 @@
         "fullName": "State Police Departments",
         "jobCount": 1600,
         "description": "Law enforcement opportunities across all states",
-        "categories": ["Constable", "Head Constable", "SI", "Inspector"],
-        "popularJobs": ["Police Constable", "SI", "Head Constable"],
+        "categories": [
+          "Constable",
+          "Head Constable",
+          "SI",
+          "Inspector"
+        ],
+        "popularJobs": [
+          "Police Constable",
+          "SI",
+          "Head Constable"
+        ],
         "states": "all"
       }
     ],
@@ -111,8 +191,16 @@
         "fullName": "Oil and Natural Gas Corporation",
         "jobCount": 300,
         "description": "Leading oil and gas exploration company",
-        "categories": ["Technical", "Non-Technical", "Medical"],
-        "popularJobs": ["Graduate Trainee", "Technician", "Assistant"],
+        "categories": [
+          "Technical",
+          "Non-Technical",
+          "Medical"
+        ],
+        "popularJobs": [
+          "Graduate Trainee",
+          "Technician",
+          "Assistant"
+        ],
         "website": "https://ongcindia.com"
       },
       {
@@ -121,8 +209,17 @@
         "fullName": "National Thermal Power Corporation",
         "jobCount": 250,
         "description": "India's largest power utility company",
-        "categories": ["Engineering", "Finance", "HR", "Medical"],
-        "popularJobs": ["Engineer Trainee", "Executive", "Technician"],
+        "categories": [
+          "Engineering",
+          "Finance",
+          "HR",
+          "Medical"
+        ],
+        "popularJobs": [
+          "Engineer Trainee",
+          "Executive",
+          "Technician"
+        ],
         "website": "https://ntpc.co.in"
       }
     ]
@@ -134,54 +231,91 @@
       "code": "UP",
       "jobCount": 2800,
       "size": "xl",
-      "position": { "top": 90, "left": 200 },
+      "position": {
+        "top": 90,
+        "left": 200
+      },
       "districts": 75,
       "population": "199,812,341",
-      "departments": ["UPPSC", "UP Police", "UP Education", "UP Health"]
+      "departments": [
+        "UPPSC",
+        "UP Police",
+        "UP Education",
+        "UP Health"
+      ]
     },
     {
-      "id": "maharashtra", 
+      "id": "maharashtra",
       "name": "Maharashtra",
       "code": "MH",
       "jobCount": 2200,
       "size": "large",
-      "position": { "top": 220, "left": 110 },
+      "position": {
+        "top": 220,
+        "left": 110
+      },
       "districts": 36,
       "population": "112,374,333",
-      "departments": ["MPSC", "Maharashtra Police", "MSEB", "Maharashtra Health"]
+      "departments": [
+        "MPSC",
+        "Maharashtra Police",
+        "MSEB",
+        "Maharashtra Health"
+      ]
     },
     {
       "id": "rajasthan",
-      "name": "Rajasthan", 
+      "name": "Rajasthan",
       "code": "RJ",
       "jobCount": 1500,
       "size": "xl",
-      "position": { "top": 120, "left": 90 },
+      "position": {
+        "top": 120,
+        "left": 90
+      },
       "districts": 33,
       "population": "68,548,437",
-      "departments": ["RPSC", "Rajasthan Police", "Rajasthan Education"]
+      "departments": [
+        "RPSC",
+        "Rajasthan Police",
+        "Rajasthan Education"
+      ]
     },
     {
       "id": "bihar",
       "name": "Bihar",
-      "code": "BR", 
+      "code": "BR",
       "jobCount": 1800,
       "size": "medium",
-      "position": { "top": 110, "left": 280 },
+      "position": {
+        "top": 110,
+        "left": 280
+      },
       "districts": 38,
       "population": "104,099,452",
-      "departments": ["BPSC", "Bihar Police", "Bihar Education"]
+      "departments": [
+        "BPSC",
+        "Bihar Police",
+        "Bihar Education"
+      ]
     },
     {
       "id": "west-bengal",
       "name": "West Bengal",
       "code": "WB",
       "jobCount": 1600,
-      "size": "medium", 
-      "position": { "top": 150, "left": 330 },
+      "size": "medium",
+      "position": {
+        "top": 150,
+        "left": 330
+      },
       "districts": 23,
       "population": "91,276,115",
-      "departments": ["WBPSC", "WB Police", "WB Education"]
+      "departments": [
+        "WBPSC",
+        "WB Police",
+        "WB Education"
+      ]
     },
     {
       "id": "tamil-nadu",
@@ -189,21 +323,35 @@
       "code": "TN",
       "jobCount": 1400,
       "size": "medium",
-      "position": { "top": 350, "left": 150 },
+      "position": {
+        "top": 350,
+        "left": 150
+      },
       "districts": 38,
       "population": "72,147,030",
-      "departments": ["TNPSC", "TN Police", "TN Education"]
+      "departments": [
+        "TNPSC",
+        "TN Police",
+        "TN Education"
+      ]
     },
     {
       "id": "karnataka",
       "name": "Karnataka",
-      "code": "KA", 
+      "code": "KA",
       "jobCount": 1300,
       "size": "large",
-      "position": { "top": 290, "left": 120 },
+      "position": {
+        "top": 290,
+        "left": 120
+      },
       "districts": 31,
       "population": "61,095,297",
-      "departments": ["KPSC", "Karnataka Police", "Karnataka Education"]
+      "departments": [
+        "KPSC",
+        "Karnataka Police",
+        "Karnataka Education"
+      ]
     },
     {
       "id": "gujarat",
@@ -211,21 +359,35 @@
       "code": "GJ",
       "jobCount": 1100,
       "size": "medium",
-      "position": { "top": 180, "left": 50 },
+      "position": {
+        "top": 180,
+        "left": 50
+      },
       "districts": 33,
       "population": "60,439,692",
-      "departments": ["GPSC", "Gujarat Police", "Gujarat Education"]
+      "departments": [
+        "GPSC",
+        "Gujarat Police",
+        "Gujarat Education"
+      ]
     },
     {
       "id": "andhra-pradesh",
-      "name": "Andhra Pradesh", 
+      "name": "Andhra Pradesh",
       "code": "AP",
       "jobCount": 900,
       "size": "medium",
-      "position": { "top": 310, "left": 180 },
+      "position": {
+        "top": 310,
+        "left": 180
+      },
       "districts": 26,
       "population": "49,386,799",
-      "departments": ["APPSC", "AP Police", "AP Education"]
+      "departments": [
+        "APPSC",
+        "AP Police",
+        "AP Education"
+      ]
     },
     {
       "id": "telangana",
@@ -233,10 +395,17 @@
       "code": "TS",
       "jobCount": 800,
       "size": "small",
-      "position": { "top": 280, "left": 180 },
+      "position": {
+        "top": 280,
+        "left": 180
+      },
       "districts": 33,
       "population": "35,003,674",
-      "departments": ["TSPSC", "TS Police", "TS Education"]
+      "departments": [
+        "TSPSC",
+        "TS Police",
+        "TS Education"
+      ]
     },
     {
       "id": "odisha",
@@ -244,10 +413,17 @@
       "code": "OR",
       "jobCount": 700,
       "size": "medium",
-      "position": { "top": 180, "left": 300 },
+      "position": {
+        "top": 180,
+        "left": 300
+      },
       "districts": 30,
       "population": "42,197,393",
-      "departments": ["OPSC", "Odisha Police", "Odisha Education"]
+      "departments": [
+        "OPSC",
+        "Odisha Police",
+        "Odisha Education"
+      ]
     },
     {
       "id": "kerala",
@@ -255,10 +431,17 @@
       "code": "KL",
       "jobCount": 600,
       "size": "small",
-      "position": { "top": 380, "left": 130 },
+      "position": {
+        "top": 380,
+        "left": 130
+      },
       "districts": 14,
       "population": "33,406,061",
-      "departments": ["Kerala PSC", "Kerala Police", "Kerala Education"]
+      "departments": [
+        "Kerala PSC",
+        "Kerala Police",
+        "Kerala Education"
+      ]
     },
     {
       "id": "jharkhand",
@@ -266,10 +449,17 @@
       "code": "JH",
       "jobCount": 500,
       "size": "small",
-      "position": { "top": 140, "left": 300 },
+      "position": {
+        "top": 140,
+        "left": 300
+      },
       "districts": 24,
       "population": "32,988,134",
-      "departments": ["JPSC", "Jharkhand Police", "Jharkhand Education"]
+      "departments": [
+        "JPSC",
+        "Jharkhand Police",
+        "Jharkhand Education"
+      ]
     },
     {
       "id": "assam",
@@ -277,10 +467,17 @@
       "code": "AS",
       "jobCount": 450,
       "size": "large",
-      "position": { "top": 100, "left": 370 },
+      "position": {
+        "top": 100,
+        "left": 370
+      },
       "districts": 34,
       "population": "31,205,576",
-      "departments": ["APSC", "Assam Police", "Assam Education"]
+      "departments": [
+        "APSC",
+        "Assam Police",
+        "Assam Education"
+      ]
     },
     {
       "id": "punjab",
@@ -288,10 +485,17 @@
       "code": "PB",
       "jobCount": 400,
       "size": "small",
-      "position": { "top": 50, "left": 150 },
+      "position": {
+        "top": 50,
+        "left": 150
+      },
       "districts": 23,
       "population": "27,743,338",
-      "departments": ["PPSC", "Punjab Police", "Punjab Education"]
+      "departments": [
+        "PPSC",
+        "Punjab Police",
+        "Punjab Education"
+      ]
     },
     {
       "id": "chhattisgarh",
@@ -299,10 +503,17 @@
       "code": "CG",
       "jobCount": 380,
       "size": "large",
-      "position": { "top": 180, "left": 220 },
+      "position": {
+        "top": 180,
+        "left": 220
+      },
       "districts": 28,
       "population": "25,545,198",
-      "departments": ["CGPSC", "CG Police", "CG Education"]
+      "departments": [
+        "CGPSC",
+        "CG Police",
+        "CG Education"
+      ]
     },
     {
       "id": "haryana",
@@ -310,10 +521,17 @@
       "code": "HR",
       "jobCount": 350,
       "size": "small",
-      "position": { "top": 70, "left": 170 },
+      "position": {
+        "top": 70,
+        "left": 170
+      },
       "districts": 22,
       "population": "25,351,462",
-      "departments": ["HSSC", "Haryana Police", "Haryana Education"]
+      "departments": [
+        "HSSC",
+        "Haryana Police",
+        "Haryana Education"
+      ]
     },
     {
       "id": "madhya-pradesh",
@@ -321,10 +539,17 @@
       "code": "MP",
       "jobCount": 1200,
       "size": "xl",
-      "position": { "top": 150, "left": 150 },
+      "position": {
+        "top": 150,
+        "left": 150
+      },
       "districts": 52,
       "population": "72,626,809",
-      "departments": ["MPPSC", "MP Police", "MP Education"]
+      "departments": [
+        "MPPSC",
+        "MP Police",
+        "MP Education"
+      ]
     },
     {
       "id": "jammu-kashmir",
@@ -332,10 +557,17 @@
       "code": "JK",
       "jobCount": 300,
       "size": "medium",
-      "position": { "top": 10, "left": 110 },
+      "position": {
+        "top": 10,
+        "left": 110
+      },
       "districts": 20,
       "population": "12,267,013",
-      "departments": ["JKSSB", "JK Police", "JK Education"]
+      "departments": [
+        "JKSSB",
+        "JK Police",
+        "JK Education"
+      ]
     },
     {
       "id": "uttarakhand",
@@ -343,10 +575,17 @@
       "code": "UK",
       "jobCount": 250,
       "size": "small",
-      "position": { "top": 80, "left": 180 },
+      "position": {
+        "top": 80,
+        "left": 180
+      },
       "districts": 13,
       "population": "10,086,292",
-      "departments": ["UKSSSC", "UK Police", "UK Education"]
+      "departments": [
+        "UKSSSC",
+        "UK Police",
+        "UK Education"
+      ]
     },
     {
       "id": "himachal-pradesh",
@@ -354,10 +593,17 @@
       "code": "HP",
       "jobCount": 200,
       "size": "small",
-      "position": { "top": 60, "left": 140 },
+      "position": {
+        "top": 60,
+        "left": 140
+      },
       "districts": 12,
       "population": "6,864,602",
-      "departments": ["HPPSC", "HP Police", "HP Education"]
+      "departments": [
+        "HPPSC",
+        "HP Police",
+        "HP Education"
+      ]
     },
     {
       "id": "tripura",
@@ -365,10 +611,16 @@
       "code": "TR",
       "jobCount": 120,
       "size": "tiny",
-      "position": { "top": 160, "left": 410 },
+      "position": {
+        "top": 160,
+        "left": 410
+      },
       "districts": 8,
       "population": "3,673,917",
-      "departments": ["TPSC", "Tripura Police"]
+      "departments": [
+        "TPSC",
+        "Tripura Police"
+      ]
     },
     {
       "id": "meghalaya",
@@ -376,10 +628,16 @@
       "code": "ML",
       "jobCount": 100,
       "size": "tiny",
-      "position": { "top": 120, "left": 400 },
+      "position": {
+        "top": 120,
+        "left": 400
+      },
       "districts": 11,
       "population": "2,966,889",
-      "departments": ["MPSC", "Meghalaya Police"]
+      "departments": [
+        "MPSC",
+        "Meghalaya Police"
+      ]
     },
     {
       "id": "manipur",
@@ -387,10 +645,16 @@
       "code": "MN",
       "jobCount": 90,
       "size": "tiny",
-      "position": { "top": 140, "left": 430 },
+      "position": {
+        "top": 140,
+        "left": 430
+      },
       "districts": 16,
       "population": "2,855,794",
-      "departments": ["MPSC", "Manipur Police"]
+      "departments": [
+        "MPSC",
+        "Manipur Police"
+      ]
     },
     {
       "id": "nagaland",
@@ -398,10 +662,16 @@
       "code": "NL",
       "jobCount": 85,
       "size": "tiny",
-      "position": { "top": 110, "left": 430 },
+      "position": {
+        "top": 110,
+        "left": 430
+      },
       "districts": 12,
       "population": "1,978,502",
-      "departments": ["NPSC", "Nagaland Police"]
+      "departments": [
+        "NPSC",
+        "Nagaland Police"
+      ]
     },
     {
       "id": "goa",
@@ -409,10 +679,16 @@
       "code": "GA",
       "jobCount": 80,
       "size": "tiny",
-      "position": { "top": 270, "left": 80 },
+      "position": {
+        "top": 270,
+        "left": 80
+      },
       "districts": 2,
       "population": "1,458,545",
-      "departments": ["Goa PSC", "Goa Police"]
+      "departments": [
+        "Goa PSC",
+        "Goa Police"
+      ]
     },
     {
       "id": "arunachal-pradesh",
@@ -420,10 +696,16 @@
       "code": "AR",
       "jobCount": 75,
       "size": "large",
-      "position": { "top": 80, "left": 450 },
+      "position": {
+        "top": 80,
+        "left": 450
+      },
       "districts": 25,
       "population": "1,383,727",
-      "departments": ["APPSC", "Arunachal Police"]
+      "departments": [
+        "APPSC",
+        "Arunachal Police"
+      ]
     },
     {
       "id": "mizoram",
@@ -431,10 +713,16 @@
       "code": "MZ",
       "jobCount": 70,
       "size": "tiny",
-      "position": { "top": 170, "left": 420 },
+      "position": {
+        "top": 170,
+        "left": 420
+      },
       "districts": 11,
       "population": "1,097,206",
-      "departments": ["MPSC", "Mizoram Police"]
+      "departments": [
+        "MPSC",
+        "Mizoram Police"
+      ]
     },
     {
       "id": "sikkim",
@@ -442,10 +730,16 @@
       "code": "SK",
       "jobCount": 60,
       "size": "tiny",
-      "position": { "top": 90, "left": 350 },
+      "position": {
+        "top": 90,
+        "left": 350
+      },
       "districts": 6,
       "population": "610,577",
-      "departments": ["SSC", "Sikkim Police"]
+      "departments": [
+        "SSC",
+        "Sikkim Police"
+      ]
     }
   ],
   "unionTerritories": [
@@ -455,10 +749,16 @@
       "code": "DL",
       "jobCount": 800,
       "size": "tiny",
-      "position": { "top": 80, "left": 185 },
+      "position": {
+        "top": 80,
+        "left": 185
+      },
       "districts": 11,
       "population": "16,787,941",
-      "departments": ["DSSSB", "Delhi Police"]
+      "departments": [
+        "DSSSB",
+        "Delhi Police"
+      ]
     },
     {
       "id": "puducherry",
@@ -466,10 +766,15 @@
       "code": "PY",
       "jobCount": 100,
       "size": "tiny",
-      "position": { "top": 360, "left": 170 },
+      "position": {
+        "top": 360,
+        "left": 170
+      },
       "districts": 4,
       "population": "1,247,953",
-      "departments": ["Puducherry PSC"]
+      "departments": [
+        "Puducherry PSC"
+      ]
     },
     {
       "id": "chandigarh",
@@ -477,10 +782,15 @@
       "code": "CH",
       "jobCount": 80,
       "size": "tiny",
-      "position": { "top": 60, "left": 160 },
+      "position": {
+        "top": 60,
+        "left": 160
+      },
       "districts": 1,
       "population": "1,055,450",
-      "departments": ["Chandigarh Administration"]
+      "departments": [
+        "Chandigarh Administration"
+      ]
     },
     {
       "id": "andaman-nicobar",
@@ -488,10 +798,15 @@
       "code": "AN",
       "jobCount": 60,
       "size": "tiny",
-      "position": { "top": 450, "left": 280 },
+      "position": {
+        "top": 450,
+        "left": 280
+      },
       "districts": 3,
       "population": "380,581",
-      "departments": ["A&N Administration"]
+      "departments": [
+        "A&N Administration"
+      ]
     },
     {
       "id": "dadra-nagar-haveli",
@@ -499,10 +814,15 @@
       "code": "DN",
       "jobCount": 40,
       "size": "tiny",
-      "position": { "top": 200, "left": 70 },
+      "position": {
+        "top": 200,
+        "left": 70
+      },
       "districts": 2,
       "population": "585,764",
-      "departments": ["DNH Administration"]
+      "departments": [
+        "DNH Administration"
+      ]
     },
     {
       "id": "daman-diu",
@@ -510,10 +830,15 @@
       "code": "DD",
       "jobCount": 35,
       "size": "tiny",
-      "position": { "top": 210, "left": 60 },
+      "position": {
+        "top": 210,
+        "left": 60
+      },
       "districts": 2,
       "population": "243,247",
-      "departments": ["DD Administration"]
+      "departments": [
+        "DD Administration"
+      ]
     },
     {
       "id": "lakshadweep",
@@ -521,10 +846,15 @@
       "code": "LD",
       "jobCount": 25,
       "size": "tiny",
-      "position": { "top": 400, "left": 50 },
+      "position": {
+        "top": 400,
+        "left": 50
+      },
       "districts": 1,
       "population": "64,473",
-      "departments": ["Lakshadweep Administration"]
+      "departments": [
+        "Lakshadweep Administration"
+      ]
     },
     {
       "id": "ladakh",
@@ -532,10 +862,15 @@
       "code": "LA",
       "jobCount": 50,
       "size": "large",
-      "position": { "top": 20, "left": 150 },
+      "position": {
+        "top": 20,
+        "left": 150
+      },
       "districts": 2,
       "population": "274,000",
-      "departments": ["Ladakh Administration"]
+      "departments": [
+        "Ladakh Administration"
+      ]
     }
   ],
   "payScales": {
@@ -549,7 +884,7 @@
       },
       {
         "level": 2,
-        "payBand": "₹5,200-20,200", 
+        "payBand": "₹5,200-20,200",
         "gradePay": 1900,
         "currentPay": "₹19,900",
         "description": "Junior positions"
@@ -667,7 +1002,7 @@
         "description": "Cost of living adjustment"
       },
       "hra": {
-        "name": "House Rent Allowance", 
+        "name": "House Rent Allowance",
         "rates": {
           "x": 24,
           "y": 16,
@@ -687,42 +1022,65 @@
       "id": "civil-services",
       "name": "Civil Services",
       "description": "Administrative positions in government",
-      "exams": ["UPSC CSE", "State PCS"],
+      "exams": [
+        "UPSC CSE",
+        "State PCS"
+      ],
       "jobCount": 1200
     },
     {
       "id": "banking",
       "name": "Banking",
-      "description": "Public and private sector banking jobs", 
-      "exams": ["IBPS", "SBI", "RBI"],
+      "description": "Public and private sector banking jobs",
+      "exams": [
+        "IBPS",
+        "SBI",
+        "RBI"
+      ],
       "jobCount": 1800
     },
     {
       "id": "railway",
       "name": "Railways",
       "description": "Indian Railways recruitment",
-      "exams": ["RRB NTPC", "RRB Group D", "RRB JE"],
+      "exams": [
+        "RRB NTPC",
+        "RRB Group D",
+        "RRB JE"
+      ],
       "jobCount": 2500
     },
     {
       "id": "defence",
       "name": "Defence",
       "description": "Armed forces and paramilitary",
-      "exams": ["NDA", "CDS", "CAPF"],
+      "exams": [
+        "NDA",
+        "CDS",
+        "CAPF"
+      ],
       "jobCount": 1200
     },
     {
       "id": "teaching",
       "name": "Teaching",
       "description": "Education sector opportunities",
-      "exams": ["CTET", "NET", "State TET"],
+      "exams": [
+        "CTET",
+        "NET",
+        "State TET"
+      ],
       "jobCount": 900
     },
     {
       "id": "police",
       "name": "Police",
       "description": "Law enforcement positions",
-      "exams": ["State Police", "CAPF", "RPF"],
+      "exams": [
+        "State Police",
+        "CAPF",
+        "RPF"
+      ],
       "jobCount": 1600
     }
   ],
@@ -730,38 +1088,65 @@
     "postingTypes": {
       "stateSpecific": {
         "description": "Jobs specific to one state/district",
-        "examples": ["State Police", "State PSC", "District Collector", "Municipal Jobs"],
+        "examples": [
+          "State Police",
+          "State PSC",
+          "District Collector",
+          "Municipal Jobs"
+        ],
         "listIn": "specific state page only"
       },
       "allIndia": {
         "description": "Jobs with posting anywhere in India",
-        "examples": ["Railway", "Banking", "UPSC", "Central Police", "Defence"],
+        "examples": [
+          "Railway",
+          "Banking",
+          "UPSC",
+          "Central Police",
+          "Defence"
+        ],
         "listIn": "all state pages + national page"
       },
       "multiState": {
         "description": "Jobs covering multiple specific states",
-        "examples": ["Regional Railway", "Zone-wise Banking", "Circle-wise Posts"],
+        "examples": [
+          "Regional Railway",
+          "Zone-wise Banking",
+          "Circle-wise Posts"
+        ],
         "listIn": "covered states only"
       }
     },
     "locationHierarchy": {
       "national": {
         "level": 1,
-        "shows": ["allIndia jobs", "multiState jobs", "popular state jobs summary"]
+        "shows": [
+          "allIndia jobs",
+          "multiState jobs",
+          "popular state jobs summary"
+        ]
       },
       "state": {
-        "level": 2, 
-        "shows": ["stateSpecific jobs", "allIndia jobs", "multiState jobs covering this state"]
+        "level": 2,
+        "shows": [
+          "stateSpecific jobs",
+          "allIndia jobs",
+          "multiState jobs covering this state"
+        ]
       },
       "district": {
         "level": 3,
-        "shows": ["district jobs", "state jobs", "allIndia jobs"]
+        "shows": [
+          "district jobs",
+          "state jobs",
+          "allIndia jobs"
+        ]
       }
     },
     "smartCategorization": {
       "rules": {
         "railway": "Show in ALL states (all-India posting)",
-        "banking": "Show in ALL states (all-India posting)", 
+        "banking": "Show in ALL states (all-India posting)",
         "upsc": "Show in ALL states (all-India posting)",
         "state-police": "Show ONLY in specific state",
         "state-psc": "Show ONLY in specific state",
