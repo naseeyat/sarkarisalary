@@ -1,11 +1,18 @@
 <!-- Brutalist Boxed Header -->
 <div class="brutalist-header-wrapper">
     <header class="brutalist-header">
-        <h1 class="site-main-title">SARKARI SALARY<span class="domain-ext">.today</span></h1>
+        <div class="header-top">
+            <h1 class="site-main-title">SARKARI SALARY<span class="domain-ext">.today</span></h1>
+            <button class="hamburger-btn" id="hamburgerBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
         <h2 class="page-title" id="dynamicPageTitle">Government Job Portal</h2>
         <p class="page-subtitle" id="dynamicPageSubtitle">Complete Career Guide</p>
 
-        <nav class="brutalist-nav">
+        <nav class="brutalist-nav" id="mainNav">
             <a href="index.html" class="nav-btn">🏠 HOME</a>
             <a href="states.html" class="nav-btn">🗺️ STATES</a>
             <a href="departments-complete.html" class="nav-btn">🏛️ DEPARTMENTS</a>
@@ -48,4 +55,27 @@ if (window.pageHeaderData) {
         }
     });
 })();
+
+// Hamburger menu toggle - attach after elements exist
+(function initHamburger() {
+    // Try immediately
+    attachHamburgerListener();
+
+    // Also try after a delay in case header loads late
+    setTimeout(attachHamburgerListener, 200);
+    setTimeout(attachHamburgerListener, 500);
+})();
+
+function attachHamburgerListener() {
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mainNav = document.getElementById('mainNav');
+
+    if (hamburgerBtn && mainNav && !hamburgerBtn.hasAttribute('data-listener-attached')) {
+        hamburgerBtn.setAttribute('data-listener-attached', 'true');
+        hamburgerBtn.addEventListener('click', function() {
+            mainNav.classList.toggle('nav-open');
+            hamburgerBtn.classList.toggle('active');
+        });
+    }
+}
 </script>
