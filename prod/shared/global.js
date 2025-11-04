@@ -29,9 +29,8 @@ window.addEventListener('scroll', handleScroll, { passive: true });
 
 // Hamburger menu toggle - using event delegation for dynamically loaded header
 document.addEventListener('click', function(e) {
-    // Check if clicked element is hamburger button or its child
+    // Header hamburger button
     const hamburgerBtn = e.target.closest('#hamburgerBtn');
-
     if (hamburgerBtn) {
         e.preventDefault();
         e.stopPropagation();
@@ -43,8 +42,22 @@ document.addEventListener('click', function(e) {
             nav.classList.toggle('nav-open');
             btn.classList.toggle('active');
             console.log('Menu toggled:', nav.classList.contains('nav-open'));
-        } else {
-            console.log('Nav or btn not found:', {nav, btn});
+        }
+    }
+
+    // Footer toggle button (mobile)
+    const footerToggleBtn = e.target.closest('#footerToggleBtn');
+    if (footerToggleBtn) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const footerGrid = document.getElementById('footerGrid');
+        const btn = document.getElementById('footerToggleBtn');
+
+        if (footerGrid && btn) {
+            footerGrid.classList.toggle('open');
+            btn.classList.toggle('active');
+            console.log('Footer links toggled:', footerGrid.classList.contains('open'));
         }
     }
 });
