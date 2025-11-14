@@ -19,137 +19,26 @@
     <link rel="stylesheet" href="shared/header-footer.css">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
-            background: #ffffff;
-            color: #333333;
-            line-height: 1.4;
-            font-size: 14px;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .section-title {
-            font-size: 20px;
-            font-weight: 800;
-            color: #333333;
-            margin-bottom: 20px;
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #333333;
-        }
-
-        .states-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-            margin-bottom: 40px;
-        }
-
-        .state-card {
-            border: 3px solid #333333;
-            background: #ffffff;
-            padding: 20px;
-            text-decoration: none;
-            color: inherit;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .state-card:hover {
-            background: #333333;
-            color: #ffffff;
-            transform: scale(1.02);
-        }
-
-        .state-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-
-        .state-name {
-            font-size: 16px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .state-code {
-            font-size: 10px;
-            background: #333333;
-            color: #ffffff;
-            padding: 4px 8px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 700;
-        }
-
-        .state-card:hover .state-code {
-            background: #ffffff;
-            color: #333333;
-        }
-
-        .state-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 8px;
-            border: 1px solid #333333;
-            background: #f8f8f8;
-        }
-
-        .state-card:hover .stat-item {
-            background: rgba(255,255,255,0.1);
-            border-color: #ffffff;
-        }
-
-        .stat-number {
-            font-size: 14px;
-            font-weight: 900;
-            margin-bottom: 2px;
-        }
-
-        .stat-label {
-            font-size: 9px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            opacity: 0.8;
-        }
-
-        .state-desc {
-            font-size: 12px;
-            opacity: 0.8;
-            line-height: 1.3;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px 15px;
-            }
-            
-            .states-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace; background: #ffffff; color: #333333; line-height: 1.4; font-size: 14px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        .page-header { padding: 40px 0; border-bottom: 3px solid #333333; margin-bottom: 40px; }
+        .page-title { font-size: 32px; font-weight: 900; margin-bottom: 10px; letter-spacing: 1px; }
+        .page-subtitle { font-size: 14px; color: #666666; font-weight: 600; }
+        .states-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .state-card { border: 3px solid #333333; background: #ffffff; transition: all 0.3s ease; cursor: pointer; text-decoration: none; color: inherit; display: block; }
+        .state-card:hover { background: #f8f8f8; transform: translateY(-2px); }
+        .state-header { padding: 12px; border-bottom: 1px solid #333333; background: #f8f8f8; display: flex; align-items: center; gap: 10px; }
+        .state-icon { font-size: 24px; }
+        .state-header-text { flex: 1; }
+        .state-name { font-size: 12px; font-weight: 700; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 1px; }
+        .state-code { font-size: 9px; color: #666666; text-transform: uppercase; letter-spacing: 0.5px; }
+        .state-body { padding: 12px; }
+        .state-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 8px; }
+        .stat-item { text-align: center; padding: 6px; background: #f8f8f8; }
+        .stat-number { font-size: 14px; font-weight: 900; margin-bottom: 2px; }
+        .stat-label { font-size: 9px; color: #666666; text-transform: uppercase; letter-spacing: 0.5px; }
+        @media (max-width: 768px) { .page-title { font-size: 24px; } .states-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } }
     </style>
 </head>
 <body>
@@ -157,7 +46,10 @@
     <div id="header"></div>
 
     <div class="container">
-        <h2 class="section-title">🗺️ All States & Union Territories</h2>
+        <div class="page-header">
+            <h1 class="page-title">🗺️ ALL STATES & UNION TERRITORIES</h1>
+            <p class="page-subtitle">Browse government jobs by state and region</p>
+        </div>
 
         <div class="states-grid" id="states-container">
             <!-- States will be auto-generated from jobs.json -->
@@ -214,22 +106,29 @@
                     card.href = `states/${state.slug}.html`;
                     card.className = 'state-card';
 
+                    // Get icon based on state
+                    const icon = state.code === '🇮🇳' ? '🇮🇳' : getStateIcon(state.slug);
+
                     card.innerHTML = `
                         <div class="state-header">
-                            <div class="state-name">${state.name}</div>
-                            <div class="state-code">${state.code}</div>
-                        </div>
-                        <div class="state-stats">
-                            <div class="stat-item">
-                                <div class="stat-number">${state.totalJobs}</div>
-                                <div class="stat-label">Active Jobs</div>
-                            </div>
-                            <div class="stat-item">
-                                <div class="stat-number">${state.totalPosts.toLocaleString()}</div>
-                                <div class="stat-label">Total Posts</div>
+                            <span class="state-icon">${icon}</span>
+                            <div class="state-header-text">
+                                <div class="state-name">${state.name}</div>
+                                <div class="state-code">${state.code} • ${state.totalJobs} Active ${state.totalJobs === 1 ? 'Job' : 'Jobs'}</div>
                             </div>
                         </div>
-                        <div class="state-desc">Click to view all ${state.name} government jobs</div>
+                        <div class="state-body">
+                            <div class="state-stats">
+                                <div class="stat-item">
+                                    <div class="stat-number">${state.totalJobs}</div>
+                                    <div class="stat-label">Active Jobs</div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-number">${state.totalPosts.toLocaleString()}</div>
+                                    <div class="stat-label">Total Posts</div>
+                                </div>
+                            </div>
+                        </div>
                     `;
 
                     container.appendChild(card);
@@ -284,6 +183,27 @@
                         'all-india': '🇮🇳'
                     };
                     return codes[slug] || slug.substring(0, 2).toUpperCase();
+                }
+
+                function getStateIcon(slug) {
+                    const icons = {
+                        'uttar-pradesh': '🕌',
+                        'maharashtra': '🏛️',
+                        'bihar': '🎓',
+                        'west-bengal': '🎭',
+                        'madhya-pradesh': '🦁',
+                        'tamil-nadu': '🕉️',
+                        'rajasthan': '🏰',
+                        'karnataka': '💻',
+                        'gujarat': '🦁',
+                        'andhra-pradesh': '⛰️',
+                        'odisha': '🏖️',
+                        'telangana': '💎',
+                        'kerala': '🌴',
+                        'delhi': '🏛️',
+                        'all-india': '🇮🇳'
+                    };
+                    return icons[slug] || '📍';
                 }
             })
             .catch(error => {
