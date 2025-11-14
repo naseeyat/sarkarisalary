@@ -7,10 +7,6 @@
     <meta name="description" content="View official government job notification PDF with full details">
     <link rel="icon" type="image/svg+xml" href="shared/favicon.svg">
 
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2954991378408470"
-         crossorigin="anonymous"></script>
-
     <!-- Global JavaScript -->
     <script src="shared/global.js"></script>
 
@@ -34,75 +30,9 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
-        }
-
-        .viewer-header {
-            background: #333333;
-            color: #ffffff;
-            padding: 20px;
-            border: 3px solid #333333;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .viewer-title {
-            font-size: 18px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .viewer-actions {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .action-btn {
-            background: #ffffff;
-            color: #333333;
-            border: 2px solid #ffffff;
-            padding: 10px 20px;
-            font-size: 12px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.2s;
-            font-family: inherit;
-        }
-
-        .action-btn:hover {
-            background: #333333;
-            color: #ffffff;
-            border-color: #ffffff;
-        }
-
-        /* Ad Container */
-        .ad-container {
-            border: 3px solid #333333;
-            background: #f8f8f8;
-            padding: 20px;
-            margin: 20px 0;
-            text-align: center;
-            min-height: 90px;
-        }
-
-        .ad-label {
-            font-size: 10px;
-            color: #666666;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
+            padding: 0 20px;
         }
 
         /* PDF Container */
@@ -115,15 +45,6 @@
             overflow: hidden;
         }
 
-        .pdf-iframe {
-            width: 100%;
-            height: 100vh;
-            min-height: 800px;
-            max-height: 1200px;
-            border: none;
-            display: block;
-        }
-
         /* PDF embed for better rendering */
         .pdf-embed {
             width: 100%;
@@ -133,28 +54,13 @@
             border: none;
         }
 
-        .loading {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 100px 20px;
-            text-align: center;
-        }
-
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #333333;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .pdf-iframe {
+            width: 100%;
+            height: 100vh;
+            min-height: 800px;
+            max-height: 1200px;
+            border: none;
+            display: block;
         }
 
         .error-box {
@@ -233,88 +139,19 @@
         }
 
         @media (max-width: 768px) {
-            .viewer-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .viewer-actions {
-                width: 100%;
-            }
-
-            .action-btn {
-                flex: 1;
-                text-align: center;
-            }
-
-            .pdf-iframe {
+            .pdf-iframe, .pdf-embed {
                 height: 600px;
             }
         }
     </style>
 </head>
 <body>
-    <script>
-        window.pageHeaderData = {
-            title: "PDF VIEWER",
-            subtitle: "Official Notification Document"
-        };
-    </script>
+    <!-- Header -->
+    <div id="header"></div>
 
     <div class="container">
-        <!-- Top Ad -->
-        <div class="ad-container">
-            <div class="ad-label">Advertisement</div>
-            <!-- AdSense ad unit here -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-2954991378408470"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-
-        <!-- Viewer Header -->
-        <div class="viewer-header">
-            <div class="viewer-title" id="viewer-title">Loading PDF...</div>
-            <div class="viewer-actions">
-                <button class="action-btn" onclick="downloadPDF()" id="download-btn">
-                    ⬇️ DOWNLOAD PDF
-                </button>
-                <button class="action-btn" onclick="openNewTab()" id="newtab-btn">
-                    🔗 OPEN IN NEW TAB
-                </button>
-                <a href="index.html" class="action-btn">
-                    🏠 HOME
-                </a>
-            </div>
-        </div>
-
         <!-- PDF Container -->
-        <div class="pdf-container" id="pdf-container">
-            <div class="loading" id="loading">
-                <div class="loading-spinner"></div>
-                <p style="font-weight: 700; font-size: 14px; text-transform: uppercase;">Loading PDF...</p>
-            </div>
-        </div>
-
-        <!-- Bottom Ad -->
-        <div class="ad-container">
-            <div class="ad-label">Advertisement</div>
-            <!-- AdSense ad unit here -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-2954991378408470"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
+        <div class="pdf-container" id="pdf-container"></div>
 
         <!-- Related Jobs -->
         <div class="related-jobs">
@@ -328,8 +165,27 @@
         </div>
     </div>
 
-    <!-- Header Footer System -->
-    <script src="js/header-footer-loader.js"></script>
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Load Header & Footer -->
+    <script>
+        // Load header
+        fetch('shared/header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('header').innerHTML = html;
+            })
+            .catch(err => console.error('Header load error:', err));
+
+        // Load footer
+        fetch('shared/footer.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('footer').innerHTML = html;
+            })
+            .catch(err => console.error('Footer load error:', err));
+    </script>
 
     <script>
         // Get filename from URL parameter
@@ -351,16 +207,13 @@
 
         function loadPDF(url) {
             const container = document.getElementById('pdf-container');
-            const loading = document.getElementById('loading');
-            const viewerTitle = document.getElementById('viewer-title');
             const pageTitle = document.getElementById('page-title');
 
             // Update title
             const displayName = filename.replace('.pdf', '').replace(/-/g, ' ').toUpperCase();
-            viewerTitle.textContent = displayName;
             pageTitle.textContent = `${displayName} - View PDF | SARKARI SALARY`;
 
-            // Try using object tag first (better rendering), fallback to iframe
+            // Create PDF embed - browser will handle loading state
             const pdfObject = document.createElement('object');
             pdfObject.data = url;
             pdfObject.type = 'application/pdf';
@@ -377,11 +230,6 @@
                 </iframe>
             `;
 
-            // Handle load
-            setTimeout(() => {
-                loading.style.display = 'none';
-            }, 1000);
-
             container.appendChild(pdfObject);
         }
 
@@ -396,29 +244,9 @@
             `;
         }
 
-        function downloadPDF() {
-            if (pdfUrl) {
-                const link = document.createElement('a');
-                link.href = pdfUrl;
-                link.download = filename || 'notification.pdf';
-                link.target = '_blank';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
-        }
-
-        function openNewTab() {
-            if (pdfUrl) {
-                window.open(pdfUrl, '_blank');
-            }
-        }
-
         // Analytics tracking (optional)
         if (filename) {
             console.log('PDF Viewed:', filename);
-            // Add your analytics code here
-            // gtag('event', 'pdf_view', { 'pdf_name': filename });
         }
     </script>
 </body>

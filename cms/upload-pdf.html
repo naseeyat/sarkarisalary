@@ -19,7 +19,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             background: #ffffff;
             border: 3px solid #333333;
@@ -244,6 +244,12 @@
 </head>
 <body>
     <div class="container">
+        <!-- Navigation -->
+        <div style="display: flex; gap: 10px; margin-bottom: 30px;">
+            <a href="upload-pdf.html" style="padding: 10px 15px; background: #333; color: #fff; border: 2px solid #333; text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase;">📤 Upload PDF</a>
+            <a href="link-manager.html" style="padding: 10px 15px; background: #fff; border: 2px solid #333; text-decoration: none; color: #333; font-size: 11px; font-weight: 700; text-transform: uppercase;">🔗 Link Manager</a>
+        </div>
+
         <h1>📤 Upload PDF Document</h1>
         <p class="subtitle">Upload official job notifications, syllabi, admit cards, and other documents to your R2 bucket with automatic naming.</p>
 
@@ -455,14 +461,29 @@
             // Upload to R2 (would need Cloudflare Workers API)
             try {
                 await uploadToR2(file, finalFilename);
-                showStatus('success', `✅ Successfully uploaded: ${finalFilename}\n\nFile available at: https://reference.sarkarisalary.today/${finalFilename}`);
 
-                // Reset form after 3 seconds
-                setTimeout(() => {
-                    document.getElementById('upload-form').reset();
-                    document.getElementById('preview-box').classList.remove('show');
-                    document.querySelectorAll('.doc-type-card').forEach(c => c.classList.remove('selected'));
-                }, 3000);
+                const pdfUrl = `https://reference.sarkarisalary.today/${finalFilename}`;
+                const docTypeMapping = {
+                    'notification': 'notificationPdf',
+                    'syllabus': 'syllabusPdf',
+                    'admit-card': 'admitCardPdf',
+                    'answer-key': 'answerKeyPdf',
+                    'result': 'resultPdf',
+                    'amendment': 'amendmentPdf'
+                };
+                const jsonField = docTypeMapping[docType];
+
+                // Generate JSON snippet for easy copy-paste
+                const jsonSnippet = `"${jsonField}": "${pdfUrl}"`;
+
+                showStatusWithLink('success',
+                    `✅ Successfully uploaded: ${finalFilename}`,
+                    pdfUrl,
+                    jobSlug,
+                    jsonSnippet
+                );
+
+                // Don't auto-reset - let user copy link first
 
             } catch (error) {
                 showStatus('error', `❌ Upload failed: ${error.message}`);
@@ -487,13 +508,108 @@
             }
         }
 
+        function showStatusWithLink(type, message, pdfUrl, jobSlug, jsonSnippet) {
+            const statusBox = document.getElementById('status-box');
+            const statusMessage = document.getElementById('status-message');
+            const spinner = document.getElementById('spinner');
+
+            statusBox.className = 'status-box show ' + type;
+            spinner.style.display = 'none';
+
+            // Create rich success message with action buttons
+            statusMessage.innerHTML = `
+                <div style="font-weight: 900; font-size: 14px; margin-bottom: 15px;">
+                    ${message}
+                </div>
+
+                <div style="background: #f8f8f8; border: 2px solid #333; padding: 15px; margin: 15px 0; font-family: monospace; font-size: 11px; text-align: left;">
+                    <div style="font-weight: 700; margin-bottom: 8px;">📋 Copy this to jobs.json:</div>
+                    <code style="display: block; background: #fff; padding: 8px; border: 1px solid #333; word-break: break-all;">
+                        ${jsonSnippet}
+                    </code>
+                    <button onclick="copyToClipboard('${jsonSnippet}')" style="margin-top: 10px; background: #333; color: #fff; border: none; padding: 8px 15px; cursor: pointer; font-weight: 700; text-transform: uppercase; font-size: 10px;">
+                        📋 COPY JSON
+                    </button>
+                </div>
+
+                <div style="background: #e8f4f8; border: 2px solid #0066cc; padding: 15px; margin: 15px 0; font-family: monospace; font-size: 11px; text-align: left;">
+                    <div style="font-weight: 700; margin-bottom: 8px;">🔗 PDF URL:</div>
+                    <code style="display: block; background: #fff; padding: 8px; border: 1px solid #333; word-break: break-all;">
+                        ${pdfUrl}
+                    </code>
+                    <button onclick="copyToClipboard('${pdfUrl}')" style="margin-top: 10px; background: #0066cc; color: #fff; border: none; padding: 8px 15px; cursor: pointer; font-weight: 700; text-transform: uppercase; font-size: 10px;">
+                        📋 COPY URL
+                    </button>
+                    <button onclick="window.open('${pdfUrl}', '_blank')" style="margin-top: 10px; margin-left: 10px; background: #00aa00; color: #fff; border: none; padding: 8px 15px; cursor: pointer; font-weight: 700; text-transform: uppercase; font-size: 10px;">
+                        👁️ VIEW PDF
+                    </button>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <button onclick="openJobsJson()" style="background: #ff8800; color: #fff; border: none; padding: 12px 20px; cursor: pointer; font-weight: 900; text-transform: uppercase; font-size: 11px; letter-spacing: 1px;">
+                        📝 OPEN JOBS.JSON IN NEW TAB
+                    </button>
+                    <button onclick="resetForm()" style="margin-left: 10px; background: #666; color: #fff; border: none; padding: 12px 20px; cursor: pointer; font-weight: 900; text-transform: uppercase; font-size: 11px; letter-spacing: 1px;">
+                        ↻ UPLOAD ANOTHER
+                    </button>
+                </div>
+
+                <div style="margin-top: 15px; padding: 12px; background: #fffacd; border: 2px solid #333; font-size: 11px; text-align: left;">
+                    <strong>⚡ Next Steps:</strong><br>
+                    1. Click "COPY JSON" button above<br>
+                    2. Click "OPEN JOBS.JSON" to edit the file<br>
+                    3. Find job "${jobSlug}" in jobs.json<br>
+                    4. Paste the copied JSON line inside that job object<br>
+                    5. Save the file - Done! 🎉
+                </div>
+            `;
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ Copied to clipboard!');
+            }).catch(() => {
+                alert('❌ Failed to copy. Please select and copy manually.');
+            });
+        }
+
+        function openJobsJson() {
+            window.open('/prod/data/jobs.json', '_blank');
+        }
+
+        function resetForm() {
+            document.getElementById('upload-form').reset();
+            document.getElementById('preview-box').classList.remove('show');
+            document.querySelectorAll('.doc-type-card').forEach(c => c.classList.remove('selected'));
+            document.getElementById('status-box').classList.remove('show');
+        }
+
         async function uploadToR2(file, filename) {
-            // Upload to Cloudflare Worker
-            // Worker URL will be: https://sarkarisalary-upload.YOUR_SUBDOMAIN.workers.dev
-            // Or custom domain: https://upload.sarkarisalary.today
+            // DEMO MODE - Worker not deployed yet
+            // To enable real uploads:
+            // 1. Deploy worker: cd workers && wrangler deploy
+            // 2. Update WORKER_URL below with your worker URL
+            // 3. Set DEMO_MODE = false
 
-            const WORKER_URL = 'https://sarkarisalary-upload.YOUR_SUBDOMAIN.workers.dev';
+            const DEMO_MODE = false; // Worker deployed!
+            const WORKER_URL = 'https://sarkarisalary-upload.naseeyatgumaan.workers.dev';
 
+            if (DEMO_MODE) {
+                // Simulate upload for demo
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        resolve({
+                            success: true,
+                            filename: filename,
+                            url: `https://reference.sarkarisalary.today/${filename}`,
+                            size: file.size,
+                            demo: true
+                        });
+                    }, 1500);
+                });
+            }
+
+            // Real upload (when worker is deployed)
             const formData = new FormData();
             formData.append('file', file);
             formData.append('filename', filename);

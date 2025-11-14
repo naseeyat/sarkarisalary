@@ -69,6 +69,7 @@ export default {
       await env.SARKARISALARY_DOCS.put(filename, file.stream(), {
         httpMetadata: {
           contentType: 'application/pdf',
+          cacheControl: 'public, max-age=315360000, immutable', // 10 years cache + immutable
         },
       });
 

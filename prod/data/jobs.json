@@ -54,8 +54,8 @@
       "minAge": 18,
       "maxAge": 40,
       "salary": {
-        "range": "As per State Government norms",
-        "note": "Salaries as per extant West Bengal State Government norms"
+        "range": "₹20,000 - ₹50,000 per month",
+        "note": "As per West Bengal State Government norms (7th Pay Commission)"
       },
       "applicationFee": {
         "general": "₹400",
@@ -499,8 +499,8 @@
       "status": "active",
       "featured": true,
       "isNew": true,
-      "applyLink": "https://examinationservices.nic.in/recsys2025/root/Home.aspx?enc=Ei4cajBkK1gZSfgr53ImFbEsl0hvvhEEwgxfU0IzC28jtU4yhpqb3pomlo4g+VC8",
-      "notificationPdf": "https://cdnbbsr.s3waas.gov.in/s32d2ca7eedf739ef4c3800713ec482e1a/uploads/2025/11/2025111348.pdf",
+      "applyLink": "https://kvsangathan.nic.in/",
+      "notificationPdf": "https://reference.sarkarisalary.today/kvs-nvs-2025-notification.pdf",
       "daysRemaining": 30,
       "addedOn": "2024-11-14",
       "pageUrl": "/jobs/kvs-nvs-2025.html",
