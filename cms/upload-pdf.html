@@ -337,16 +337,33 @@
         // Load jobs from jobs.json
         let jobsData = [];
 
-        fetch('/prod/data/jobs.json')
-            .then(response => response.json())
-            .then(data => {
-                jobsData = data.jobs;
-                populateJobSelect(data.jobs);
-            })
-            .catch(error => {
-                console.error('Error loading jobs:', error);
-                alert('Failed to load jobs. Please refresh the page.');
-            });
+        // Try multiple paths (works from different server roots)
+        async function loadJobs() {
+            const paths = [
+                '../prod/data/jobs.json',  // If running from root
+                '/prod/data/jobs.json',     // If running from root with absolute path
+                '/data/jobs.json'           // If running from prod folder
+            ];
+
+            for (const path of paths) {
+                try {
+                    const response = await fetch(path);
+                    if (response.ok) {
+                        const data = await response.json();
+                        jobsData = data.jobs;
+                        populateJobSelect(data.jobs);
+                        console.log('✅ Jobs loaded from:', path);
+                        return;
+                    }
+                } catch (error) {
+                    console.log('Failed to load from:', path);
+                }
+            }
+
+            alert('Failed to load jobs from any path. Please check:\n1. Server is running\n2. jobs.json exists\n3. Path is correct');
+        }
+
+        loadJobs();
 
         function populateJobSelect(jobs) {
             const select = document.getElementById('job-select');
