@@ -1,18 +1,32 @@
+# Robots.txt for Sarkari Salary
+# Allow all search engines to crawl everything
+
 User-agent: *
 Allow: /
 
 # Sitemap location
 Sitemap: https://sarkarisalary.today/sitemap.xml
 
-# AdSense verification
-User-agent: Googlebot
-Allow: /ads.txt
-
-# Block unnecessary crawling
-Disallow: /archive/
-Disallow: /sarkari-static-test/
-Disallow: /*.js$
-Disallow: /*.css$
-
-# Crawl delay for respectful crawling
+# Crawl-delay for polite bots
 Crawl-delay: 1
+
+# Disallow admin or private areas (if any in future)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow all job pages
+Allow: /jobs/
+Allow: /categories/
+Allow: /states/
+Allow: /pages/
+
+# Common files to disallow
+Disallow: /cgi-bin/
+Disallow: /*.php$
+Disallow: /*.asp$
+
+# Allow CSS and JS for Google
+Allow: /shared/*.css
+Allow: /shared/*.js
+Allow: /*.css$
+Allow: /*.js$

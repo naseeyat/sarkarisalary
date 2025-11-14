@@ -462,20 +462,20 @@
 
         <div class="brutalist-stats">
             <div class="stat-box">
-                <div class="stat-number">500+</div>
-                <div class="stat-label">Government Jobs</div>
+                <div class="stat-number" id="total-jobs-stat">-</div>
+                <div class="stat-label">Active Jobs</div>
             </div>
             <div class="stat-box">
-                <div class="stat-number">50+</div>
-                <div class="stat-label">Departments</div>
+                <div class="stat-number" id="total-posts-stat">-</div>
+                <div class="stat-label">Total Posts</div>
             </div>
             <div class="stat-box" onclick="window.location.href='pages/pay-scales/pay-scale-chart.html'" style="cursor: pointer;">
                 <div class="stat-number">17</div>
                 <div class="stat-label">Pay Scales</div>
             </div>
-            <div class="stat-box">
-                <div class="stat-number">Daily</div>
-                <div class="stat-label">Updates</div>
+            <div class="stat-box" onclick="window.location.href='exam-calendar.html'" style="cursor: pointer;">
+                <div class="stat-number" id="closing-soon-stat">-</div>
+                <div class="stat-label">Closing Soon</div>
             </div>
         </div>
 
@@ -489,58 +489,58 @@
         <section class="categories-section">
             <h2 class="section-title">📂 Browse by Category</h2>
             <div class="categories-grid">
-                <a href="banking-jobs.html" class="category-card">
+                <a href="categories/banking-jobs.html" class="category-card">
                     <span class="category-icon">🏦</span>
                     <div class="category-title">Banking Jobs</div>
-                    <div class="category-count banking-count">Loading...</div>
+                    <div class="category-count" data-category="banking-jobs">Loading...</div>
                 </a>
 
-                <a href="railway-jobs.html" class="category-card">
+                <a href="categories/railway-jobs.html" class="category-card">
                     <span class="category-icon">🚂</span>
                     <div class="category-title">Railway Jobs</div>
-                    <div class="category-count railway-count">Loading...</div>
+                    <div class="category-count" data-category="railway-jobs">Loading...</div>
                 </a>
 
-                <a href="police-jobs.html" class="category-card">
+                <a href="categories/police-jobs.html" class="category-card">
                     <span class="category-icon">👮</span>
                     <div class="category-title">Police Jobs</div>
-                    <div class="category-count police-count">Loading...</div>
+                    <div class="category-count" data-category="police-jobs">Loading...</div>
                 </a>
 
-                <a href="civil-services.html" class="category-card">
+                <a href="categories/civil-services.html" class="category-card">
                     <span class="category-icon">🏛️</span>
                     <div class="category-title">Civil Services</div>
-                    <div class="category-count civil-count">Loading...</div>
+                    <div class="category-count" data-category="civil-services">Loading...</div>
                 </a>
 
-                <a href="teaching-jobs.html" class="category-card">
+                <a href="categories/teaching-jobs.html" class="category-card">
                     <span class="category-icon">📚</span>
                     <div class="category-title">Teaching Jobs</div>
-                    <div class="category-count teaching-count">Loading...</div>
+                    <div class="category-count" data-category="teaching-jobs">Loading...</div>
                 </a>
 
-                <a href="defense-jobs.html" class="category-card">
+                <a href="categories/defense-jobs.html" class="category-card">
                     <span class="category-icon">⚔️</span>
                     <div class="category-title">Defense Jobs</div>
-                    <div class="category-count defense-count">Loading...</div>
+                    <div class="category-count" data-category="defense-jobs">Loading...</div>
                 </a>
 
-                <a href="medical-jobs.html" class="category-card">
+                <a href="categories/medical-jobs.html" class="category-card">
                     <span class="category-icon">🏥</span>
                     <div class="category-title">Medical Jobs</div>
-                    <div class="category-count medical-count">Loading...</div>
+                    <div class="category-count" data-category="medical-jobs">Loading...</div>
                 </a>
 
-                <a href="technical-jobs.html" class="category-card">
+                <a href="categories/technical-jobs.html" class="category-card">
                     <span class="category-icon">💻</span>
                     <div class="category-title">Technical Jobs</div>
-                    <div class="category-count technical-count">Loading...</div>
+                    <div class="category-count" data-category="technical-jobs">Loading...</div>
                 </a>
 
-                <a href="ssc-jobs.html" class="category-card">
+                <a href="categories/ssc-jobs.html" class="category-card">
                     <span class="category-icon">📊</span>
                     <div class="category-title">SSC Jobs</div>
-                    <div class="category-count ssc-count">Loading...</div>
+                    <div class="category-count" data-category="ssc-jobs">Loading...</div>
                 </a>
             </div>
         </section>
@@ -565,9 +565,35 @@
             .then(data => {
                 const container = document.getElementById('latest-jobs-grid');
 
+                // Get active jobs
+                const activeJobs = data.jobs.filter(job => job.status === 'active');
+
+                // Update stats with real data
+                document.getElementById('total-jobs-stat').textContent = activeJobs.length;
+
+                const totalPosts = activeJobs.reduce((sum, job) => sum + (job.posts || 0), 0);
+                document.getElementById('total-posts-stat').textContent = totalPosts.toLocaleString();
+
+                const closingSoon = activeJobs.filter(job => job.daysRemaining && job.daysRemaining <= 7).length;
+                document.getElementById('closing-soon-stat').textContent = closingSoon;
+
+                // Update category counts
+                const categoryCounts = {};
+                activeJobs.forEach(job => {
+                    if (job.category) {
+                        categoryCounts[job.category] = (categoryCounts[job.category] || 0) + 1;
+                    }
+                });
+
+                // Update all category count elements
+                document.querySelectorAll('.category-count').forEach(el => {
+                    const category = el.getAttribute('data-category');
+                    const count = categoryCounts[category] || 0;
+                    el.textContent = count > 0 ? `${count} Active ${count === 1 ? 'Job' : 'Jobs'}` : 'Coming Soon';
+                });
+
                 // Get active jobs sorted by priority/date
-                const latestJobs = data.jobs
-                    .filter(job => job.status === 'active')
+                const latestJobs = activeJobs
                     .sort((a, b) => {
                         // Sort by: isNew first, then featured, then by priorityScore
                         if (a.isNew && !b.isNew) return -1;
@@ -675,57 +701,6 @@
                 document.querySelector('.search-btn').click();
             }
         });
-
-        // Job counts data
-        const jobCounts = {
-            banking: 87,
-            railway: 124, 
-            police: 96,
-            civil: 52,
-            teaching: 108,
-            defense: 73,
-            medical: 64,
-            technical: 89,
-            ssc: 156
-        };
-
-        // Update category counts automatically
-        function updateCategoryCounts() {
-            Object.keys(jobCounts).forEach(category => {
-                const element = document.querySelector(`.${category}-count`);
-                if (element) {
-                    element.textContent = `${jobCounts[category]}+ Positions`;
-                }
-            });
-        }
-
-        // Add hover effects and interactions
-        document.addEventListener('DOMContentLoaded', function() {
-            // Update counts when page loads
-            updateCategoryCounts();
-            
-            // Animate rolling banner on page load
-            const rollingText = document.querySelector('.rolling-text');
-            if (rollingText) {
-                rollingText.style.animationDelay = '0s';
-            }
-        });
-    </script>
-
-    <!-- Footer -->
-    <div id="footer"></div>
-
-    <!-- Header Footer Loading Script -->
-    <script>
-        // Load header
-        fetch('shared/header.html')
-            .then(response => response.text())
-            .then(data => document.getElementById('header').innerHTML = data);
-
-        // Load footer
-        fetch('shared/footer.html')
-            .then(response => response.text())
-            .then(data => document.getElementById('footer').innerHTML = data);
     </script>
 
         </div> <!-- End main-content-wrapper -->

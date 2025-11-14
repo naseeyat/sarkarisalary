@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Jobs 2025 | Government Technical Jobs Recruitment Notifications</title>
+    <meta name="description" content="Latest Technical Jobs 2025. All government Technical Jobs recruitment notifications. Apply online.">
+    <script src="../shared/global.js"></script>
+    <link rel="stylesheet" href="../shared/brutalist-styles.css">
+    <link rel="stylesheet" href="../shared/header-footer.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace; background: #ffffff; color: #333333; line-height: 1.4; font-size: 14px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+        .page-header { padding: 40px 0; border-bottom: 3px solid #333333; }
+        .breadcrumb { font-size: 12px; margin-bottom: 15px; color: #666666; }
+        .breadcrumb a { color: #0066cc; text-decoration: none; }
+        .page-title { font-size: 32px; font-weight: 900; margin-bottom: 10px; letter-spacing: 1px; }
+        .page-subtitle { font-size: 14px; color: #666666; font-weight: 600; }
+        .stats-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1px; background: #333333; border: 3px solid #333333; margin: 40px 0; }
+        .stat-item { background: #ffffff; padding: 20px; text-align: center; }
+        .stat-number { font-size: 24px; font-weight: 900; margin-bottom: 5px; }
+        .stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #666666; font-weight: 700; }
+        .jobs-section { padding: 20px 0; }
+        .job-card { border: 3px solid #333333; padding: 20px; margin-bottom: 10px; background: #ffffff; transition: all 0.2s; cursor: pointer; }
+        .job-card:hover { background: #333333; color: #ffffff; transform: translateX(5px); }
+        .job-card:hover .job-title, .job-card:hover .job-meta, .job-card:hover .job-salary { color: #ffffff; }
+        .job-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
+        .job-title { font-size: 16px; font-weight: 700; color: #333333; margin-bottom: 5px; }
+        .job-meta { font-size: 12px; color: #666666; margin-bottom: 10px; }
+        .job-badge { background: #333333; color: #ffffff; padding: 4px 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+        .job-badge.new { background: #00aa00; }
+        .job-badge.closing { background: #ff4444; }
+        .job-badge.featured { background: #ff8800; }
+        .job-details { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .job-detail { font-size: 13px; }
+        .job-detail-label { color: #666666; font-size: 10px; text-transform: uppercase; font-weight: 700; margin-bottom: 3px; }
+        .job-salary { font-size: 16px; font-weight: 900; color: #333333; }
+        .empty-state { background: #fffacd; border: 3px solid #333333; padding: 40px; text-align: center; margin: 40px 0; }
+        .empty-state h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+        @media (max-width: 768px) { .page-title { font-size: 24px; } .job-header { flex-direction: column; gap: 10px; } }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+    <div class="container">
+        <div class="page-header">
+            <div class="breadcrumb"><a href="../index.html">Home</a> → <a href="../categories.html">Categories</a> → Technical Jobs</div>
+            <h1 class="page-title">💻 Technical Jobs</h1>
+            <p class="page-subtitle">All active government Engineering & Tech recruitment notifications</p>
+        </div>
+        <div class="stats-bar">
+            <div class="stat-item"><div class="stat-number" id="total-jobs">-</div><div class="stat-label">Total Jobs</div></div>
+            <div class="stat-item"><div class="stat-number" id="active-jobs">-</div><div class="stat-label">Active Jobs</div></div>
+            <div class="stat-item"><div class="stat-number" id="total-posts">-</div><div class="stat-label">Total Posts</div></div>
+            <div class="stat-item"><div class="stat-number" id="closing-soon">-</div><div class="stat-label">Closing Soon</div></div>
+        </div>
+        <div class="jobs-section">
+            <div id="jobs-container"></div>
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <h3>No Active Jobs</h3>
+                <p>Currently no active Technical Jobs notifications. Check back soon!</p>
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+    <script>
+        fetch('../shared/header.html').then(response => response.text()).then(data => document.getElementById('header').innerHTML = data);
+        fetch('../shared/footer.html').then(response => response.text()).then(data => document.getElementById('footer').innerHTML = data);
+        fetch('../data/jobs.json').then(response => response.json()).then(data => {
+            const categoryJobs = data.jobs.filter(job => job.category === 'technical-jobs' && job.status === 'active');
+            document.getElementById('total-jobs').textContent = categoryJobs.length;
+            document.getElementById('active-jobs').textContent = categoryJobs.length;
+            document.getElementById('total-posts').textContent = categoryJobs.reduce((sum, job) => sum + (job.posts || 0), 0).toLocaleString();
+            document.getElementById('closing-soon').textContent = categoryJobs.filter(job => job.daysRemaining && job.daysRemaining <= 7).length;
+            const container = document.getElementById('jobs-container');
+            const emptyState = document.getElementById('empty-state');
+            if (categoryJobs.length === 0) { emptyState.style.display = 'block'; return; }
+            categoryJobs.forEach(job => {
+                const card = document.createElement('div');
+                card.className = 'job-card';
+                card.onclick = () => window.location.href = '../' + job.pageUrl;
+                let badge = '';
+                if (job.isNew) badge = '<div class="job-badge new">NEW</div>';
+                else if (job.daysRemaining <= 7) badge = '<div class="job-badge closing">CLOSING SOON</div>';
+                else if (job.featured) badge = '<div class="job-badge featured">FEATURED</div>';
+                let salaryDisplay = '';
+                if (job.salary) {
+                    if (typeof job.salary === 'string') salaryDisplay = job.salary;
+                    else if (job.salary.range) salaryDisplay = job.salary.range;
+                    else if (job.salary.stipend) salaryDisplay = job.salary.stipend;
+                    else if (job.salary.basic) salaryDisplay = job.salary.basic;
+                }
+                card.innerHTML = `
+                    <div class="job-header">
+                        <div><div class="job-title">${job.title}</div><div class="job-meta">${job.departmentName || job.organization}</div></div>
+                        ${badge}
+                    </div>
+                    <div class="job-details">
+                        <div class="job-detail"><div class="job-detail-label">Posts</div><div>${job.posts} Vacancies</div></div>
+                        <div class="job-detail"><div class="job-detail-label">Salary</div><div class="job-salary">${salaryDisplay}</div></div>
+                        <div class="job-detail"><div class="job-detail-label">Last Date</div><div>${new Date(job.lastDate).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}</div></div>
+                        <div class="job-detail"><div class="job-detail-label">Qualification</div><div>${job.qualification}</div></div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }).catch(error => {
+            console.error('Error loading jobs:', error);
+            document.getElementById('empty-state').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
