@@ -142,6 +142,59 @@
             .pdf-iframe, .pdf-embed {
                 height: 600px;
             }
+
+            /* Sticky footer on mobile for easy navigation */
+            .related-jobs {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: 0;
+                border-left: none;
+                border-right: none;
+                border-bottom: none;
+                z-index: 50;
+                max-height: 60px;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            .related-jobs.expanded {
+                max-height: 400px;
+                overflow-y: auto;
+            }
+
+            .related-jobs h3 {
+                cursor: pointer;
+                user-select: none;
+                padding: 15px;
+                margin: 0;
+                border-bottom: 2px solid #333333;
+            }
+
+            .related-jobs h3::after {
+                content: ' ▼';
+                float: right;
+                transition: transform 0.3s ease;
+            }
+
+            .related-jobs.expanded h3::after {
+                transform: rotate(180deg);
+            }
+
+            .job-links {
+                display: none;
+            }
+
+            .related-jobs.expanded .job-links {
+                display: grid;
+                padding: 15px;
+            }
+
+            /* Add padding to container so content not hidden behind sticky footer */
+            .container {
+                padding-bottom: 80px;
+            }
         }
     </style>
 </head>
@@ -247,6 +300,18 @@
         // Analytics tracking (optional)
         if (filename) {
             console.log('PDF Viewed:', filename);
+        }
+
+        // Mobile footer toggle
+        if (window.innerWidth <= 768) {
+            const relatedJobs = document.querySelector('.related-jobs');
+            const relatedJobsH3 = document.querySelector('.related-jobs h3');
+
+            if (relatedJobsH3) {
+                relatedJobsH3.addEventListener('click', function() {
+                    relatedJobs.classList.toggle('expanded');
+                });
+            }
         }
     </script>
 </body>
