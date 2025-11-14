@@ -570,11 +570,19 @@
 
             // Hide empty date groups
             dateGroups.forEach(group => {
-                const visibleCards = group.querySelectorAll('.event-card[style*="display: flex"]');
-                if (visibleCards.length === 0) {
-                    group.style.display = 'none';
-                } else {
+                const allCards = group.querySelectorAll('.event-card');
+                let hasVisibleCard = false;
+
+                allCards.forEach(card => {
+                    if (card.style.display !== 'none') {
+                        hasVisibleCard = true;
+                    }
+                });
+
+                if (hasVisibleCard) {
                     group.style.display = 'block';
+                } else {
+                    group.style.display = 'none';
                 }
             });
         }
