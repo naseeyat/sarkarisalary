@@ -544,8 +544,12 @@
             const buttons = document.querySelectorAll('.filter-btn');
 
             // Update active button
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.onclick && btn.onclick.toString().includes(`'${type}'`)) {
+                    btn.classList.add('active');
+                }
+            });
 
             if (type === 'all') {
                 cards.forEach(card => card.style.display = 'flex');
