@@ -8,12 +8,21 @@ This document describes the complete process for adding government job notificat
 ## 🎯 CORE PRINCIPLES
 
 ### 0. DATA VERIFICATION (CRITICAL!)
-**⚠️ ALWAYS VERIFY VACANCY COUNTS FROM OFFICIAL PDF**
+**⚠️ ALWAYS VERIFY DATA FROM OFFICIAL PDF**
+
+**Vacancy Counts:**
 - NEVER estimate or guess vacancy numbers
 - ALWAYS read the complete official notification PDF
 - COUNT all posts carefully from vacancy tables
 - Double-check totals before adding to jobs.json
 - When in doubt, re-read the PDF section with vacancy breakdown
+
+**Links & URLs:**
+- VERIFY all links work before adding to job pages
+- Check official website URLs from notification PDF
+- Test apply links, notification PDF links
+- NEVER use placeholder or dummy links
+- Important links should appear EARLY on page (after Quick Info, before detailed content)
 
 ### 1. Single Source of Truth
 **`prod/data/jobs.json`** - All pages auto-generate from this file.
