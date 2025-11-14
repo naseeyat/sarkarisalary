@@ -187,6 +187,10 @@
 .hamburger-btn.active span:nth-child(2) {
     opacity: 0;
 }
+
+.hamburger-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(8px, -8px);
+}
 .site-footer {
     max-width: 900px;
     margin: 40px auto 10px; /* Bottom spacing */
