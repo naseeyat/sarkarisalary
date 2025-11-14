@@ -57,12 +57,4 @@ if (window.pageHeaderData) {
     });
 })();
 
-// Inject AdSense script if not already present
-if (!document.querySelector('script[src*="adsbygoogle"]')) {
-    const adsenseScript = document.createElement('script');
-    adsenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2954991378408470';
-    adsenseScript.async = true;
-    adsenseScript.crossOrigin = 'anonymous';
-    document.head.appendChild(adsenseScript);
-}
 </script>
