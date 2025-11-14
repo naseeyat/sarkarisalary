@@ -583,3 +583,80 @@ For any issues:
 
 **Last Updated:** 14 Nov 2024
 **Version:** 1.0
+
+---
+
+## 🎯 CAREER TIMELINE FEATURE
+
+### Overview
+Detailed career progression pages showing complete journey from entry to retirement for each government job.
+
+### Structure
+```
+prod/data/careers.json  ← Career progression data (permanent)
+prod/career/           ← Career timeline pages
+  ├── ias-officer.html
+  ├── sbi-po.html
+  └── kvs-teacher.html
+```
+
+### Implementation Approach
+**Start Manual, Then Automate:**
+1. Copy `archive/ias-timeline-v0-planetscale.html`
+2. Adapt to 900px width (brutalist style)
+3. Add header/footer integration
+4. Create for top 5 jobs manually
+5. Later: Build generation script from careers.json
+
+### careers.json Structure
+```json
+{
+  "careers": [
+    {
+      "id": "ias-officer",
+      "slug": "ias-officer",
+      "title": "IAS Officer Career Timeline",
+      "category": "civil-services",
+      "overview": {
+        "entryAge": "21-32",
+        "retirementAge": "60",
+        "entrySalary": "₹56,100",
+        "peakSalary": "₹2,50,000"
+      },
+      "stages": [
+        {
+          "number": 1,
+          "designation": "Sub Divisional Magistrate",
+          "years": "0-4 years",
+          "salary": "₹56,100 - ₹1,77,500",
+          "inHand": "₹75,000/month",
+          "responsibilities": [...]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Link from Job Pages
+Add after Quick Info Grid, before Apply Button:
+```html
+<a href="/career/ias-officer.html" class="career-journey-btn">
+    📊 VIEW COMPLETE CAREER JOURNEY & SALARY PROGRESSION →
+</a>
+```
+
+### Data Collection Sources
+- Official government websites
+- Pay Commission reports
+- RTI responses
+- Verified forums & officer associations
+
+### Priority Order
+1. IAS Officer
+2. SBI PO
+3. IPS Officer
+4. Railway Officer
+5. KVS/NVS Teachers
+
+---
