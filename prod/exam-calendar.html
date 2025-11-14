@@ -542,6 +542,7 @@
         function filterEvents(type) {
             const cards = document.querySelectorAll('.event-card');
             const buttons = document.querySelectorAll('.filter-btn');
+            const dateGroups = document.querySelectorAll('.date-group');
 
             // Update active button
             buttons.forEach(btn => {
@@ -551,11 +552,14 @@
                 }
             });
 
+            // Show all if 'all' is selected
             if (type === 'all') {
                 cards.forEach(card => card.style.display = 'flex');
+                dateGroups.forEach(group => group.style.display = 'block');
                 return;
             }
 
+            // Filter cards by type
             cards.forEach(card => {
                 if (card.dataset.type === type) {
                     card.style.display = 'flex';
@@ -565,10 +569,9 @@
             });
 
             // Hide empty date groups
-            const dateGroups = document.querySelectorAll('.date-group');
             dateGroups.forEach(group => {
-                const visibleCards = group.querySelectorAll('.event-card[style="display: flex;"]');
-                if (visibleCards.length === 0 && type !== 'all') {
+                const visibleCards = group.querySelectorAll('.event-card[style*="display: flex"]');
+                if (visibleCards.length === 0) {
                     group.style.display = 'none';
                 } else {
                     group.style.display = 'block';
