@@ -28,8 +28,7 @@
         .states-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 30px; }
         .state-card { border: 3px solid #333333; background: #ffffff; transition: all 0.3s ease; cursor: pointer; text-decoration: none; color: inherit; display: block; }
         .state-card:hover { background: #f8f8f8; transform: translateY(-2px); }
-        .state-header { padding: 12px; border-bottom: 1px solid #333333; background: #f8f8f8; display: flex; align-items: center; gap: 10px; }
-        .state-icon { font-size: 24px; }
+        .state-header { padding: 12px; border-bottom: 1px solid #333333; background: #f8f8f8; }
         .state-header-text { flex: 1; }
         .state-name { font-size: 12px; font-weight: 700; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 1px; }
         .state-code { font-size: 9px; color: #666666; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -163,12 +162,8 @@
                     card.href = `states/${state.slug}.html`;
                     card.className = 'state-card';
 
-                    // Get icon based on state
-                    const icon = state.code === '🇮🇳' ? '🇮🇳' : getStateIcon(state.slug);
-
                     card.innerHTML = `
                         <div class="state-header">
-                            <span class="state-icon">${icon}</span>
                             <div class="state-header-text">
                                 <div class="state-name">${state.name}</div>
                                 <div class="state-code">${state.code} • ${state.totalJobs} Active ${state.totalJobs === 1 ? 'Job' : 'Jobs'}</div>
@@ -240,27 +235,6 @@
                         'all-india': '🇮🇳'
                     };
                     return codes[slug] || slug.substring(0, 2).toUpperCase();
-                }
-
-                function getStateIcon(slug) {
-                    const icons = {
-                        'uttar-pradesh': '🕌',
-                        'maharashtra': '🏛️',
-                        'bihar': '🎓',
-                        'west-bengal': '🎭',
-                        'madhya-pradesh': '🦁',
-                        'tamil-nadu': '🕉️',
-                        'rajasthan': '🏰',
-                        'karnataka': '💻',
-                        'gujarat': '🦁',
-                        'andhra-pradesh': '⛰️',
-                        'odisha': '🏖️',
-                        'telangana': '💎',
-                        'kerala': '🌴',
-                        'delhi': '🏛️',
-                        'all-india': '🇮🇳'
-                    };
-                    return icons[slug] || '📍';
                 }
             })
             .catch(error => {
