@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icon Test - Emoji vs SVG</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, monospace;
+            background: #ffffff;
+            color: #333333;
+            padding: 40px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        h1 {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #333;
+            padding-bottom: 15px;
+        }
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .section {
+            border: 3px solid #333;
+            padding: 20px;
+            background: #fff;
+        }
+        .section h2 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .icon-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border: 2px solid #333;
+            margin-bottom: 10px;
+            background: #f8f8f8;
+        }
+        .icon-row:hover {
+            background: #333;
+            color: #fff;
+        }
+        .icon-emoji {
+            font-size: 32px;
+            width: 40px;
+            text-align: center;
+        }
+        .icon-svg {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+        }
+        .icon-label {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 ICON COMPARISON: EMOJI vs SVG</h1>
+
+        <div class="comparison-grid">
+            <div class="section">
+                <h2>❌ Current (Emoji)</h2>
+
+                <div class="icon-row">
+                    <span class="icon-emoji">📚</span>
+                    <span class="icon-label">Teaching Jobs</span>
+                </div>
+
+                <div class="icon-row">
+                    <span class="icon-emoji">👮</span>
+                    <span class="icon-label">Police Jobs</span>
+                </div>
+
+                <div class="icon-row">
+                    <span class="icon-emoji">🏦</span>
+                    <span class="icon-label">Banking Jobs</span>
+                </div>
+
+                <div class="icon-row">
+                    <span class="icon-emoji">🚂</span>
+                    <span class="icon-label">Railway Jobs</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>✅ New (Brutalist SVG)</h2>
+
+                <div class="icon-row">
+                    <img src="shared/icons/teaching.svg" class="icon-svg" alt="Teaching">
+                    <span class="icon-label">Teaching Jobs</span>
+                </div>
+
+                <div class="icon-row">
+                    <img src="shared/icons/police.svg" class="icon-svg" alt="Police">
+                    <span class="icon-label">Police Jobs</span>
+                </div>
+
+                <div class="icon-row">
+                    <img src="shared/icons/banking.svg" class="icon-svg" alt="Banking">
+                    <span class="icon-label">Banking Jobs</span>
+                </div>
+
+                <div class="icon-row">
+                    <img src="shared/icons/railway.svg" class="icon-svg" alt="Railway">
+                    <span class="icon-label">Railway Jobs</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="border: 3px solid #333; padding: 20px; background: #fffacd;">
+            <h3 style="font-size: 16px; margin-bottom: 10px;">SVG ADVANTAGES:</h3>
+            <ul style="margin-left: 20px; font-size: 13px; line-height: 1.8;">
+                <li>✓ Professional, consistent style</li>
+                <li>✓ Matches brutalist design system</li>
+                <li>✓ Scalable without pixelation</li>
+                <li>✓ Inherits color on hover (currentColor)</li>
+                <li>✓ Works across all browsers/OS consistently</li>
+                <li>✓ Emojis vary by device (iOS ≠ Android ≠ Windows)</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

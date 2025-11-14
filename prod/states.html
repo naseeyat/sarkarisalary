@@ -74,31 +74,88 @@
             .then(response => response.json())
             .then(data => {
                 const container = document.getElementById('states-container');
-                const stateMap = {};
 
-                // Calculate stats for each state from ACTIVE jobs only
+                // MASTER LIST of ALL Indian States & UTs (28 States + 8 UTs = 36)
+                const masterStatesList = [
+                    // All India
+                    { slug: 'all-india', name: 'All India', type: 'national' },
+
+                    // 28 States (alphabetical)
+                    { slug: 'andhra-pradesh', name: 'Andhra Pradesh', type: 'state' },
+                    { slug: 'arunachal-pradesh', name: 'Arunachal Pradesh', type: 'state' },
+                    { slug: 'assam', name: 'Assam', type: 'state' },
+                    { slug: 'bihar', name: 'Bihar', type: 'state' },
+                    { slug: 'chhattisgarh', name: 'Chhattisgarh', type: 'state' },
+                    { slug: 'goa', name: 'Goa', type: 'state' },
+                    { slug: 'gujarat', name: 'Gujarat', type: 'state' },
+                    { slug: 'haryana', name: 'Haryana', type: 'state' },
+                    { slug: 'himachal-pradesh', name: 'Himachal Pradesh', type: 'state' },
+                    { slug: 'jharkhand', name: 'Jharkhand', type: 'state' },
+                    { slug: 'karnataka', name: 'Karnataka', type: 'state' },
+                    { slug: 'kerala', name: 'Kerala', type: 'state' },
+                    { slug: 'madhya-pradesh', name: 'Madhya Pradesh', type: 'state' },
+                    { slug: 'maharashtra', name: 'Maharashtra', type: 'state' },
+                    { slug: 'manipur', name: 'Manipur', type: 'state' },
+                    { slug: 'meghalaya', name: 'Meghalaya', type: 'state' },
+                    { slug: 'mizoram', name: 'Mizoram', type: 'state' },
+                    { slug: 'nagaland', name: 'Nagaland', type: 'state' },
+                    { slug: 'odisha', name: 'Odisha', type: 'state' },
+                    { slug: 'punjab', name: 'Punjab', type: 'state' },
+                    { slug: 'rajasthan', name: 'Rajasthan', type: 'state' },
+                    { slug: 'sikkim', name: 'Sikkim', type: 'state' },
+                    { slug: 'tamil-nadu', name: 'Tamil Nadu', type: 'state' },
+                    { slug: 'telangana', name: 'Telangana', type: 'state' },
+                    { slug: 'tripura', name: 'Tripura', type: 'state' },
+                    { slug: 'uttar-pradesh', name: 'Uttar Pradesh', type: 'state' },
+                    { slug: 'uttarakhand', name: 'Uttarakhand', type: 'state' },
+                    { slug: 'west-bengal', name: 'West Bengal', type: 'state' },
+
+                    // 8 Union Territories
+                    { slug: 'andaman-nicobar', name: 'Andaman & Nicobar', type: 'ut' },
+                    { slug: 'chandigarh', name: 'Chandigarh', type: 'ut' },
+                    { slug: 'dadra-nagar-haveli', name: 'Dadra & Nagar Haveli', type: 'ut' },
+                    { slug: 'daman-diu', name: 'Daman & Diu', type: 'ut' },
+                    { slug: 'delhi', name: 'Delhi', type: 'ut' },
+                    { slug: 'jammu-kashmir', name: 'Jammu & Kashmir', type: 'ut' },
+                    { slug: 'ladakh', name: 'Ladakh', type: 'ut' },
+                    { slug: 'lakshadweep', name: 'Lakshadweep', type: 'ut' },
+                    { slug: 'puducherry', name: 'Puducherry', type: 'ut' }
+                ];
+
+                // Initialize all states with 0 jobs
+                const stateMap = {};
+                masterStatesList.forEach(state => {
+                    stateMap[state.slug] = {
+                        slug: state.slug,
+                        name: state.name,
+                        type: state.type,
+                        code: getStateCode(state.slug),
+                        jobs: [],
+                        totalJobs: 0,
+                        totalPosts: 0
+                    };
+                });
+
+                // Add job data for states that have jobs
                 data.jobs.filter(job => job.status === 'active').forEach(job => {
                     if (job.states && Array.isArray(job.states)) {
                         job.states.forEach(stateSlug => {
-                            if (!stateMap[stateSlug]) {
-                                stateMap[stateSlug] = {
-                                    slug: stateSlug,
-                                    name: formatStateName(stateSlug),
-                                    code: getStateCode(stateSlug),
-                                    jobs: [],
-                                    totalJobs: 0,
-                                    totalPosts: 0
-                                };
+                            if (stateMap[stateSlug]) {
+                                stateMap[stateSlug].jobs.push(job);
+                                stateMap[stateSlug].totalJobs++;
+                                stateMap[stateSlug].totalPosts += (job.posts || 0);
                             }
-                            stateMap[stateSlug].jobs.push(job);
-                            stateMap[stateSlug].totalJobs++;
-                            stateMap[stateSlug].totalPosts += (job.posts || 0);
                         });
                     }
                 });
 
-                // Sort states by total jobs (descending)
-                const states = Object.values(stateMap).sort((a, b) => b.totalJobs - a.totalJobs);
+                // Sort: All India first, then by total jobs (descending), then alphabetically
+                const states = Object.values(stateMap).sort((a, b) => {
+                    if (a.slug === 'all-india') return -1;
+                    if (b.slug === 'all-india') return 1;
+                    if (b.totalJobs !== a.totalJobs) return b.totalJobs - a.totalJobs;
+                    return a.name.localeCompare(b.name);
+                });
 
                 // Render state cards
                 states.forEach(state => {
