@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Job Exam Calendar 2025 | Important Dates Timeline</title>
+    <meta name="description" content="Complete government job exam calendar 2025. Track all notification dates, last dates, exam dates, admit cards, and results in one timeline.">
+
+    <script src="shared/global.js"></script>
+    <link rel="stylesheet" href="shared/brutalist-styles.css">
+    <link rel="stylesheet" href="shared/header-footer.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+            background: #ffffff;
+            color: #333333;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .page-header {
+            padding: 40px 0;
+            border-bottom: 3px solid #333333;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .page-subtitle {
+            font-size: 14px;
+            color: #666666;
+            font-weight: 600;
+        }
+
+        /* Timeline Container */
+        .timeline-section {
+            padding: 40px 0;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 50px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #333333;
+        }
+
+        /* Date Group */
+        .date-group {
+            margin-bottom: 40px;
+        }
+
+        .date-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .date-dot {
+            position: absolute;
+            left: -36px;
+            width: 20px;
+            height: 20px;
+            background: #333333;
+            border: 4px solid #ffffff;
+            box-shadow: 0 0 0 3px #333333;
+            border-radius: 0;
+        }
+
+        .date-dot.today {
+            background: #ff4444;
+            box-shadow: 0 0 0 3px #ff4444;
+        }
+
+        .date-dot.upcoming {
+            background: #ff8800;
+            box-shadow: 0 0 0 3px #ff8800;
+        }
+
+        .date-label {
+            font-size: 18px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .date-day {
+            font-size: 12px;
+            color: #666666;
+            margin-left: 15px;
+            font-weight: 700;
+        }
+
+        /* Events List */
+        .events-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .event-card {
+            border: 3px solid #333333;
+            padding: 15px;
+            background: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .event-card:hover {
+            background: #333333;
+            color: #ffffff;
+            transform: translateX(5px);
+            cursor: pointer;
+        }
+
+        .event-card:hover .event-title a,
+        .event-card:hover .event-type,
+        .event-card:hover .event-meta {
+            color: #ffffff;
+        }
+
+        .event-info {
+            flex: 1;
+        }
+
+        .event-type {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666666;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .event-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .event-title a {
+            color: #333333;
+            text-decoration: none;
+        }
+
+        .event-title a:hover {
+            text-decoration: underline;
+        }
+
+        .event-meta {
+            font-size: 11px;
+            color: #666666;
+        }
+
+        .event-badge {
+            background: #333333;
+            color: #ffffff;
+            padding: 6px 12px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .event-badge.notification {
+            background: #00aa00;
+        }
+
+        .event-badge.last-date {
+            background: #ff4444;
+        }
+
+        .event-badge.exam {
+            background: #0066cc;
+        }
+
+        .event-badge.result {
+            background: #ff8800;
+        }
+
+        .event-badge.admit-card {
+            background: #9900cc;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1px;
+            background: #333333;
+            border: 3px solid #333333;
+            margin-bottom: 40px;
+        }
+
+        .stat-item {
+            background: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666666;
+            font-weight: 700;
+        }
+
+        /* Filter Buttons */
+        .filter-bar {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .filter-btn {
+            background: #ffffff;
+            border: 2px solid #333333;
+            padding: 8px 15px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            font-family: inherit;
+            letter-spacing: 1px;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 24px;
+            }
+
+            .timeline {
+                padding-left: 40px;
+            }
+
+            .date-dot {
+                left: -30px;
+                width: 15px;
+                height: 15px;
+            }
+
+            .event-card {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">📅 EXAM CALENDAR 2025</h1>
+            <p class="page-subtitle">Complete Timeline • All Government Job Events • Notifications, Last Dates, Exams, Results</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="timeline-section">
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Active Jobs</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">8</div>
+                    <div class="stat-label">Events This Month</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Closing Soon</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Results Today</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="timeline-section">
+            <div class="filter-bar">
+                <button class="filter-btn active" onclick="filterEvents('all')">ALL EVENTS</button>
+                <button class="filter-btn" onclick="filterEvents('notification')">NOTIFICATIONS</button>
+                <button class="filter-btn" onclick="filterEvents('last-date')">LAST DATES</button>
+                <button class="filter-btn" onclick="filterEvents('exam')">EXAMS</button>
+                <button class="filter-btn" onclick="filterEvents('result')">RESULTS</button>
+                <button class="filter-btn" onclick="filterEvents('admit-card')">ADMIT CARDS</button>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline-section">
+            <div class="timeline" id="timeline">
+                <!-- December 1, 2025 -->
+                <div class="date-group">
+                    <div class="date-header">
+                        <div class="date-dot upcoming"></div>
+                        <div class="date-label">01 DEC 2025</div>
+                        <div class="date-day">• Monday</div>
+                    </div>
+                    <div class="events-list">
+                        <div class="event-card" data-type="last-date">
+                            <div class="event-info">
+                                <div class="event-type">🔴 LAST DATE</div>
+                                <div class="event-title">
+                                    <a href="jobs/bob-apprentice-2025.html">Bank of Baroda Apprentice 2025</a>
+                                </div>
+                                <div class="event-meta">Applications Close • 2700 Posts • All India • Graduation</div>
+                            </div>
+                            <div class="event-badge last-date">LAST DATE</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- November 28, 2025 -->
+                <div class="date-group">
+                    <div class="date-header">
+                        <div class="date-dot upcoming"></div>
+                        <div class="date-label">28 NOV 2025</div>
+                        <div class="date-day">• Thursday</div>
+                    </div>
+                    <div class="events-list">
+                        <div class="event-card" data-type="last-date">
+                            <div class="event-info">
+                                <div class="event-type">🔴 LAST DATE</div>
+                                <div class="event-title">
+                                    <a href="jobs/nhb-officer-2025.html">NHB Officer Recruitment 2025-26</a>
+                                </div>
+                                <div class="event-meta">Applications Close • 10 Posts • Multiple Levels • Delhi</div>
+                            </div>
+                            <div class="event-badge last-date">LAST DATE</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- November 15, 2025 -->
+                <div class="date-group">
+                    <div class="date-header">
+                        <div class="date-dot today"></div>
+                        <div class="date-label">15 NOV 2025</div>
+                        <div class="date-day">• Friday</div>
+                    </div>
+                    <div class="events-list">
+                        <div class="event-card" data-type="last-date">
+                            <div class="event-info">
+                                <div class="event-type">🔴 LAST DATE</div>
+                                <div class="event-title">
+                                    <a href="jobs/ner-railway-apprentice-2026.html">NER Railway Apprentice 2026-27</a>
+                                </div>
+                                <div class="event-meta">Applications Close • 1104 Posts • 10th + ITI</div>
+                            </div>
+                            <div class="event-badge last-date">LAST DATE</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- November 11, 2025 -->
+                <div class="date-group">
+                    <div class="date-header">
+                        <div class="date-dot"></div>
+                        <div class="date-label">11 NOV 2025</div>
+                        <div class="date-day">• Tuesday</div>
+                    </div>
+                    <div class="events-list">
+                        <div class="event-card" data-type="notification">
+                            <div class="event-info">
+                                <div class="event-type">📢 NOTIFICATION RELEASED</div>
+                                <div class="event-title">
+                                    <a href="jobs/bob-apprentice-2025.html">Bank of Baroda Apprentice 2025</a>
+                                </div>
+                                <div class="event-meta">Banking • 2700 Posts • All India</div>
+                            </div>
+                            <div class="event-badge notification">NEW</div>
+                        </div>
+                        <div class="event-card" data-type="notification">
+                            <div class="event-info">
+                                <div class="event-type">✅ APPLICATIONS OPENED</div>
+                                <div class="event-title">
+                                    <a href="jobs/bob-apprentice-2025.html">Bank of Baroda Apprentice 2025</a>
+                                </div>
+                                <div class="event-meta">Apply Online • Graduation Required</div>
+                            </div>
+                            <div class="event-badge notification">OPENED</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- November 7, 2025 -->
+                <div class="date-group">
+                    <div class="date-header">
+                        <div class="date-dot"></div>
+                        <div class="date-label">07 NOV 2025</div>
+                        <div class="date-day">• Friday</div>
+                    </div>
+                    <div class="events-list">
+                        <div class="event-card" data-type="notification">
+                            <div class="event-info">
+                                <div class="event-type">📢 NOTIFICATION RELEASED</div>
+                                <div class="event-title">
+                                    <a href="jobs/nhb-officer-2025.html">NHB Officer Recruitment 2025-26</a>
+                                </div>
+                                <div class="event-meta">Banking • 10 Posts • Multiple Levels • Delhi</div>
+                            </div>
+                            <div class="event-badge notification">NEW</div>
+                        </div>
+                        <div class="event-card" data-type="notification">
+                            <div class="event-info">
+                                <div class="event-type">✅ APPLICATIONS OPENED</div>
+                                <div class="event-title">
+                                    <a href="jobs/nhb-officer-2025.html">NHB Officer Recruitment 2025-26</a>
+                                </div>
+                                <div class="event-meta">Apply Online • CA/MBA/Graduate</div>
+                            </div>
+                            <div class="event-badge notification">OPENED</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- October 16, 2025 -->
+                <div class="date-group">
+                    <div class="date-header">
+                        <div class="date-dot"></div>
+                        <div class="date-label">16 OCT 2025</div>
+                        <div class="date-day">• Thursday</div>
+                    </div>
+                    <div class="events-list">
+                        <div class="event-card" data-type="notification">
+                            <div class="event-info">
+                                <div class="event-type">✅ APPLICATIONS OPENED</div>
+                                <div class="event-title">
+                                    <a href="jobs/ner-railway-apprentice-2026.html">NER Railway Apprentice 2026-27</a>
+                                </div>
+                                <div class="event-meta">Railway • Gorakhpur • 1104 Vacancies</div>
+                            </div>
+                            <div class="event-badge notification">OPENED</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- October 15, 2025 -->
+                <div class="date-group">
+                    <div class="date-header">
+                        <div class="date-dot"></div>
+                        <div class="date-label">15 OCT 2025</div>
+                        <div class="date-day">• Wednesday</div>
+                    </div>
+                    <div class="events-list">
+                        <div class="event-card" data-type="notification">
+                            <div class="event-info">
+                                <div class="event-type">📢 NOTIFICATION RELEASED</div>
+                                <div class="event-title">
+                                    <a href="jobs/ner-railway-apprentice-2026.html">NER Railway Apprentice 2026-27</a>
+                                </div>
+                                <div class="event-meta">Indian Railways • Act Apprentice Training</div>
+                            </div>
+                            <div class="event-badge notification">NEW</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- More dates will be added automatically from jobs.json -->
+            </div>
+        </div>
+
+        <!-- Info Box -->
+        <div class="timeline-section">
+            <div style="background: #fffacd; border: 3px solid #333; padding: 20px;">
+                <h3 style="font-size: 14px; font-weight: 700; margin-bottom: 10px; text-transform: uppercase;">
+                    📌 ABOUT THIS CALENDAR
+                </h3>
+                <ul style="margin-left: 20px; font-size: 13px; line-height: 1.8;">
+                    <li>All government job events in <strong>chronological order</strong></li>
+                    <li>Track notifications, application deadlines, exams, results</li>
+                    <li>Filter by event type using buttons above</li>
+                    <li>Click on job title to see complete details</li>
+                    <li><strong>Updated daily</strong> with new events</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script>
+        // Load header and footer
+        fetch('shared/header.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('header').innerHTML = data);
+
+        fetch('shared/footer.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('footer').innerHTML = data);
+
+        // Filter events
+        function filterEvents(type) {
+            const cards = document.querySelectorAll('.event-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            // Update active button
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (type === 'all') {
+                cards.forEach(card => card.style.display = 'flex');
+                return;
+            }
+
+            cards.forEach(card => {
+                if (card.dataset.type === type) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Hide empty date groups
+            const dateGroups = document.querySelectorAll('.date-group');
+            dateGroups.forEach(group => {
+                const visibleCards = group.querySelectorAll('.event-card[style="display: flex;"]');
+                if (visibleCards.length === 0 && type !== 'all') {
+                    group.style.display = 'none';
+                } else {
+                    group.style.display = 'block';
+                }
+            });
+        }
+
+        // Mark today's date
+        const today = new Date().toISOString().split('T')[0];
+        // This can be enhanced to highlight today's events
+    </script>
+</body>
+</html>

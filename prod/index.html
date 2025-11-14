@@ -330,6 +330,38 @@
             color: #ffffff;
         }
 
+        /* Sidebar Ads Layout */
+        .page-wrapper {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .sidebar-ad {
+            flex: 0 0 160px;
+            position: sticky;
+            top: 20px;
+            min-height: 600px;
+        }
+
+        .main-content-wrapper {
+            flex: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1200px) {
+            .sidebar-ad {
+                display: none; /* Hide sidebars on smaller screens */
+            }
+
+            .page-wrapper {
+                display: block;
+            }
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 20px 15px;
@@ -400,21 +432,15 @@
     </style>
 </head>
 <body>
-    <!-- Skeleton header placeholder - exact same size as real header -->
-    <div id="header-skeleton" style="max-width: 900px; margin: 0 auto; padding: 0 20px;">
-        <div style="border: 4px solid #333; padding: 40px 30px; background: #fff; margin-bottom: 30px; text-align: center;">
-            <div style="height: 48px; background: #f0f0f0; margin: 0 auto 10px; max-width: 450px;"></div>
-            <div style="height: 28px; background: #f8f8f8; margin: 0 auto 8px; max-width: 350px;"></div>
-            <div style="height: 20px; background: #fcfcfc; margin: 0 auto 25px; max-width: 250px;"></div>
-            <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-                <div style="height: 47px; width: 130px; background: #e0e0e0;"></div>
-                <div style="height: 47px; width: 130px; background: #e0e0e0;"></div>
-                <div style="height: 47px; width: 180px; background: #e0e0e0;"></div>
-                <div style="height: 47px; width: 120px; background: #e0e0e0;"></div>
-                <div style="height: 47px; width: 160px; background: #e0e0e0;"></div>
-            </div>
-        </div>
-    </div>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <div class="page-wrapper">
+        <!-- Left sidebar - Auto ads (side rails) will appear here -->
+        <aside class="sidebar-ad sidebar-left"></aside>
+
+        <!-- Main Content -->
+        <div class="main-content-wrapper">
 
     <div class="container">
         <!-- Breaking News Marquee -->
@@ -454,84 +480,11 @@
         </div>
 
         <section class="trending-section">
-            <h2 class="section-title">🔥 Trending High Salary Jobs</h2>
-            <div class="trending-grid" style="grid-template-columns: 1fr; gap: 10px;">
-                <div class="brutalist-card job-card" onclick="openJob('ias')">
-                    <div class="job-header">
-                        <div class="job-title">IAS Officer</div>
-                        <div class="job-dept">UPSC - All India Service</div>
-                    </div>
-                    <div class="job-body">
-                        <div class="salary-amount">₹99,000/month</div>
-                        <div class="job-badge trending-tag">TRENDING</div>
-                    </div>
-                </div>
-
-                <div class="brutalist-card job-card" onclick="openJob('ips')">
-                    <div class="job-header">
-                        <div class="job-title">IPS Officer</div>
-                        <div class="job-dept">UPSC - Police Service</div>
-                    </div>
-                    <div class="job-body">
-                        <div class="salary-amount">₹99,000/month</div>
-                        <div class="job-badge trending-tag">TRENDING</div>
-                    </div>
-                </div>
-
-                <div class="brutalist-card job-card" onclick="openJob('sbi-po')">
-                    <div class="job-header">
-                        <div class="job-title">SBI PO</div>
-                        <div class="job-dept">State Bank of India</div>
-                    </div>
-                    <div class="job-body">
-                        <div class="salary-amount">₹82,000/month</div>
-                        <div class="job-badge new-tag">NEW OPENING</div>
-                    </div>
-                </div>
-
-                <div class="brutalist-card job-card" onclick="openJob('railway-officer')">
-                    <div class="job-header">
-                        <div class="job-title">Railway Officer</div>
-                        <div class="job-dept">Indian Railways</div>
-                    </div>
-                    <div class="job-body">
-                        <div class="salary-amount">₹78,000/month</div>
-                        <div class="job-badge deadline-tag">LAST DATE</div>
-                    </div>
-                </div>
-
-                <div class="brutalist-card job-card" onclick="openJob('ssc-cgl')">
-                    <div class="job-header">
-                        <div class="job-title">SSC CGL Officer</div>
-                        <div class="job-dept">Staff Selection Commission</div>
-                    </div>
-                    <div class="job-body">
-                        <div class="salary-amount">₹56,100/month</div>
-                        <div class="job-badge new-tag">NEW</div>
-                    </div>
-                </div>
-
-                <div class="brutalist-card job-card" onclick="openJob('bank-manager')">
-                    <div class="job-header">
-                        <div class="job-title">Bank Manager</div>
-                        <div class="job-dept">Public Sector Banks</div>
-                    </div>
-                    <div class="job-body">
-                        <div class="salary-amount">₹90,000/month</div>
-                        <div class="job-badge trending-tag">HIGH DEMAND</div>
-                    </div>
-                </div>
+            <h2 class="section-title">🔥 Latest Government Jobs</h2>
+            <div class="trending-grid" id="latest-jobs-grid" style="grid-template-columns: 1fr; gap: 10px;">
+                <!-- Jobs will be loaded dynamically from jobs.json -->
             </div>
         </section>
-
-        <div class="brutalist-md latest-jobs">
-            <div class="latest-header">Latest Job Notifications</div>
-            <div class="rolling-banner">
-                <div class="rolling-text">
-                    SBI PO 2024 - ₹82,000 | IBPS PO - ₹78,000 | Railway ALP - ₹45,000 | SSC CGL - ₹56,100 | UPSC CSE - ₹99,000 | Banking SO - ₹65,000 | Police SI - ₹44,900
-                </div>
-            </div>
-        </div>
 
         <section class="categories-section">
             <h2 class="section-title">📂 Browse by Category</h2>
@@ -606,17 +559,85 @@
     </div>
 
     <script>
+        // Load latest jobs dynamically from jobs.json
+        fetch('data/jobs.json')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('latest-jobs-grid');
+
+                // Get active jobs sorted by priority/date
+                const latestJobs = data.jobs
+                    .filter(job => job.status === 'active')
+                    .sort((a, b) => {
+                        // Sort by: isNew first, then featured, then by priorityScore
+                        if (a.isNew && !b.isNew) return -1;
+                        if (!a.isNew && b.isNew) return 1;
+                        if (a.featured && !b.featured) return -1;
+                        if (!a.featured && b.featured) return 1;
+                        return (b.priorityScore || 0) - (a.priorityScore || 0);
+                    })
+                    .slice(0, 6); // Show top 6 jobs
+
+                latestJobs.forEach(job => {
+                    const card = document.createElement('div');
+                    card.className = 'brutalist-card job-card';
+                    card.onclick = () => window.location.href = job.pageUrl;
+
+                    let badge = 'ACTIVE';
+                    let badgeClass = 'trending-tag';
+
+                    if (job.isNew) {
+                        badge = 'NEW';
+                        badgeClass = 'new-tag';
+                    } else if (job.daysRemaining <= 7) {
+                        badge = 'CLOSING SOON';
+                        badgeClass = 'deadline-tag';
+                    } else if (job.featured) {
+                        badge = 'FEATURED';
+                        badgeClass = 'trending-tag';
+                    }
+
+                    // Get salary display
+                    let salaryDisplay = 'Check Details';
+                    if (job.salary) {
+                        if (typeof job.salary === 'string') {
+                            salaryDisplay = job.salary;
+                        } else if (job.salary.range) {
+                            salaryDisplay = job.salary.range;
+                        } else if (job.salary.stipend) {
+                            salaryDisplay = job.salary.stipend;
+                        } else if (job.salary.basic) {
+                            salaryDisplay = job.salary.basic;
+                        }
+                    }
+
+                    card.innerHTML = `
+                        <div class="job-header">
+                            <div class="job-title">${job.shortTitle || job.title}</div>
+                            <div class="job-dept">${job.departmentName || job.organization}</div>
+                        </div>
+                        <div class="job-body">
+                            <div class="salary-amount">${salaryDisplay}</div>
+                            <div class="job-badge ${badgeClass}">${badge}</div>
+                        </div>
+                    `;
+
+                    container.appendChild(card);
+                });
+            })
+            .catch(error => console.error('Error loading jobs:', error));
+
         function openJob(jobType) {
             // Map job types to actual template URLs
             const jobUrls = {
                 'ias': 'job-template-basic.html?job=ias',
-                'ips': 'job-template-basic.html?job=ips', 
+                'ips': 'job-template-basic.html?job=ips',
                 'sbi-po': 'job-template-basic.html?job=sbi_po',
                 'railway-officer': 'job-template-basic.html?job=railway',
                 'ssc-cgl': 'job-template-basic.html?job=ssc_cgl',
                 'bank-manager': 'job-template-basic.html?job=bank_manager'
             };
-            
+
             if (jobUrls[jobType]) {
                 window.location.href = jobUrls[jobType];
             }
@@ -690,8 +711,42 @@
             }
         });
     </script>
-    
-    <!-- Header Footer System -->
-    <script src="js/header-footer-loader.js"></script>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Header Footer Loading Script -->
+    <script>
+        // Load header
+        fetch('shared/header.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('header').innerHTML = data);
+
+        // Load footer
+        fetch('shared/footer.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('footer').innerHTML = data);
+    </script>
+
+        </div> <!-- End main-content-wrapper -->
+
+        <!-- Right sidebar - Auto ads (side rails) will appear here -->
+        <aside class="sidebar-ad sidebar-right"></aside>
+
+    </div> <!-- End page-wrapper -->
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Load Header & Footer -->
+    <script>
+        fetch('shared/header.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('header').innerHTML = data);
+
+        fetch('shared/footer.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('footer').innerHTML = data);
+    </script>
 </body>
 </html>

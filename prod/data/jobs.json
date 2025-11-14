@@ -1,0 +1,542 @@
+{
+  "metadata": {
+    "lastUpdated": "2024-11-14",
+    "totalJobs": 3,
+    "activeJobs": 3,
+    "closedJobs": 0
+  },
+  "jobs": [
+    {
+      "id": "nhb-officer-2025",
+      "slug": "nhb-officer-2025",
+      "title": "National Housing Bank Officer Recruitment 2025-26",
+      "shortTitle": "NHB Officer 2025",
+      "department": "banking",
+      "departmentName": "National Housing Bank",
+      "category": "banking-jobs",
+      "states": ["delhi"],
+      "posts": 10,
+      "organization": "National Housing Bank, New Delhi",
+      "multiPost": true,
+      "regularPosts": 6,
+      "contractualPosts": 4,
+      "postBreakdown": {
+        "regular": [
+          {
+            "postName": "Deputy General Manager - Credit Monitoring",
+            "postSlug": "dgm-credit-monitoring",
+            "posts": 1,
+            "scale": "TEG Scale-VI",
+            "salary": {
+              "basic": "₹1,40,500 - ₹1,56,500",
+              "increment": "₹4,000"
+            },
+            "qualification": "CA/MBA/PGDM/PGDBM",
+            "experience": "15 years (10 years in housing finance retail credit/risk)",
+            "minAge": 40,
+            "maxAge": 55,
+            "category": "UR"
+          },
+          {
+            "postName": "Deputy General Manager - Sustainable Finance",
+            "postSlug": "dgm-sustainable-finance",
+            "posts": 1,
+            "scale": "TEG Scale-VI",
+            "salary": {
+              "basic": "₹1,40,500 - ₹1,56,500",
+              "increment": "₹4,000"
+            },
+            "qualification": "CA/MBA/PGDM/PGDBM + ESG/Sustainable Finance Certification",
+            "experience": "15 years (10 years in credit)",
+            "minAge": 40,
+            "maxAge": 55,
+            "category": "SC"
+          },
+          {
+            "postName": "Assistant General Manager - Credit (Backlog)",
+            "postSlug": "agm-credit",
+            "posts": 1,
+            "scale": "SMG Scale-V",
+            "salary": {
+              "basic": "₹1,20,940 - ₹1,35,020",
+              "increment": "₹3,360/₹3,680"
+            },
+            "qualification": "Graduate + CA/CMA/CFA/MBA Finance/FRM/PRM",
+            "experience": "10 years (8 years in Retail/Corporate Credit/Project Finance)",
+            "minAge": 36,
+            "maxAge": 55,
+            "category": "SC"
+          },
+          {
+            "postName": "Assistant Manager - Learning & Development",
+            "postSlug": "am-learning-development",
+            "posts": 1,
+            "scale": "JMG Scale-I",
+            "salary": {
+              "basic": "₹48,480 - ₹85,920",
+              "increment": "₹2,000/₹2,340/₹2,680"
+            },
+            "qualification": "MBA/PGDM/PGDBM",
+            "experience": "1 year in L&D/Training in banking sector",
+            "minAge": 21,
+            "maxAge": 30,
+            "category": "OBC"
+          },
+          {
+            "postName": "Assistant Manager - Audit",
+            "postSlug": "am-audit",
+            "posts": 2,
+            "scale": "JMG Scale-I",
+            "salary": {
+              "basic": "₹48,480 - ₹85,920",
+              "increment": "₹2,000/₹2,340/₹2,680"
+            },
+            "qualification": "Chartered Accountant",
+            "experience": "1 year in audit field",
+            "minAge": 21,
+            "maxAge": 30,
+            "category": "EWS"
+          }
+        ],
+        "contractual": [
+          {
+            "postName": "Chief Information Security Officer",
+            "postSlug": "ciso",
+            "posts": 1,
+            "salary": {
+              "consolidated": "₹5,00,000/month",
+              "fixed": "₹3,75,000",
+              "variable": "₹1,25,000"
+            },
+            "qualification": "B.Tech/M.Tech (CS/IT/Electronics/Telecom) or MCA + CISA/CISM/CISSP/CDPSE/CCSP",
+            "experience": "10 years IT/InfoSec (5 years in cyber security)",
+            "minAge": 40,
+            "maxAge": 55,
+            "contract": "3 years (extendable to 5 years)",
+            "category": "OBC"
+          },
+          {
+            "postName": "Head: Learning & Development",
+            "postSlug": "head-learning-development",
+            "posts": 1,
+            "salary": {
+              "consolidated": "₹3,50,000/month"
+            },
+            "qualification": "CA/CMA/CS/MBA/PG in any discipline",
+            "experience": "15 years (4 years in Credit/L&D/HR in housing finance)",
+            "maxAge": 62,
+            "contract": "3 years or 65 years age (whichever earlier)",
+            "category": "UR"
+          },
+          {
+            "postName": "Senior Tax Officer",
+            "postSlug": "senior-tax-officer",
+            "posts": 2,
+            "salary": {
+              "consolidated": "₹2,00,000/month"
+            },
+            "qualification": "Chartered Accountant",
+            "experience": "5 years in tax matters (Banks/HFCs/PSUs)",
+            "maxAge": 62,
+            "contract": "3 years or 65 years age (whichever earlier)",
+            "category": "UR"
+          }
+        ]
+      },
+      "qualification": "CA/MBA/Graduate (varies by post)",
+      "minAge": 21,
+      "maxAge": 62,
+      "salary": {
+        "range": "₹48,480 - ₹5,00,000 per month",
+        "note": "Varies by post - Regular posts have scale pay, Contractual posts have consolidated pay"
+      },
+      "applicationFee": {
+        "general": "₹850 + GST",
+        "sc": "₹175",
+        "st": "₹175",
+        "pwbd": "₹175"
+      },
+      "notificationDate": "2025-11-07",
+      "applicationStart": "2025-11-07",
+      "lastDate": "2025-11-28",
+      "status": "active",
+      "featured": true,
+      "isNew": true,
+      "applyLink": "https://www.nhb.org.in",
+      "notificationPdf": "/notifications/NHB-Officer-2025.pdf",
+      "daysRemaining": 14,
+      "addedOn": "2024-11-14",
+      "pageUrl": "/jobs/nhb-officer-2025.html",
+      "isRecurring": true,
+      "recurringCycle": "annual",
+      "examCycleId": "nhb-officer",
+      "estimatedAspirants": 50000,
+      "priorityScore": 0,
+      "uniqueFeatures": [
+        "Multiple posts at different levels (Manager to DGM)",
+        "Both regular and contractual positions available",
+        "High salary packages up to ₹5 lakh/month",
+        "Specialized roles in sustainable finance and cyber security",
+        "PwBD reservation available (2 posts)"
+      ],
+      "updates": []
+    },
+    {
+      "id": "bob-apprentice-2025",
+      "slug": "bob-apprentice-2025",
+      "title": "Bank of Baroda Apprentice Recruitment 2025",
+      "shortTitle": "Bank of Baroda Apprentice 2025",
+      "department": "banking",
+      "departmentName": "Bank of Baroda",
+      "category": "banking-jobs",
+      "states": ["all-india"],
+      "posts": 2700,
+      "organization": "Bank of Baroda",
+      "qualification": "Graduation in any discipline",
+      "minAge": 20,
+      "maxAge": 28,
+      "salary": {
+        "stipend": "₹15,000/month",
+        "duration": "12 months",
+        "totalPackage": "₹1,80,000 for training period",
+        "inHand": "₹15,000",
+        "note": "No job guarantee after training completion"
+      },
+      "applicationFee": {
+        "general": "₹800 + GST",
+        "obc": "₹800 + GST",
+        "ews": "₹800 + GST",
+        "pwbd": "₹400 + GST",
+        "sc": "NIL",
+        "st": "NIL"
+      },
+      "notificationDate": "2025-11-11",
+      "applicationStart": "2025-11-11",
+      "lastDate": "2025-12-01",
+      "status": "active",
+      "featured": true,
+      "isNew": true,
+      "applyLink": "https://www.bankofbaroda.in/apprentice",
+      "notificationPdf": "/notifications/BoB-Apprentice-Notification-2025.pdf",
+      "daysRemaining": 17,
+      "addedOn": "2024-11-14",
+      "pageUrl": "/jobs/bob-apprentice-2025.html",
+      "isRecurring": true,
+      "recurringCycle": "annual",
+      "examCycleId": "bob-apprentice",
+      "estimatedAspirants": 800000,
+      "priorityScore": 0,
+      "uniqueFeatures": [
+        "NO job guarantee after training completion",
+        "Must register on NAPS/NATS government portals first",
+        "Remote proctored exam from home (webcam + mic required)",
+        "Local language proficiency test required for each state",
+        "Can choose 3 location preferences within selected state",
+        "Wait-list valid for 1 year from date of result",
+        "All 27 states/UTs covered - Pan India recruitment"
+      ],
+      "stateWiseVacancies": {
+        "andhra-pradesh": 55,
+        "arunachal-pradesh": 5,
+        "assam": 40,
+        "bihar": 65,
+        "chhattisgarh": 30,
+        "goa": 15,
+        "gujarat": 400,
+        "haryana": 60,
+        "himachal-pradesh": 20,
+        "jharkhand": 45,
+        "karnataka": 440,
+        "kerala": 65,
+        "madhya-pradesh": 80,
+        "maharashtra": 297,
+        "manipur": 5,
+        "meghalaya": 5,
+        "mizoram": 5,
+        "nagaland": 5,
+        "odisha": 90,
+        "punjab": 55,
+        "rajasthan": 215,
+        "sikkim": 5,
+        "tamil-nadu": 135,
+        "telangana": 65,
+        "tripura": 10,
+        "uttar-pradesh": 307,
+        "uttarakhand": 25,
+        "west-bengal": 156
+      }
+    },
+    {
+      "id": "ner-railway-apprentice-2026",
+      "slug": "ner-railway-apprentice-2026",
+      "title": "North Eastern Railway Apprentice Training 2026-27",
+      "shortTitle": "NER Railway Apprentice 2026",
+      "department": "railway",
+      "departmentName": "Indian Railways",
+      "category": "railway-jobs",
+      "states": ["uttar-pradesh"],
+      "cities": ["gorakhpur", "lucknow", "varanasi", "izzatnagar", "gonda"],
+      "posts": 1104,
+      "organization": "North Eastern Railway, Gorakhpur",
+      "qualification": "10th (50%) + ITI",
+      "minAge": 15,
+      "maxAge": 24,
+      "salary": "Stipend as per norms",
+      "notificationDate": "2025-10-15",
+      "applicationStart": "2025-10-16",
+      "lastDate": "2025-11-15",
+      "status": "active",
+      "featured": true,
+      "isNew": true,
+      "applyLink": "https://www.ner.indianrailways.gov.in",
+      "notificationPdf": "https://ner.indianrailways.gov.in/uploads/files/1760532135478-Act%20Apprentice%20Notification%202026-27.pdf",
+      "daysRemaining": 1,
+      "addedOn": "2024-11-14",
+      "pageUrl": "/jobs/ner-railway-apprentice-2026.html",
+      "isRecurring": true,
+      "recurringCycle": "annual",
+      "examCycleId": "railway-apprentice"
+    },
+    {
+      "id": "kvs-nvs-2025",
+      "slug": "kvs-nvs-2025",
+      "title": "KVS & NVS Combined Recruitment 2025 (Notification 01/2025)",
+      "shortTitle": "KVS & NVS 2025",
+      "department": "education",
+      "departmentName": "Kendriya Vidyalaya Sangathan & Navodaya Vidyalaya Samiti",
+      "category": "teaching-jobs",
+      "states": ["all-india"],
+      "posts": 13000,
+      "organization": "KVS & NVS, Ministry of Education, Govt. of India",
+      "multiPost": true,
+      "qualification": "Graduation/Post Graduation with B.Ed/Diploma (varies by post)",
+      "minAge": 18,
+      "maxAge": 62,
+      "salary": {
+        "range": "₹18,000 - ₹2,25,000 per month",
+        "note": "Varies by post and level"
+      },
+      "applicationFee": {
+        "general": "₹1,000",
+        "female": "₹500",
+        "sc": "₹500",
+        "st": "₹500",
+        "pwbd": "₹500"
+      },
+      "notificationDate": "2025-11-14",
+      "applicationStart": "2025-11-14",
+      "lastDate": "2025-12-04",
+      "status": "active",
+      "featured": true,
+      "isNew": true,
+      "applyLink": "https://www.kvsangathan.nic.in",
+      "notificationPdf": "/notifications/KVS-NVS-Combined-2025-01.pdf",
+      "daysRemaining": 20,
+      "addedOn": "2024-11-14",
+      "pageUrl": "/jobs/kvs-nvs-2025.html",
+      "isRecurring": true,
+      "recurringCycle": "annual",
+      "examCycleId": "kvs-nvs",
+      "estimatedAspirants": 2000000,
+      "priorityScore": 95,
+      "uniqueFeatures": [
+        "Combined KVS + NVS recruitment under single notification",
+        "Two-tier online CBT examination pattern",
+        "Teaching and non-teaching posts both available",
+        "Central government benefits and allowances",
+        "All India posting with transfer policy"
+      ],
+      "selectionProcess": {
+        "stages": [
+          {
+            "name": "Tier-1 Exam",
+            "type": "objective",
+            "description": "Computer-Based Test (CBT) - Objective type",
+            "marks": 100,
+            "duration": "90-120 minutes"
+          },
+          {
+            "name": "Tier-2 Exam",
+            "type": "objective",
+            "description": "Computer-Based Test (CBT) - Descriptive/Objective",
+            "marks": 100,
+            "duration": "120 minutes"
+          },
+          {
+            "name": "Interview/Skill Test",
+            "type": "interview",
+            "description": "For teaching posts - Demo class, For non-teaching - Skill test",
+            "marks": "20-50",
+            "note": "Only for shortlisted candidates"
+          }
+        ]
+      },
+      "postCategories": [
+        {
+          "category": "Teaching Posts",
+          "posts": [
+            "Assistant Commissioner (10 Posts)",
+            "Principal (500 Posts)",
+            "Vice Principal (800 Posts)",
+            "PGT (Post Graduate Teacher) - 4000 Posts",
+            "TGT (Trained Graduate Teacher) - 5000 Posts",
+            "PRT (Primary Teacher) - 2000 Posts",
+            "Special Educator (200 Posts)",
+            "Librarian (300 Posts)"
+          ]
+        },
+        {
+          "category": "Non-Teaching Posts",
+          "posts": [
+            "Administrative Officer (50 Posts)",
+            "Finance Officer (40 Posts)",
+            "Assistant Engineer (Civil) (30 Posts)",
+            "Assistant Engineer (Electrical) (20 Posts)",
+            "Junior Engineer (60 Posts)",
+            "Assistant Section Officer (100 Posts)"
+          ]
+        }
+      ],
+      "updates": []
+    }
+  ],
+  "departments": {
+    "banking": {
+      "name": "Banking & Financial Institutions",
+      "slug": "banking",
+      "totalJobs": 2,
+      "activeJobs": 2,
+      "latestJobs": ["nhb-officer-2025", "bob-apprentice-2025"]
+    },
+    "railway": {
+      "name": "Indian Railways",
+      "slug": "railway",
+      "totalJobs": 1,
+      "activeJobs": 1,
+      "latestJobs": ["ner-railway-apprentice-2026"]
+    },
+    "education": {
+      "name": "Education & Teaching",
+      "slug": "education",
+      "totalJobs": 1,
+      "activeJobs": 1,
+      "latestJobs": ["kvs-nvs-2025"]
+    }
+  },
+  "states": {
+    "all-india": {
+      "name": "All India",
+      "slug": "all-india",
+      "totalJobs": 2,
+      "activeJobs": 2,
+      "latestJobs": ["bob-apprentice-2025", "kvs-nvs-2025"]
+    },
+    "delhi": {
+      "name": "Delhi",
+      "slug": "delhi",
+      "totalJobs": 1,
+      "activeJobs": 1,
+      "latestJobs": ["nhb-officer-2025"]
+    },
+    "uttar-pradesh": {
+      "name": "Uttar Pradesh",
+      "slug": "uttar-pradesh",
+      "totalJobs": 2,
+      "activeJobs": 2,
+      "latestJobs": ["bob-apprentice-2025", "ner-railway-apprentice-2026"]
+    }
+  },
+  "categories": {
+    "banking-jobs": {
+      "name": "Banking Jobs",
+      "slug": "banking-jobs",
+      "totalJobs": 2,
+      "activeJobs": 2,
+      "latestJobs": ["nhb-officer-2025", "bob-apprentice-2025"]
+    },
+    "railway-jobs": {
+      "name": "Railway Jobs",
+      "slug": "railway-jobs",
+      "totalJobs": 1,
+      "activeJobs": 1,
+      "latestJobs": ["ner-railway-apprentice-2026"]
+    },
+    "teaching-jobs": {
+      "name": "Teaching Jobs",
+      "slug": "teaching-jobs",
+      "totalJobs": 1,
+      "activeJobs": 1,
+      "latestJobs": ["kvs-nvs-2025"]
+    }
+  },
+  "examCycles": {
+    "nhb-officer": {
+      "name": "National Housing Bank Officer Recruitment",
+      "slug": "nhb-officer",
+      "department": "banking",
+      "cycleType": "annual",
+      "description": "Annual officer recruitment by National Housing Bank",
+      "usualMonths": ["November", "December"],
+      "history": [
+        {
+          "year": "2025-26",
+          "jobId": "nhb-officer-2025",
+          "notificationDate": "2025-11-07",
+          "posts": 10,
+          "status": "active"
+        }
+      ]
+    },
+    "bob-apprentice": {
+      "name": "Bank of Baroda Apprentice Recruitment",
+      "slug": "bob-apprentice",
+      "department": "banking",
+      "cycleType": "annual",
+      "description": "Annual apprentice recruitment by Bank of Baroda",
+      "usualMonths": ["November", "December"],
+      "history": [
+        {
+          "year": "2025",
+          "jobId": "bob-apprentice-2025",
+          "notificationDate": "2025-11-11",
+          "posts": 2700,
+          "status": "active"
+        }
+      ]
+    },
+    "railway-apprentice": {
+      "name": "Railway Apprentice Recruitment",
+      "slug": "railway-apprentice",
+      "department": "railway",
+      "cycleType": "annual",
+      "description": "Annual apprentice training recruitment by Indian Railways",
+      "usualMonths": ["October", "November"],
+      "history": [
+        {
+          "year": "2026-27",
+          "jobId": "ner-railway-apprentice-2026",
+          "notificationDate": "2025-10-15",
+          "posts": 1104,
+          "status": "active"
+        }
+      ]
+    },
+    "kvs-nvs": {
+      "name": "KVS & NVS Combined Recruitment",
+      "slug": "kvs-nvs",
+      "department": "education",
+      "cycleType": "annual",
+      "description": "Combined recruitment for teaching and non-teaching posts in Kendriya Vidyalaya and Navodaya Vidyalaya",
+      "usualMonths": ["November", "December"],
+      "history": [
+        {
+          "year": "2025",
+          "jobId": "kvs-nvs-2025",
+          "notificationDate": "2025-11-14",
+          "posts": 13000,
+          "status": "active"
+        }
+      ]
+    }
+  }
+}

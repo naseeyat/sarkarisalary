@@ -1,11 +1,17 @@
+/* Header container - make this sticky */
+#header {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #fff;
+}
+
 /* Brutalist Boxed Header */
 .brutalist-header-wrapper {
     max-width: 900px;
     margin: 0 auto;
     padding: 0 20px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
     background: #fff;
     /* Hardware acceleration to fix flickering */
     transform: translateZ(0);
@@ -181,12 +187,6 @@
 .hamburger-btn.active span:nth-child(2) {
     opacity: 0;
 }
-
-.hamburger-btn.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -7px);
-}
-
-/* Brutalist Boxed Footer - matches header style */
 .site-footer {
     max-width: 900px;
     margin: 40px auto 10px; /* Bottom spacing */

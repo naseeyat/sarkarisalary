@@ -1,0 +1,292 @@
+h<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Archive 2025 | Past Government Jobs | Sarkari Salary</title>
+    <meta name="description" content="Archive of past government job notifications. Check closed recruitments, previous vacancies, and historical job data.">
+
+    <script src="shared/global.js"></script>
+    <link rel="stylesheet" href="shared/brutalist-styles.css">
+    <link rel="stylesheet" href="shared/header-footer.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+            background: #ffffff;
+            color: #333333;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .page-header {
+            padding: 40px 0;
+            border-bottom: 3px solid #333333;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .page-subtitle {
+            font-size: 14px;
+            color: #666666;
+            font-weight: 600;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 30px 0;
+            padding: 20px;
+            border: 3px solid #333333;
+            background: #f5f5f5;
+        }
+
+        .filter-btn {
+            background: #ffffff;
+            border: 3px solid #333333;
+            padding: 10px 20px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        .job-card {
+            border: 3px solid #333333;
+            padding: 20px;
+            margin-bottom: 10px;
+            background: #ffffff;
+            transition: all 0.2s;
+            opacity: 0.7;
+        }
+
+        .job-card:hover {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .job-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 5px;
+        }
+
+        .job-meta {
+            font-size: 12px;
+            color: #666666;
+            margin-bottom: 10px;
+        }
+
+        .job-badge {
+            background: #666666;
+            color: #ffffff;
+            padding: 4px 10px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .job-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+        }
+
+        .job-detail {
+            font-size: 13px;
+        }
+
+        .job-detail-label {
+            color: #666666;
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .empty-state {
+            background: #fffacd;
+            border: 3px solid #333333;
+            padding: 40px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        @media (max-width: 768px) {
+            .filter-bar {
+                flex-direction: column;
+            }
+
+            .filter-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="page-title">📂 JOB ARCHIVE</h1>
+            <p class="page-subtitle">Past government job notifications and closed recruitments</p>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="banking">Banking</button>
+            <button class="filter-btn" data-filter="railway">Railway</button>
+            <button class="filter-btn" data-filter="education">Education</button>
+            <button class="filter-btn" data-filter="2025">2025</button>
+            <button class="filter-btn" data-filter="2024">2024</button>
+        </div>
+
+        <!-- Jobs List -->
+        <div id="jobs-container"></div>
+
+        <div id="empty-state" class="empty-state" style="display: none;">
+            <h3>No Archived Jobs</h3>
+            <p>No closed job notifications found. Check back later!</p>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script>
+        // Load header and footer
+        fetch('shared/header.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('header').innerHTML = data);
+
+        fetch('shared/footer.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('footer').innerHTML = data);
+
+        // Load jobs from JSON
+        fetch('data/jobs.json')
+            .then(response => response.json())
+            .then(data => {
+                let currentFilter = 'all';
+
+                // Get closed jobs
+                const closedJobs = data.jobs.filter(job => job.status === 'closed' || job.status === 'expired');
+
+                function renderJobs(filter = 'all') {
+                    const container = document.getElementById('jobs-container');
+                    const emptyState = document.getElementById('empty-state');
+
+                    container.innerHTML = '';
+
+                    let filteredJobs = closedJobs;
+
+                    if (filter !== 'all') {
+                        filteredJobs = closedJobs.filter(job => {
+                            if (filter === '2025' || filter === '2024') {
+                                return job.notificationDate?.startsWith(filter);
+                            }
+                            return job.department === filter || job.category?.includes(filter);
+                        });
+                    }
+
+                    if (filteredJobs.length === 0) {
+                        emptyState.style.display = 'block';
+                        return;
+                    } else {
+                        emptyState.style.display = 'none';
+                    }
+
+                    filteredJobs.forEach(job => {
+                        const card = document.createElement('div');
+                        card.className = 'job-card';
+                        card.onclick = () => window.location.href = job.pageUrl;
+
+                        const closedDate = job.lastDate || 'N/A';
+
+                        card.innerHTML = `
+                            <div class="job-header">
+                                <div>
+                                    <div class="job-title">${job.title}</div>
+                                    <div class="job-meta">${job.departmentName || job.organization}</div>
+                                </div>
+                                <div class="job-badge">CLOSED</div>
+                            </div>
+                            <div class="job-details">
+                                <div class="job-detail">
+                                    <div class="job-detail-label">Posts</div>
+                                    <div>${job.posts} Vacancies</div>
+                                </div>
+                                <div class="job-detail">
+                                    <div class="job-detail-label">Closed On</div>
+                                    <div>${new Date(closedDate).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}</div>
+                                </div>
+                                <div class="job-detail">
+                                    <div class="job-detail-label">Department</div>
+                                    <div>${job.departmentName || 'N/A'}</div>
+                                </div>
+                                <div class="job-detail">
+                                    <div class="job-detail-label">Status</div>
+                                    <div>Recruitment Closed</div>
+                                </div>
+                            </div>
+                        `;
+
+                        container.appendChild(card);
+                    });
+                }
+
+                // Initial render
+                renderJobs();
+
+                // Filter buttons
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                        this.classList.add('active');
+                        currentFilter = this.dataset.filter;
+                        renderJobs(currentFilter);
+                    });
+                });
+            })
+            .catch(error => {
+                console.error('Error loading jobs:', error);
+                document.getElementById('empty-state').style.display = 'block';
+            });
+    </script>
+</body>
+</html>
