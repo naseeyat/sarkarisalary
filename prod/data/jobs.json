@@ -1,11 +1,109 @@
 {
   "metadata": {
     "lastUpdated": "2024-11-14",
-    "totalJobs": 3,
-    "activeJobs": 3,
+    "totalJobs": 4,
+    "activeJobs": 4,
     "closedJobs": 0
   },
   "jobs": [
+    {
+      "id": "wbssc-slst-2025",
+      "slug": "wbssc-slst-2025",
+      "title": "WBSSC 1st SLST 2025 - Non Teaching Staff (Clerk & Group D) Recruitment",
+      "shortTitle": "WBSSC SLST 2025",
+      "department": "education",
+      "departmentName": "West Bengal Central School Service Commission",
+      "category": "clerk-group-d-jobs",
+      "states": ["west-bengal"],
+      "posts": 8477,
+      "organization": "West Bengal Central School Service Commission, Kolkata",
+      "multiPost": true,
+      "postBreakdown": [
+        {
+          "postName": "Clerk (Group C)",
+          "postSlug": "clerk",
+          "posts": 2989,
+          "qualification": "School Final/Madhyamik or old HS/School Final",
+          "minAge": 18,
+          "maxAge": 40,
+          "ageRelaxation": "5 years for SC/ST, 3 years for OBC, 8 years for PwBD",
+          "salary": {
+            "range": "As per West Bengal State Government norms",
+            "note": "State government pay scale applicable"
+          },
+          "selectionProcess": "Written exam + Academic evaluation + Prior experience + Interview (typing-cum-computer proficiency test)",
+          "pageUrl": "/jobs/wbssc-slst-2025-clerk.html"
+        },
+        {
+          "postName": "Group D Staff",
+          "postSlug": "group-d",
+          "posts": 5488,
+          "qualification": "Passed Class VIII from recognized school/Board/Council",
+          "minAge": 18,
+          "maxAge": 40,
+          "ageRelaxation": "5 years for SC/ST, 3 years for OBC, 8 years for PwBD",
+          "salary": {
+            "range": "As per West Bengal State Government norms",
+            "note": "State government pay scale applicable"
+          },
+          "selectionProcess": "Written exam + Prior similar experience + Interview",
+          "pageUrl": "/jobs/wbssc-slst-2025-group-d.html"
+        }
+      ],
+      "qualification": "Class VIII / Madhyamik (varies by post)",
+      "minAge": 18,
+      "maxAge": 40,
+      "salary": {
+        "range": "As per State Government norms",
+        "note": "Salaries as per extant West Bengal State Government norms"
+      },
+      "applicationFee": {
+        "general": "₹400",
+        "obc": "₹400",
+        "ews": "₹400",
+        "sc": "₹150",
+        "st": "₹150",
+        "ph": "₹150"
+      },
+      "notificationDate": "2025-10-09",
+      "applicationStart": "2025-11-03",
+      "lastDate": "2025-12-03",
+      "examDate": "January 2026 (tentative)",
+      "status": "active",
+      "featured": true,
+      "isNew": true,
+      "applyLink": "https://www.westbengalssc.com",
+      "notificationPdf": "/notifications/WBSSC-1st-SLST-2025-NTS.pdf",
+      "daysRemaining": 19,
+      "addedOn": "2024-11-14",
+      "pageUrl": "/jobs/wbssc-slst-2025.html",
+      "isRecurring": true,
+      "recurringCycle": "annual",
+      "examCycleId": "wbssc-slst",
+      "estimatedAspirants": 500000,
+      "priorityScore": 85,
+      "uniqueFeatures": [
+        "8477 vacancies - one of the largest non-teaching staff recruitments in West Bengal",
+        "Online application only (no offline mode accepted)",
+        "Question papers in both English and Bengali",
+        "Candidates identified as 'tainted' by Supreme Court Order (Civil Appeal 4800/2024) NOT eligible",
+        "No TA/DA for exam or interview",
+        "Panel validity: 1 year (extendable to 1.5 years)",
+        "Medium of vacancy: Bengali language proficiency required",
+        "No negative marking in written exam",
+        "Syllabus to be uploaded on official website"
+      ],
+      "importantNotes": [
+        "Age limit calculated as on 1st January 2025",
+        "Only online applications accepted through www.westbengalssc.com",
+        "No rectification allowed after form submission",
+        "Multiple applications: Only last application will be considered",
+        "Admit card available 7 days before exam (download only, not sent by post)",
+        "SC/ST/OBC/PH/EWS certificates from West Bengal Govt only valid",
+        "Candidates from other states apply as General without age/fee concession"
+      ],
+      "updates": []
+    },
     {
       "id": "nhb-officer-2025",
       "slug": "nhb-officer-2025",
@@ -300,21 +398,93 @@
     {
       "id": "kvs-nvs-2025",
       "slug": "kvs-nvs-2025",
-      "title": "KVS & NVS Combined Recruitment 2025 (Notification 01/2025)",
+      "title": "KVS & NVS Combined Recruitment 2025 - 13,965 Posts",
       "shortTitle": "KVS & NVS 2025",
       "department": "education",
       "departmentName": "Kendriya Vidyalaya Sangathan & Navodaya Vidyalaya Samiti",
       "category": "teaching-jobs",
       "states": ["all-india"],
-      "posts": 13000,
+      "posts": 13965,
       "organization": "KVS & NVS, Ministry of Education, Govt. of India",
       "multiPost": true,
-      "qualification": "Graduation/Post Graduation with B.Ed/Diploma (varies by post)",
+      "postBreakdown": [
+        {
+          "postName": "Assistant Commissioner in KVS",
+          "posts": 8,
+          "category": "administrative"
+        },
+        {
+          "postName": "Assistant Commissioner in NVS",
+          "posts": 9,
+          "category": "administrative"
+        },
+        {
+          "postName": "Principal (Group A)",
+          "posts": 227,
+          "category": "administrative"
+        },
+        {
+          "postName": "Vice-Principal in KVS",
+          "posts": 58,
+          "category": "administrative"
+        },
+        {
+          "postName": "PGT in KVS",
+          "posts": 1465,
+          "category": "teaching"
+        },
+        {
+          "postName": "PGT in NVS",
+          "posts": 1513,
+          "category": "teaching"
+        },
+        {
+          "postName": "PGT (Modern Indian Language) in NVS",
+          "posts": 18,
+          "category": "teaching"
+        },
+        {
+          "postName": "TGT in KVS",
+          "posts": 2794,
+          "category": "teaching"
+        },
+        {
+          "postName": "Librarian in KVS",
+          "posts": 147,
+          "category": "teaching"
+        },
+        {
+          "postName": "TGT in NVS",
+          "posts": 2978,
+          "category": "teaching"
+        },
+        {
+          "postName": "TGT (3rd Language) in NVS",
+          "posts": 443,
+          "category": "teaching"
+        },
+        {
+          "postName": "PRT in KVS",
+          "posts": 3365,
+          "category": "teaching"
+        },
+        {
+          "postName": "Non-Teaching Posts in KVS",
+          "posts": 1155,
+          "category": "non-teaching"
+        },
+        {
+          "postName": "Non-Teaching Posts in NVS",
+          "posts": 787,
+          "category": "non-teaching"
+        }
+      ],
+      "qualification": "Graduation/Post Graduation with B.Ed (varies by post)",
       "minAge": 18,
-      "maxAge": 62,
+      "maxAge": 40,
       "salary": {
-        "range": "₹18,000 - ₹2,25,000 per month",
-        "note": "Varies by post and level"
+        "range": "₹18,000 - ₹2,00,000 per month",
+        "note": "Varies by post level (PRT/TGT/PGT/Principal)"
       },
       "applicationFee": {
         "general": "₹1,000",
@@ -325,77 +495,27 @@
       },
       "notificationDate": "2025-11-14",
       "applicationStart": "2025-11-14",
-      "lastDate": "2025-12-04",
+      "lastDate": "2025-12-14",
       "status": "active",
       "featured": true,
       "isNew": true,
       "applyLink": "https://www.kvsangathan.nic.in",
-      "notificationPdf": "/notifications/KVS-NVS-Combined-2025-01.pdf",
-      "daysRemaining": 20,
+      "notificationPdf": "/notifications/KVS-NVS-2025.pdf",
+      "daysRemaining": 30,
       "addedOn": "2024-11-14",
       "pageUrl": "/jobs/kvs-nvs-2025.html",
       "isRecurring": true,
       "recurringCycle": "annual",
       "examCycleId": "kvs-nvs",
-      "estimatedAspirants": 2000000,
+      "estimatedAspirants": 2500000,
       "priorityScore": 95,
       "uniqueFeatures": [
-        "Combined KVS + NVS recruitment under single notification",
-        "Two-tier online CBT examination pattern",
-        "Teaching and non-teaching posts both available",
-        "Central government benefits and allowances",
-        "All India posting with transfer policy"
-      ],
-      "selectionProcess": {
-        "stages": [
-          {
-            "name": "Tier-1 Exam",
-            "type": "objective",
-            "description": "Computer-Based Test (CBT) - Objective type",
-            "marks": 100,
-            "duration": "90-120 minutes"
-          },
-          {
-            "name": "Tier-2 Exam",
-            "type": "objective",
-            "description": "Computer-Based Test (CBT) - Descriptive/Objective",
-            "marks": 100,
-            "duration": "120 minutes"
-          },
-          {
-            "name": "Interview/Skill Test",
-            "type": "interview",
-            "description": "For teaching posts - Demo class, For non-teaching - Skill test",
-            "marks": "20-50",
-            "note": "Only for shortlisted candidates"
-          }
-        ]
-      },
-      "postCategories": [
-        {
-          "category": "Teaching Posts",
-          "posts": [
-            "Assistant Commissioner (10 Posts)",
-            "Principal (500 Posts)",
-            "Vice Principal (800 Posts)",
-            "PGT (Post Graduate Teacher) - 4000 Posts",
-            "TGT (Trained Graduate Teacher) - 5000 Posts",
-            "PRT (Primary Teacher) - 2000 Posts",
-            "Special Educator (200 Posts)",
-            "Librarian (300 Posts)"
-          ]
-        },
-        {
-          "category": "Non-Teaching Posts",
-          "posts": [
-            "Administrative Officer (50 Posts)",
-            "Finance Officer (40 Posts)",
-            "Assistant Engineer (Civil) (30 Posts)",
-            "Assistant Engineer (Electrical) (20 Posts)",
-            "Junior Engineer (60 Posts)",
-            "Assistant Section Officer (100 Posts)"
-          ]
-        }
+        "13,965 vacancies - Largest KVS+NVS combined recruitment",
+        "Teaching posts: PRT (3365), TGT (6215), PGT (2996)",
+        "Administrative posts: Principal (227), VP (58), AC (17)",
+        "Non-teaching posts: 1942 positions",
+        "All India posting with transfer facility",
+        "Central government pay scale and benefits"
       ],
       "updates": []
     }
@@ -418,9 +538,9 @@
     "education": {
       "name": "Education & Teaching",
       "slug": "education",
-      "totalJobs": 1,
-      "activeJobs": 1,
-      "latestJobs": ["kvs-nvs-2025"]
+      "totalJobs": 2,
+      "activeJobs": 2,
+      "latestJobs": ["kvs-nvs-2025", "wbssc-slst-2025"]
     }
   },
   "states": {
@@ -429,7 +549,7 @@
       "slug": "all-india",
       "totalJobs": 2,
       "activeJobs": 2,
-      "latestJobs": ["bob-apprentice-2025", "kvs-nvs-2025"]
+      "latestJobs": ["kvs-nvs-2025", "bob-apprentice-2025"]
     },
     "delhi": {
       "name": "Delhi",
@@ -444,6 +564,13 @@
       "totalJobs": 2,
       "activeJobs": 2,
       "latestJobs": ["bob-apprentice-2025", "ner-railway-apprentice-2026"]
+    },
+    "west-bengal": {
+      "name": "West Bengal",
+      "slug": "west-bengal",
+      "totalJobs": 2,
+      "activeJobs": 2,
+      "latestJobs": ["wbssc-slst-2025", "bob-apprentice-2025"]
     }
   },
   "categories": {
@@ -467,6 +594,13 @@
       "totalJobs": 1,
       "activeJobs": 1,
       "latestJobs": ["kvs-nvs-2025"]
+    },
+    "clerk-group-d-jobs": {
+      "name": "Clerk & Group D Jobs",
+      "slug": "clerk-group-d-jobs",
+      "totalJobs": 1,
+      "activeJobs": 1,
+      "latestJobs": ["wbssc-slst-2025"]
     }
   },
   "examCycles": {
@@ -521,6 +655,23 @@
         }
       ]
     },
+    "wbssc-slst": {
+      "name": "WBSSC State Level Selection Test (Non-Teaching Staff)",
+      "slug": "wbssc-slst",
+      "department": "education",
+      "cycleType": "annual",
+      "description": "West Bengal School Service Commission recruitment for Clerk and Group D staff in government aided/sponsored schools",
+      "usualMonths": ["October", "November"],
+      "history": [
+        {
+          "year": "2025",
+          "jobId": "wbssc-slst-2025",
+          "notificationDate": "2025-10-09",
+          "posts": 8477,
+          "status": "active"
+        }
+      ]
+    },
     "kvs-nvs": {
       "name": "KVS & NVS Combined Recruitment",
       "slug": "kvs-nvs",
@@ -533,7 +684,7 @@
           "year": "2025",
           "jobId": "kvs-nvs-2025",
           "notificationDate": "2025-11-14",
-          "posts": 13000,
+          "posts": 13965,
           "status": "active"
         }
       ]

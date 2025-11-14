@@ -7,6 +7,14 @@ This document describes the complete process for adding government job notificat
 
 ## 🎯 CORE PRINCIPLES
 
+### 0. DATA VERIFICATION (CRITICAL!)
+**⚠️ ALWAYS VERIFY VACANCY COUNTS FROM OFFICIAL PDF**
+- NEVER estimate or guess vacancy numbers
+- ALWAYS read the complete official notification PDF
+- COUNT all posts carefully from vacancy tables
+- Double-check totals before adding to jobs.json
+- When in doubt, re-read the PDF section with vacancy breakdown
+
 ### 1. Single Source of Truth
 **`prod/data/jobs.json`** - All pages auto-generate from this file.
 
