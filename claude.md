@@ -90,12 +90,15 @@ prod/
 │   └── railway.html
 ├── exam-calendar.html         # Date-wise timeline
 ├── index.html                 # Homepage
-└── shared/
-    ├── header.html
-    ├── footer.html
-    ├── global.js
-    ├── header-footer.css
-    └── brutalist-styles.css
+├── shared/
+│   ├── header.html
+│   ├── footer.html
+│   ├── global.js
+│   ├── header-footer.css
+│   └── brutalist-styles.css
+└── scripts/
+    ├── check-adsense.js       # AdSense verification tool
+    └── add-adsense.js         # AdSense batch installer
 ```
 
 **AUTO-UPDATE SYSTEM:**
@@ -675,5 +678,100 @@ Add after Quick Info Grid, before Apply Button:
 3. IPS Officer
 4. Railway Officer
 5. KVS/NVS Teachers
+
+---
+
+## 📢 GOOGLE ADSENSE MANAGEMENT
+
+### Philosophy: Manual Per-Page Integration
+
+**Why NOT automatic injection?**
+- ❌ Header component timing issues (fetch delays)
+- ❌ DOM ready race conditions
+- ❌ Unpredictable script loading order
+- ❌ Hard to debug when it fails
+
+**Why manual `<head>` tags?**
+- ✅ Loads immediately with page HTML
+- ✅ No fetch/timing dependencies
+- ✅ Google recommends early `<head>` placement
+- ✅ Better ad rendering performance
+- ✅ Predictable, debuggable, reliable
+
+### Required AdSense Script
+
+Add to **every page's `<head>` section**:
+
+```html
+<head>
+    <meta charset="UTF-8">
+    <title>Page Title</title>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2954991378408470"
+         crossorigin="anonymous"></script>
+
+    <!-- Other meta tags, CSS, etc -->
+</head>
+```
+
+### Verification Tools
+
+**Check all pages:**
+```bash
+node scripts/check-adsense.js
+```
+
+**Output:**
+- ✅ Total pages scanned
+- ✅ Pages with AdSense
+- ❌ Pages missing AdSense (detailed list)
+- Exit code 1 if missing, 0 if all good
+
+**Auto-fix missing pages:**
+```bash
+node scripts/add-adsense.js
+```
+
+**Then verify:**
+```bash
+node scripts/check-adsense.js
+# Should show: ✅ SUCCESS! All HTML files have AdSense script.
+```
+
+### When to Run Checker
+
+1. **After creating new HTML pages** - Always check
+2. **Before deployment** - Part of CI/CD
+3. **Weekly audit** - Catch any missed pages
+4. **After bulk changes** - Verify nothing broke
+
+### Excluded Files
+
+Scripts automatically skip:
+- `header.html` (component, not full page)
+- `footer.html` (component, not full page)
+- `test-*.html` (test files)
+- `template.html` (boilerplate)
+- `draft.html` (work in progress)
+
+### Best Practices
+
+1. **New page checklist:**
+   - [ ] Create HTML file
+   - [ ] Add AdSense to `<head>`
+   - [ ] Run `node scripts/check-adsense.js`
+   - [ ] Verify in browser console
+
+2. **Component-based pages:**
+   - Even if page uses header/footer components
+   - Still add AdSense to main page's `<head>`
+   - Components load AFTER page, too late for ads
+
+3. **Never:**
+   - ❌ Add AdSense via JavaScript injection
+   - ❌ Load AdSense in footer
+   - ❌ Use setTimeout/defer for AdSense
+   - ❌ Skip verification after changes
 
 ---
