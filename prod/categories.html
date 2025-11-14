@@ -17,13 +17,16 @@
         .page-header { padding: 40px 0; border-bottom: 3px solid #333333; margin-bottom: 40px; }
         .page-title { font-size: 32px; font-weight: 900; margin-bottom: 10px; letter-spacing: 1px; }
         .page-subtitle { font-size: 14px; color: #666666; font-weight: 600; }
-        .categories-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 40px; }
-        .category-card { border: 3px solid #333333; background: #ffffff; padding: 30px; text-align: center; cursor: pointer; transition: all 0.3s ease; text-decoration: none; color: inherit; display: block; }
-        .category-card:hover { background: #333333; color: #ffffff; transform: scale(1.02); }
-        .category-icon { font-size: 48px; margin-bottom: 15px; display: block; }
-        .category-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
-        .category-count { font-size: 12px; opacity: 0.8; font-weight: 600; }
-        .category-description { font-size: 11px; margin-top: 8px; opacity: 0.7; }
+        .categories-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .category-card { border: 3px solid #333333; background: #ffffff; transition: all 0.3s ease; cursor: pointer; text-decoration: none; color: inherit; display: block; }
+        .category-card:hover { background: #f8f8f8; transform: translateY(-2px); }
+        .category-header { padding: 12px; border-bottom: 1px solid #333333; background: #f8f8f8; display: flex; align-items: center; gap: 10px; }
+        .category-icon { font-size: 24px; }
+        .category-header-text { flex: 1; }
+        .category-title { font-size: 12px; font-weight: 700; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 1px; }
+        .category-count { font-size: 9px; color: #666666; text-transform: uppercase; letter-spacing: 0.5px; }
+        .category-body { padding: 12px; }
+        .category-description { font-size: 11px; color: #666666; }
         @media (max-width: 768px) { .page-title { font-size: 24px; } .categories-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } .category-card { padding: 20px; } .category-icon { font-size: 36px; } }
     </style>
 </head>
@@ -38,66 +41,120 @@
 
         <div class="categories-grid" id="categories-container">
             <a href="categories/banking-jobs.html" class="category-card" data-category="banking-jobs">
-                <span class="category-icon">🏦</span>
-                <div class="category-title">Banking Jobs</div>
-                <div class="category-count">Loading...</div>
-                <div class="category-description">Bank PO, Clerk, Officer positions</div>
+                <div class="category-header">
+                    <span class="category-icon">🏦</span>
+                    <div class="category-header-text">
+                        <div class="category-title">Banking Jobs</div>
+                        <div class="category-count">Loading...</div>
+                    </div>
+                </div>
+                <div class="category-body">
+                    <div class="category-description">Bank PO, Clerk, Officer positions</div>
+                </div>
             </a>
 
             <a href="categories/railway-jobs.html" class="category-card" data-category="railway-jobs">
-                <span class="category-icon">🚂</span>
-                <div class="category-title">Railway Jobs</div>
-                <div class="category-count">Loading...</div>
-                <div class="category-description">Railway Recruitment Board jobs</div>
+                <div class="category-header">
+                    <span class="category-icon">🚂</span>
+                    <div class="category-header-text">
+                        <div class="category-title">Railway Jobs</div>
+                        <div class="category-count">Loading...</div>
+                    </div>
+                </div>
+                <div class="category-body">
+                    <div class="category-description">Railway Recruitment Board jobs</div>
+                </div>
             </a>
 
             <a href="categories/teaching-jobs.html" class="category-card" data-category="teaching-jobs">
-                <span class="category-icon">📚</span>
-                <div class="category-title">Teaching Jobs</div>
-                <div class="category-count">Loading...</div>
-                <div class="category-description">KVS, NVS, TGT, PGT, PRT posts</div>
+                <div class="category-header">
+                    <span class="category-icon">📚</span>
+                    <div class="category-header-text">
+                        <div class="category-title">Teaching Jobs</div>
+                        <div class="category-count">Loading...</div>
+                    </div>
+                </div>
+                <div class="category-body">
+                    <div class="category-description">KVS, NVS, TGT, PGT, PRT posts</div>
+                </div>
             </a>
 
             <a href="categories/police-jobs.html" class="category-card" data-category="police-jobs">
-                <span class="category-icon">👮</span>
-                <div class="category-title">Police Jobs</div>
-                <div class="category-count">Loading...</div>
-                <div class="category-description">State & Central Police recruitment</div>
+                <div class="category-header">
+                    <span class="category-icon">👮</span>
+                    <div class="category-header-text">
+                        <div class="category-title">Police Jobs</div>
+                        <div class="category-count">Loading...</div>
+                    </div>
+                </div>
+                <div class="category-body">
+                    <div class="category-description">State & Central Police recruitment</div>
+                </div>
             </a>
 
             <a href="categories/defense-jobs.html" class="category-card" data-category="defense-jobs">
-                <span class="category-icon">⚔️</span>
-                <div class="category-title">Defense Jobs</div>
-                <div class="category-count">Loading...</div>
-                <div class="category-description">Army, Navy, Air Force positions</div>
+                <div class="category-header">
+                    <span class="category-icon">⚔️</span>
+                    <div class="category-header-text">
+                        <div class="category-title">Defense Jobs</div>
+                        <div class="category-count">Loading...</div>
+                    </div>
+                </div>
+                <div class="category-body">
+                    <div class="category-description">Army, Navy, Air Force positions</div>
+                </div>
             </a>
 
             <a href="categories/civil-services.html" class="category-card" data-category="civil-services">
-                <span class="category-icon">🏛️</span>
-                <div class="category-title">Civil Services</div>
-                <div class="category-count">Loading...</div>
-                <div class="category-description">IAS, IPS, IRS and other services</div>
+                <div class="category-header">
+                    <span class="category-icon">🏛️</span>
+                    <div class="category-header-text">
+                        <div class="category-title">Civil Services</div>
+                        <div class="category-count">Loading...</div>
+                    </div>
+                </div>
+                <div class="category-body">
+                    <div class="category-description">IAS, IPS, IRS and other services</div>
+                </div>
             </a>
 
             <a href="categories/medical-jobs.html" class="category-card" data-category="medical-jobs">
-                <span class="category-icon">🏥</span>
-                <div class="category-title">Medical Jobs</div>
-                <div class="category-count">Loading...</div>
-                <div class="category-description">Doctors, Nurses, Medical staff</div>
+                <div class="category-header">
+                    <span class="category-icon">🏥</span>
+                    <div class="category-header-text">
+                        <div class="category-title">Medical Jobs</div>
+                        <div class="category-count">Loading...</div>
+                    </div>
+                </div>
+                <div class="category-body">
+                    <div class="category-description">Doctors, Nurses, Medical staff</div>
+                </div>
             </a>
 
             <a href="categories/technical-jobs.html" class="category-card" data-category="technical-jobs">
-                <span class="category-icon">💻</span>
-                <div class="category-title">Technical Jobs</div>
-                <div class="category-count">Loading...</div>
-                <div class="category-description">Engineers, IT professionals</div>
+                <div class="category-header">
+                    <span class="category-icon">💻</span>
+                    <div class="category-header-text">
+                        <div class="category-title">Technical Jobs</div>
+                        <div class="category-count">Loading...</div>
+                    </div>
+                </div>
+                <div class="category-body">
+                    <div class="category-description">Engineers, IT professionals</div>
+                </div>
             </a>
 
             <a href="categories/ssc-jobs.html" class="category-card" data-category="ssc-jobs">
-                <span class="category-icon">📊</span>
-                <div class="category-title">SSC Jobs</div>
-                <div class="category-count">Loading...</div>
-                <div class="category-description">Staff Selection Commission exams</div>
+                <div class="category-header">
+                    <span class="category-icon">📊</span>
+                    <div class="category-header-text">
+                        <div class="category-title">SSC Jobs</div>
+                        <div class="category-count">Loading...</div>
+                    </div>
+                </div>
+                <div class="category-body">
+                    <div class="category-description">Staff Selection Commission exams</div>
+                </div>
             </a>
         </div>
     </div>
