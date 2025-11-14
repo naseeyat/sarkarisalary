@@ -1,0 +1,20 @@
+# Cloudflare Workers Configuration for PDF Upload
+
+name = "sarkarisalary-upload"
+main = "upload-handler.js"
+compatibility_date = "2024-01-01"
+
+# R2 Bucket Binding
+[[r2_buckets]]
+binding = "SARKARISALARY_DOCS"
+bucket_name = "sarkarisalarydocs"
+
+# Routes (deploy to subdomain)
+# route = "upload.sarkarisalary.today/*"
+
+# Or use workers.dev for testing
+# workers_dev = true
+
+# Environment variables (optional)
+[vars]
+# ALLOWED_ORIGINS = "https://sarkarisalary.today,http://localhost:8000"

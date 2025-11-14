@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">View Notification PDF - SARKARI SALARY</title>
+    <meta name="description" content="View official government job notification PDF with full details">
+    <link rel="icon" type="image/svg+xml" href="shared/favicon.svg">
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2954991378408470"
+         crossorigin="anonymous"></script>
+
+    <!-- Global JavaScript -->
+    <script src="shared/global.js"></script>
+
+    <!-- Brutalist Styles -->
+    <link rel="stylesheet" href="shared/brutalist-styles.css">
+    <link rel="stylesheet" href="shared/header-footer.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+            background: #ffffff;
+            color: #333333;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .viewer-header {
+            background: #333333;
+            color: #ffffff;
+            padding: 20px;
+            border: 3px solid #333333;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .viewer-title {
+            font-size: 18px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .viewer-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            background: #ffffff;
+            color: #333333;
+            border: 2px solid #ffffff;
+            padding: 10px 20px;
+            font-size: 12px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .action-btn:hover {
+            background: #333333;
+            color: #ffffff;
+            border-color: #ffffff;
+        }
+
+        /* Ad Container */
+        .ad-container {
+            border: 3px solid #333333;
+            background: #f8f8f8;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            min-height: 90px;
+        }
+
+        .ad-label {
+            font-size: 10px;
+            color: #666666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        /* PDF Container */
+        .pdf-container {
+            border: 3px solid #333333;
+            background: #e8e8e8;
+            min-height: 800px;
+            position: relative;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .pdf-iframe {
+            width: 100%;
+            height: 100vh;
+            min-height: 800px;
+            max-height: 1200px;
+            border: none;
+            display: block;
+        }
+
+        /* PDF embed for better rendering */
+        .pdf-embed {
+            width: 100%;
+            height: 100vh;
+            min-height: 800px;
+            max-height: 1200px;
+            border: none;
+        }
+
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #333333;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error-box {
+            background: #ff4444;
+            color: #ffffff;
+            border: 3px solid #333333;
+            padding: 30px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .error-box h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            background: #333333;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 12px;
+        }
+
+        .back-link:hover {
+            background: #ffffff;
+            color: #333333;
+            border: 2px solid #333333;
+        }
+
+        .related-jobs {
+            border: 3px solid #333333;
+            background: #f8f8f8;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .related-jobs h3 {
+            font-size: 18px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #333333;
+            padding-bottom: 10px;
+        }
+
+        .job-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+        }
+
+        .job-link {
+            display: block;
+            padding: 12px 15px;
+            background: #ffffff;
+            border: 2px solid #333333;
+            text-decoration: none;
+            color: #333333;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+
+        .job-link:hover {
+            background: #333333;
+            color: #ffffff;
+            transform: translateX(5px);
+        }
+
+        @media (max-width: 768px) {
+            .viewer-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .viewer-actions {
+                width: 100%;
+            }
+
+            .action-btn {
+                flex: 1;
+                text-align: center;
+            }
+
+            .pdf-iframe {
+                height: 600px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        window.pageHeaderData = {
+            title: "PDF VIEWER",
+            subtitle: "Official Notification Document"
+        };
+    </script>
+
+    <div class="container">
+        <!-- Top Ad -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- AdSense ad unit here -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-2954991378408470"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <!-- Viewer Header -->
+        <div class="viewer-header">
+            <div class="viewer-title" id="viewer-title">Loading PDF...</div>
+            <div class="viewer-actions">
+                <button class="action-btn" onclick="downloadPDF()" id="download-btn">
+                    ⬇️ DOWNLOAD PDF
+                </button>
+                <button class="action-btn" onclick="openNewTab()" id="newtab-btn">
+                    🔗 OPEN IN NEW TAB
+                </button>
+                <a href="index.html" class="action-btn">
+                    🏠 HOME
+                </a>
+            </div>
+        </div>
+
+        <!-- PDF Container -->
+        <div class="pdf-container" id="pdf-container">
+            <div class="loading" id="loading">
+                <div class="loading-spinner"></div>
+                <p style="font-weight: 700; font-size: 14px; text-transform: uppercase;">Loading PDF...</p>
+            </div>
+        </div>
+
+        <!-- Bottom Ad -->
+        <div class="ad-container">
+            <div class="ad-label">Advertisement</div>
+            <!-- AdSense ad unit here -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-2954991378408470"
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
+        <!-- Related Jobs -->
+        <div class="related-jobs">
+            <h3>🔗 Explore More Jobs</h3>
+            <div class="job-links">
+                <a href="index.html" class="job-link">→ Browse All Active Jobs</a>
+                <a href="states.html" class="job-link">→ State-wise Job Opportunities</a>
+                <a href="categories.html" class="job-link">→ Browse by Category</a>
+                <a href="exam-calendar.html" class="job-link">→ Exam Calendar & Dates</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Footer System -->
+    <script src="js/header-footer-loader.js"></script>
+
+    <script>
+        // Get filename from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const filename = urlParams.get('file');
+
+        // R2 bucket base URL
+        const R2_BASE_URL = 'https://reference.sarkarisalary.today/';
+
+        let pdfUrl = '';
+
+        // Load PDF
+        if (!filename) {
+            showError('No PDF file specified. Please provide a valid file parameter.');
+        } else {
+            pdfUrl = R2_BASE_URL + filename;
+            loadPDF(pdfUrl);
+        }
+
+        function loadPDF(url) {
+            const container = document.getElementById('pdf-container');
+            const loading = document.getElementById('loading');
+            const viewerTitle = document.getElementById('viewer-title');
+            const pageTitle = document.getElementById('page-title');
+
+            // Update title
+            const displayName = filename.replace('.pdf', '').replace(/-/g, ' ').toUpperCase();
+            viewerTitle.textContent = displayName;
+            pageTitle.textContent = `${displayName} - View PDF | SARKARI SALARY`;
+
+            // Try using object tag first (better rendering), fallback to iframe
+            const pdfObject = document.createElement('object');
+            pdfObject.data = url;
+            pdfObject.type = 'application/pdf';
+            pdfObject.className = 'pdf-embed';
+            pdfObject.title = displayName;
+
+            // Fallback content if PDF plugin not available
+            pdfObject.innerHTML = `
+                <iframe src="${url}" class="pdf-iframe" title="${displayName}">
+                    <p style="padding: 40px; text-align: center;">
+                        Your browser doesn't support PDF viewing.
+                        <a href="${url}" style="color: #0066cc; font-weight: 700;">Click here to download the PDF</a>
+                    </p>
+                </iframe>
+            `;
+
+            // Handle load
+            setTimeout(() => {
+                loading.style.display = 'none';
+            }, 1000);
+
+            container.appendChild(pdfObject);
+        }
+
+        function showError(message) {
+            const container = document.getElementById('pdf-container');
+            container.innerHTML = `
+                <div class="error-box">
+                    <h2>⚠️ ERROR LOADING PDF</h2>
+                    <p style="margin-top: 10px; line-height: 1.6;">${message}</p>
+                    <a href="index.html" class="back-link">← BACK TO HOME</a>
+                </div>
+            `;
+        }
+
+        function downloadPDF() {
+            if (pdfUrl) {
+                const link = document.createElement('a');
+                link.href = pdfUrl;
+                link.download = filename || 'notification.pdf';
+                link.target = '_blank';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+
+        function openNewTab() {
+            if (pdfUrl) {
+                window.open(pdfUrl, '_blank');
+            }
+        }
+
+        // Analytics tracking (optional)
+        if (filename) {
+            console.log('PDF Viewed:', filename);
+            // Add your analytics code here
+            // gtag('event', 'pdf_view', { 'pdf_name': filename });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload PDF - CMS | SARKARI SALARY</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+            background: #f5f5f5;
+            color: #333333;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 3px solid #333333;
+            padding: 40px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            border-bottom: 3px solid #333333;
+            padding-bottom: 15px;
+        }
+
+        .subtitle {
+            color: #666666;
+            font-size: 13px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            color: #333333;
+        }
+
+        select, input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #333333;
+            background: #ffffff;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333333;
+        }
+
+        select:focus, input[type="file"]:focus {
+            outline: none;
+            border-color: #0066cc;
+        }
+
+        .preview-box {
+            background: #fffacd;
+            border: 2px solid #333333;
+            padding: 20px;
+            margin: 25px 0;
+            display: none;
+        }
+
+        .preview-box.show {
+            display: block;
+        }
+
+        .preview-label {
+            font-size: 11px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666666;
+            margin-bottom: 8px;
+        }
+
+        .preview-filename {
+            font-size: 16px;
+            font-weight: 900;
+            font-family: monospace;
+            color: #333333;
+            word-break: break-all;
+        }
+
+        .upload-btn {
+            width: 100%;
+            background: #333333;
+            color: #ffffff;
+            border: none;
+            padding: 15px;
+            font-size: 14px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .upload-btn:hover {
+            background: #0066cc;
+        }
+
+        .upload-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .status-box {
+            border: 3px solid #333333;
+            padding: 20px;
+            margin-top: 25px;
+            display: none;
+            text-align: center;
+        }
+
+        .status-box.show {
+            display: block;
+        }
+
+        .status-box.success {
+            background: #d4edda;
+            border-color: #00aa00;
+        }
+
+        .status-box.error {
+            background: #f8d7da;
+            border-color: #ff4444;
+        }
+
+        .status-box.loading {
+            background: #d1ecf1;
+            border-color: #0066cc;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #333333;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .info-box {
+            background: #f8f8f8;
+            border: 2px solid #333333;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .info-box h3 {
+            font-size: 14px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .info-box ul {
+            margin-left: 20px;
+            line-height: 1.8;
+            font-size: 13px;
+        }
+
+        .helper-text {
+            font-size: 11px;
+            color: #666666;
+            margin-top: 5px;
+            line-height: 1.5;
+        }
+
+        .doc-type-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .doc-type-card {
+            border: 2px solid #333333;
+            padding: 12px;
+            cursor: pointer;
+            background: #ffffff;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .doc-type-card:hover {
+            background: #f8f8f8;
+        }
+
+        .doc-type-card.selected {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        .doc-type-card input[type="radio"] {
+            display: none;
+        }
+
+        .doc-type-label {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            display: block;
+        }
+
+        .doc-type-desc {
+            font-size: 10px;
+            color: #666666;
+            margin-top: 4px;
+        }
+
+        .doc-type-card.selected .doc-type-desc {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📤 Upload PDF Document</h1>
+        <p class="subtitle">Upload official job notifications, syllabi, admit cards, and other documents to your R2 bucket with automatic naming.</p>
+
+        <form id="upload-form">
+            <!-- Job Selection -->
+            <div class="form-group">
+                <label for="job-select">1. Select Job</label>
+                <select id="job-select" required>
+                    <option value="">-- Choose Job --</option>
+                </select>
+                <p class="helper-text">Select the job this document belongs to</p>
+            </div>
+
+            <!-- Document Type Selection (Radio Cards) -->
+            <div class="form-group">
+                <label>2. Document Type</label>
+                <div class="doc-type-grid">
+                    <label class="doc-type-card">
+                        <input type="radio" name="doc-type" value="notification" required>
+                        <span class="doc-type-label">📄 Notification</span>
+                        <span class="doc-type-desc">Official recruitment notification</span>
+                    </label>
+                    <label class="doc-type-card">
+                        <input type="radio" name="doc-type" value="syllabus">
+                        <span class="doc-type-label">📚 Syllabus</span>
+                        <span class="doc-type-desc">Exam syllabus & pattern</span>
+                    </label>
+                    <label class="doc-type-card">
+                        <input type="radio" name="doc-type" value="admit-card">
+                        <span class="doc-type-label">🎫 Admit Card</span>
+                        <span class="doc-type-desc">Hall ticket download link</span>
+                    </label>
+                    <label class="doc-type-card">
+                        <input type="radio" name="doc-type" value="answer-key">
+                        <span class="doc-type-label">🔑 Answer Key</span>
+                        <span class="doc-type-desc">Official answer key</span>
+                    </label>
+                    <label class="doc-type-card">
+                        <input type="radio" name="doc-type" value="result">
+                        <span class="doc-type-label">🏆 Result</span>
+                        <span class="doc-type-desc">Final result/merit list</span>
+                    </label>
+                    <label class="doc-type-card">
+                        <input type="radio" name="doc-type" value="amendment">
+                        <span class="doc-type-label">📝 Amendment</span>
+                        <span class="doc-type-desc">Corrigendum/changes</span>
+                    </label>
+                </div>
+                <p class="helper-text">Select the type of document you're uploading</p>
+            </div>
+
+            <!-- File Upload -->
+            <div class="form-group">
+                <label for="pdf-file">3. Choose PDF File</label>
+                <input type="file" id="pdf-file" accept=".pdf" required>
+                <p class="helper-text">Only PDF files are accepted (max 10MB recommended)</p>
+            </div>
+
+            <!-- Preview Box -->
+            <div class="preview-box" id="preview-box">
+                <div class="preview-label">Final Filename (Auto-generated):</div>
+                <div class="preview-filename" id="preview-filename">-</div>
+            </div>
+
+            <!-- Upload Button -->
+            <button type="submit" class="upload-btn" id="upload-btn">
+                🚀 UPLOAD TO R2 BUCKET
+            </button>
+        </form>
+
+        <!-- Status Box -->
+        <div class="status-box" id="status-box">
+            <div class="spinner" id="spinner" style="display: none;"></div>
+            <div id="status-message"></div>
+        </div>
+
+        <!-- Info Box -->
+        <div class="info-box">
+            <h3>ℹ️ How It Works:</h3>
+            <ul>
+                <li><strong>Automatic Naming:</strong> Files are renamed as <code>{job-slug}-{doc-type}.pdf</code></li>
+                <li><strong>Example:</strong> kvs-nvs-2025 + notification = <code>kvs-nvs-2025-notification.pdf</code></li>
+                <li><strong>R2 Upload:</strong> Files uploaded to your Cloudflare R2 bucket</li>
+                <li><strong>Instant Access:</strong> Available at <code>reference.sarkarisalary.today/{filename}</code></li>
+                <li><strong>No Duplicates:</strong> Existing files with same name will be overwritten</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Load jobs from jobs.json
+        let jobsData = [];
+
+        fetch('/prod/data/jobs.json')
+            .then(response => response.json())
+            .then(data => {
+                jobsData = data.jobs;
+                populateJobSelect(data.jobs);
+            })
+            .catch(error => {
+                console.error('Error loading jobs:', error);
+                alert('Failed to load jobs. Please refresh the page.');
+            });
+
+        function populateJobSelect(jobs) {
+            const select = document.getElementById('job-select');
+
+            // Sort jobs: active first, then by date
+            const sortedJobs = jobs
+                .filter(job => job.status === 'active')
+                .sort((a, b) => new Date(b.notificationDate) - new Date(a.notificationDate));
+
+            sortedJobs.forEach(job => {
+                const option = document.createElement('option');
+                option.value = job.slug;
+                option.textContent = `${job.shortTitle || job.title} (${job.posts} posts)`;
+                select.appendChild(option);
+            });
+        }
+
+        // Document type card selection
+        const docTypeCards = document.querySelectorAll('.doc-type-card');
+        docTypeCards.forEach(card => {
+            card.addEventListener('click', function() {
+                // Remove selected class from all
+                docTypeCards.forEach(c => c.classList.remove('selected'));
+                // Add to current
+                this.classList.add('selected');
+                // Check the radio
+                this.querySelector('input[type="radio"]').checked = true;
+                // Update preview
+                updatePreview();
+            });
+        });
+
+        // Update preview when selections change
+        document.getElementById('job-select').addEventListener('change', updatePreview);
+        document.querySelectorAll('input[name="doc-type"]').forEach(radio => {
+            radio.addEventListener('change', updatePreview);
+        });
+        document.getElementById('pdf-file').addEventListener('change', updatePreview);
+
+        function updatePreview() {
+            const jobSlug = document.getElementById('job-select').value;
+            const docType = document.querySelector('input[name="doc-type"]:checked')?.value;
+            const fileInput = document.getElementById('pdf-file');
+
+            const previewBox = document.getElementById('preview-box');
+            const previewFilename = document.getElementById('preview-filename');
+
+            if (jobSlug && docType) {
+                const finalFilename = `${jobSlug}-${docType}.pdf`;
+                previewFilename.textContent = finalFilename;
+                previewBox.classList.add('show');
+            } else {
+                previewBox.classList.remove('show');
+            }
+        }
+
+        // Form submission
+        document.getElementById('upload-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const jobSlug = document.getElementById('job-select').value;
+            const docType = document.querySelector('input[name="doc-type"]:checked').value;
+            const fileInput = document.getElementById('pdf-file');
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert('Please select a PDF file');
+                return;
+            }
+
+            // Validate file type
+            if (!file.type.includes('pdf')) {
+                alert('Only PDF files are allowed');
+                return;
+            }
+
+            // Validate file size (10MB limit)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('File size must be less than 10MB');
+                return;
+            }
+
+            const finalFilename = `${jobSlug}-${docType}.pdf`;
+
+            // Show loading
+            showStatus('loading', `Uploading ${finalFilename}...`);
+            document.getElementById('upload-btn').disabled = true;
+
+            // Upload to R2 (would need Cloudflare Workers API)
+            try {
+                await uploadToR2(file, finalFilename);
+                showStatus('success', `✅ Successfully uploaded: ${finalFilename}\n\nFile available at: https://reference.sarkarisalary.today/${finalFilename}`);
+
+                // Reset form after 3 seconds
+                setTimeout(() => {
+                    document.getElementById('upload-form').reset();
+                    document.getElementById('preview-box').classList.remove('show');
+                    document.querySelectorAll('.doc-type-card').forEach(c => c.classList.remove('selected'));
+                }, 3000);
+
+            } catch (error) {
+                showStatus('error', `❌ Upload failed: ${error.message}`);
+            } finally {
+                document.getElementById('upload-btn').disabled = false;
+            }
+        });
+
+        function showStatus(type, message) {
+            const statusBox = document.getElementById('status-box');
+            const statusMessage = document.getElementById('status-message');
+            const spinner = document.getElementById('spinner');
+
+            statusBox.className = 'status-box show ' + type;
+            statusMessage.style.whiteSpace = 'pre-line';
+            statusMessage.textContent = message;
+
+            if (type === 'loading') {
+                spinner.style.display = 'block';
+            } else {
+                spinner.style.display = 'none';
+            }
+        }
+
+        async function uploadToR2(file, filename) {
+            // Upload to Cloudflare Worker
+            // Worker URL will be: https://sarkarisalary-upload.YOUR_SUBDOMAIN.workers.dev
+            // Or custom domain: https://upload.sarkarisalary.today
+
+            const WORKER_URL = 'https://sarkarisalary-upload.YOUR_SUBDOMAIN.workers.dev';
+
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('filename', filename);
+
+            const response = await fetch(WORKER_URL, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.error || 'Upload failed');
+            }
+
+            const result = await response.json();
+            return result;
+        }
+    </script>
+</body>
+</html>
