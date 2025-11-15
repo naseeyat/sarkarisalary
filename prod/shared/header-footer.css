@@ -1,3 +1,16 @@
+/* FOUC Prevention - skeleton loader for header/footer */
+#header:empty, #footer:empty {
+    min-height: 100px;
+    background: #f8f8f8;
+    border: 3px solid #e0e0e0;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
 /* Header container - make this sticky */
 #header {
     position: -webkit-sticky;

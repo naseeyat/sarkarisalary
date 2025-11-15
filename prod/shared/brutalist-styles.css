@@ -166,7 +166,7 @@ table, tr, td, th, button, input, select, textarea {
 
 /* Job Card Styles */
 .job-card {
-    padding: 12px 15px;
+    padding: 0;
 }
 
 .job-header {
