@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2954991378408470"
+         crossorigin="anonymous"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found | SarkariSalary.today</title>
+
+    <script src="/shared/global.js"></script>
+    <link rel="stylesheet" href="/shared/brutalist-styles.css">
+    <link rel="stylesheet" href="/shared/header-footer.css">
+
+    <style>
+        body {
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+            background: #ffffff;
+            color: #333333;
+        }
+
+        .error-container {
+            max-width: 900px;
+            margin: 100px auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .error-code {
+            font-size: 120px;
+            font-weight: 900;
+            color: #ff4444;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .error-title {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .error-message {
+            font-size: 16px;
+            color: #666666;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .error-box {
+            border: 3px solid #333333;
+            padding: 30px;
+            background: #fffacd;
+            margin: 30px 0;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #333333;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 3px solid #333333;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background: #ffffff;
+            color: #333333;
+        }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: #333333;
+        }
+
+        .btn-secondary:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        .helpful-links {
+            margin-top: 50px;
+        }
+
+        .helpful-links h3 {
+            font-size: 18px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .link-card {
+            border: 3px solid #333333;
+            padding: 20px;
+            text-align: left;
+            text-decoration: none;
+            color: #333333;
+            transition: all 0.2s;
+        }
+
+        .link-card:hover {
+            background: #333333;
+            color: #ffffff;
+        }
+
+        .link-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .link-title {
+            font-size: 14px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .link-desc {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header"></div>
+
+    <div class="error-container">
+        <div class="error-code">404</div>
+        <h1 class="error-title">Page Not Found</h1>
+        <p class="error-message">
+            The page you're looking for doesn't exist or has been moved.
+        </p>
+
+        <div class="error-box">
+            <p style="font-size: 14px; margin: 0;">
+                <strong>Looking for a specific job?</strong> It might have been archived or the URL may have changed.
+                Try searching from our homepage or check the exam calendar for latest updates.
+            </p>
+        </div>
+
+        <div class="button-group">
+            <a href="/" class="btn">🏠 GO TO HOMEPAGE</a>
+            <a href="/exam-calendar.html" class="btn btn-secondary">📅 EXAM CALENDAR</a>
+        </div>
+
+        <div class="helpful-links">
+            <h3>Popular Pages</h3>
+            <div class="links-grid">
+                <a href="/categories/banking-jobs.html" class="link-card">
+                    <div class="link-icon">🏦</div>
+                    <div class="link-title">Banking Jobs</div>
+                    <div class="link-desc">Latest bank recruitments</div>
+                </a>
+
+                <a href="/categories/teaching-jobs.html" class="link-card">
+                    <div class="link-icon">👨‍🏫</div>
+                    <div class="link-title">Teaching Jobs</div>
+                    <div class="link-desc">KVS, NVS, school jobs</div>
+                </a>
+
+                <a href="/categories/railway-jobs.html" class="link-card">
+                    <div class="link-icon">🚂</div>
+                    <div class="link-title">Railway Jobs</div>
+                    <div class="link-desc">Indian Railways recruitment</div>
+                </a>
+
+                <a href="/states.html" class="link-card">
+                    <div class="link-icon">🗺️</div>
+                    <div class="link-title">State-wise Jobs</div>
+                    <div class="link-desc">Browse jobs by state</div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer"></div>
+
+    <!-- Load header/footer -->
+    <script>
+        fetch('/shared/header.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('header').innerHTML = data);
+
+        fetch('/shared/footer.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('footer').innerHTML = data);
+    </script>
+</body>
+</html>

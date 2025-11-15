@@ -1,8 +1,8 @@
 {
   "metadata": {
-    "lastUpdated": "2024-11-14",
-    "totalJobs": 4,
-    "activeJobs": 4,
+    "lastUpdated": "2024-11-15",
+    "totalJobs": 5,
+    "activeJobs": 5,
     "closedJobs": 0
   },
   "jobs": [
@@ -518,6 +518,147 @@
         "Central government pay scale and benefits"
       ],
       "updates": []
+    },
+    {
+      "id": "afcat-01-2026",
+      "slug": "afcat-01-2026",
+      "title": "AFCAT 01/2026 - Air Force Common Admission Test for Flying & Ground Duty",
+      "shortTitle": "AFCAT 01/2026",
+      "department": "defense",
+      "departmentName": "Indian Air Force",
+      "category": "defense-jobs",
+      "states": ["all-india"],
+      "posts": 346,
+      "organization": "Indian Air Force, Ministry of Defence",
+      "multiPost": true,
+      "postBreakdown": [
+        {
+          "postName": "Flying Branch (SSC)",
+          "postSlug": "flying-ssc",
+          "posts": 38,
+          "breakdown": {
+            "men": 34,
+            "women": 4
+          },
+          "qualification": "Graduation (60% marks) + 50% in Physics & Maths at 10+2",
+          "minAge": 20,
+          "maxAge": 24,
+          "commission": "Short Service Commission (14 years)",
+          "pageUrl": "/jobs/afcat-01-2026-flying-ssc.html"
+        },
+        {
+          "postName": "Ground Duty Technical - PC (Permanent Commission)",
+          "postSlug": "technical-pc",
+          "posts": 18,
+          "breakdown": {
+            "AE_L_Men": 3,
+            "AE_L_Women": 3,
+            "AE_M_Men": 9,
+            "AE_M_Women": 3
+          },
+          "qualification": "B.Tech/BE (4 years) in specified streams (60% marks) + 50% in Physics & Maths at 10+2",
+          "minAge": 20,
+          "maxAge": 26,
+          "commission": "Permanent Commission",
+          "pageUrl": "/jobs/afcat-01-2026-technical-pc.html"
+        },
+        {
+          "postName": "Ground Duty Technical - SSC",
+          "postSlug": "technical-ssc",
+          "posts": 170,
+          "breakdown": {
+            "AE_L_Men": 100,
+            "AE_L_Women": 23,
+            "AE_M_Men": 38,
+            "AE_M_Women": 9
+          },
+          "qualification": "B.Tech/BE (4 years) in specified streams (60% marks) + 50% in Physics & Maths at 10+2",
+          "minAge": 20,
+          "maxAge": 26,
+          "commission": "Short Service Commission (10 years + 4 years extension)",
+          "pageUrl": "/jobs/afcat-01-2026-technical-ssc.html"
+        },
+        {
+          "postName": "Ground Duty Non-Technical - SSC",
+          "postSlug": "non-technical-ssc",
+          "posts": 120,
+          "breakdown": {
+            "Weapon_Systems_Men": 21,
+            "Weapon_Systems_Women": 6,
+            "Admin_Men": 48,
+            "Admin_Women": 15,
+            "Logistics_Men": 9,
+            "Logistics_Women": 4,
+            "Accounts_Men": 8,
+            "Accounts_Women": 3,
+            "Education_Men": 2,
+            "Education_Women": 1,
+            "Meteorology_Men": 1,
+            "Meteorology_Women": 2
+          },
+          "qualification": "Graduation (60% marks) - varies by branch",
+          "minAge": 20,
+          "maxAge": 26,
+          "commission": "Short Service Commission (10 years + 4 years extension)",
+          "pageUrl": "/jobs/afcat-01-2026-non-technical-ssc.html"
+        }
+      ],
+      "qualification": "Graduation (60% marks) - varies by branch and post",
+      "minAge": 20,
+      "maxAge": 26,
+      "salary": {
+        "range": "₹56,100 - ₹1,77,500 per month (Level 10)",
+        "note": "As per 7th CPC + Military Service Pay + Grade Pay + Allowances (DA, HRA, etc.)"
+      },
+      "applicationFee": {
+        "general": "₹550 + 18% GST",
+        "ncc_special": "NIL"
+      },
+      "notificationDate": "2025-11-15",
+      "applicationStart": "2025-11-17",
+      "lastDate": "2025-12-14",
+      "examDate": "2026-01-31",
+      "status": "active",
+      "featured": true,
+      "isNew": true,
+      "applyLink": "https://afcat.edcil.co.in",
+      "notificationPdf": "/notifications/AFCAT-01-2026-Notification.pdf",
+      "daysRemaining": 29,
+      "addedOn": "2024-11-15",
+      "pageUrl": "/jobs/afcat-01-2026.html",
+      "isRecurring": true,
+      "recurringCycle": "biannual",
+      "examCycleId": "afcat",
+      "estimatedAspirants": 400000,
+      "priorityScore": 90,
+      "uniqueFeatures": [
+        "Join Indian Air Force as Commissioned Officer",
+        "Both Permanent Commission (PC) and Short Service Commission (SSC) available",
+        "Flying Branch: 14 years SSC engagement",
+        "Ground Duty: 10 years SSC (extendable to 14 years)",
+        "Possibility of PC grant for SSC officers (subject to service requirements)",
+        "NCC Special Entry available (10% reservation from vacancies)",
+        "CPL holders: Age relaxation up to 26 years for Flying Branch",
+        "Comprehensive medical standards required (detailed in notification)",
+        "Selection: Written Test (AFCAT) + Air Force Selection Board (AFSB) + Medical",
+        "Tentative vacancies - subject to service requirements"
+      ],
+      "importantNotes": [
+        "Age as on 01 Jan 2027",
+        "Flying Branch: 20-24 years (26 for CPL holders)",
+        "Ground Duty: 20-26 years",
+        "Medical standards: Extensive requirements (pages 28-64 of notification)",
+        "Marital status: Unmarried (widows without encumbrance eligible)",
+        "SSC officers not entitled to pension",
+        "Vacancies are tentative and subject to change based on service requirements"
+      ],
+      "selectionProcess": {
+        "stage1": "AFCAT Online Exam (31 Jan 2026)",
+        "stage2": "Air Force Selection Board (AFSB) Interview & Testing",
+        "stage3": "Medical Examination",
+        "stage4": "Final Merit List"
+      },
+      "updates": []
     }
   ],
   "departments": {
@@ -541,15 +682,22 @@
       "totalJobs": 2,
       "activeJobs": 2,
       "latestJobs": ["kvs-nvs-2025", "wbssc-slst-2025"]
+    },
+    "defense": {
+      "name": "Defense & Armed Forces",
+      "slug": "defense",
+      "totalJobs": 1,
+      "activeJobs": 1,
+      "latestJobs": ["afcat-01-2026"]
     }
   },
   "states": {
     "all-india": {
       "name": "All India",
       "slug": "all-india",
-      "totalJobs": 2,
-      "activeJobs": 2,
-      "latestJobs": ["kvs-nvs-2025", "bob-apprentice-2025"]
+      "totalJobs": 3,
+      "activeJobs": 3,
+      "latestJobs": ["afcat-01-2026", "kvs-nvs-2025", "bob-apprentice-2025"]
     },
     "delhi": {
       "name": "Delhi",
@@ -601,6 +749,13 @@
       "totalJobs": 1,
       "activeJobs": 1,
       "latestJobs": ["wbssc-slst-2025"]
+    },
+    "defense-jobs": {
+      "name": "Defense Jobs",
+      "slug": "defense-jobs",
+      "totalJobs": 1,
+      "activeJobs": 1,
+      "latestJobs": ["afcat-01-2026"]
     }
   },
   "examCycles": {
@@ -685,6 +840,23 @@
           "jobId": "kvs-nvs-2025",
           "notificationDate": "2025-11-14",
           "posts": 13965,
+          "status": "active"
+        }
+      ]
+    },
+    "afcat": {
+      "name": "Air Force Common Admission Test (AFCAT)",
+      "slug": "afcat",
+      "department": "defense",
+      "cycleType": "biannual",
+      "description": "Biannual recruitment for Flying, Ground Duty Technical and Non-Technical branches in Indian Air Force",
+      "usualMonths": ["January", "July"],
+      "history": [
+        {
+          "year": "01/2026",
+          "jobId": "afcat-01-2026",
+          "notificationDate": "2025-11-15",
+          "posts": 346,
           "status": "active"
         }
       ]
