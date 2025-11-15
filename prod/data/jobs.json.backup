@@ -14,9 +14,7 @@
       "department": "education",
       "departmentName": "West Bengal Central School Service Commission",
       "category": "clerk-group-d-jobs",
-      "states": [
-        "west-bengal"
-      ],
+      "states": ["west-bengal"],
       "posts": 8477,
       "organization": "West Bengal Central School Service Commission, Kolkata",
       "multiPost": true,
@@ -76,6 +74,7 @@
       "isNew": true,
       "applyLink": "https://www.westbengalssc.com",
       "notificationPdf": "/notifications/WBSSC-1st-SLST-2025-NTS.pdf",
+      "daysRemaining": 19,
       "addedOn": "2024-11-14",
       "pageUrl": "/jobs/wbssc-slst-2025.html",
       "isRecurring": true,
@@ -113,9 +112,7 @@
       "department": "banking",
       "departmentName": "National Housing Bank",
       "category": "banking-jobs",
-      "states": [
-        "delhi"
-      ],
+      "states": ["delhi"],
       "posts": 10,
       "organization": "National Housing Bank, New Delhi",
       "multiPost": true,
@@ -265,6 +262,7 @@
       "isNew": true,
       "applyLink": "https://www.nhb.org.in",
       "notificationPdf": "/notifications/NHB-Officer-2025.pdf",
+      "daysRemaining": 14,
       "addedOn": "2024-11-14",
       "pageUrl": "/jobs/nhb-officer-2025.html",
       "isRecurring": true,
@@ -289,9 +287,7 @@
       "department": "banking",
       "departmentName": "Bank of Baroda",
       "category": "banking-jobs",
-      "states": [
-        "all-india"
-      ],
+      "states": ["all-india"],
       "posts": 2700,
       "organization": "Bank of Baroda",
       "qualification": "Graduation in any discipline",
@@ -320,6 +316,7 @@
       "isNew": true,
       "applyLink": "https://www.bankofbaroda.in/apprentice",
       "notificationPdf": "/notifications/BoB-Apprentice-Notification-2025.pdf",
+      "daysRemaining": 17,
       "addedOn": "2024-11-14",
       "pageUrl": "/jobs/bob-apprentice-2025.html",
       "isRecurring": true,
@@ -375,16 +372,8 @@
       "department": "railway",
       "departmentName": "Indian Railways",
       "category": "railway-jobs",
-      "states": [
-        "uttar-pradesh"
-      ],
-      "cities": [
-        "gorakhpur",
-        "lucknow",
-        "varanasi",
-        "izzatnagar",
-        "gonda"
-      ],
+      "states": ["uttar-pradesh"],
+      "cities": ["gorakhpur", "lucknow", "varanasi", "izzatnagar", "gonda"],
       "posts": 1104,
       "organization": "North Eastern Railway, Gorakhpur",
       "qualification": "10th (50%) + ITI",
@@ -399,6 +388,7 @@
       "isNew": true,
       "applyLink": "https://www.ner.indianrailways.gov.in",
       "notificationPdf": "https://ner.indianrailways.gov.in/uploads/files/1760532135478-Act%20Apprentice%20Notification%202026-27.pdf",
+      "daysRemaining": 1,
       "addedOn": "2024-11-14",
       "pageUrl": "/jobs/ner-railway-apprentice-2026.html",
       "isRecurring": true,
@@ -413,9 +403,7 @@
       "department": "education",
       "departmentName": "Kendriya Vidyalaya Sangathan & Navodaya Vidyalaya Samiti",
       "category": "teaching-jobs",
-      "states": [
-        "all-india"
-      ],
+      "states": ["all-india"],
       "posts": 13965,
       "organization": "KVS & NVS, Ministry of Education, Govt. of India",
       "multiPost": true,
@@ -513,6 +501,7 @@
       "isNew": true,
       "applyLink": "https://kvsangathan.nic.in/",
       "notificationPdf": "https://reference.sarkarisalary.today/kvs-nvs-2025-notification.pdf",
+      "daysRemaining": 30,
       "addedOn": "2024-11-14",
       "pageUrl": "/jobs/kvs-nvs-2025.html",
       "isRecurring": true,
@@ -538,9 +527,7 @@
       "department": "defense",
       "departmentName": "Indian Air Force",
       "category": "defense-jobs",
-      "states": [
-        "all-india"
-      ],
+      "states": ["all-india"],
       "posts": 346,
       "organization": "Indian Air Force, Ministry of Defence",
       "multiPost": true,
@@ -636,6 +623,7 @@
       "isNew": true,
       "applyLink": "https://afcat.edcil.co.in",
       "notificationPdf": "/notifications/AFCAT-01-2026-Notification.pdf",
+      "daysRemaining": 29,
       "addedOn": "2024-11-15",
       "pageUrl": "/jobs/afcat-01-2026.html",
       "isRecurring": true,
@@ -679,38 +667,28 @@
       "slug": "banking",
       "totalJobs": 2,
       "activeJobs": 2,
-      "latestJobs": [
-        "nhb-officer-2025",
-        "bob-apprentice-2025"
-      ]
+      "latestJobs": ["nhb-officer-2025", "bob-apprentice-2025"]
     },
     "railway": {
       "name": "Indian Railways",
       "slug": "railway",
       "totalJobs": 1,
       "activeJobs": 1,
-      "latestJobs": [
-        "ner-railway-apprentice-2026"
-      ]
+      "latestJobs": ["ner-railway-apprentice-2026"]
     },
     "education": {
       "name": "Education & Teaching",
       "slug": "education",
       "totalJobs": 2,
       "activeJobs": 2,
-      "latestJobs": [
-        "kvs-nvs-2025",
-        "wbssc-slst-2025"
-      ]
+      "latestJobs": ["kvs-nvs-2025", "wbssc-slst-2025"]
     },
     "defense": {
       "name": "Defense & Armed Forces",
       "slug": "defense",
       "totalJobs": 1,
       "activeJobs": 1,
-      "latestJobs": [
-        "afcat-01-2026"
-      ]
+      "latestJobs": ["afcat-01-2026"]
     }
   },
   "states": {
@@ -719,40 +697,28 @@
       "slug": "all-india",
       "totalJobs": 3,
       "activeJobs": 3,
-      "latestJobs": [
-        "afcat-01-2026",
-        "kvs-nvs-2025",
-        "bob-apprentice-2025"
-      ]
+      "latestJobs": ["afcat-01-2026", "kvs-nvs-2025", "bob-apprentice-2025"]
     },
     "delhi": {
       "name": "Delhi",
       "slug": "delhi",
       "totalJobs": 1,
       "activeJobs": 1,
-      "latestJobs": [
-        "nhb-officer-2025"
-      ]
+      "latestJobs": ["nhb-officer-2025"]
     },
     "uttar-pradesh": {
       "name": "Uttar Pradesh",
       "slug": "uttar-pradesh",
       "totalJobs": 2,
       "activeJobs": 2,
-      "latestJobs": [
-        "bob-apprentice-2025",
-        "ner-railway-apprentice-2026"
-      ]
+      "latestJobs": ["bob-apprentice-2025", "ner-railway-apprentice-2026"]
     },
     "west-bengal": {
       "name": "West Bengal",
       "slug": "west-bengal",
       "totalJobs": 2,
       "activeJobs": 2,
-      "latestJobs": [
-        "wbssc-slst-2025",
-        "bob-apprentice-2025"
-      ]
+      "latestJobs": ["wbssc-slst-2025", "bob-apprentice-2025"]
     }
   },
   "categories": {
@@ -761,46 +727,35 @@
       "slug": "banking-jobs",
       "totalJobs": 2,
       "activeJobs": 2,
-      "latestJobs": [
-        "nhb-officer-2025",
-        "bob-apprentice-2025"
-      ]
+      "latestJobs": ["nhb-officer-2025", "bob-apprentice-2025"]
     },
     "railway-jobs": {
       "name": "Railway Jobs",
       "slug": "railway-jobs",
       "totalJobs": 1,
       "activeJobs": 1,
-      "latestJobs": [
-        "ner-railway-apprentice-2026"
-      ]
+      "latestJobs": ["ner-railway-apprentice-2026"]
     },
     "teaching-jobs": {
       "name": "Teaching Jobs",
       "slug": "teaching-jobs",
       "totalJobs": 1,
       "activeJobs": 1,
-      "latestJobs": [
-        "kvs-nvs-2025"
-      ]
+      "latestJobs": ["kvs-nvs-2025"]
     },
     "clerk-group-d-jobs": {
       "name": "Clerk & Group D Jobs",
       "slug": "clerk-group-d-jobs",
       "totalJobs": 1,
       "activeJobs": 1,
-      "latestJobs": [
-        "wbssc-slst-2025"
-      ]
+      "latestJobs": ["wbssc-slst-2025"]
     },
     "defense-jobs": {
       "name": "Defense Jobs",
       "slug": "defense-jobs",
       "totalJobs": 1,
       "activeJobs": 1,
-      "latestJobs": [
-        "afcat-01-2026"
-      ]
+      "latestJobs": ["afcat-01-2026"]
     }
   },
   "examCycles": {
@@ -810,10 +765,7 @@
       "department": "banking",
       "cycleType": "annual",
       "description": "Annual officer recruitment by National Housing Bank",
-      "usualMonths": [
-        "November",
-        "December"
-      ],
+      "usualMonths": ["November", "December"],
       "history": [
         {
           "year": "2025-26",
@@ -830,10 +782,7 @@
       "department": "banking",
       "cycleType": "annual",
       "description": "Annual apprentice recruitment by Bank of Baroda",
-      "usualMonths": [
-        "November",
-        "December"
-      ],
+      "usualMonths": ["November", "December"],
       "history": [
         {
           "year": "2025",
@@ -850,10 +799,7 @@
       "department": "railway",
       "cycleType": "annual",
       "description": "Annual apprentice training recruitment by Indian Railways",
-      "usualMonths": [
-        "October",
-        "November"
-      ],
+      "usualMonths": ["October", "November"],
       "history": [
         {
           "year": "2026-27",
@@ -870,10 +816,7 @@
       "department": "education",
       "cycleType": "annual",
       "description": "West Bengal School Service Commission recruitment for Clerk and Group D staff in government aided/sponsored schools",
-      "usualMonths": [
-        "October",
-        "November"
-      ],
+      "usualMonths": ["October", "November"],
       "history": [
         {
           "year": "2025",
@@ -890,10 +833,7 @@
       "department": "education",
       "cycleType": "annual",
       "description": "Combined recruitment for teaching and non-teaching posts in Kendriya Vidyalaya and Navodaya Vidyalaya",
-      "usualMonths": [
-        "November",
-        "December"
-      ],
+      "usualMonths": ["November", "December"],
       "history": [
         {
           "year": "2025",
@@ -910,10 +850,7 @@
       "department": "defense",
       "cycleType": "biannual",
       "description": "Biannual recruitment for Flying, Ground Duty Technical and Non-Technical branches in Indian Air Force",
-      "usualMonths": [
-        "January",
-        "July"
-      ],
+      "usualMonths": ["January", "July"],
       "history": [
         {
           "year": "01/2026",

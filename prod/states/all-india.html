@@ -281,7 +281,7 @@
                 const totalPosts = stateJobs.reduce((sum, job) => sum + (job.posts || 0), 0);
                 document.getElementById('total-posts').textContent = totalPosts;
 
-                const closingSoon = stateJobs.filter(job => job.daysRemaining && job.daysRemaining <= 7).length;
+                const closingSoon = stateJobs.filter(job => job.daysRemaining !== null && job.daysRemaining >= 0 && job.daysRemaining <= 7).length;
                 document.getElementById('closing-soon').textContent = closingSoon;
 
                 // Display jobs
@@ -301,7 +301,7 @@
                     let badge = '';
                     if (job.isNew) {
                         badge = '<div class="job-badge new">NEW</div>';
-                    } else if (job.daysRemaining <= 7) {
+                    } else if (job.daysRemaining !== null && job.daysRemaining <= 7) {
                         badge = '<div class="job-badge closing">CLOSING SOON</div>';
                     } else if (job.featured) {
                         badge = '<div class="job-badge featured">FEATURED</div>';

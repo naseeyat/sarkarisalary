@@ -1,5 +1,16 @@
 // Global JavaScript for all pages
 
+// Helper function to calculate days remaining dynamically
+function calculateDaysRemaining(lastDate) {
+    if (!lastDate) return null;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const last = new Date(lastDate);
+    last.setHours(0, 0, 0, 0);
+    const daysRemaining = Math.ceil((last - today) / (1000 * 60 * 60 * 24));
+    return daysRemaining;
+}
+
 // Sticky header - instant compact on ANY scroll
 let headerElement = null;
 let isScrolled = false;

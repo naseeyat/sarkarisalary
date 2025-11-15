@@ -68,11 +68,11 @@
         fetch('../shared/header.html').then(response => response.text()).then(data => document.getElementById('header').innerHTML = data);
         fetch('../shared/footer.html').then(response => response.text()).then(data => document.getElementById('footer').innerHTML = data);
         fetch('../data/jobs.json').then(response => response.json()).then(data => {
-            const categoryJobs = data.jobs.filter(job => job.category === 'ssc-jobs' && job.status === 'active');
+            const categoryJobs = data.jobs.filter(job => job.category === 'ssc-jobs' && job.status === 'active').map(job => { job.daysRemaining = calculateDaysRemaining(job.lastDate); return job; });
             document.getElementById('total-jobs').textContent = categoryJobs.length;
             document.getElementById('active-jobs').textContent = categoryJobs.length;
             document.getElementById('total-posts').textContent = categoryJobs.reduce((sum, job) => sum + (job.posts || 0), 0).toLocaleString();
-            document.getElementById('closing-soon').textContent = categoryJobs.filter(job => job.daysRemaining && job.daysRemaining <= 7).length;
+            document.getElementById('closing-soon').textContent = categoryJobs.filter(job => job.daysRemaining !== null && job.daysRemaining >= 0 && job.daysRemaining <= 7).length;
             const container = document.getElementById('jobs-container');
             const emptyState = document.getElementById('empty-state');
             if (categoryJobs.length === 0) { emptyState.style.display = 'block'; return; }
@@ -82,7 +82,7 @@
                 card.onclick = () => window.location.href = '../' + job.pageUrl;
                 let badge = '';
                 if (job.isNew) badge = '<div class="job-badge new">NEW</div>';
-                else if (job.daysRemaining <= 7) badge = '<div class="job-badge closing">CLOSING SOON</div>';
+                else if (job.daysRemaining !== null && job.daysRemaining <= 7) badge = '<div class="job-badge closing">CLOSING SOON</div>';
                 else if (job.featured) badge = '<div class="job-badge featured">FEATURED</div>';
                 let salaryDisplay = '';
                 if (job.salary) {

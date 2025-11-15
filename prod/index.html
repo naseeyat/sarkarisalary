@@ -559,14 +559,28 @@
     </div>
 
     <script>
+        // Helper function to calculate days remaining
+        function calculateDaysRemaining(lastDate) {
+            if (!lastDate) return null;
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const last = new Date(lastDate);
+            last.setHours(0, 0, 0, 0);
+            const daysRemaining = Math.ceil((last - today) / (1000 * 60 * 60 * 24));
+            return daysRemaining;
+        }
+
         // Load latest jobs dynamically from jobs.json
         fetch('data/jobs.json')
             .then(response => response.json())
             .then(data => {
                 const container = document.getElementById('latest-jobs-grid');
 
-                // Get active jobs
-                const activeJobs = data.jobs.filter(job => job.status === 'active');
+                // Get active jobs and calculate days remaining dynamically
+                const activeJobs = data.jobs.filter(job => job.status === 'active').map(job => {
+                    job.daysRemaining = calculateDaysRemaining(job.lastDate);
+                    return job;
+                });
 
                 // Update stats with real data
                 document.getElementById('total-jobs-stat').textContent = activeJobs.length;
@@ -574,7 +588,7 @@
                 const totalPosts = activeJobs.reduce((sum, job) => sum + (job.posts || 0), 0);
                 document.getElementById('total-posts-stat').textContent = totalPosts.toLocaleString();
 
-                const closingSoon = activeJobs.filter(job => job.daysRemaining && job.daysRemaining <= 7).length;
+                const closingSoon = activeJobs.filter(job => job.daysRemaining !== null && job.daysRemaining >= 0 && job.daysRemaining <= 7).length;
                 document.getElementById('closing-soon-stat').textContent = closingSoon;
 
                 // Update category counts
@@ -669,38 +683,86 @@
             }
         }
 
-        // Search functionality
+        // Search functionality - Dynamic search through jobs.json
+        let jobsData = [];
+
+        // Load jobs data for search
+        fetch('data/jobs.json')
+            .then(response => response.json())
+            .then(data => {
+                jobsData = data.jobs;
+            })
+            .catch(err => console.error('Error loading jobs for search:', err));
+
         document.querySelector('.search-btn').addEventListener('click', function() {
-            const searchTerm = document.querySelector('.search-box').value.toLowerCase();
-            
-            // Simple search logic - in real implementation would be more sophisticated
-            const searchMappings = {
-                'ias': 'job-template-basic.html?job=ias',
-                'ips': 'job-template-basic.html?job=ips',
-                'sbi': 'job-template-basic.html?job=sbi_po',
-                'bank': 'banking-jobs.html',
-                'railway': 'railway-jobs.html',
-                'police': 'police-jobs.html',
-                'ssc': 'ssc-jobs.html'
-            };
-            
-            for (const [key, url] of Object.entries(searchMappings)) {
-                if (searchTerm.includes(key)) {
-                    window.location.href = url;
-                    return;
-                }
-            }
-            
-            // If no match found, show all jobs
-            alert('Search results will be shown here. Feature coming soon!');
+            performSearch();
         });
 
         // Enter key search
         document.querySelector('.search-box').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                document.querySelector('.search-btn').click();
+                performSearch();
             }
         });
+
+        function performSearch() {
+            const searchTerm = document.querySelector('.search-box').value.toLowerCase().trim();
+
+            if (!searchTerm) {
+                alert('Please enter a search term');
+                return;
+            }
+
+            // 1. Search through jobs.json for exact matches
+            const jobMatches = jobsData.filter(job =>
+                job.title.toLowerCase().includes(searchTerm) ||
+                job.organization.toLowerCase().includes(searchTerm) ||
+                job.department.toLowerCase().includes(searchTerm) ||
+                job.category.toLowerCase().includes(searchTerm)
+            );
+
+            // If we found job matches, go to first match
+            if (jobMatches.length > 0) {
+                const job = jobMatches[0];
+                window.location.href = `jobs/${job.slug}.html`;
+                return;
+            }
+
+            // 2. Check category keywords
+            const categoryMappings = {
+                'bank': 'banking-jobs',
+                'banking': 'banking-jobs',
+                'railway': 'railway-jobs',
+                'train': 'railway-jobs',
+                'police': 'police-jobs',
+                'teaching': 'teaching-jobs',
+                'teacher': 'teaching-jobs',
+                'kvs': 'teaching-jobs',
+                'nvs': 'teaching-jobs',
+                'ssc': 'ssc-jobs',
+                'defense': 'defense-jobs',
+                'army': 'defense-jobs',
+                'navy': 'defense-jobs',
+                'medical': 'medical-jobs',
+                'doctor': 'medical-jobs',
+                'nurse': 'medical-jobs',
+                'technical': 'technical-jobs',
+                'engineer': 'technical-jobs',
+                'civil': 'civil-services',
+                'ias': 'civil-services',
+                'ips': 'civil-services'
+            };
+
+            for (const [key, category] of Object.entries(categoryMappings)) {
+                if (searchTerm.includes(key)) {
+                    window.location.href = `categories/${category}.html`;
+                    return;
+                }
+            }
+
+            // 3. If no match found
+            alert(`No results found for "${searchTerm}". Try searching for job categories like "banking", "railway", "teaching", etc.`);
+        }
     </script>
 
         </div> <!-- End main-content-wrapper -->
