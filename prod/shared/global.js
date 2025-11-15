@@ -1,5 +1,25 @@
 // Global JavaScript for all pages
 
+// Inject global loader immediately (before DOM ready)
+(function() {
+    const loaderHTML = `
+        <div id="global-loader">
+            <div class="loader-logo">SARKARI SALARY<span style="color: #666;">.today</span></div>
+            <div class="loader-spinner"></div>
+        </div>
+    `;
+    document.write(loaderHTML);
+})();
+
+// Remove loader when page is fully loaded
+window.addEventListener('load', function() {
+    document.body.classList.add('loaded');
+    setTimeout(() => {
+        const loader = document.getElementById('global-loader');
+        if (loader) loader.remove();
+    }, 300); // Match CSS transition duration
+});
+
 // Sticky header - instant compact on ANY scroll
 let headerElement = null;
 let isScrolled = false;
