@@ -1,50 +1,5 @@
 /* Brutalist Design System - Component-Based Classes */
 
-/* Global Loading Screen - Prevents FOUC */
-#global-loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #ffffff;
-    z-index: 9999;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-#global-loader .loader-logo {
-    font-family: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
-    font-size: 32px;
-    font-weight: 900;
-    color: #333333;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-}
-
-#global-loader .loader-spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid #e0e0e0;
-    border-top: 4px solid #333333;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* Hide loader when page is loaded */
-body.loaded #global-loader {
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-}
-
 /* Global shadow disable - applies to ALL elements */
 *, *::before, *::after {
     box-shadow: none !important;
