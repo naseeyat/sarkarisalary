@@ -39,19 +39,12 @@
             background: #00aa00;
             color: #ffffff;
             text-align: center;
-            padding: 12px;
+            padding: 20px;
             font-weight: 900;
-            font-size: 12px;
+            font-size: 14px;
             letter-spacing: 1.5px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 3px solid #333333;
-        }
-
-        .alert-container {
-            max-width: 900px;
-            margin: 0 auto;
+            border: 3px solid #333333;
+            margin: 30px 0;
         }
 
         .job-header {
@@ -243,14 +236,11 @@
     <!-- Header -->
     <div id="header"></div>
 
-    <!-- Alert Banner -->
-    <div class="job-alert">
-        <div class="alert-container">
-            🔥 NEW OPENING • LAST DATE: 4 DEC 2025 • 20 DAYS REMAINING
-        </div>
-    </div>
-
     <div class="container">
+        <!-- Alert Banner -->
+        <div class="job-alert" id="alert-banner">
+            🔥 NEW OPENING • LAST DATE: 4 DEC 2025 • <span id="days-remaining-banner">Calculating...</span>
+        </div>
         <!-- Job Header -->
         <div class="job-header">
             <div class="breadcrumb">
@@ -657,6 +647,22 @@
         fetch('../shared/footer.html')
             .then(response => response.text())
             .then(data => document.getElementById('footer').innerHTML = data);
+
+        // Calculate days remaining dynamically
+        const lastDate = new Date('2025-12-04');
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        lastDate.setHours(0, 0, 0, 0);
+        const daysRemaining = Math.ceil((lastDate - today) / (1000 * 60 * 60 * 24));
+
+        const bannerSpan = document.getElementById('days-remaining-banner');
+        if (daysRemaining > 0) {
+            bannerSpan.textContent = `${daysRemaining} DAYS REMAINING`;
+        } else if (daysRemaining === 0) {
+            bannerSpan.textContent = 'LAST DAY TODAY!';
+        } else {
+            bannerSpan.textContent = 'CLOSED';
+        }
     </script>
 </body>
 </html>

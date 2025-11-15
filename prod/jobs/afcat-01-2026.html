@@ -346,7 +346,7 @@
                 <span class="meta-tag">346 POSTS</span>
                 <span class="meta-tag blue">DEFENSE</span>
                 <span class="meta-tag">ALL INDIA</span>
-                <span class="meta-tag green">29 DAYS REMAINING</span>
+                <span class="meta-tag green" id="days-remaining-tag">Calculating...</span>
             </div>
         </div>
 
@@ -748,6 +748,26 @@
     <script>
         fetch('../shared/header.html').then(r => r.text()).then(html => document.getElementById('header').innerHTML = html);
         fetch('../shared/footer.html').then(r => r.text()).then(html => document.getElementById('footer').innerHTML = html);
+
+        // Calculate days remaining dynamically
+        const lastDate = new Date('2025-12-14');
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        lastDate.setHours(0, 0, 0, 0);
+        const daysRemaining = Math.ceil((lastDate - today) / (1000 * 60 * 60 * 24));
+
+        const tag = document.getElementById('days-remaining-tag');
+        if (daysRemaining > 0) {
+            tag.textContent = `${daysRemaining} DAYS REMAINING`;
+        } else if (daysRemaining === 0) {
+            tag.textContent = 'LAST DAY TODAY!';
+            tag.classList.remove('green');
+            tag.classList.add('red');
+        } else {
+            tag.textContent = 'CLOSED';
+            tag.classList.remove('green');
+            tag.classList.add('red');
+        }
     </script>
 </body>
 </html>
